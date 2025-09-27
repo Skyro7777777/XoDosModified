@@ -1,4 +1,4 @@
-package com.termux.app.fragments.settings.termux_widget;
+package com.xodos.app.fragments.settings.termux_widget;
 
 import android.content.Context;
 import android.os.Bundle;

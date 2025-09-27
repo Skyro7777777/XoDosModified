@@ -3,7 +3,7 @@ plugins {
 }
 android.buildFeatures.buildConfig true
 android {
-    namespace 'com.termux.shell.stub'
+    namespace 'com.xodos.shell.stub'
     compileSdk 34
     defaultConfig {
         minSdkVersion 24

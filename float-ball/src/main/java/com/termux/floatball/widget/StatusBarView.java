@@ -1,4 +1,4 @@
-package com.termux.floatball.widget;
+package com.xodos.floatball.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.termux.floatball.FloatBallManager;
-import com.termux.floatball.FloatBallUtil;
+import com.xodos.floatball.FloatBallManager;
+import com.xodos.floatball.FloatBallUtil;
 
 
 public class StatusBarView extends View {

@@ -1,4 +1,4 @@
-package com.termux.widget.utils;
+package com.xodos.widget.utils;
 
 import android.content.Context;
 import android.content.pm.ShortcutManager;
@@ -7,13 +7,13 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.widget.NaturalOrderComparator;
-import com.termux.widget.R;
-import com.termux.widget.ShortcutFile;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.termux.TermuxConstants;
+import com.xodos.shared.termux.TermuxUtils;
+import com.xodos.widget.NaturalOrderComparator;
+import com.xodos.widget.R;
+import com.xodos.widget.ShortcutFile;
 
 import java.io.File;
 import java.io.FileFilter;

@@ -1,4 +1,4 @@
-package com.termux.floatball.utils;
+package com.xodos.floatball.utils;
 
 import android.text.TextUtils;
 import android.util.Log;

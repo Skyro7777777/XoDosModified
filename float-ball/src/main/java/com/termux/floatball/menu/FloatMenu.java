@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.termux.floatball.menu;
+package com.xodos.floatball.menu;
 
 import android.app.Activity;
 import android.content.Context;

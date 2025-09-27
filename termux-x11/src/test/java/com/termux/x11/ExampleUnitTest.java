@@ -1,4 +1,4 @@
-package com.termux.x11;
+package com.xodos.x11;
 
 import org.junit.Test;
 

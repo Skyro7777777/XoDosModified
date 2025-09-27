@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    namespace "com.termux.view"
+    namespace "com.xodos.view"
     compileSdk project.properties.compileSdkVersion.toInteger()
 
     dependencies {
@@ -49,7 +49,7 @@ afterEvaluate {
             // Creates a Maven publication called "release".
 //            release(MavenPublication) {
 //                from components.release
-//                groupId = 'com.termux'
+//                groupId = 'com.xodos'
 //                artifactId = 'terminal-view'
 //                version = '0.118.0'
 //                artifact(sourceJar)

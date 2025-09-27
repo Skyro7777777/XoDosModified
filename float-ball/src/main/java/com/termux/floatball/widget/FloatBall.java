@@ -1,4 +1,4 @@
-package com.termux.floatball.widget;
+package com.xodos.floatball.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,14 +12,14 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.termux.floatball.FloatBallManager;
-import com.termux.floatball.FloatBallUtil;
-import com.termux.floatball.LocationService;
-import com.termux.floatball.runner.ICarrier;
-import com.termux.floatball.runner.OnceRunnable;
-import com.termux.floatball.runner.ScrollRunner;
-import com.termux.floatball.utils.MotionVelocityUtil;
-import com.termux.floatball.utils.Util;
+import com.xodos.floatball.FloatBallManager;
+import com.xodos.floatball.FloatBallUtil;
+import com.xodos.floatball.LocationService;
+import com.xodos.floatball.runner.ICarrier;
+import com.xodos.floatball.runner.OnceRunnable;
+import com.xodos.floatball.runner.ScrollRunner;
+import com.xodos.floatball.utils.MotionVelocityUtil;
+import com.xodos.floatball.utils.Util;
 
 
 public class FloatBall extends FrameLayout implements ICarrier {

@@ -1,4 +1,4 @@
-package com.termux.floatball.menu;
+package com.xodos.floatball.menu;
 
 public class FloatMenuCfg {
     public int mSize;

@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
  */
-package com.termux.floatball.permission;
+package com.xodos.floatball.permission;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

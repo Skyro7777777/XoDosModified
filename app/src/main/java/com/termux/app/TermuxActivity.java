@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 // ======== Imports =========
 
 import android.Manifest;

@@ -1,4 +1,4 @@
-package com.termux.widget;
+package com.xodos.widget;
 
 /*
  NaturalOrderComparator.java -- Perform 'natural order' comparisons of strings in Java.

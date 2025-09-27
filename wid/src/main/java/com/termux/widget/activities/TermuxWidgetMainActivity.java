@@ -1,4 +1,4 @@
-package com.termux.widget.activities;
+package com.xodos.widget.activities;
 
 import android.os.Bundle;
 import android.view.View;

@@ -116,8 +116,8 @@ static void nativeInit(JNIEnv *env, jobject thiz) {
         CharBuffer.self = FindClassOrDie(env,  "java/nio/CharBuffer");
         CharBuffer.toString = FindMethodOrDie(env, CharBuffer.self, "toString", "()Ljava/lang/String;", JNI_FALSE);
 
-        MainActivity.self = FindClassOrDie(env,  "com/termux/x11/MainActivity");
-        MainActivity.getInstance = FindMethodOrDie(env, MainActivity.self, "getInstance", "()Lcom/termux/x11/MainActivity;", JNI_TRUE);
+        MainActivity.self = FindClassOrDie(env,  "com/xodos/x11/MainActivity");
+        MainActivity.getInstance = FindMethodOrDie(env, MainActivity.self, "getInstance", "()Lcom/xodos/x11/MainActivity;", JNI_TRUE);
         MainActivity.clientConnectedStateChanged = FindMethodOrDie(env, MainActivity.self, "clientConnectedStateChanged", "()V", JNI_FALSE);
         MainActivity.resetIme = FindMethodOrDie(env, (*env)->GetObjectClass(env, thiz), "resetIme", "()V", JNI_FALSE);
     }
@@ -403,7 +403,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, __unused void *reserved) {
             {"requestConnection", "()Z", (void *)&requestConnection},
     };
     (*vm)->AttachCurrentThread(vm, &env, NULL);
-    jclass cls = (*env)->FindClass(env, "com/termux/x11/LorieView");
+    jclass cls = (*env)->FindClass(env, "com/xodos/x11/LorieView");
     (*env)->RegisterNatives(env, cls, methods, sizeof(methods)/sizeof(methods[0]));
 
     rendererInit(env);
@@ -434,6 +434,6 @@ static void* stderrToLogcatThread(__unused void* cookie) {
 extern char* __progname;
 __attribute__((constructor)) static void init(void) {
     pthread_t t;
-    if (!strcmp(__progname, "com.termux.x11"))
+    if (!strcmp(__progname, "com.xodos.x11"))
         pthread_create(&t, NULL, stderrToLogcatThread, NULL);
 }

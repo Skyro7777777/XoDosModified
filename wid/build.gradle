@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace "com.termux.widget"
+    namespace "com.xodos.widget"
     compileSdk project.properties.compileSdkVersion.toInteger()
 
     // NDK version (optional for widgets, but retained if needed)
@@ -20,7 +20,7 @@ android {
 
         // Manifest placeholders for app metadata
         manifestPlaceholders = [
-            TERMUX_PACKAGE_NAME: "com.termux",
+            TERMUX_PACKAGE_NAME: "com.xodos",
             TERMUX_APP_NAME: "Termux",
             TERMUX_WIDGET_APP_NAME: "Termux:Widget"
         ]

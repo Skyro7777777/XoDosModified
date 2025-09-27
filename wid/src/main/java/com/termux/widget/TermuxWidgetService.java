@@ -1,4 +1,4 @@
-package com.termux.widget;
+package com.xodos.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;

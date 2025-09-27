@@ -1,4 +1,4 @@
-package com.termux.floatball.widget;
+package com.xodos.floatball.widget;
 
 import android.graphics.drawable.Drawable;
 

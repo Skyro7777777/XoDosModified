@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;

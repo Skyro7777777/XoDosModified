@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;

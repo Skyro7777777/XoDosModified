@@ -1,4 +1,4 @@
-package com.termux.widget.receivers;
+package com.xodos.widget.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

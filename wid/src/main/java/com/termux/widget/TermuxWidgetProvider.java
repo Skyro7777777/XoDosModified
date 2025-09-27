@@ -1,4 +1,4 @@
-package com.termux.widget;
+package com.xodos.widget;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;

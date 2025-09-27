@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.termux.x11'
+    namespace 'com.xodos.x11'
     compileSdk 34
 
     defaultConfig {
@@ -121,15 +121,15 @@ afterEvaluate {
                 preferences << [ type: 'Boolean',  key: node.getAttribute("app:key"), default: node.getAttribute("app:defaultValue") ]
         }
 
-        def out = file('build/generated/java/com/termux/x11/Prefs.java')
+        def out = file('build/generated/java/com/xodos/x11/Prefs.java')
         out.getParentFile().exists() || out.getParentFile().mkdirs()
         out.delete()
         out.createNewFile()
 
-        out << 'package com.termux.x11;\n'
+        out << 'package com.xodos.x11;\n'
         out << 'import java.util.HashMap;\n'
         out << 'import android.content.Context;\n'
-        out << 'import com.termux.x11.utils.TermuxX11ExtraKeys;\n'
+        out << 'import com.xodos.x11.utils.TermuxX11ExtraKeys;\n'
         out << '\n'
         out << 'public class Prefs extends LoriePreferences.PrefsProto {\n'
         preferences.each {

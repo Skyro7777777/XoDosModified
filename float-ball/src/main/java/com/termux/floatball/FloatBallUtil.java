@@ -1,4 +1,4 @@
-package com.termux.floatball;
+package com.xodos.floatball;
 
 import android.app.Activity;
 import android.content.Context;

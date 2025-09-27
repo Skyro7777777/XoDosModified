@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
  */
-package com.termux.floatball.permission.rom;
+package com.xodos.floatball.permission.rom;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;

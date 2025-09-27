@@ -1,4 +1,4 @@
-package com.termux.floatball.menu;
+package com.xodos.floatball.menu;
 
 import android.content.Context;
 import android.graphics.Rect;

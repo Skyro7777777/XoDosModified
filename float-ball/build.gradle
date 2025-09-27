@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.termux.floatball'
+    namespace 'com.xodos.floatball'
     compileSdk 34
 
     defaultConfig {

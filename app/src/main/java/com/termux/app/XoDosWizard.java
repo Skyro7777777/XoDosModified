@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
