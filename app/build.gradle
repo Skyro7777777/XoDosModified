@@ -65,7 +65,7 @@ aaptOptions {
 
     defaultConfig {
         applicationId "com.xodos"
-        minSdkVersion project.properties.minSdkVersion.toInteger()
+        minSdkVersion 26
         targetSdkVersion project.properties.targetSdkVersion.toInteger()
         versionCode 5
         versionName "5.9.0"
