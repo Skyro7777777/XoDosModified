@@ -60,8 +60,7 @@
         android:theme="@style/Theme.ForceBlack"
         android:hardwareAccelerated="true"
         android:isGame="true"
-        tools:targetApi="m"
-        tools:replace="android:allowBackup,android:label,android:theme,android:supportsRtl">
+        tools:targetApi="m">
 
         <!-- PS1 Emulator Activities (example if included as module) -->
 
@@ -290,10 +289,7 @@
         <meta-data
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
-            <meta-data
-            android:name="com.samsung.android.multidisplay.keep_process_alive"
-            android:value="true"
-            tools:replace="android:value"/>
+            
 
     </application>
 
