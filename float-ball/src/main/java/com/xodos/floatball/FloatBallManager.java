@@ -7,12 +7,12 @@ import android.graphics.Point;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.termux.floatball.menu.FloatMenu;
-import com.termux.floatball.menu.FloatMenuCfg;
-import com.termux.floatball.menu.MenuItem;
-import com.termux.floatball.widget.FloatBall;
-import com.termux.floatball.widget.FloatBallCfg;
-import com.termux.floatball.widget.StatusBarView;
+import com.xodos.floatball.menu.FloatMenu;
+import com.xodos.floatball.menu.FloatMenuCfg;
+import com.xodos.floatball.menu.MenuItem;
+import com.xodos.floatball.widget.FloatBall;
+import com.xodos.floatball.widget.FloatBallCfg;
+import com.xodos.floatball.widget.StatusBarView;
 
 import java.util.ArrayList;
 import java.util.List;

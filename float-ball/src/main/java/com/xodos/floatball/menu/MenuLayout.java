@@ -5,9 +5,9 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-import com.termux.floatball.runner.ICarrier;
-import com.termux.floatball.runner.ScrollRunner;
-import com.termux.floatball.utils.DensityUtil;
+import com.xodos.floatball.runner.ICarrier;
+import com.xodos.floatball.runner.ScrollRunner;
+import com.xodos.floatball.utils.DensityUtil;
 
 
 /**

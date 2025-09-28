@@ -14,7 +14,7 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.termux.floatball.R;
+import com.xodos.floatball.R;
 
 import java.lang.reflect.Method;
 

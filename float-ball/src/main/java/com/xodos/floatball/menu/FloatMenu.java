@@ -28,8 +28,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.termux.floatball.FloatBallManager;
-import com.termux.floatball.FloatBallUtil;
+import com.xodos.floatball.FloatBallManager;
+import com.xodos.floatball.FloatBallUtil;
 
 public class FloatMenu extends FrameLayout {
     private MenuLayout mMenuLayout;

@@ -16,12 +16,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 
-import com.termux.floatball.R;
-import com.termux.floatball.permission.rom.HuaweiUtils;
-import com.termux.floatball.permission.rom.MeizuUtils;
-import com.termux.floatball.permission.rom.MiuiUtils;
-import com.termux.floatball.permission.rom.QikuUtils;
-import com.termux.floatball.permission.rom.RomUtils;
+import com.xodos.floatball.R;
+import com.xodos.floatball.permission.rom.HuaweiUtils;
+import com.xodos.floatball.permission.rom.MeizuUtils;
+import com.xodos.floatball.permission.rom.MiuiUtils;
+import com.xodos.floatball.permission.rom.QikuUtils;
+import com.xodos.floatball.permission.rom.RomUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
