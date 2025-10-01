@@ -1,6 +1,6 @@
-package com.termux.shared.activity;
+package com.xodos.shared.activity;
 
-import com.termux.shared.errors.Errno;
+import com.xodos.shared.errors.Errno;
 
 public class ActivityErrno extends Errno {
 

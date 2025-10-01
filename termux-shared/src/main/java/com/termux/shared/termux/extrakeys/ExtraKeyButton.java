@@ -1,4 +1,4 @@
-package com.termux.shared.termux.extrakeys;
+package com.xodos.shared.xodos.extrakeys;
 
 import android.text.TextUtils;
 

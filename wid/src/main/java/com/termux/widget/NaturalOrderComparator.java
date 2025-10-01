@@ -23,7 +23,7 @@ package com.xodos.widget;
  misrepresented as being the original software.
  3. This notice may not be removed or altered from any source distribution.
 
- NOTICE: The change in Termux has been made:
+ NOTICE: The change in xodos has been made:
  - Make this class not implement Comparator, and instead use a static compare method
  - Make the comparison case insensitive.
  - Remove the main() and associated methods.

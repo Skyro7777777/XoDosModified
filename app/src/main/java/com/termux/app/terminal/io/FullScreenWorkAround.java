@@ -1,14 +1,14 @@
-package com.termux.app.terminal.io;
+package com.xodos.app.terminal.io;
 
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
 
 /**
- * Work around for fullscreen mode in Termux to fix ExtraKeysView not being visible.
+ * Work around for fullscreen mode in xodos to fix ExtraKeysView not being visible.
  * This class is derived from:
  * https://stackoverflow.com/questions/7417123/android-how-to-adjust-layout-in-full-screen-mode-when-softkeyboard-is-visible
  * and has some additional tweaks
@@ -23,13 +23,13 @@ public class FullScreenWorkAround {
     private final int mNavBarHeight;
 
 
-    public static void apply(TermuxActivity activity) {
+    public static void apply(xodosActivity activity) {
         new FullScreenWorkAround(activity);
     }
 
-    private FullScreenWorkAround(TermuxActivity activity) {
+    private FullScreenWorkAround(xodosActivity activity) {
 //        ViewGroup content = activity.findViewById(android.R.id.content);
-        ViewGroup content = activity.findViewById(R.id.activity_termux_root_view);
+        ViewGroup content = activity.findViewById(R.id.activity_xodos_root_view);
         mChildOfContent = content.getChildAt(0);
         mViewGroupLayoutParams = mChildOfContent.getLayoutParams();
         mNavBarHeight = activity.getNavBarHeight();

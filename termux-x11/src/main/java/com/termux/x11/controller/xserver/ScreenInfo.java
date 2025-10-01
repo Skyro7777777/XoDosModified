@@ -1,4 +1,4 @@
-package com.termux.x11.controller.xserver;
+package com.xodos.x11.controller.xserver;
 
 public class ScreenInfo {
     public final short width;

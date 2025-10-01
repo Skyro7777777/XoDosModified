@@ -1,4 +1,4 @@
-package com.termux.x11.utils;
+package com.xodos.x11.utils;
 
 import android.opengl.GLES20;
 import android.util.Log;

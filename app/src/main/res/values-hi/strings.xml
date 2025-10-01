@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_API_APP_NAME "Termux:API"><!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot"><!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float"><!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling"><!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker"><!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_API_APP_NAME "xodos:API"><!ENTITY xodos_BOOT_APP_NAME "xodos:Boot"><!ENTITY xodos_FLOAT_APP_NAME "xodos:Float"><!ENTITY xodos_STYLING_APP_NAME "xodos:Styling"><!ENTITY xodos_TASKER_APP_NAME "xodos:Tasker"><!ENTITY xodos_WIDGET_APP_NAME "xodos:Widget">]>
 <resources>
     <string name="application_name">XoDos</string>
     <string name="shared_user_label">user</string>
-    <!-- Termux RUN_COMMAND permission -->
-    <string name="permission_run_command_label">&TERMUX_APP_NAME; वातावरण में कमांड चलाएं</string>
-    <string name="permission_run_command_description">&TERMUX_APP_NAME; वातावरण के भीतर मनमाने कमांड निष्पादित करें और फ़ाइलों तक पहुंचें</string>
+    <!-- xodos RUN_COMMAND permission -->
+    <string name="permission_run_command_label">&xodos_APP_NAME; वातावरण में कमांड चलाएं</string>
+    <string name="permission_run_command_description">&xodos_APP_NAME; वातावरण के भीतर मनमाने कमांड निष्पादित करें और फ़ाइलों तक पहुंचें</string>
 
 
-    <!-- Termux Bootstrap Packages Installation -->
+    <!-- xodos Bootstrap Packages Installation -->
     <string name="bootstrap_installer_body">बूटस्ट्रैप पैकेज स्थापित किए जा रहे हैं…</string>
     <string name="bootstrap_error_title">बूटस्ट्रैप स्थापित करने में असमर्थ</string>
-    <string name="bootstrap_error_body">&TERMUX_APP_NAME; बूटस्ट्रैप पैकेज स्थापित करने में असमर्थ था।</string>
+    <string name="bootstrap_error_body">&xodos_APP_NAME; बूटस्ट्रैप पैकेज स्थापित करने में असमर्थ था।</string>
     <string name="bootstrap_error_abort">रद्द करें</string>
     <string name="bootstrap_error_try_again">फिर से प्रयास करें</string>
-    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" केवल प्राथमिक उपयोगकर्ता के रूप में चलाया जा सकता है। बूटस्ट्रैप बाइनरीज़ को हार्डकोडेड $PREFIX पथ के लिए संकलित किया गया है और इसे किसी अन्य पथ पर स्थापित नहीं किया जा सकता है:%1$s।"</string>
-    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" आपके डिवाइस पर पोर्टेबल/बाहरी/हटाने योग्य एसडी कार्ड पर स्थापित नहीं किया जा सकता है। बूटस्ट्रैप बाइनरीज़ को हार्डकोडेड $PREFIX पथ के लिए संकलित किया गया है और इसे किसी अन्य पथ पर स्थापित नहीं किया जा सकता है:%1$s।"</string>
+    <string name="bootstrap_error_not_primary_user_message">&xodos_APP_NAME;&xodos_APP_NAME;" केवल प्राथमिक उपयोगकर्ता के रूप में चलाया जा सकता है। बूटस्ट्रैप बाइनरीज़ को हार्डकोडेड $PREFIX पथ के लिए संकलित किया गया है और इसे किसी अन्य पथ पर स्थापित नहीं किया जा सकता है:%1$s।"</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&xodos_APP_NAME;&xodos_APP_NAME;" आपके डिवाइस पर पोर्टेबल/बाहरी/हटाने योग्य एसडी कार्ड पर स्थापित नहीं किया जा सकता है। बूटस्ट्रैप बाइनरीज़ को हार्डकोडेड $PREFIX पथ के लिए संकलित किया गया है और इसे किसी अन्य पथ पर स्थापित नहीं किया जा सकता है:%1$s।"</string>
 
 
     <!-- Terminal Sidebar and Shortcuts -->
@@ -68,131 +68,131 @@
 
     <string name="action_report_issue">समस्या रिपोर्ट करें</string>
     <string name="msg_generating_report">रिपोर्ट जेनरेट की जा रही है</string>
-    <string name="msg_add_termux_debug_info">क्या रिपोर्ट में टर्मक्स डीबग जानकारी जोड़नी है?</string>
+    <string name="msg_add_xodos_debug_info">क्या रिपोर्ट में टर्मक्स डीबग जानकारी जोड़नी है?</string>
 
-    <string name="error_styling_not_installed">&TERMUX_STYLING_APP_NAME; प्लगइन ऐप स्थापित नहीं है।</string>
+    <string name="error_styling_not_installed">&xodos_STYLING_APP_NAME; प्लगइन ऐप स्थापित नहीं है।</string>
     <string name="action_styling_install">स्थापित करें</string>
 
 
-    <!-- Termux Notifications -->
+    <!-- xodos Notifications -->
     <string name="notification_action_exit">बाहर निकलें</string>
     <string name="notification_action_wake_lock">वेकलॉक प्राप्त करें</string>
     <string name="notification_action_wake_unlock">वेकलॉक रिलीज़ करें</string>
 
 
-    <!-- TermuxService -->
-    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME;
+    <!-- xodosService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&xodos_APP_NAME;
         को Android >= 10 पर पृष्ठभूमि से टर्मिनल सत्र शुरू करने के लिए \"अन्य ऐप्स के ऊपर प्रदर्शित करें\" अनुमति की आवश्यकता है।
-        इसे सेटिंग्स -> ऐप्स -> &TERMUX_APP_NAME; -> उन्नत से अनुदान दें</string>
-    <string name="error_termux_service_invalid_execution_command_runner">TermuxService के लिए अमान्य निष्पादन कमांड रनर: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_runner">TermuxService के लिए असमर्थित निष्पादन कमांड रनर: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">TermuxService के लिए असमर्थित निष्पादन कमांड शेल बनाने का मोड: `%1$s`</string>
-    <string name="error_termux_service_execution_command_shell_name_unset">शेल का नाम सेट नहीं है लेकिन `%1$s` शेल बनाने का मोड पास किया गया है</string>
+        इसे सेटिंग्स -> ऐप्स -> &xodos_APP_NAME; -> उन्नत से अनुदान दें</string>
+    <string name="error_xodos_service_invalid_execution_command_runner">xodosService के लिए अमान्य निष्पादन कमांड रनर: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_runner">xodosService के लिए असमर्थित निष्पादन कमांड रनर: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_shell_create_mode">xodosService के लिए असमर्थित निष्पादन कमांड शेल बनाने का मोड: `%1$s`</string>
+    <string name="error_xodos_service_execution_command_shell_name_unset">शेल का नाम सेट नहीं है लेकिन `%1$s` शेल बनाने का मोड पास किया गया है</string>
 
 
-    <!-- Termux RunCommandService -->
+    <!-- xodos RunCommandService -->
     <string name="error_run_command_service_invalid_intent_action">RunCommandService के लिए अमान्य इंटेंट एक्शन: `%1$s`</string>
     <string name="error_run_command_service_invalid_execution_command_runner">RunCommandService के लिए अमान्य निष्पादन कमांड रनर: `%1$s`</string>
     <string name="error_run_command_service_mandatory_extra_missing">RunCommandService के लिए अनिवार्य एक्स्ट्रा गुम है: \"%1$s\"</string>
     <string name="error_run_command_service_api_help">RUN_COMMAND इंटेंट उपयोग के बारे में अधिक जानकारी के लिए %1$s पर जाएं।</string>
 
 
-    <!-- Termux File Receiver -->
+    <!-- xodos File Receiver -->
     <string name="title_file_received">फ़ाइल को ~/downloads/ में सहेजें</string>
     <string name="action_file_received_edit">संपादित करें</string>
     <string name="action_file_received_open_directory">डायरेक्टरी खोलें</string>
 
 
     <!-- Miscellaneous -->
-    <string name="error_termux_service_start_failed_general">TermuxService शुरू करने में विफल। अपवाद संदेश के लिए लॉगकैट जांचें।</string>
-    <string name="error_termux_service_start_failed_bg">ऐप पृष्ठभूमि में होने के कारण TermuxService शुरू करने में विफल।</string>
+    <string name="error_xodos_service_start_failed_general">xodosService शुरू करने में विफल। अपवाद संदेश के लिए लॉगकैट जांचें।</string>
+    <string name="error_xodos_service_start_failed_bg">ऐप पृष्ठभूमि में होने के कारण xodosService शुरू करने में विफल।</string>
 
 
-    <!-- Termux Settings -->
-    <string name="title_activity_termux_settings">&TERMUX_APP_NAME; सेटिंग्स</string>
+    <!-- xodos Settings -->
+    <string name="title_activity_xodos_settings">&xodos_APP_NAME; सेटिंग्स</string>
 
-    <!-- Termux App Preferences -->
-    <string name="termux_preferences_title">&TERMUX_APP_NAME; प्राथमिकताएं</string>
-    <string name="termux_preferences_summary">&TERMUX_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
+    <!-- xodos App Preferences -->
+    <string name="xodos_preferences_title">&xodos_APP_NAME; प्राथमिकताएं</string>
+    <string name="xodos_preferences_summary">&xodos_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
 
     <!-- Debugging Preferences -->
-    <string name="termux_debugging_preferences_title">डीबगिंग</string>
-    <string name="termux_debugging_preferences_summary">डीबगिंग के लिए प्राथमिकताएं</string>
+    <string name="xodos_debugging_preferences_title">डीबगिंग</string>
+    <string name="xodos_debugging_preferences_summary">डीबगिंग के लिए प्राथमिकताएं</string>
 
     <!-- Logging Category -->
-    <string name="termux_logging_header">लॉगिंग</string>
+    <string name="xodos_logging_header">लॉगिंग</string>
 
     <!-- Log Level -->
-    <string name="termux_log_level_title">लॉग स्तर</string>
+    <string name="xodos_log_level_title">लॉग स्तर</string>
 
     <!-- Terminal View Key Logging -->
-    <string name="termux_terminal_view_key_logging_enabled_title">टर्मिनल व्यू की लॉगिंग</string>
-    <string name="termux_terminal_view_key_logging_enabled_off">टर्मिनल व्यू कुंजियों के लिए लॉग प्रविष्टियां नहीं होंगी। (डिफ़ॉल्ट)</string>
-    <string name="termux_terminal_view_key_logging_enabled_on">लॉगकैट लॉग में टर्मिनल व्यू कुंजियों के लिए प्रविष्टियां होंगी।
+    <string name="xodos_terminal_view_key_logging_enabled_title">टर्मिनल व्यू की लॉगिंग</string>
+    <string name="xodos_terminal_view_key_logging_enabled_off">टर्मिनल व्यू कुंजियों के लिए लॉग प्रविष्टियां नहीं होंगी। (डिफ़ॉल्ट)</string>
+    <string name="xodos_terminal_view_key_logging_enabled_on">लॉगकैट लॉग में टर्मिनल व्यू कुंजियों के लिए प्रविष्टियां होंगी।
                     ये बहुत विस्तृत हैं और सामान्य परिस्थितियों में इन्हें अक्षम कर देना चाहिए अन्यथा प्रदर्शन समस्याएं हो सकती हैं।</string>
 
     <!-- Plugin Error Notifications -->
-    <string name="termux_plugin_error_notifications_enabled_title">प्लगइन त्रुटि सूचनाएं</string>
-    <string name="termux_plugin_error_notifications_enabled_off">प्लगइन त्रुटियों के लिए फ्लैश और सूचनाएं अक्षम करें।</string>
-    <string name="termux_plugin_error_notifications_enabled_on">प्लगइन त्रुटियों के लिए फ्लैश और सूचनाएं दिखाएं। (डिफ़ॉल्ट)</string>
+    <string name="xodos_plugin_error_notifications_enabled_title">प्लगइन त्रुटि सूचनाएं</string>
+    <string name="xodos_plugin_error_notifications_enabled_off">प्लगइन त्रुटियों के लिए फ्लैश और सूचनाएं अक्षम करें।</string>
+    <string name="xodos_plugin_error_notifications_enabled_on">प्लगइन त्रुटियों के लिए फ्लैश और सूचनाएं दिखाएं। (डिफ़ॉल्ट)</string>
 
     <!-- Crash Report Notifications -->
-    <string name="termux_crash_report_notifications_enabled_title">क्रैश रिपोर्ट सूचनाएं</string>
-    <string name="termux_crash_report_notifications_enabled_off">क्रैश रिपोर्ट के लिए सूचनाएं अक्षम करें।</string>
-    <string name="termux_crash_report_notifications_enabled_on">क्रैश रिपोर्ट के लिए सूचनाएं दिखाएं। (डिफ़ॉल्ट)</string>
+    <string name="xodos_crash_report_notifications_enabled_title">क्रैश रिपोर्ट सूचनाएं</string>
+    <string name="xodos_crash_report_notifications_enabled_off">क्रैश रिपोर्ट के लिए सूचनाएं अक्षम करें।</string>
+    <string name="xodos_crash_report_notifications_enabled_on">क्रैश रिपोर्ट के लिए सूचनाएं दिखाएं। (डिफ़ॉल्ट)</string>
 
 
     <!-- Terminal IO Preferences -->
-    <string name="termux_terminal_io_preferences_title">टर्मिनल I/O</string>
-    <string name="termux_terminal_io_preferences_summary">टर्मिनल I/O के लिए प्राथमिकताएं</string>
+    <string name="xodos_terminal_io_preferences_title">टर्मिनल I/O</string>
+    <string name="xodos_terminal_io_preferences_summary">टर्मिनल I/O के लिए प्राथमिकताएं</string>
 
     <!-- Keyboard Category -->
-    <string name="termux_keyboard_header">कीबोर्ड</string>
+    <string name="xodos_keyboard_header">कीबोर्ड</string>
 
     <!-- Soft Keyboard -->
-    <string name="termux_soft_keyboard_enabled_title">सॉफ्ट कीबोर्ड सक्षम</string>
-    <string name="termux_soft_keyboard_enabled_off">सॉफ्ट कीबोर्ड अक्षम होगा।</string>
-    <string name="termux_soft_keyboard_enabled_on">सॉफ्ट कीबोर्ड सक्षम होगा। (डिफ़ॉल्ट)</string>
+    <string name="xodos_soft_keyboard_enabled_title">सॉफ्ट कीबोर्ड सक्षम</string>
+    <string name="xodos_soft_keyboard_enabled_off">सॉफ्ट कीबोर्ड अक्षम होगा।</string>
+    <string name="xodos_soft_keyboard_enabled_on">सॉफ्ट कीबोर्ड सक्षम होगा। (डिफ़ॉल्ट)</string>
 
     <!-- Soft Keyboard Only If No Hardware-->
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">सॉफ्ट कीबोर्ड केवल यदि हार्डवेयर नहीं है</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">सॉफ्ट कीबोर्ड सक्षम होगा भले ही हार्डवेयर कीबोर्ड जुड़ा हो। (डिफ़ॉल्ट)</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">सॉफ्ट कीबोर्ड केवल तब सक्षम होगा जब कोई हार्डवेयर कीबोर्ड जुड़ा नहीं है।</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_title">सॉफ्ट कीबोर्ड केवल यदि हार्डवेयर नहीं है</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_off">सॉफ्ट कीबोर्ड सक्षम होगा भले ही हार्डवेयर कीबोर्ड जुड़ा हो। (डिफ़ॉल्ट)</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_on">सॉफ्ट कीबोर्ड केवल तब सक्षम होगा जब कोई हार्डवेयर कीबोर्ड जुड़ा नहीं है।</string>
 
 
     <!-- Terminal View Preferences -->
-    <string name="termux_terminal_view_preferences_title">टर्मिनल व्यू</string>
-    <string name="termux_terminal_view_preferences_summary">टर्मिनल व्यू के लिए प्राथमिकताएं</string>
+    <string name="xodos_terminal_view_preferences_title">टर्मिनल व्यू</string>
+    <string name="xodos_terminal_view_preferences_summary">टर्मिनल व्यू के लिए प्राथमिकताएं</string>
 
     <!-- View Category -->
-    <string name="termux_terminal_view_view_header">दृश्य</string>
+    <string name="xodos_terminal_view_view_header">दृश्य</string>
 
     <!-- Terminal View Margin Adjustment -->
-    <string name="termux_terminal_view_terminal_margin_adjustment_title">टर्मिनल मार्जिन समायोजन</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_off">टर्मिनल मार्जिन समायोजन अक्षम होगा।</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_on">टर्मिनल मार्जिन समायोजन सक्षम होगा।
+    <string name="xodos_terminal_view_terminal_margin_adjustment_title">टर्मिनल मार्जिन समायोजन</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_off">टर्मिनल मार्जिन समायोजन अक्षम होगा।</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_on">टर्मिनल मार्जिन समायोजन सक्षम होगा।
                     इसे सक्षम किया जाना चाहिए यदि सॉफ्ट कीबोर्ड एक्स्ट्रा कुंजियों/टर्मिनल व्यू के हिस्से को ढकता है।
                     यदि यह आपके डिवाइस पर स्क्रीन फ्लिकरिंग का कारण बनता है, तो इसे अक्षम करें। (डिफ़ॉल्ट)</string>
 
 
-    <!-- Termux:API App Preferences -->
-    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME; टर्मक्स एपीआई प्राथमिकताएं</string>
-    <string name="termux_api_preferences_summary">&TERMUX_API_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
+    <!-- xodos:API App Preferences -->
+    <string name="xodos_api_preferences_title">&xodos_API_APP_NAME; टर्मक्स एपीआई प्राथमिकताएं</string>
+    <string name="xodos_api_preferences_summary">&xodos_API_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
 
 
-    <!-- Termux:Float App Preferences -->
-    <string name="termux_float_preferences_title">&TERMUX_FLOAT_APP_NAME; टर्मक्स फ्लोट प्राथमिकताएं</string>
-    <string name="termux_float_preferences_summary">&TERMUX_FLOAT_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
+    <!-- xodos:Float App Preferences -->
+    <string name="xodos_float_preferences_title">&xodos_FLOAT_APP_NAME; टर्मक्स फ्लोट प्राथमिकताएं</string>
+    <string name="xodos_float_preferences_summary">&xodos_FLOAT_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
 
 
-    <!-- Termux:Tasker App Preferences -->
-    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME; टर्मक्स टास्कर प्राथमिकताएं</string>
-    <string name="termux_tasker_preferences_summary">&TERMUX_TASKER_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
+    <!-- xodos:Tasker App Preferences -->
+    <string name="xodos_tasker_preferences_title">&xodos_TASKER_APP_NAME; टर्मक्स टास्कर प्राथमिकताएं</string>
+    <string name="xodos_tasker_preferences_summary">&xodos_TASKER_APP_NAME; ऐप के लिए प्राथमिकताएं</string>
 
 
-    <!-- Termux:Widget App Preferences -->
-    <string name="termux_widget_preferences_title">&TERMUX_WIDGET_APP_NAME; टर्मक्स विजेट प्राथमिकताएं</string>
-    <string name="termux_widget_preferences_summary">&TERMUX_WIDGET_APP_NAME; टर्मक्स विजेट प्राथमिकताएं सारांश</string>
+    <!-- xodos:Widget App Preferences -->
+    <string name="xodos_widget_preferences_title">&xodos_WIDGET_APP_NAME; टर्मक्स विजेट प्राथमिकताएं</string>
+    <string name="xodos_widget_preferences_summary">&xodos_WIDGET_APP_NAME; टर्मक्स विजेट प्राथमिकताएं सारांश</string>
 
 
     <!-- About Preference -->
@@ -213,7 +213,7 @@
     <string name="open_terminal">टर्मिनल खोलें</string>
     <string name="terminate_current_process">वर्तमान चल रही प्रक्रिया को समाप्त करें</string>
     <string name="unlock_layout">स्क्रीन स्लाइडर अनलॉक करें</string>
-    <string name="raise_termux_app">टर्मक्स ऐप उठाएं</string>
+    <string name="raise_xodos_app">टर्मक्स ऐप उठाएं</string>
     <string name="add_menu_item">फ्लोट बॉल मेनू में कुछ आइटम जोड़ें</string>
     <string name="hide_terminal">टर्मिनल छिपाएं</string>
     <string name="set_dinput">dinput</string>
@@ -254,7 +254,7 @@
     <item>Wine🍷Bionic: नेटिव ड्राइवर रैपर के साथ Windows इम्युलेशन (Snapdragon नहीं है तो wrapper उपयोग करें)</item>
     <item>Wine🍷: किसी भी फ़ोल्डर से EXE फाइल चलाएँ</item>
     <item>Xbox🎮एमुलेटर: Xemu के साथ Xbox गेम्स खेलें</item>
-            <item>Termux:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
+            <item>xodos:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
     <item>सेटिंग्स⚙️: Wine/DXVK/Box और ड्राइवर कॉन्फ़िगर करें</item>
     <item>AI🤖चैट: स्थानीय AI DeepSeek, Llama आदि के साथ</item>
     <item>पुनर्स्थापित♻️: XoDos अपडेट और अन्य सिस्टम इंस्टॉल करें</item>
@@ -314,7 +314,7 @@
   <string name="install_complete">✅ इंस्टॉलेशन पूरा!</string>
   <string name="install_error">इंस्टॉलेशन त्रुटि</string>
   <string name="install_failed">XoDos इंस्टॉल करने में विफल: %s</string>
-  <string name="launch_xodos_command">/data/data/com.termux/files/usr/bin/xodos\n</string>
+  <string name="launch_xodos_command">/data/data/com.xodos/files/usr/bin/xodos\n</string>
   <string name="cleanup_error">त्रुटि: %s</string>
   <string name="install_copying">सिस्टम फाइल्स कॉपी कर रहा है…</string>
   <string name="install_extracting">सिस्टम अपडेट कर रहा है…</string>

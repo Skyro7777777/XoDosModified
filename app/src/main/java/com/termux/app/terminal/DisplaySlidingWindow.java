@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
 import com.nineoldandroids.view.ViewHelper;
-import com.termux.app.TermuxActivity;
-import com.termux.app.terminal.utils.ScreenUtils;
-import com.termux.x11.MainActivity;
+import com.xodos.app.xodosActivity;
+import com.xodos.app.terminal.utils.ScreenUtils;
+import com.xodos.x11.MainActivity;
 
 public class DisplaySlidingWindow extends HorizontalScrollView {
     public enum ContentType {
         LEFT_CONTENT, CENTER_CONTENT, RIGHT_CONTENT
     }
 
-    private TermuxActivity mTermuxActivity;
+    private xodosActivity mxodosActivity;
     private int mMenuWidth;
     private int mHalfMenuWidth;
     private boolean mIsOperateRight;
@@ -32,8 +32,8 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
     private boolean mIsRightMenuOpen;
     private ContentType mContentType;
 
-    public void setTermuxActivity(TermuxActivity activity) {
-        this.mTermuxActivity = activity;
+    public void setxodosActivity(xodosActivity activity) {
+        this.mxodosActivity = activity;
     }
 
     /**
@@ -124,7 +124,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
     private void remeasure() {
         mContentWidth = ScreenUtils.getScreenWidth(getContext());
         mStatusHeight = ScreenUtils.getStatusHeight();
-        boolean hideCutout = mTermuxActivity.getPrefs().hideCutout.get();
+        boolean hideCutout = mxodosActivity.getPrefs().hideCutout.get();
         if (mLandscape) {
             if (hideCutout) {
                 mStatusHeight = 0;
@@ -153,7 +153,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
         }
 //        Log.d("onInterceptTouchEvent",String.valueOf(ev.getAction()));
         if (!mLockContentSlider) {
-            mTermuxActivity.sendTouchEvent(ev);
+            mxodosActivity.sendTouchEvent(ev);
             return false;
         }
         if (mMenuSwitchSlider) {
@@ -173,7 +173,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
                     float dy = ev.getRawY() - mDownY;
                     if (scrollX <= 0) {
                         if (dx > mMenuWidth * 0.6 && Math.abs(dx) > Math.abs(dy)) {
-                            mTermuxActivity.onEdgeReached();
+                            mxodosActivity.onEdgeReached();
                         }
                     }
             }
@@ -196,7 +196,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
                         this.smoothScrollTo(mMenuWidth, 0);
                         //notify listener that left meun opened
                         if (mIsLeftMenuOpen) {
-                            mTermuxActivity.onMenuOpen(false, 0);
+                            mxodosActivity.onMenuOpen(false, 0);
                             mContentType = ContentType.CENTER_CONTENT;
                         }
                         mIsLeftMenuOpen = false;
@@ -206,7 +206,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
                     {
                         this.smoothScrollTo(0, 0);
                         if (!mIsLeftMenuOpen) {
-                            mTermuxActivity.onMenuOpen(true, 0);
+                            mxodosActivity.onMenuOpen(true, 0);
                             mContentType = ContentType.LEFT_CONTENT;
                         }
                         mIsLeftMenuOpen = true;
@@ -218,7 +218,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
                     if (scrollX > mHalfMenuWidth + mMenuWidth) {
                         this.smoothScrollTo(mMenuWidth + mMenuWidth + mStatusHeight * 4, 0);
                         if (!mIsRightMenuOpen) {
-                            mTermuxActivity.onMenuOpen(true, 1);
+                            mxodosActivity.onMenuOpen(true, 1);
                             mContentType = ContentType.RIGHT_CONTENT;
                         }
                         mIsRightMenuOpen = true;
@@ -228,7 +228,7 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
                     {
                         this.smoothScrollTo(mMenuWidth, 0);
                         if (mIsRightMenuOpen) {
-                            mTermuxActivity.onMenuOpen(false, 1);
+                            mxodosActivity.onMenuOpen(false, 1);
                             mContentType = ContentType.CENTER_CONTENT;
                         }
                         mIsRightMenuOpen = false;
@@ -265,13 +265,13 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
         this.mMenuSwitchSlider = openSlider;
         if (!openSlider) {
             this.smoothScrollTo(mMenuWidth, 0);
-            mTermuxActivity.onMenuOpen(false, 1);
+            mxodosActivity.onMenuOpen(false, 1);
             mContentType = ContentType.CENTER_CONTENT;
             mIsRightMenuOpen = false;
             this.mLockContentSlider=false;
         } else {
             this.smoothScrollTo(mMenuWidth + mMenuWidth + mStatusHeight * 4, 0);
-            mTermuxActivity.onMenuOpen(true, 1);
+            mxodosActivity.onMenuOpen(true, 1);
             mContentType = ContentType.RIGHT_CONTENT;
             mIsRightMenuOpen = true;
             this.mLockContentSlider=true;
@@ -282,13 +282,13 @@ public class DisplaySlidingWindow extends HorizontalScrollView {
         this.mMenuSwitchSlider = openSlider;
         if (!openSlider) {
             this.smoothScrollTo(mMenuWidth, 0);
-            mTermuxActivity.onMenuOpen(false, 0);
+            mxodosActivity.onMenuOpen(false, 0);
             mContentType = ContentType.CENTER_CONTENT;
             mIsLeftMenuOpen = false;
             this.mLockContentSlider=false;
         } else {
             this.smoothScrollTo(0, 0);
-            mTermuxActivity.onMenuOpen(true, 0);
+            mxodosActivity.onMenuOpen(true, 0);
             mContentType = ContentType.LEFT_CONTENT;
             mIsLeftMenuOpen = true;
             this.mLockContentSlider=true;

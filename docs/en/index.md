@@ -1,5 +1,5 @@
 ---
-page_ref: /docs/apps/termux/index.html
+page_ref: /docs/apps/xodos/index.html
 ---
 
 # XoDos help 

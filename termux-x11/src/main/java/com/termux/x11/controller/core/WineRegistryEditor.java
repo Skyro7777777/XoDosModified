@@ -1,7 +1,7 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
 
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.controller.math.Mathf;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

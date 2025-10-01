@@ -1,4 +1,4 @@
-package com.termux.x11.extrakeys;
+package com.xodos.x11.extrakeys;
 
 import android.text.TextUtils;
 
@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class TermuxX11ExtraKeyButton {
+public class xodosX11ExtraKeyButton {
 
     /** The key name for the name of the extra key if using a dict to define the extra key. {key: name, ...} */
     public static final String KEY_KEY_NAME = "key";
@@ -28,7 +28,7 @@ public class TermuxX11ExtraKeyButton {
 
     /**
      * The key that will be sent to the terminal, either a control character, like defined in
-     * {@link TermuxX11ExtraKeysConstants#PRIMARY_KEY_CODES_FOR_STRINGS} (LEFT, RIGHT, PGUP...) or some text.
+     * {@link xodosX11ExtraKeysConstants#PRIMARY_KEY_CODES_FOR_STRINGS} (LEFT, RIGHT, PGUP...) or some text.
      */
     public final String key;
 
@@ -43,42 +43,42 @@ public class TermuxX11ExtraKeyButton {
     public final String display;
 
     /**
-     * The {@link TermuxX11ExtraKeyButton} containing the information of the popup button (triggered by swipe up).
+     * The {@link xodosX11ExtraKeyButton} containing the information of the popup button (triggered by swipe up).
      */
     @Nullable
-    public final TermuxX11ExtraKeyButton popup;
+    public final xodosX11ExtraKeyButton popup;
 
 
     /**
-     * Initialize a {@link TermuxX11ExtraKeyButton}.
+     * Initialize a {@link xodosX11ExtraKeyButton}.
      *
-     * @param config The {@link JSONObject} containing the info to create the {@link TermuxX11ExtraKeyButton}.
-     * @param extraKeyDisplayMap The {@link TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
+     * @param config The {@link JSONObject} containing the info to create the {@link xodosX11ExtraKeyButton}.
+     * @param extraKeyDisplayMap The {@link xodosX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
      *                           x11 text mapping for the keys if a custom value is not defined
      *                           by {@link #KEY_DISPLAY_NAME}.
-     * @param extraKeyAliasMap The {@link TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
+     * @param extraKeyAliasMap The {@link xodosX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
      *                           aliases for the actual key names.
      */
-    public TermuxX11ExtraKeyButton(@NonNull JSONObject config,
-                                   @NonNull TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyDisplayMap,
-                                   @NonNull TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap) throws JSONException {
+    public xodosX11ExtraKeyButton(@NonNull JSONObject config,
+                                   @NonNull xodosX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyDisplayMap,
+                                   @NonNull xodosX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap) throws JSONException {
         this(config, null, extraKeyDisplayMap, extraKeyAliasMap);
     }
 
     /**
-     * Initialize a {@link TermuxX11ExtraKeyButton}.
+     * Initialize a {@link xodosX11ExtraKeyButton}.
      *
-     * @param config The {@link JSONObject} containing the info to create the {@link TermuxX11ExtraKeyButton}.
-     * @param popup The {@link TermuxX11ExtraKeyButton} optional {@link #popup} button.
-     * @param extraKeyDisplayMap The {@link TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
+     * @param config The {@link JSONObject} containing the info to create the {@link xodosX11ExtraKeyButton}.
+     * @param popup The {@link xodosX11ExtraKeyButton} optional {@link #popup} button.
+     * @param extraKeyDisplayMap The {@link xodosX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
      *                           x11 text mapping for the keys if a custom value is not defined
      *                           by {@link #KEY_DISPLAY_NAME}.
-     * @param extraKeyAliasMap The {@link TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
+     * @param extraKeyAliasMap The {@link xodosX11ExtraKeysConstants.ExtraKeyDisplayMap} that defines the
      *                           aliases for the actual key names.
      */
-    public TermuxX11ExtraKeyButton(@NonNull JSONObject config, @Nullable TermuxX11ExtraKeyButton popup,
-                                   @NonNull TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyDisplayMap,
-                                   @NonNull TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap) throws JSONException {
+    public xodosX11ExtraKeyButton(@NonNull JSONObject config, @Nullable xodosX11ExtraKeyButton popup,
+                                   @NonNull xodosX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyDisplayMap,
+                                   @NonNull xodosX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap) throws JSONException {
         String keyFromConfig = getStringFromJson(config, KEY_KEY_NAME);
         String macroFromConfig = getStringFromJson(config, KEY_MACRO);
         String[] keys;
@@ -123,7 +123,7 @@ public class TermuxX11ExtraKeyButton {
     /**
      * Replace the alias with its actual key name if found in extraKeyAliasMap.
      */
-    public static String replaceAlias(@NonNull TermuxX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap, String key) {
+    public static String replaceAlias(@NonNull xodosX11ExtraKeysConstants.ExtraKeyDisplayMap extraKeyAliasMap, String key) {
         return extraKeyAliasMap.get(key, key);
     }
 }

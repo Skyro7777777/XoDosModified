@@ -1,14 +1,14 @@
-package com.termux.shared.termux.shell;
+package com.xodos.shared.xodos.shell;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.errors.Error;
-import com.termux.shared.file.filesystem.FileTypes;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.file.filesystem.FileTypes;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
 
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TermuxShellUtils {
+public class xodosShellUtils {
 
-    private static final String LOG_TAG = "TermuxShellUtils";
+    private static final String LOG_TAG = "xodosShellUtils";
 
     /**
      * Setup shell command arguments for the execute. The file interpreter may be prefixed to
@@ -57,7 +57,7 @@ public class TermuxShellUtils {
                                     if (shebangExecutable.startsWith("/usr") || shebangExecutable.startsWith("/bin")) {
                                         String[] parts = shebangExecutable.split("/");
                                         String binary = parts[parts.length - 1];
-                                        interpreter = TermuxConstants.TERMUX_BIN_PREFIX_DIR_PATH + "/" + binary;
+                                        interpreter = xodosConstants.xodos_BIN_PREFIX_DIR_PATH + "/" + binary;
                                     }
                                     break;
                                 }
@@ -67,7 +67,7 @@ public class TermuxShellUtils {
                         }
                     } else {
                         // No shebang and no ELF, use standard shell.
-                        interpreter = TermuxConstants.TERMUX_BIN_PREFIX_DIR_PATH + "/sh";
+                        interpreter = xodosConstants.xodos_BIN_PREFIX_DIR_PATH + "/sh";
                     }
                 }
             }
@@ -82,19 +82,19 @@ public class TermuxShellUtils {
         return result.toArray(new String[0]);
     }
 
-    /** Clear files under {@link TermuxConstants#TERMUX_TMP_PREFIX_DIR_PATH}. */
-    public static void clearTermuxTMPDIR(boolean onlyIfExists) {
+    /** Clear files under {@link xodosConstants#xodos_TMP_PREFIX_DIR_PATH}. */
+    public static void clearxodosTMPDIR(boolean onlyIfExists) {
         // Existence check before clearing may be required since clearDirectory() will automatically
         // re-create empty directory if doesn't exist, which should not be done for things like
-        // termux-reset (d6eb5e35). Moreover, TMPDIR must be a directory and not a symlink, this can
-        // also allow users who don't want TMPDIR to be cleared automatically on termux exit, since
+        // xodos-reset (d6eb5e35). Moreover, TMPDIR must be a directory and not a symlink, this can
+        // also allow users who don't want TMPDIR to be cleared automatically on xodos exit, since
         // it may remove files still being used by background processes (#1159).
-        if(onlyIfExists && !FileUtils.directoryFileExists(TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH, false))
+        if(onlyIfExists && !FileUtils.directoryFileExists(xodosConstants.xodos_TMP_PREFIX_DIR_PATH, false))
             return;
 
         Error error;
 
-        TermuxAppSharedProperties properties = TermuxAppSharedProperties.getProperties();
+        xodosAppSharedProperties properties = xodosAppSharedProperties.getProperties();
         int days = properties.getDeleteTMPDIRFilesOlderThanXDaysOnExit();
 
         // Disable currently until FileUtils.deleteFilesOlderThanXDays() is fixed.
@@ -102,19 +102,19 @@ public class TermuxShellUtils {
             days = 0;
 
         if (days < 0) {
-            Logger.logInfo(LOG_TAG, "Not clearing termux $TMPDIR");
+            Logger.logInfo(LOG_TAG, "Not clearing xodos $TMPDIR");
         } else if (days == 0) {
             error = FileUtils.clearDirectory("$TMPDIR",
-                FileUtils.getCanonicalPath(TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH, null));
+                FileUtils.getCanonicalPath(xodosConstants.xodos_TMP_PREFIX_DIR_PATH, null));
             if (error != null) {
-                Logger.logErrorExtended(LOG_TAG, "Failed to clear termux $TMPDIR\n" + error);
+                Logger.logErrorExtended(LOG_TAG, "Failed to clear xodos $TMPDIR\n" + error);
             }
         } else {
             error = FileUtils.deleteFilesOlderThanXDays("$TMPDIR",
-                FileUtils.getCanonicalPath(TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH, null),
+                FileUtils.getCanonicalPath(xodosConstants.xodos_TMP_PREFIX_DIR_PATH, null),
                 TrueFileFilter.INSTANCE, days, true, FileTypes.FILE_TYPE_ANY_FLAGS);
             if (error != null) {
-                Logger.logErrorExtended(LOG_TAG, "Failed to delete files from termux $TMPDIR older than " + days + " days\n" + error);
+                Logger.logErrorExtended(LOG_TAG, "Failed to delete files from xodos $TMPDIR older than " + days + " days\n" + error);
             }
         }
     }

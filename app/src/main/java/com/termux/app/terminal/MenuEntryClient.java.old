@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 ///////////
 import java.io.File;
 import android.content.Intent;
@@ -26,13 +26,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
-import com.termux.app.terminal.utils.ScreenUtils;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
+import com.xodos.app.terminal.utils.ScreenUtils;
 
 public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
-    private TermuxActivity mTermuxActivity;
-    private TermuxTerminalSessionActivityClient mTermuxTerminalSessionActivityClient;
+    private xodosActivity mxodosActivity;
+    private xodosTerminalSessionActivityClient mxodosTerminalSessionActivityClient;
     private PopupWindow mPop;
     private PopupWindow mConfigPopWindow;
     private View mPopWindowConfigContent;
@@ -44,9 +44,9 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
     private MenuEntryClient() {
     }
 
-    public MenuEntryClient(TermuxActivity activity, TermuxTerminalSessionActivityClient termuxTerminalSessionActivityClient) {
-        this.mTermuxActivity = activity;
-        this.mTermuxTerminalSessionActivityClient = termuxTerminalSessionActivityClient;
+    public MenuEntryClient(xodosActivity activity, xodosTerminalSessionActivityClient xodosTerminalSessionActivityClient) {
+        this.mxodosActivity = activity;
+        this.mxodosTerminalSessionActivityClient = xodosTerminalSessionActivityClient;
         mMenutryEntry = new MenuEntry();
         mMenutryEntry.loadMenuItems();
         setToolBoxView();
@@ -55,25 +55,25 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
 
     private void showAddMenuItem() {
 //        PopupWindow mConfigPopWindow = AppUtils.showPopupWindow(mainContentView, mPopWindowConfigContent, 200, 240);
-        mConfigPopWindow = new PopupWindow(mTermuxActivity);
+        mConfigPopWindow = new PopupWindow(mxodosActivity);
         mConfigPopWindow.setContentView(mPopWindowConfigContent);
         int x = 0;
         int y = 120;
-        if (mTermuxActivity.getExtraKeysView().getVisibility() == View.VISIBLE) {
-            y += mTermuxActivity.getExtraKeysView().getHeight();
+        if (mxodosActivity.getExtraKeysView().getVisibility() == View.VISIBLE) {
+            y += mxodosActivity.getExtraKeysView().getHeight();
         }
         mConfigPopWindow.setFocusable(true);
-        mConfigPopWindow.showAtLocation(mTermuxActivity.findViewById(R.id.left_drawer), Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, x, y);
+        mConfigPopWindow.showAtLocation(mxodosActivity.findViewById(R.id.left_drawer), Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, x, y);
     }
 
     private void setToolBoxView() {
-        mTermuxActivity.findViewById(R.id.toggle_tool_box).setOnClickListener(v -> {
+        mxodosActivity.findViewById(R.id.toggle_tool_box).setOnClickListener(v -> {
             showBackupRestoreDialog();
         });
     }
 
     private void showBackupRestoreDialog() {
-        new AlertDialog.Builder(mTermuxActivity)
+        new AlertDialog.Builder(mxodosActivity)
             .setTitle("XoDOS Management")
             .setMessage("Choose an action:")
             .setPositiveButton("Backup", (dialog, which) -> executeBackupCommand())
@@ -83,19 +83,19 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
     }
 
     private void executeBackupCommand() {
-        String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.termux/files ./home ./usr \n";
-        File storageDir = new File(mTermuxActivity.getFilesDir(), "home/storage");
+        String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.xodos/files ./home ./usr \n";
+        File storageDir = new File(mxodosActivity.getFilesDir(), "home/storage");
         if (!storageDir.exists()) {
-            command = "termux-setup-storage; sleep 5; " + command;
+            command = "xodos-setup-storage; sleep 5; " + command;
         }
-        mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+        mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
     }
 
     private void launchFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT)
             .setType("*/*")
             .addCategory(Intent.CATEGORY_OPENABLE);
-        mTermuxActivity.startActivityForResult(intent, TermuxActivity.FILE_REQUEST_BACKUP_CODE);
+        mxodosActivity.startActivityForResult(intent, xodosActivity.FILE_REQUEST_BACKUP_CODE);
     }
 
 // Keep all other existing methods intact
@@ -110,17 +110,17 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
         gridLayout.addView(recover);
 
         recover.setOnClickListener(v -> {
-            LinearLayout linearLayout = new LinearLayout(mTermuxActivity);
-            CheckBox dInputCheckBox = new CheckBox(mTermuxActivity);
-            dInputCheckBox.setText(mTermuxActivity.getText(R.string.set_dinput));
+            LinearLayout linearLayout = new LinearLayout(mxodosActivity);
+            CheckBox dInputCheckBox = new CheckBox(mxodosActivity);
+            dInputCheckBox.setText(mxodosActivity.getText(R.string.set_dinput));
             linearLayout.addView(dInputCheckBox);
-            CheckBox xInputCheckoutBox = new CheckBox(mTermuxActivity);
-            xInputCheckoutBox.setText(mTermuxActivity.getText(R.string.set_xinput));
+            CheckBox xInputCheckoutBox = new CheckBox(mxodosActivity);
+            xInputCheckoutBox.setText(mxodosActivity.getText(R.string.set_xinput));
             linearLayout.addView(xInputCheckoutBox);
-            AlertDialog.Builder builder = new AlertDialog.Builder(mTermuxActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mxodosActivity);
             builder.setView(linearLayout);
-            builder.setMessage(mTermuxActivity.getText(R.string.ready_set_mobox_env))
-                .setPositiveButton(mTermuxActivity.getText(R.string.yes), (dialog, id) -> {
+            builder.setMessage(mxodosActivity.getText(R.string.ready_set_mobox_env))
+                .setPositiveButton(mxodosActivity.getText(R.string.yes), (dialog, id) -> {
                     int option1 = 0b0001; // dinput
                     int option2 = 0b0010; // xinput
                     int flags = 0;
@@ -134,14 +134,14 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
                     if (flags != 0) {
                         mode = flags;
                     }
-                    mTermuxActivity.reInstallCustomStartScript(mode);
+                    mxodosActivity.reInstallCustomStartScript(mode);
                 })
-                .setNegativeButton(mTermuxActivity.getText(R.string.cancel), (dialog, id) -> {
+                .setNegativeButton(mxodosActivity.getText(R.string.cancel), (dialog, id) -> {
 
                 });
 
             AlertDialog dialog = builder.create();
-            dialog.setTitle(mTermuxActivity.getText(R.string.select_gamepad_input_mode));
+            dialog.setTitle(mxodosActivity.getText(R.string.select_gamepad_input_mode));
             dialog.show();
 
             mPop.dismiss();
@@ -155,29 +155,29 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
             }
             final String cmd = command + "\n";
             button.setOnClickListener(v -> {
-                mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(cmd);
+                mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(cmd);
             });
             int idx = i;
             button.setOnLongClickListener(v -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mTermuxActivity);
-                builder.setMessage(mTermuxActivity.getText(R.string.remove_shortcut))
-                    .setPositiveButton(mTermuxActivity.getText(R.string.yes), (dialog, id) -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mxodosActivity);
+                builder.setMessage(mxodosActivity.getText(R.string.remove_shortcut))
+                    .setPositiveButton(mxodosActivity.getText(R.string.yes), (dialog, id) -> {
                         mMenutryEntry.getStartItemList().remove(idx);
                         mGrideLayout.removeAllViews();
-                        updateMenuItems(ScreenUtils.getScreenWidth(mTermuxActivity), mGrideLayout);
+                        updateMenuItems(ScreenUtils.getScreenWidth(mxodosActivity), mGrideLayout);
                     })
-                    .setNegativeButton(mTermuxActivity.getText(R.string.cancel), (dialog, id) -> {
+                    .setNegativeButton(mxodosActivity.getText(R.string.cancel), (dialog, id) -> {
 
                     });
 
                 AlertDialog dialog = builder.create();
-                dialog.setTitle(mTermuxActivity.getText(R.string.remove));
+                dialog.setTitle(mxodosActivity.getText(R.string.remove));
                 dialog.show();
                 return true;
             });
             gridLayout.addView(button);
         }
-        LinearLayout but = createImageButton("add", mTermuxActivity.getString(com.termux.x11.R.string.add), width / 5);
+        LinearLayout but = createImageButton("add", mxodosActivity.getString(com.xodos.x11.R.string.add), width / 5);
         but.setGravity(Gravity.CENTER_VERTICAL);
         but.setOrientation(LinearLayout.VERTICAL);
         gridLayout.addView(but);
@@ -187,13 +187,13 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
     }
 
     private void setToolboxConfig() {
-        mPopWindowConfigContent = mTermuxActivity.getLayoutInflater().inflate(R.layout.menu_launch_item, null);
+        mPopWindowConfigContent = mxodosActivity.getLayoutInflater().inflate(R.layout.menu_launch_item, null);
         LinearLayout mStartItemEntriesConfig = mPopWindowConfigContent.findViewById(R.id.LConfigStartItems);
 
 
         ImageButton mAddConfigButton = mPopWindowConfigContent.findViewById(R.id.BConfig_item);
 
-        mFileBrowser = new FileBrowser(mTermuxActivity, this);
+        mFileBrowser = new FileBrowser(mxodosActivity, this);
         mFileBrowser.init();
         mAddConfigButton.setOnClickListener(v -> {
             mFileBrowser.showFileBrowser(mStartItemEntriesConfig);
@@ -204,7 +204,7 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
         okButton.setOnClickListener(v -> {
             if (command.getText().toString().isEmpty()||
             title.getText().toString().isEmpty()){
-                Toast.makeText(mTermuxActivity,R.string.invalid_config,Toast.LENGTH_LONG);
+                Toast.makeText(mxodosActivity,R.string.invalid_config,Toast.LENGTH_LONG);
                 return;
             }
             MenuEntry.Entry entry = new MenuEntry.Entry();
@@ -216,48 +216,48 @@ public class MenuEntryClient implements FileBrowser.FileSlectedAdapter {
             entry.setType("executable");
             mMenutryEntry.addMenuEntry(entry);
             mGrideLayout.removeAllViews();
-            updateMenuItems(ScreenUtils.getScreenWidth(mTermuxActivity), mGrideLayout);
+            updateMenuItems(ScreenUtils.getScreenWidth(mxodosActivity), mGrideLayout);
             mConfigPopWindow.dismiss();
         });
     }
 
     private LinearLayout createImageButton(String type, String title, int size) {
-        LinearLayout layout = new LinearLayout(mTermuxActivity);
+        LinearLayout layout = new LinearLayout(mxodosActivity);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(size < 10 ? WRAP_CONTENT : size, size < 10 ? WRAP_CONTENT : size);
         param.setMargins(10, 10, 10, 10);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
-        ImageView v = new ImageView(mTermuxActivity);
+        ImageView v = new ImageView(mxodosActivity);
         LinearLayout.LayoutParams vParam = new LinearLayout.LayoutParams(MATCH_PARENT, 0);
         vParam.weight = 3;
         vParam.gravity = Gravity.CENTER_VERTICAL;
         v.setLayoutParams(vParam);
         switch (type) {
             case "script": {
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_script_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_script_click));
                 break;
             }
             case "executable": {
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_executable_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_executable_click));
                 break;
             }
             case "short_cut": {
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_shortcut_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_shortcut_click));
                 break;
             }
             case "terminal": {
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_terminal_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_terminal_click));
                 break;
             }
             case "add": {
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_add_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_add_click));
                 break;
             }
             default:
-                v.setImageDrawable(mTermuxActivity.getDrawable(R.drawable.ic_code_click));
+                v.setImageDrawable(mxodosActivity.getDrawable(R.drawable.ic_code_click));
         }
-        TextView tv = new TextView(mTermuxActivity);
+        TextView tv = new TextView(mxodosActivity);
         LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(MATCH_PARENT, 0);
         tvParam.weight = 1;
         tv.setGravity(Gravity.CENTER);

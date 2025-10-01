@@ -1,7 +1,7 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
-import com.termux.x11.LorieView;
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.LorieView;
+import com.xodos.x11.controller.math.Mathf;
 
 import java.util.Timer;
 import java.util.TimerTask;

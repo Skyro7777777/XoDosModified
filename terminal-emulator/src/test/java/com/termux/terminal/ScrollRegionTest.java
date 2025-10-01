@@ -1,4 +1,4 @@
-package com.termux.terminal;
+package com.xodos.terminal;
 
 /**
  * ${CSI}${top};${bottom}r" - set Scrolling Region [top;bottom] (default = full size of window) (DECSTBM).
@@ -107,7 +107,7 @@ public class ScrollRegionTest extends TerminalTestCase {
 		assertLinesAre("1 ", "2 ", "3 ", "QQ", "YY");
 	}
 
-	/** See https://github.com/termux/termux-app/issues/1340 */
+	/** See https://github.com/xodos/xodos-app/issues/1340 */
 	public void testScrollRegionDoesNotLimitCursorMovement() {
 		withTerminalSized(6, 4)
 			.enterString("\033[4;7r\033[3;1Haaa\033[Axxx")

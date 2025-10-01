@@ -1,4 +1,4 @@
-package com.termux.terminal;
+package com.xodos.terminal;
 
 import android.view.KeyEvent;
 

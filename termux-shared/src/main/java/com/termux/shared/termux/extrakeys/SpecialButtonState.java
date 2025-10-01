@@ -1,4 +1,4 @@
-package com.termux.shared.termux.extrakeys;
+package com.xodos.shared.xodos.extrakeys;
 
 import com.google.android.material.button.MaterialButton;
 

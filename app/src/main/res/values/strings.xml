@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.xodos"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_API_APP_NAME "Termux:API"><!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot"><!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float"><!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling"><!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker"><!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_API_APP_NAME "xodos:API"><!ENTITY xodos_BOOT_APP_NAME "xodos:Boot"><!ENTITY xodos_FLOAT_APP_NAME "xodos:Float"><!ENTITY xodos_STYLING_APP_NAME "xodos:Styling"><!ENTITY xodos_TASKER_APP_NAME "xodos:Tasker"><!ENTITY xodos_WIDGET_APP_NAME "xodos:Widget">]>
 
 <resources>
 
-    <string name="application_name">&TERMUX_APP_NAME; </string>
-    <string name="shared_user_label">&TERMUX_APP_NAME; user</string>
+    <string name="application_name">&xodos_APP_NAME; </string>
+    <string name="shared_user_label">&xodos_APP_NAME; user</string>
 
 
-    <!-- Termux RUN_COMMAND permission -->
-    <string name="permission_run_command_label">Run commands in &TERMUX_APP_NAME; environment</string>
-    <string name="permission_run_command_description">&TERMUX_APP_NAME;execute arbitrary commands within environment and access files</string>
+    <!-- xodos RUN_COMMAND permission -->
+    <string name="permission_run_command_label">Run commands in &xodos_APP_NAME; environment</string>
+    <string name="permission_run_command_description">&xodos_APP_NAME;execute arbitrary commands within environment and access files</string>
 
 
-    <!-- Termux Bootstrap Packages Installation -->
-    <string name="bootstrap_error_body">&TERMUX_APP_NAME; was unable to install the bootstrap packages.</string>
+    <!-- xodos Bootstrap Packages Installation -->
+    <string name="bootstrap_error_body">&xodos_APP_NAME; was unable to install the bootstrap packages.</string>
     <string name="bootstrap_error_abort">Abort</string>
     <string name="bootstrap_error_try_again">Try again</string>
-    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" can only be run as the primary user. Bootstrap binaries compiled for  have hardcoded $PREFIX path and cannot be installed  under any path other than:%1$s."</string>
-    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" cannot be installed on portable/external/removable sd card on your device.  Bootstrap binaries compiled for  have hardcoded $PREFIX path and cannot be installed under any path other than:%1$s."</string>
+    <string name="bootstrap_error_not_primary_user_message">&xodos_APP_NAME;&xodos_APP_NAME;" can only be run as the primary user. Bootstrap binaries compiled for  have hardcoded $PREFIX path and cannot be installed  under any path other than:%1$s."</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&xodos_APP_NAME;&xodos_APP_NAME;" cannot be installed on portable/external/removable sd card on your device.  Bootstrap binaries compiled for  have hardcoded $PREFIX path and cannot be installed under any path other than:%1$s."</string>
 
 
     <!-- Terminal Sidebar and Shortcuts -->
@@ -70,134 +70,134 @@
 
     <string name="action_report_issue">Report Issue</string>
     <string name="msg_generating_report">Generating Report</string>
-    <string name="msg_add_termux_debug_info">Add termux debug info to report?</string>
+    <string name="msg_add_xodos_debug_info">Add xodos debug info to report?</string>
 
-    <string name="error_styling_not_installed">The &TERMUX_STYLING_APP_NAME; Plugin App is not installed.</string>
+    <string name="error_styling_not_installed">The &xodos_STYLING_APP_NAME; Plugin App is not installed.</string>
     <string name="action_styling_install">Install</string>
 
 
-    <!-- Termux Notifications -->
+    <!-- xodos Notifications -->
     <string name="notification_action_exit">Exit</string>
     <string name="notification_action_wake_lock">Acquire wakelock</string>
     <string name="notification_action_wake_unlock">Release wakelock</string>
 
 
-    <!-- TermuxService -->
-    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME;
+    <!-- xodosService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&xodos_APP_NAME;
         requires
         \"Display over other apps\" permission to start terminal sessions from background on Android >= 10.
-        Grants it from Settings -> Apps -> &TERMUX_APP_NAME; -> Advanced</string>
-    <string name="error_termux_service_invalid_execution_command_runner">Invalid execution command runner to TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_runner">Unsupported execution command runner to TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">Unsupported execution command shell create mode to TermuxService: `%1$s`</string>
-    <string name="error_termux_service_execution_command_shell_name_unset">Shell name not set but `%1$s` shell create mode passed</string>
+        Grants it from Settings -> Apps -> &xodos_APP_NAME; -> Advanced</string>
+    <string name="error_xodos_service_invalid_execution_command_runner">Invalid execution command runner to xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_runner">Unsupported execution command runner to xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_shell_create_mode">Unsupported execution command shell create mode to xodosService: `%1$s`</string>
+    <string name="error_xodos_service_execution_command_shell_name_unset">Shell name not set but `%1$s` shell create mode passed</string>
 
 
-    <!-- Termux RunCommandService -->
+    <!-- xodos RunCommandService -->
     <string name="error_run_command_service_invalid_intent_action">Invalid intent action to RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_invalid_execution_command_runner">Invalid execution command runner to RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_mandatory_extra_missing">Mandatory extra missing to RunCommandService: \"%1$s\"</string>
     <string name="error_run_command_service_api_help">Visit %1$s for more info on RUN_COMMAND Intent usage.</string>
 
 
-    <!-- Termux File Receiver -->
+    <!-- xodos File Receiver -->
     <string name="title_file_received">Save file in ~/downloads/</string>
     <string name="action_file_received_edit">Edit</string>
     <string name="action_file_received_open_directory">Open directory</string>
 
 
     <!-- Miscellaneous -->
-    <string name="error_termux_service_start_failed_general">Failed to start TermuxService. Check logcat for exception message.</string>
-    <string name="error_termux_service_start_failed_bg">Failed to start TermuxService while app is in background due to android bg restrictions.</string>
+    <string name="error_xodos_service_start_failed_general">Failed to start xodosService. Check logcat for exception message.</string>
+    <string name="error_xodos_service_start_failed_bg">Failed to start xodosService while app is in background due to android bg restrictions.</string>
 
 
-    <!-- Termux Settings -->
-    <string name="title_activity_termux_settings">&TERMUX_APP_NAME; Settings</string>
+    <!-- xodos Settings -->
+    <string name="title_activity_xodos_settings">&xodos_APP_NAME; Settings</string>
 
-    <!-- Termux App Preferences -->
-    <string name="termux_preferences_title">&TERMUX_APP_NAME;preference</string>
-    <string name="termux_preferences_summary">Preferences for &TERMUX_APP_NAME; app</string>
+    <!-- xodos App Preferences -->
+    <string name="xodos_preferences_title">&xodos_APP_NAME;preference</string>
+    <string name="xodos_preferences_summary">Preferences for &xodos_APP_NAME; app</string>
 
     <!-- Debugging Preferences -->
-    <string name="termux_debugging_preferences_title">Debugging</string>
-    <string name="termux_debugging_preferences_summary">Preferences for debugging</string>
+    <string name="xodos_debugging_preferences_title">Debugging</string>
+    <string name="xodos_debugging_preferences_summary">Preferences for debugging</string>
 
     <!-- Logging Category -->
-    <string name="termux_logging_header">Logging</string>
+    <string name="xodos_logging_header">Logging</string>
 
     <!-- Log Level -->
-    <string name="termux_log_level_title">Log Level</string>
+    <string name="xodos_log_level_title">Log Level</string>
 
     <!-- Terminal View Key Logging -->
-    <string name="termux_terminal_view_key_logging_enabled_title">Terminal View Key Logging</string>
-    <string name="termux_terminal_view_key_logging_enabled_off">Logs will not have entries for terminal view keys. (Default)</string>
-    <string name="termux_terminal_view_key_logging_enabled_on">Logcat logs will have entries for terminal view keys.
+    <string name="xodos_terminal_view_key_logging_enabled_title">Terminal View Key Logging</string>
+    <string name="xodos_terminal_view_key_logging_enabled_off">Logs will not have entries for terminal view keys. (Default)</string>
+    <string name="xodos_terminal_view_key_logging_enabled_on">Logcat logs will have entries for terminal view keys.
                     These are very verbose and should be disabled under normal circumstances or will cause performance issues.</string>
 
     <!-- Plugin Error Notifications -->
-    <string name="termux_plugin_error_notifications_enabled_title">Plugin Error Notifications</string>
-    <string name="termux_plugin_error_notifications_enabled_off">Disable flashes and notifications for plugin errors.</string>
-    <string name="termux_plugin_error_notifications_enabled_on">Show flashes and notifications for plugin errors. (Default)</string>
+    <string name="xodos_plugin_error_notifications_enabled_title">Plugin Error Notifications</string>
+    <string name="xodos_plugin_error_notifications_enabled_off">Disable flashes and notifications for plugin errors.</string>
+    <string name="xodos_plugin_error_notifications_enabled_on">Show flashes and notifications for plugin errors. (Default)</string>
 
     <!-- Crash Report Notifications -->
-    <string name="termux_crash_report_notifications_enabled_title">Crash Report Notifications</string>
-    <string name="termux_crash_report_notifications_enabled_off">Disable notifications for crash reports.</string>
-    <string name="termux_crash_report_notifications_enabled_on">Show notifications for crash reports. (Default)</string>
+    <string name="xodos_crash_report_notifications_enabled_title">Crash Report Notifications</string>
+    <string name="xodos_crash_report_notifications_enabled_off">Disable notifications for crash reports.</string>
+    <string name="xodos_crash_report_notifications_enabled_on">Show notifications for crash reports. (Default)</string>
 
 
     <!-- Terminal IO Preferences -->
-    <string name="termux_terminal_io_preferences_title">Terminal I/O</string>
-    <string name="termux_terminal_io_preferences_summary">Preferences for terminal I/O</string>
+    <string name="xodos_terminal_io_preferences_title">Terminal I/O</string>
+    <string name="xodos_terminal_io_preferences_summary">Preferences for terminal I/O</string>
 
     <!-- Keyboard Category -->
-    <string name="termux_keyboard_header">Keyboard</string>
+    <string name="xodos_keyboard_header">Keyboard</string>
 
     <!-- Soft Keyboard -->
-    <string name="termux_soft_keyboard_enabled_title">Soft Keyboard Enabled</string>
-    <string name="termux_soft_keyboard_enabled_off">Soft keyboard will be disabled.</string>
-    <string name="termux_soft_keyboard_enabled_on">Soft keyboard will be enabled. (Default)</string>
+    <string name="xodos_soft_keyboard_enabled_title">Soft Keyboard Enabled</string>
+    <string name="xodos_soft_keyboard_enabled_off">Soft keyboard will be disabled.</string>
+    <string name="xodos_soft_keyboard_enabled_on">Soft keyboard will be enabled. (Default)</string>
 
     <!-- Soft Keyboard Only If No Hardware-->
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Soft Keyboard Only If No Hardware</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">Soft keyboard will be enabled even if
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_title">Soft Keyboard Only If No Hardware</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_off">Soft keyboard will be enabled even if
                     hardware keyboard is connected. (Default)</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">Soft keyboard will be enabled only if
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_on">Soft keyboard will be enabled only if
                     no hardware keyboard is connected.</string>
 
 
     <!-- Terminal View Preferences -->
-    <string name="termux_terminal_view_preferences_title">Terminal View</string>
-    <string name="termux_terminal_view_preferences_summary">Preferences for terminal view</string>
+    <string name="xodos_terminal_view_preferences_title">Terminal View</string>
+    <string name="xodos_terminal_view_preferences_summary">Preferences for terminal view</string>
 
     <!-- View Category -->
-    <string name="termux_terminal_view_view_header">View</string>
+    <string name="xodos_terminal_view_view_header">View</string>
 
     <!-- Terminal View Margin Adjustment -->
-    <string name="termux_terminal_view_terminal_margin_adjustment_title">Terminal Margin Adjustment</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_off">Terminal margin adjustment will be disabled.</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_on">Terminal margin adjustment will be enabled.
+    <string name="xodos_terminal_view_terminal_margin_adjustment_title">Terminal Margin Adjustment</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_off">Terminal margin adjustment will be disabled.</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_on">Terminal margin adjustment will be enabled.
                     It should be enabled to try to fix the issue where soft keyboard covers part of extra keys/terminal view.
                     If it causes screen flickering on your devices, then disable it. (Default)</string>
 
 
-    <!-- Termux:API App Preferences -->
-    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME;termux api preference</string>
-    <string name="termux_api_preferences_summary">Preferences for &TERMUX_API_APP_NAME; app</string>
+    <!-- xodos:API App Preferences -->
+    <string name="xodos_api_preferences_title">&xodos_API_APP_NAME;xodos api preference</string>
+    <string name="xodos_api_preferences_summary">Preferences for &xodos_API_APP_NAME; app</string>
 
 
-    <!-- Termux:Float App Preferences -->
-    <string name="termux_float_preferences_title">&TERMUX_FLOAT_APP_NAME;termux float preference</string>
-    <string name="termux_float_preferences_summary">Preferences for &TERMUX_FLOAT_APP_NAME; app</string>
+    <!-- xodos:Float App Preferences -->
+    <string name="xodos_float_preferences_title">&xodos_FLOAT_APP_NAME;xodos float preference</string>
+    <string name="xodos_float_preferences_summary">Preferences for &xodos_FLOAT_APP_NAME; app</string>
 
 
-    <!-- Termux:Tasker App Preferences -->
-    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME;termux tasker preference</string>
-    <string name="termux_tasker_preferences_summary">Preferences for &TERMUX_TASKER_APP_NAME; app</string>
+    <!-- xodos:Tasker App Preferences -->
+    <string name="xodos_tasker_preferences_title">&xodos_TASKER_APP_NAME;xodos tasker preference</string>
+    <string name="xodos_tasker_preferences_summary">Preferences for &xodos_TASKER_APP_NAME; app</string>
 
 
-    <!-- Termux:Widget App Preferences -->
-    <string name="termux_widget_preferences_title">&TERMUX_WIDGET_APP_NAME;termux widget preference</string>
-    <string name="termux_widget_preferences_summary">&TERMUX_WIDGET_APP_NAME;termux widget preference summary</string>
+    <!-- xodos:Widget App Preferences -->
+    <string name="xodos_widget_preferences_title">&xodos_WIDGET_APP_NAME;xodos widget preference</string>
+    <string name="xodos_widget_preferences_summary">&xodos_WIDGET_APP_NAME;xodos widget preference summary</string>
 
 
     <!-- About Preference -->
@@ -218,7 +218,7 @@
     <string name="open_terminal">open terminal</string>
     <string name="terminate_current_process">kill current running process</string>
     <string name="unlock_layout">unlock screen slider</string>
-    <string name="raise_termux_app">raise termux app</string>
+    <string name="raise_xodos_app">raise xodos app</string>
     <string name="add_menu_item">add some item to float ball menu</string>
     <string name="hide_terminal">hide terminal</string>
     <string name="set_dinput">dinput</string>
@@ -233,9 +233,9 @@
     <string name="invalid_config">invalid config</string>
     
     <!-- Add to res/values/strings.xml -->
-    <string name="bootstrap_initializing">Initializing Termux environment...</string>
+    <string name="bootstrap_initializing">Initializing xodos environment...</string>
 
-<string name="bootstrap_installer_title">Installing Termux</string>
+<string name="bootstrap_installer_title">Installing xodos</string>
 <string name="bootstrap_installer_body">Initializing environment...</string>
 <string name="bootstrap_error_title">Installation Error</string>
 <!-- Add these lines -->
@@ -278,7 +278,7 @@
     <item>Wine🍷Bionic: Windows emulation with native driver wrapping (if not snapdragon Use wrapper)</item>
     <item>Wine🍷:Here you can Run EXE files from any folder on your device</item>
     <item>Xbox🎮Emulator: Play original Xbox games using Xemu</item>
-            <item>Termux:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
+            <item>xodos:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
       <item>Settings⚙️: Configure Wine/DXVK/Box versions and system drivers</item> 
     <item>AI🤖Chat: Local private AI supporting DeepSeek, Llama, and 100+ models</item>
     <item>Restore♻️: Install XoDos system updates and more systems like Kali/Proot</item>
@@ -351,7 +351,7 @@
 <string name="install_complete">✅ Installation complete!</string>
 <string name="install_error">Installation Error</string>
 <string name="install_failed">Failed to install XoDos: %s</string>
-<string name="launch_xodos_command">/data/data/com.termux/files/usr/bin/xodos\n</string>
+<string name="launch_xodos_command">/data/data/com.xodos/files/usr/bin/xodos\n</string>
 <string name="cleanup_error">Error: %s</string>
 <string name="install_copying">Copying system files…</string>
 <string name="install_extracting">updating system…</string>

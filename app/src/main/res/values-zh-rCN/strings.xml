@@ -46,17 +46,17 @@
     <string name="action_backup_storage">备份</string>
     <string name="action_report_issue">报告问题</string>
     <string name="msg_generating_report">生成报告</string>
-    <string name="msg_add_termux_debug_info">将 termux 调试信息添加到报告中？</string>
+    <string name="msg_add_xodos_debug_info">将 xodos 调试信息添加到报告中？</string>
     <string name="error_styling_not_installed">插件应用程序未安装。</string>
     <string name="action_styling_install">安装</string>
     <string name="notification_action_exit">退出</string>
     <string name="notification_action_wake_lock">获取唤醒锁</string>
     <string name="notification_action_wake_unlock">释放唤醒锁</string>
     <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">这需要\n授予“在其他应用上显示”权限后才能在 Android >= 10 上从后台启动终端会话。\n从“设置”->“应用”->“高级”授予该权限</string>
-    <string name="error_termux_service_invalid_execution_command_runner">对 TermuxService 执行的命令无效：`%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_runner">不支持对 TermuxService 执行命令的运行器：`%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">不支持对 TermuxService 执行命令 shell 创建模式：`%1$s`</string>
-    <string name="error_termux_service_execution_command_shell_name_unset">未设置 Shell 名称但已通过 `%1$s` shell 创建模式</string>
+    <string name="error_xodos_service_invalid_execution_command_runner">对 xodosService 执行的命令无效：`%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_runner">不支持对 xodosService 执行命令的运行器：`%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_shell_create_mode">不支持对 xodosService 执行命令 shell 创建模式：`%1$s`</string>
+    <string name="error_xodos_service_execution_command_shell_name_unset">未设置 Shell 名称但已通过 `%1$s` shell 创建模式</string>
     <string name="error_run_command_service_invalid_intent_action">对 RunCommandService 的无效 intent action：`%1$s`</string>
     <string name="error_run_command_service_invalid_execution_command_runner">对 RunCommandService 执行的命令运行器无效：`%1$s`</string>
     <string name="error_run_command_service_mandatory_extra_missing">RunCommandService 缺少强制附加项：“%1$s”</string>
@@ -64,47 +64,47 @@
     <string name="title_file_received">将文件保存在 ~/downloads/</string>
     <string name="action_file_received_edit">编辑</string>
     <string name="action_file_received_open_directory">打开目录</string>
-    <string name="error_termux_service_start_failed_general">无法启动 TermuxService,检查 logcat 以查找异常消息</string>
-    <string name="error_termux_service_start_failed_bg">由于 Android BG 限制,当应用程序在后台时无法启动 TermuxService</string>
-    <string name="title_activity_termux_settings">设置</string>
-    <string name="termux_preferences_title">首选项</string>
-    <string name="termux_preferences_summary">应用程序偏好设置</string>
-    <string name="termux_debugging_preferences_title">调试</string>
-    <string name="termux_debugging_preferences_summary">调试首选项</string>
-    <string name="termux_logging_header">Logging</string>
-    <string name="termux_log_level_title">日志等级</string>
-    <string name="termux_terminal_view_key_logging_enabled_title">终端视图关键日志</string>
-    <string name="termux_terminal_view_key_logging_enabled_off">日志将不会包含终端视图的关键条目。（默认）</string>
-    <string name="termux_terminal_view_key_logging_enabled_on">Logcat 日志将包含终端视图关键条目。\n这些条目非常冗长，在正常情况下应禁用，否则会导致性能问题。</string>
-    <string name="termux_plugin_error_notifications_enabled_title">插件错误通知</string>
-    <string name="termux_plugin_error_notifications_enabled_off">禁用插件错误的闪烁和通知。</string>
-    <string name="termux_plugin_error_notifications_enabled_on">显示插件错误的闪烁和通知。（默认）</string>
-    <string name="termux_crash_report_notifications_enabled_title">崩溃报告通知</string>
-    <string name="termux_crash_report_notifications_enabled_off">禁用崩溃报告的通知。</string>
-    <string name="termux_crash_report_notifications_enabled_on">显示崩溃报告的通知。（默认）</string>
-    <string name="termux_terminal_io_preferences_title">终端 输入/输出</string>
-    <string name="termux_terminal_io_preferences_summary">终端 输入/输出 首选项</string>
-    <string name="termux_keyboard_header">软键盘</string>
-    <string name="termux_soft_keyboard_enabled_title">软键盘已启用</string>
-    <string name="termux_soft_keyboard_enabled_off">软键盘将被禁用。</string>
-    <string name="termux_soft_keyboard_enabled_on">软键盘将被启用。（默认）</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">仅当没有硬件时才使用软键盘</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">即使连接了硬件键盘，软键盘也会启用。（默认）</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">仅当未连接硬件键盘时才会启用软键盘。</string>
-    <string name="termux_terminal_view_preferences_title">终端视图</string>
-    <string name="termux_terminal_view_preferences_summary">终端视图的首选项</string>
-    <string name="termux_terminal_view_view_header">视图</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_title">终端边距调整</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_off">终端边距调整将被禁用。</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_on">将启用终端边距调整。\n应启用它以尝试修复软键盘覆盖部分额外按键/终端视图的问题。\n如果它导致您的设备屏幕闪烁，请禁用它。（默认）</string>
-    <string name="termux_api_preferences_title">终端api偏好设定</string>
-    <string name="termux_api_preferences_summary">应用程序偏好设置</string>
-    <string name="termux_float_preferences_title">终端浮动偏好设置</string>
-    <string name="termux_float_preferences_summary">终端偏好设定</string>
-    <string name="termux_tasker_preferences_title">终端任务偏好设置</string>
-    <string name="termux_tasker_preferences_summary">终端任务概要偏好设定</string>
-    <string name="termux_widget_preferences_title">终端组件偏好设定</string>
-    <string name="termux_widget_preferences_summary">终端组件概要偏好设置</string>
+    <string name="error_xodos_service_start_failed_general">无法启动 xodosService,检查 logcat 以查找异常消息</string>
+    <string name="error_xodos_service_start_failed_bg">由于 Android BG 限制,当应用程序在后台时无法启动 xodosService</string>
+    <string name="title_activity_xodos_settings">设置</string>
+    <string name="xodos_preferences_title">首选项</string>
+    <string name="xodos_preferences_summary">应用程序偏好设置</string>
+    <string name="xodos_debugging_preferences_title">调试</string>
+    <string name="xodos_debugging_preferences_summary">调试首选项</string>
+    <string name="xodos_logging_header">Logging</string>
+    <string name="xodos_log_level_title">日志等级</string>
+    <string name="xodos_terminal_view_key_logging_enabled_title">终端视图关键日志</string>
+    <string name="xodos_terminal_view_key_logging_enabled_off">日志将不会包含终端视图的关键条目。（默认）</string>
+    <string name="xodos_terminal_view_key_logging_enabled_on">Logcat 日志将包含终端视图关键条目。\n这些条目非常冗长，在正常情况下应禁用，否则会导致性能问题。</string>
+    <string name="xodos_plugin_error_notifications_enabled_title">插件错误通知</string>
+    <string name="xodos_plugin_error_notifications_enabled_off">禁用插件错误的闪烁和通知。</string>
+    <string name="xodos_plugin_error_notifications_enabled_on">显示插件错误的闪烁和通知。（默认）</string>
+    <string name="xodos_crash_report_notifications_enabled_title">崩溃报告通知</string>
+    <string name="xodos_crash_report_notifications_enabled_off">禁用崩溃报告的通知。</string>
+    <string name="xodos_crash_report_notifications_enabled_on">显示崩溃报告的通知。（默认）</string>
+    <string name="xodos_terminal_io_preferences_title">终端 输入/输出</string>
+    <string name="xodos_terminal_io_preferences_summary">终端 输入/输出 首选项</string>
+    <string name="xodos_keyboard_header">软键盘</string>
+    <string name="xodos_soft_keyboard_enabled_title">软键盘已启用</string>
+    <string name="xodos_soft_keyboard_enabled_off">软键盘将被禁用。</string>
+    <string name="xodos_soft_keyboard_enabled_on">软键盘将被启用。（默认）</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_title">仅当没有硬件时才使用软键盘</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_off">即使连接了硬件键盘，软键盘也会启用。（默认）</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_on">仅当未连接硬件键盘时才会启用软键盘。</string>
+    <string name="xodos_terminal_view_preferences_title">终端视图</string>
+    <string name="xodos_terminal_view_preferences_summary">终端视图的首选项</string>
+    <string name="xodos_terminal_view_view_header">视图</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_title">终端边距调整</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_off">终端边距调整将被禁用。</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_on">将启用终端边距调整。\n应启用它以尝试修复软键盘覆盖部分额外按键/终端视图的问题。\n如果它导致您的设备屏幕闪烁，请禁用它。（默认）</string>
+    <string name="xodos_api_preferences_title">终端api偏好设定</string>
+    <string name="xodos_api_preferences_summary">应用程序偏好设置</string>
+    <string name="xodos_float_preferences_title">终端浮动偏好设置</string>
+    <string name="xodos_float_preferences_summary">终端偏好设定</string>
+    <string name="xodos_tasker_preferences_title">终端任务偏好设置</string>
+    <string name="xodos_tasker_preferences_summary">终端任务概要偏好设定</string>
+    <string name="xodos_widget_preferences_title">终端组件偏好设定</string>
+    <string name="xodos_widget_preferences_summary">终端组件概要偏好设置</string>
     <string name="about_preference_title">关于</string>
     <string name="donate_preference_title">捐赠</string>
     <string name="hello_blank_fragment">开屏问候语</string>
@@ -119,7 +119,7 @@
     <string name="open_terminal">显示终端</string>
     <string name="terminate_current_process">终止终端中当前运行的程序</string>
     <string name="unlock_layout">解除侧边栏锁定</string>
-    <string name="raise_termux_app">唤起termux</string>
+    <string name="raise_xodos_app">唤起xodos</string>
     <string name="add_menu_item">添加一些菜单</string>
     <string name="hide_terminal">隐藏终端</string>
     <string name="set_dinput">dinput</string>
@@ -161,7 +161,7 @@
     <item>Wine🍷Bionic：使用原生驱动包装器的模拟器（非 Snapdragon 使用 wrapper）</item>
     <item>Wine🍷：可从任意文件夹运行 EXE 文件</item>
     <item>Xbox🎮模拟器：使用 Xemu 玩原版 Xbox 游戏</item>
-            <item>Termux:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
+            <item>xodos:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
     <item>设置⚙️：配置 Wine/DXVK/Box 和系统驱动</item>
     <item>AI🤖聊天：本地私有 AI 支持 DeepSeek、Llama 等</item>
     <item>恢复♻️：安装 XoDos 更新和 Kali/Proot 等系统</item>
@@ -221,7 +221,7 @@
   <string name="install_complete">✅ 安装完成！</string>
   <string name="install_error">安装错误</string>
   <string name="install_failed">安装XoDos失败: %s</string>
-  <string name="launch_xodos_command">/data/data/com.termux/files/usr/bin/xodos\n</string>
+  <string name="launch_xodos_command">/data/data/com.xodos/files/usr/bin/xodos\n</string>
   <string name="cleanup_error">错误: %s</string>
   <string name="install_copying">正在复制系统文件…</string>
   <string name="install_extracting">正在更新系统…</string>

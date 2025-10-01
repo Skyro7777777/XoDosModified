@@ -1,4 +1,4 @@
-package com.termux.x11.controller.contentdialog;
+package com.xodos.x11.controller.contentdialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.Callback;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.Callback;
 
 import java.util.ArrayList;
 

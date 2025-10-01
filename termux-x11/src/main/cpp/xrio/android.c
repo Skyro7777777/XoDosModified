@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_xodos_x11_XrActivity_init(JNIEnv *env, jobject o
     xrJava java;
     java.vm = vm;
     java.activity = (*env)->NewGlobalRef(env, obj);
-    XrEngineInit(&xr_engine, &java, "termux-x11", 1);
+    XrEngineInit(&xr_engine, &java, "xodos-x11", 1);
     XrEngineEnter(&xr_engine);
     XrInputInit(&xr_engine, &xr_input);
     XrRendererInit(&xr_engine, &xr_renderer);

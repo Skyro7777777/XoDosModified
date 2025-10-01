@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-package com.termux.x11.input;
+package com.xodos.x11.input;
 
 import static android.view.InputDevice.KEYBOARD_TYPE_ALPHABETIC;
 import static android.view.KeyEvent.ACTION_DOWN;
@@ -32,11 +32,11 @@ import androidx.annotation.IntDef;
 import androidx.core.app.NotificationCompat;
 import androidx.core.math.MathUtils;
 
-import com.termux.x11.LoriePreferences;
-import com.termux.x11.LorieView;
-import com.termux.x11.MainActivity;
-import com.termux.x11.Prefs;
-import com.termux.x11.utils.SamsungDexUtils;
+import com.xodos.x11.LoriePreferences;
+import com.xodos.x11.LorieView;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.Prefs;
+import com.xodos.x11.utils.SamsungDexUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

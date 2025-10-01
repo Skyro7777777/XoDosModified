@@ -31,7 +31,7 @@ jobs:
       - name: Fetch folder from external repo
         run: |
           pwd
-          mkdir -p termux-x11/src/main/cpp
+          mkdir -p xodos-x11/src/main/cpp
           git clone -b main https://github.com/xodiosx/Xodoshw temprepo
           cd temprepo
           ls
@@ -40,10 +40,10 @@ jobs:
           #git clone --depth=1 --filter=blob:none --sparse https://github.com/xodiosx/XoDos-test temprepo
           
           #cd temprepo
-          git sparse-checkout set termux-x11/src/main/cpp
-          ls termux-x11/src/main/cpp
-          rm -rf ../termux-x11/src/main/cpp/*
-          cp -r termux-x11/src/main/cpp ../termux-x11/src/main/
+          git sparse-checkout set xodos-x11/src/main/cpp
+          ls xodos-x11/src/main/cpp
+          rm -rf ../xodos-x11/src/main/cpp/*
+          cp -r xodos-x11/src/main/cpp ../xodos-x11/src/main/
           cd ..
           rm -rf temprepo
 
@@ -51,7 +51,7 @@ jobs:
         run: |
          git config user.name "github-actions"
          git config user.email "github-actions@github.com"
-         git add termux-x11/src/main/cpp         
+         git add xodos-x11/src/main/cpp         
          git commit -m "Update cpp and restore"
          sleep 2
          git push

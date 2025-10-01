@@ -1,15 +1,15 @@
-package com.termux.view;
+package com.xodos.view;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 
-import com.termux.terminal.TerminalBuffer;
-import com.termux.terminal.TerminalEmulator;
-import com.termux.terminal.TerminalRow;
-import com.termux.terminal.TextStyle;
-import com.termux.terminal.WcWidth;
+import com.xodos.terminal.TerminalBuffer;
+import com.xodos.terminal.TerminalEmulator;
+import com.xodos.terminal.TerminalRow;
+import com.xodos.terminal.TextStyle;
+import com.xodos.terminal.WcWidth;
 
 /**
  * Renderer of a {@link TerminalEmulator} into a {@link Canvas}.

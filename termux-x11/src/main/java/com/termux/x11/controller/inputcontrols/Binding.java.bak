@@ -1,10 +1,10 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import androidx.annotation.NonNull;
 
 
-import com.termux.x11.controller.xserver.Pointer;
-import com.termux.x11.controller.xserver.XKeycode;
+import com.xodos.x11.controller.xserver.Pointer;
+import com.xodos.x11.controller.xserver.XKeycode;
 
 import java.util.ArrayList;
 

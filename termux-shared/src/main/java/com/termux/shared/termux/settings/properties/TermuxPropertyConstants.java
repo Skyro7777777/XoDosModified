@@ -1,15 +1,15 @@
-package com.termux.shared.termux.settings.properties;
+package com.xodos.shared.xodos.settings.properties;
 
 import com.google.common.collect.ImmutableBiMap;
-import com.termux.shared.termux.shell.am.TermuxAmSocketServer;
-import com.termux.shared.theme.NightMode;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.file.filesystem.FileType;
-import com.termux.shared.settings.properties.SharedProperties;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.logger.Logger;
-import com.termux.terminal.TerminalEmulator;
-import com.termux.view.TerminalView;
+import com.xodos.shared.xodos.shell.am.xodosAmSocketServer;
+import com.xodos.shared.theme.NightMode;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.file.filesystem.FileType;
+import com.xodos.shared.settings.properties.SharedProperties;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.logger.Logger;
+import com.xodos.terminal.TerminalEmulator;
+import com.xodos.view.TerminalView;
 
 import java.io.File;
 import java.util.Arrays;
@@ -27,9 +27,9 @@ import java.util.Set;
  *      - Initial Release.
  *
  * - 0.2.0 (2021-03-11)
- *      - Renamed `HOME_PATH` to `TERMUX_HOME_DIR_PATH`.
- *      - Renamed `TERMUX_PROPERTIES_PRIMARY_PATH` to `TERMUX_PROPERTIES_PRIMARY_FILE_PATH`.
- *      - Renamed `TERMUX_PROPERTIES_SECONDARY_FILE_PATH` to `TERMUX_PROPERTIES_SECONDARY_FILE_PATH`.
+ *      - Renamed `HOME_PATH` to `xodos_HOME_DIR_PATH`.
+ *      - Renamed `xodos_PROPERTIES_PRIMARY_PATH` to `xodos_PROPERTIES_PRIMARY_FILE_PATH`.
+ *      - Renamed `xodos_PROPERTIES_SECONDARY_FILE_PATH` to `xodos_PROPERTIES_SECONDARY_FILE_PATH`.
  *
  * - 0.3.0 (2021-03-16)
  *      - Add `*TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR*`.
@@ -67,7 +67,7 @@ import java.util.Set;
  *      - Add `*KEY_TERMINAL_MARGIN_HORIZONTAL*` and `*KEY_TERMINAL_MARGIN_VERTICAL*`.
  *
  * - 0.14.0 (2021-09-02)
- *      - Add `getTermuxFloatPropertiesFile()`.
+ *      - Add `getxodosFloatPropertiesFile()`.
  *
  * - 0.15.0 (2021-09-05)
  *      - Add `KEY_EXTRA_KEYS_TEXT_ALL_CAPS`.
@@ -83,19 +83,19 @@ import java.util.Set;
  */
 
 /**
- * A class that defines shared constants of the SharedProperties used by Termux app and its plugins.
- * This class will be hosted by termux-shared lib and should be imported by other termux plugin
+ * A class that defines shared constants of the SharedProperties used by xodos app and its plugins.
+ * This class will be hosted by xodos-shared lib and should be imported by other xodos plugin
  * apps as is instead of copying constants to random classes. The 3rd party apps can also import
- * it for interacting with termux apps. If changes are made to this file, increment the version number
+ * it for interacting with xodos apps. If changes are made to this file, increment the version number
  * and add an entry in the Changelog section above.
  *
  * The properties are loaded from the first file found at
- * {@link TermuxConstants#TERMUX_PROPERTIES_PRIMARY_FILE_PATH} or
- * {@link TermuxConstants#TERMUX_PROPERTIES_SECONDARY_FILE_PATH}
+ * {@link xodosConstants#xodos_PROPERTIES_PRIMARY_FILE_PATH} or
+ * {@link xodosConstants#xodos_PROPERTIES_SECONDARY_FILE_PATH}
  */
-public final class TermuxPropertyConstants {
+public final class xodosPropertyConstants {
 
-    private static final String LOG_TAG = "TermuxPropertyConstants";
+    private static final String LOG_TAG = "xodosPropertyConstants";
 
     /* boolean */
 
@@ -127,13 +127,13 @@ public final class TermuxPropertyConstants {
 
 
 
-    /** Defines the key for whether to hide soft keyboard when termux app is started */
+    /** Defines the key for whether to hide soft keyboard when xodos app is started */
     public static final String KEY_HIDE_SOFT_KEYBOARD_ON_STARTUP =  "hide-soft-keyboard-on-startup"; // Default: "hide-soft-keyboard-on-startup"
 
 
 
-    /** Defines the key for whether the {@link TermuxAmSocketServer} should be run at app startup */
-    public static final String KEY_RUN_TERMUX_AM_SOCKET_SERVER =  "run-termux-am-socket-server"; // Default: "run-termux-am-socket-server"
+    /** Defines the key for whether the {@link xodosAmSocketServer} should be run at app startup */
+    public static final String KEY_RUN_xodos_AM_SOCKET_SERVER =  "run-xodos-am-socket-server"; // Default: "run-xodos-am-socket-server"
 
 
 
@@ -223,7 +223,7 @@ public final class TermuxPropertyConstants {
 
     /**
      * Defines the key for how many days old the access time should be of files that should be
-     * deleted from $TMPDIR on termux exit.
+     * deleted from $TMPDIR on xodos exit.
      * `-1` for none, `0` for all and `> 0` for x days.
      */
     public static final String KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT =  "delete-tmpdir-files-older-than-x-days-on-exit"; // Default: "delete-tmpdir-files-older-than-x-days-on-exit"
@@ -319,7 +319,7 @@ public final class TermuxPropertyConstants {
     /** Defines the key for the default working directory */
     public static final String KEY_DEFAULT_WORKING_DIRECTORY =  "default-working-directory"; // Default: "default-working-directory"
     /** Defines the default working directory */
-    public static final String DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY = TermuxConstants.TERMUX_HOME_DIR_PATH;
+    public static final String DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY = xodosConstants.xodos_HOME_DIR_PATH;
 
 
 
@@ -386,10 +386,10 @@ public final class TermuxPropertyConstants {
 
 
 
-    /** Defines the set for keys loaded by termux
+    /** Defines the set for keys loaded by xodos
      * Setting this to {@code null} will make {@link SharedProperties} throw an exception.
      * */
-    public static final Set<String> TERMUX_APP_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
+    public static final Set<String> xodos_APP_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
         /* boolean */
         KEY_DISABLE_FILE_SHARE_RECEIVER,
         KEY_DISABLE_FILE_VIEW_RECEIVER,
@@ -398,12 +398,12 @@ public final class TermuxPropertyConstants {
         KEY_ENFORCE_CHAR_BASED_INPUT,
         KEY_EXTRA_KEYS_TEXT_ALL_CAPS,
         KEY_HIDE_SOFT_KEYBOARD_ON_STARTUP,
-        KEY_RUN_TERMUX_AM_SOCKET_SERVER,
+        KEY_RUN_xodos_AM_SOCKET_SERVER,
         KEY_TERMINAL_ONCLICK_URL_OPEN,
         KEY_USE_CTRL_SPACE_WORKAROUND,
         KEY_USE_FULLSCREEN,
         KEY_USE_FULLSCREEN_WORKAROUND,
-        TermuxConstants.PROP_ALLOW_EXTERNAL_APPS,
+        xodosConstants.PROP_ALLOW_EXTERNAL_APPS,
 
         /* int */
         KEY_BELL_BEHAVIOUR,
@@ -433,12 +433,12 @@ public final class TermuxPropertyConstants {
         KEY_VOLUME_KEYS_BEHAVIOUR
     ));
 
-    /** Defines the set for keys loaded by termux that have default boolean behaviour with false as default.
+    /** Defines the set for keys loaded by xodos that have default boolean behaviour with false as default.
      * "true" -> true
      * "false" -> false
      * default: false
      */
-    public static final Set<String> TERMUX_DEFAULT_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
+    public static final Set<String> xodos_DEFAULT_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
         KEY_DISABLE_FILE_SHARE_RECEIVER,
         KEY_DISABLE_FILE_VIEW_RECEIVER,
         KEY_DISABLE_HARDWARE_KEYBOARD_SHORTCUTS,
@@ -449,33 +449,33 @@ public final class TermuxPropertyConstants {
         KEY_USE_CTRL_SPACE_WORKAROUND,
         KEY_USE_FULLSCREEN,
         KEY_USE_FULLSCREEN_WORKAROUND,
-        TermuxConstants.PROP_ALLOW_EXTERNAL_APPS
+        xodosConstants.PROP_ALLOW_EXTERNAL_APPS
     ));
 
-    /** Defines the set for keys loaded by termux that have default boolean behaviour with true as default.
+    /** Defines the set for keys loaded by xodos that have default boolean behaviour with true as default.
      * "true" -> true
      * "false" -> false
      * default: true
      */
-    public static final Set<String> TERMUX_DEFAULT_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
+    public static final Set<String> xodos_DEFAULT_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
         KEY_EXTRA_KEYS_TEXT_ALL_CAPS,
-        KEY_RUN_TERMUX_AM_SOCKET_SERVER
+        KEY_RUN_xodos_AM_SOCKET_SERVER
     ));
 
-    /** Defines the set for keys loaded by termux that have default inverted boolean behaviour with false as default.
+    /** Defines the set for keys loaded by xodos that have default inverted boolean behaviour with false as default.
      * "false" -> true
      * "true" -> false
      * default: false
      */
-    public static final Set<String> TERMUX_DEFAULT_INVERETED_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
+    public static final Set<String> xodos_DEFAULT_INVERETED_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
     ));
 
-    /** Defines the set for keys loaded by termux that have default inverted boolean behaviour with true as default.
+    /** Defines the set for keys loaded by xodos that have default inverted boolean behaviour with true as default.
      * "false" -> true
      * "true" -> false
      * default: true
      */
-    public static final Set<String> TERMUX_DEFAULT_INVERETED_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
+    public static final Set<String> xodos_DEFAULT_INVERETED_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST = new HashSet<>(Arrays.asList(
     ));
 
 }

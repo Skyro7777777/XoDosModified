@@ -1,4 +1,4 @@
-package com.termux.shared.termux.settings.preferences;
+package com.xodos.shared.xodos.settings.preferences;
 
 /*
  * Version: v0.16.0
@@ -13,79 +13,79 @@ package com.termux.shared.termux.settings.preferences;
  *
  * - 0.3.0 (2021-03-16)
  *      - Changed to per app scoping of variables so that the same file can store all constants of
- *          Termux app and its plugins. This will allow {@link com.termux.app.TermuxSettings} to
+ *          xodos app and its plugins. This will allow {@link com.xodos.app.xodosSettings} to
  *          manage preferences of plugins as well if they don't have launcher activity themselves
  *          and also allow plugin apps to make changes to preferences from background.
- *      - Added following to `TERMUX_TASKER_APP`:
+ *      - Added following to `xodos_TASKER_APP`:
  *           `KEY_LOG_LEVEL`.
  *
  * - 0.4.0 (2021-03-13)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED` and `DEFAULT_VALUE_PLUGIN_ERROR_NOTIFICATIONS_ENABLED`.
  *
  * - 0.5.0 (2021-03-24)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_LAST_NOTIFICATION_ID` and `DEFAULT_VALUE_KEY_LAST_NOTIFICATION_ID`.
  *
  * - 0.6.0 (2021-03-24)
- *      - Change `DEFAULT_VALUE_KEEP_SCREEN_ON` value to `false` in `TERMUX_APP`.
+ *      - Change `DEFAULT_VALUE_KEEP_SCREEN_ON` value to `false` in `xodos_APP`.
  *
  * - 0.7.0 (2021-03-27)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_SOFT_KEYBOARD_ENABLED` and `DEFAULT_VALUE_KEY_SOFT_KEYBOARD_ENABLED`.
  *
  * - 0.8.0 (2021-04-06)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_CRASH_REPORT_NOTIFICATIONS_ENABLED` and `DEFAULT_VALUE_CRASH_REPORT_NOTIFICATIONS_ENABLED`.
  *
  * - 0.9.0 (2021-04-07)
  *      - Updated javadocs.
  *
  * - 0.10.0 (2021-05-12)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_SOFT_KEYBOARD_ENABLED_ONLY_IF_NO_HARDWARE` and `DEFAULT_VALUE_KEY_SOFT_KEYBOARD_ENABLED_ONLY_IF_NO_HARDWARE`.
  *
  * - 0.11.0 (2021-07-08)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_DISABLE_TERMINAL_MARGIN_ADJUSTMENT`.
  *
  * - 0.12.0 (2021-08-27)
- *      - Added `TERMUX_API_APP.KEY_LOG_LEVEL`, `TERMUX_BOOT_APP.KEY_LOG_LEVEL`,
- *          `TERMUX_FLOAT_APP.KEY_LOG_LEVEL`, `TERMUX_STYLING_APP.KEY_LOG_LEVEL`,
- *          `TERMUX_Widget_APP.KEY_LOG_LEVEL`.
+ *      - Added `xodos_API_APP.KEY_LOG_LEVEL`, `xodos_BOOT_APP.KEY_LOG_LEVEL`,
+ *          `xodos_FLOAT_APP.KEY_LOG_LEVEL`, `xodos_STYLING_APP.KEY_LOG_LEVEL`,
+ *          `xodos_Widget_APP.KEY_LOG_LEVEL`.
  *
  * - 0.13.0 (2021-09-02)
- *      - Added following to `TERMUX_FLOAT_APP`:
+ *      - Added following to `xodos_FLOAT_APP`:
  *          `KEY_WINDOW_X`, `KEY_WINDOW_Y`, `KEY_WINDOW_WIDTH`, `KEY_WINDOW_HEIGHT`, `KEY_FONTSIZE`,
  *          `KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED`.
  *
  * - 0.14.0 (2021-09-04)
- *      - Added `TERMUX_WIDGET_APP.KEY_TOKEN`.
+ *      - Added `xodos_WIDGET_APP.KEY_TOKEN`.
  *
  * - 0.15.0 (2021-09-05)
- *      - Added following to `TERMUX_TASKER_APP`:
+ *      - Added following to `xodos_TASKER_APP`:
  *          `KEY_LAST_PENDING_INTENT_REQUEST_CODE` and `DEFAULT_VALUE_KEY_LAST_PENDING_INTENT_REQUEST_CODE`.
  *
  * - 0.16.0 (2022-06-11)
- *      - Added following to `TERMUX_APP`:
+ *      - Added following to `xodos_APP`:
  *          `KEY_APP_SHELL_NUMBER_SINCE_BOOT` and `KEY_TERMINAL_SESSION_NUMBER_SINCE_BOOT`.
  */
 
-import com.termux.shared.shell.command.ExecutionCommand;
+import com.xodos.shared.shell.command.ExecutionCommand;
 
 /**
- * A class that defines shared constants of the SharedPreferences used by Termux app and its plugins.
- * This class will be hosted by termux-shared lib and should be imported by other termux plugin
+ * A class that defines shared constants of the SharedPreferences used by xodos app and its plugins.
+ * This class will be hosted by xodos-shared lib and should be imported by other xodos plugin
  * apps as is instead of copying constants to random classes. The 3rd party apps can also import
- * it for interacting with termux apps. If changes are made to this file, increment the version number
+ * it for interacting with xodos apps. If changes are made to this file, increment the version number
  * and add an entry in the Changelog section above.
  */
-public final class TermuxPreferenceConstants {
+public final class xodosPreferenceConstants {
 
     /**
-     * Termux app constants.
+     * xodos app constants.
      */
-    public static final class TERMUX_APP {
+    public static final class xodos_APP {
 
         /**
          * Defines the key for whether terminal view margin adjustment that is done to prevent soft
@@ -126,13 +126,13 @@ public final class TermuxPreferenceConstants {
 
 
         /**
-         * Defines the key for font size of termux terminal view.
+         * Defines the key for font size of xodos terminal view.
          */
         public static final String KEY_FONTSIZE = "fontsize";
 
 
         /**
-         * Defines the key for current termux terminal session.
+         * Defines the key for current xodos terminal session.
          */
         public static final String KEY_CURRENT_SESSION = "current_session";
 
@@ -150,20 +150,20 @@ public final class TermuxPreferenceConstants {
         public static final int DEFAULT_VALUE_KEY_LAST_NOTIFICATION_ID = 0;
 
         /**
-         * The {@link ExecutionCommand.Runner#APP_SHELL} number after termux app process since boot.
+         * The {@link ExecutionCommand.Runner#APP_SHELL} number after xodos app process since boot.
          */
         public static final String KEY_APP_SHELL_NUMBER_SINCE_BOOT = "app_shell_number_since_boot";
         public static final int DEFAULT_VALUE_APP_SHELL_NUMBER_SINCE_BOOT = 0;
 
         /**
-         * The {@link ExecutionCommand.Runner#TERMINAL_SESSION} number after termux app process since boot.
+         * The {@link ExecutionCommand.Runner#TERMINAL_SESSION} number after xodos app process since boot.
          */
         public static final String KEY_TERMINAL_SESSION_NUMBER_SINCE_BOOT = "terminal_session_number_since_boot";
         public static final int DEFAULT_VALUE_TERMINAL_SESSION_NUMBER_SINCE_BOOT = 0;
 
 
         /**
-         * Defines the key for whether termux terminal view key logging is enabled or not
+         * Defines the key for whether xodos terminal view key logging is enabled or not
          */
         public static final String KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED = "terminal_view_key_logging_enabled";
         public static final boolean DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED = false;
@@ -185,9 +185,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:API app constants.
+     * xodos:API app constants.
      */
-    public static final class TERMUX_API_APP {
+    public static final class xodos_API_APP {
 
         /**
          * Defines the key for current log level.
@@ -206,9 +206,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:Boot app constants.
+     * xodos:Boot app constants.
      */
-    public static final class TERMUX_BOOT_APP {
+    public static final class xodos_BOOT_APP {
 
         /**
          * Defines the key for current log level.
@@ -220,9 +220,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:Float app constants.
+     * xodos:Float app constants.
      */
-    public static final class TERMUX_FLOAT_APP {
+    public static final class xodos_FLOAT_APP {
 
         /**
          * The float window x coordinate.
@@ -245,7 +245,7 @@ public final class TermuxPreferenceConstants {
         public static final String KEY_WINDOW_HEIGHT = "window_height";
 
         /**
-         * Defines the key for font size of termux terminal view.
+         * Defines the key for font size of xodos terminal view.
          */
         public static final String KEY_FONTSIZE = "fontsize";
 
@@ -255,7 +255,7 @@ public final class TermuxPreferenceConstants {
         public static final String KEY_LOG_LEVEL = "log_level";
 
         /**
-         * Defines the key for whether termux terminal view key logging is enabled or not
+         * Defines the key for whether xodos terminal view key logging is enabled or not
          */
         public static final String KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED = "terminal_view_key_logging_enabled";
         public static final boolean DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED = false;
@@ -265,9 +265,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:Styling app constants.
+     * xodos:Styling app constants.
      */
-    public static final class TERMUX_STYLING_APP {
+    public static final class xodos_STYLING_APP {
 
         /**
          * Defines the key for current log level.
@@ -279,9 +279,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:Tasker app constants.
+     * xodos:Tasker app constants.
      */
-    public static final class TERMUX_TASKER_APP {
+    public static final class xodos_TASKER_APP {
 
         /**
          * Defines the key for current log level.
@@ -300,9 +300,9 @@ public final class TermuxPreferenceConstants {
 
 
     /**
-     * Termux:Widget app constants.
+     * xodos:Widget app constants.
      */
-    public static final class TERMUX_WIDGET_APP {
+    public static final class xodos_WIDGET_APP {
 
         /**
          * Defines the key for current log level.

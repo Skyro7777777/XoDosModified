@@ -1,11 +1,11 @@
-package com.termux.shared.net.socket.local;
+package com.xodos.shared.net.socket.local;
 
 import androidx.annotation.NonNull;
 
-import com.termux.shared.errors.Error;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.jni.models.JniResult;
-import com.termux.shared.logger.Logger;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.jni.models.JniResult;
+import com.xodos.shared.logger.Logger;
 
 import java.io.Closeable;
 import java.io.File;

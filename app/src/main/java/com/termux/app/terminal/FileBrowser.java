@@ -1,6 +1,6 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_FILES_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_FILES_DIR_PATH;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,10 +13,10 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.UnitUtils;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.UnitUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,30 +31,30 @@ public class FileBrowser implements FileAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private FileAdapter mFileAdapter;
     private ArrayList<FileInfo> mFileList;
-    private TermuxActivity mTermuxActivity;
+    private xodosActivity mxodosActivity;
     private PopupWindow mPopupWindow;
     private int popWindowHeight, mPopWindowWidth;
-    private String mCurrentPath = TERMUX_FILES_DIR_PATH;
+    private String mCurrentPath = xodos_FILES_DIR_PATH;
     private FileSlectedAdapter fileSlectedAdapter;
 
     private FileBrowser() {
     }
 
-    public FileBrowser(TermuxActivity activity, FileSlectedAdapter ada) {
-        this.mTermuxActivity = activity;
+    public FileBrowser(xodosActivity activity, FileSlectedAdapter ada) {
+        this.mxodosActivity = activity;
         this.fileSlectedAdapter = ada;
         mPopWindowWidth = 210;
     }
 
     public void init() {
-        mFileBrowserView = LayoutInflater.from(mTermuxActivity).inflate(R.layout.file_bowser, null);
+        mFileBrowserView = LayoutInflater.from(mxodosActivity).inflate(R.layout.file_bowser, null);
         mRecyclerView = mFileBrowserView.findViewById(R.id.recyclerView);
         mSearchEditText = mFileBrowserView.findViewById(R.id.ESearchEditText);
         mFileList = new ArrayList<>();
 
         mFileAdapter = new FileAdapter(mFileList, this);
         mRecyclerView.setAdapter(mFileAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mTermuxActivity));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mxodosActivity));
 
         mSearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,7 +75,7 @@ public class FileBrowser implements FileAdapter.OnItemClickListener {
             }
         });
 
-        loadFiles(TERMUX_FILES_DIR_PATH);
+        loadFiles(xodos_FILES_DIR_PATH);
     }
 
     private void loadFiles(String path) {
@@ -118,7 +118,7 @@ public class FileBrowser implements FileAdapter.OnItemClickListener {
     public void onItemClick(FileInfo fileInfo) {
         if (fileInfo.getName().equals("..")) {
 //            Log.d("FileBrowser.onItemClick", ".. : " + fileInfo.getPath());
-            if (fileInfo.getPath().equals(TERMUX_FILES_DIR_PATH)) {
+            if (fileInfo.getPath().equals(xodos_FILES_DIR_PATH)) {
                 return;
             }
             int pathIdx = fileInfo.getPath().lastIndexOf("/");
@@ -134,7 +134,7 @@ public class FileBrowser implements FileAdapter.OnItemClickListener {
 //            Log.d("FileBrowser.onItemClick", fileInfo.getName() + ": " + fileInfo.getPath());
             File currentFile = new File(fileInfo.getPath());
             if (!currentFile.canExecute()) {
-                Toast.makeText(mTermuxActivity, fileInfo.getName() + "is not executable file", Toast.LENGTH_LONG).show();
+                Toast.makeText(mxodosActivity, fileInfo.getName() + "is not executable file", Toast.LENGTH_LONG).show();
                 return;
             }
             mCurrentPath = fileInfo.getPath();

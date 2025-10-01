@@ -1,0 +1,12 @@
+{
+    "codingcopilot.enableCompletionLanguage": {
+        "scminput": true
+    },
+    "codingcopilot.enableInlineChat": true,
+    "codingcopilot.modelResponseLanguage": "English",
+    "codingcopilot.modelDocumentLanguage": "English",
+    "codingcopilot.enableWorkspaceRules": true,
+    "codingcopilot.enableClientProductPriority": true,
+    "codingcopilot.envRouteMode": "custom",
+    "java.configuration.updateBuildConfiguration": "automatic"
+}

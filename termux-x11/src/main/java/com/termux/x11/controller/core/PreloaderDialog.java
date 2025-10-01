@@ -1,4 +1,4 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -6,7 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.termux.x11.R;
+import com.xodos.x11.R;
 
 
 public class PreloaderDialog {

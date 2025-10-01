@@ -1,9 +1,9 @@
-package com.termux.x11.controller.xserver;
+package com.xodos.x11.controller.xserver;
 
-import static com.termux.x11.controller.xserver.Keyboard.createKeycodeMap;
-import static com.termux.x11.input.InputStub.BUTTON_UNDEFINED;
+import static com.xodos.x11.controller.xserver.Keyboard.createKeycodeMap;
+import static com.xodos.x11.input.InputStub.BUTTON_UNDEFINED;
 
-import com.termux.x11.LorieView;
+import com.xodos.x11.LorieView;
 
 import java.util.HashMap;
 

@@ -1,14 +1,14 @@
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_DISPLAY_APP_NAME "Termux:X11">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_DISPLAY_APP_NAME "xodos:X11">]>
 <resources>
-    <string name="app_name">&TERMUX_DISPLAY_APP_NAME; </string>
-    <string name="plugin_info">&TERMUX_DISPLAY_APP_NAME; est une application plugin pour l\'application &TERMUX_APP_NAME;.
-        \n\nConsultez le GitHub de l\'application &TERMUX_APP_NAME; %1$s et le GitHub de l\'application &TERMUX_DISPLAY_APP_NAME; %2$s pour plus d\'informations.</string>
+    <string name="app_name">&xodos_DISPLAY_APP_NAME; </string>
+    <string name="plugin_info">&xodos_DISPLAY_APP_NAME; est une application plugin pour l\'application &xodos_APP_NAME;.
+        \n\nConsultez le GitHub de l\'application &xodos_APP_NAME; %1$s et le GitHub de l\'application &xodos_DISPLAY_APP_NAME; %2$s pour plus d\'informations.</string>
 
-    <!-- TermuxX11Activity -->
-    <string name="msg_storage_permission_not_granted_warning">L\'autorisation de stockage doit être accordée à l\'application &TERMUX_DISPLAY_APP_NAME; pour...</string>
+    <!-- xodosX11Activity -->
+    <string name="msg_storage_permission_not_granted_warning">L\'autorisation de stockage doit être accordée à l\'application &xodos_DISPLAY_APP_NAME; pour...</string>
     <string name="action_grant_storage_permission">Accorder l\'autorisation de stockage</string>
 
-    <string name="msg_battery_optimization_not_disabled_warning">Les optimisations de batterie Android doivent être désactivées pour l\'application &TERMUX_DISPLAY_APP_NAME; afin que…
+    <string name="msg_battery_optimization_not_disabled_warning">Les optimisations de batterie Android doivent être désactivées pour l\'application &xodos_DISPLAY_APP_NAME; afin que…
         Consultez https://developer.android.com/about/versions/oreo/background pour plus d\'informations et
         https://developer.android.com/guide/components/foreground-services#background-start-restrictions
         pour plus de détails.
@@ -18,7 +18,7 @@
         activer `Afficher les fenêtres pop-up lors de l\'exécution en arrière-plan` pour l\'application.</string>
     <string name="action_disable_battery_optimizations">Désactiver les optimisations de batterie</string>
 
-    <string name="msg_display_over_other_apps_permission_not_granted_warning">L\'autorisation d\'affichage au-dessus des autres applications doit être accordée à &TERMUX_DISPLAY_APP_NAME; pour démarrer des activités au premier plan depuis l\'arrière-plan. Consultez https://developer.android.com/guide/components/activities/background-starts
+    <string name="msg_display_over_other_apps_permission_not_granted_warning">L\'autorisation d\'affichage au-dessus des autres applications doit être accordée à &xodos_DISPLAY_APP_NAME; pour démarrer des activités au premier plan depuis l\'arrière-plan. Consultez https://developer.android.com/guide/components/activities/background-starts
         pour plus d\'informations.
     </string>
     <string name="action_grant_display_over_other_apps_permission">Accorder l\'autorisation d\'affichage au-dessus des autres applications</string>
@@ -28,7 +28,7 @@
     <string name="not_connected">Non connecté</string>
     <string name="help_button_text">   Aide   </string>
     <string name="preferences_button_text">   Préférences   </string>
-    <string name="extra_keys_config_desc">Ici, vous pouvez définir la valeur de la variable extra-keys comme dans l\'application Termux (lisez <a href="http://wiki.termux.com/wiki/Touch_Keyboard#Extra_Keys_Row">ceci</a>) et plus (par exemple, META).</string>
+    <string name="extra_keys_config_desc">Ici, vous pouvez définir la valeur de la variable extra-keys comme dans l\'application xodos (lisez <a href="http://wiki.xodos.com/wiki/Touch_Keyboard#Extra_Keys_Row">ceci</a>) et plus (par exemple, META).</string>
     <!--    preference-->
     <string name="pref_main">Préférences</string>
     <string name="pref_output">Sortie🖥️</string>
@@ -101,8 +101,8 @@
 
     <string name="pref_adjustHeightForEK">Ajuster la hauteur d\'affichage pour la barre de touches supplémentaires</string>
     <string name="pref_adjustHeightForEK_summary">Peut provoquer un scintillement de l\'écran lors de l\'activation/désactivation de la barre EK.</string>
-    <string name="pref_useTermuxEKBarBehaviour">Désactiver les touches spéciales sur la barre de touches supplémentaires après chaque pression</string>
-    <string name="pref_useTermuxEKBarBehaviour_summary">Utilisez un appui long pour verrouiller les touches spéciales</string>
+    <string name="pref_usexodosEKBarBehaviour">Désactiver les touches spéciales sur la barre de touches supplémentaires après chaque pression</string>
+    <string name="pref_usexodosEKBarBehaviour_summary">Utilisez un appui long pour verrouiller les touches spéciales</string>
     <string name="pref_opacityEKBar">Opacité de la barre de touches supplémentaires, %</string>
     <string name="pref_extra_keys_config">Configuration des touches supplémentaires</string>
 
@@ -210,7 +210,7 @@
     <string name="log_level_value">Niveau de journal Logcat défini sur \"%1$s\"</string>
     <string name="start_button_start_x11">démarrer le serveur x11</string>
     <string name="exit_button_exit_app">Quitter</string>
-    <string name="x11_server_bridge_config">Réinstallez le pont utilisé par le serveur x11 pour communiquer avec termux. L\'installation arrêtera l\'interface graphique actuelle et nécessitera un redémarrage. Si un fichier n\'est pas enregistré, enregistrez-le et réessayez.</string>
+    <string name="x11_server_bridge_config">Réinstallez le pont utilisé par le serveur x11 pour communiquer avec xodos. L\'installation arrêtera l\'interface graphique actuelle et nécessitera un redémarrage. Si un fichier n\'est pas enregistré, enregistrez-le et réessayez.</string>
 
     <!--inpt controller-->
     <string name="run">Exécuter</string>

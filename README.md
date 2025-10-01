@@ -4,7 +4,7 @@
   <img src="https://github.com/xodiosx/XoDos/blob/main/Logo.png" alt="Logo" width="330" height="300">
 </p>
 
-A Windows and Linux emulator for Android that combines Termux and Winlator touch controls with x86_64 support.
+A Windows and Linux emulator for Android that combines xodos and Winlator touch controls with x86_64 support.
 
 ## Features
 - Windows/Linux app and game compatibility
@@ -20,7 +20,7 @@ A Windows and Linux emulator for Android that combines Termux and Winlator touch
 3. Grant storage permissions
 4. Wait for automatic installation to complete
 
-**Note:** Uninstall Termux if you encounter installation issues.
+**Note:** Uninstall xodos if you encounter installation issues.
 
 ## Important
 Android 11+ users may need to disable Phantom Process Killer:
@@ -30,7 +30,7 @@ settings put global settings_enable_monitor_phantom_procs false
 
 ## Credits
 - **Editor:** Skyro
-- Based on: Winlator, Termux, Wine, Mesa3D, and DXVK
+- Based on: Winlator, xodos, Wine, Mesa3D, and DXVK
 
 ## License
 GPLv3 - See `LICENSE.md` for details

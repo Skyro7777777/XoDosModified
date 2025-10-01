@@ -1,12 +1,12 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
 
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.widget.InputControlsView;
 
 import org.json.JSONArray;
 import org.json.JSONException;

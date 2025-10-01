@@ -1,4 +1,4 @@
-package com.termux.app.activities;
+package com.xodos.app.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,22 +9,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.termux.R;
-import com.termux.shared.activities.ReportActivity;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.models.ReportInfo;
-import com.termux.app.models.UserAction;
-import com.termux.shared.interact.ShareUtils;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.termux.settings.preferences.TermuxAPIAppSharedPreferences;
-import com.termux.shared.termux.settings.preferences.TermuxFloatAppSharedPreferences;
-import com.termux.shared.termux.settings.preferences.TermuxTaskerAppSharedPreferences;
-import com.termux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences;
-import com.termux.shared.android.AndroidUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.activity.media.AppCompatActivityUtils;
-import com.termux.shared.theme.NightMode;
+import com.xodos.R;
+import com.xodos.shared.activities.ReportActivity;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.models.ReportInfo;
+import com.xodos.app.models.UserAction;
+import com.xodos.shared.interact.ShareUtils;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosAPIAppSharedPreferences;
+import com.xodos.shared.xodos.settings.preferences.xodosFloatAppSharedPreferences;
+import com.xodos.shared.xodos.settings.preferences.xodosTaskerAppSharedPreferences;
+import com.xodos.shared.xodos.settings.preferences.xodosWidgetAppSharedPreferences;
+import com.xodos.shared.android.AndroidUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.activity.media.AppCompatActivityUtils;
+import com.xodos.shared.theme.NightMode;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .commit();
         }
 
-        AppCompatActivityUtils.setToolbar(this, com.termux.shared.R.id.toolbar);
+        AppCompatActivityUtils.setToolbar(this, com.xodos.shared.R.id.toolbar);
         AppCompatActivityUtils.setShowBackButtonInActionBar(this, true);
     }
 
@@ -63,49 +63,49 @@ public class SettingsActivity extends AppCompatActivity {
             new Thread() {
                 @Override
                 public void run() {
-                    configureTermuxAPIPreference(context);
-                    configureTermuxFloatPreference(context);
-                    configureTermuxTaskerPreference(context);
-                    configureTermuxWidgetPreference(context);
+                    configurexodosAPIPreference(context);
+                    configurexodosFloatPreference(context);
+                    configurexodosTaskerPreference(context);
+                    configurexodosWidgetPreference(context);
                     configureAboutPreference(context);
                     configureDonatePreference(context);
                 }
             }.start();
         }
 
-        private void configureTermuxAPIPreference(@NonNull Context context) {
-            Preference termuxAPIPreference = findPreference("termux_api");
-            if (termuxAPIPreference != null) {
-                TermuxAPIAppSharedPreferences preferences = TermuxAPIAppSharedPreferences.build(context, false);
+        private void configurexodosAPIPreference(@NonNull Context context) {
+            Preference xodosAPIPreference = findPreference("xodos_api");
+            if (xodosAPIPreference != null) {
+                xodosAPIAppSharedPreferences preferences = xodosAPIAppSharedPreferences.build(context, false);
                 // If failed to get app preferences, then likely app is not installed, so do not show its preference
-                termuxAPIPreference.setVisible(preferences != null);
+                xodosAPIPreference.setVisible(preferences != null);
             }
         }
 
-        private void configureTermuxFloatPreference(@NonNull Context context) {
-            Preference termuxFloatPreference = findPreference("termux_float");
-            if (termuxFloatPreference != null) {
-                TermuxFloatAppSharedPreferences preferences = TermuxFloatAppSharedPreferences.build(context, false);
+        private void configurexodosFloatPreference(@NonNull Context context) {
+            Preference xodosFloatPreference = findPreference("xodos_float");
+            if (xodosFloatPreference != null) {
+                xodosFloatAppSharedPreferences preferences = xodosFloatAppSharedPreferences.build(context, false);
                 // If failed to get app preferences, then likely app is not installed, so do not show its preference
-                termuxFloatPreference.setVisible(preferences != null);
+                xodosFloatPreference.setVisible(preferences != null);
             }
         }
 
-        private void configureTermuxTaskerPreference(@NonNull Context context) {
-            Preference termuxTaskerPreference = findPreference("termux_tasker");
-            if (termuxTaskerPreference != null) {
-                TermuxTaskerAppSharedPreferences preferences = TermuxTaskerAppSharedPreferences.build(context, false);
+        private void configurexodosTaskerPreference(@NonNull Context context) {
+            Preference xodosTaskerPreference = findPreference("xodos_tasker");
+            if (xodosTaskerPreference != null) {
+                xodosTaskerAppSharedPreferences preferences = xodosTaskerAppSharedPreferences.build(context, false);
                 // If failed to get app preferences, then likely app is not installed, so do not show its preference
-                termuxTaskerPreference.setVisible(preferences != null);
+                xodosTaskerPreference.setVisible(preferences != null);
             }
         }
 
-        private void configureTermuxWidgetPreference(@NonNull Context context) {
-            Preference termuxWidgetPreference = findPreference("termux_widget");
-            if (termuxWidgetPreference != null) {
-                TermuxWidgetAppSharedPreferences preferences = TermuxWidgetAppSharedPreferences.build(context, false);
+        private void configurexodosWidgetPreference(@NonNull Context context) {
+            Preference xodosWidgetPreference = findPreference("xodos_widget");
+            if (xodosWidgetPreference != null) {
+                xodosWidgetAppSharedPreferences preferences = xodosWidgetAppSharedPreferences.build(context, false);
                 // If failed to get app preferences, then likely app is not installed, so do not show its preference
-                termuxWidgetPreference.setVisible(preferences != null);
+                xodosWidgetPreference.setVisible(preferences != null);
             }
         }
 
@@ -119,18 +119,18 @@ public class SettingsActivity extends AppCompatActivity {
                             String title = "About";
 
                             StringBuilder aboutString = new StringBuilder();
-                            aboutString.append(TermuxUtils.getAppInfoMarkdownString(context, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES));
+                            aboutString.append(xodosUtils.getAppInfoMarkdownString(context, xodosUtils.AppInfoMode.xodos_AND_PLUGIN_PACKAGES));
                             aboutString.append("\n\n").append(AndroidUtils.getDeviceInfoMarkdownString(context, true));
-                            aboutString.append("\n\n").append(TermuxUtils.getImportantLinksMarkdownString(context));
+                            aboutString.append("\n\n").append(xodosUtils.getImportantLinksMarkdownString(context));
 
                             String userActionName = UserAction.ABOUT.getName();
 
                             ReportInfo reportInfo = new ReportInfo(userActionName,
-                                TermuxConstants.TERMUX_APP.TERMUX_SETTINGS_ACTIVITY_NAME, title);
+                                xodosConstants.xodos_APP.xodos_SETTINGS_ACTIVITY_NAME, title);
                             reportInfo.setReportString(aboutString.toString());
                             reportInfo.setReportSaveFileLabelAndPath(userActionName,
                                 Environment.getExternalStorageDirectory() + "/" +
-                                    FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+                                    FileUtils.sanitizeFileName(xodosConstants.xodos_APP_NAME + "-" + userActionName + ".log", true, true));
 
                             ReportActivity.startReportActivity(context, reportInfo);
                         }
@@ -147,10 +147,10 @@ public class SettingsActivity extends AppCompatActivity {
                 String signingCertificateSHA256Digest = PackageUtils.getSigningCertificateSHA256DigestForPackage(context);
                 if (signingCertificateSHA256Digest != null) {
                     // If APK is a Google Playstore release, then do not show the donation link
-                    // since Termux isn't exempted from the playstore policy donation links restriction
+                    // since xodos isn't exempted from the playstore policy donation links restriction
                     // Check Fund solicitations: https://pay.google.com/intl/en_in/about/policy/
-                    String apkRelease = TermuxUtils.getAPKRelease(signingCertificateSHA256Digest);
-                    if (apkRelease == null || apkRelease.equals(TermuxConstants.APK_RELEASE_GOOGLE_PLAYSTORE_SIGNING_CERTIFICATE_SHA256_DIGEST)) {
+                    String apkRelease = xodosUtils.getAPKRelease(signingCertificateSHA256Digest);
+                    if (apkRelease == null || apkRelease.equals(xodosConstants.APK_RELEASE_GOOGLE_PLAYSTORE_SIGNING_CERTIFICATE_SHA256_DIGEST)) {
                         donatePreference.setVisible(false);
                         return;
                     } else {
@@ -159,7 +159,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 donatePreference.setOnPreferenceClickListener(preference -> {
-                    ShareUtils.openUrl(context, TermuxConstants.TERMUX_DONATE_URL);
+                    ShareUtils.openUrl(context, xodosConstants.xodos_DONATE_URL);
                     return true;
                 });
             }

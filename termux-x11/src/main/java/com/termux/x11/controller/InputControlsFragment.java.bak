@@ -1,6 +1,6 @@
-package com.termux.x11.controller;
+package com.xodos.x11.controller;
 
-import com.termux.x11.R;
+import com.xodos.x11.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,18 +30,18 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
-import com.termux.x11.MainActivity;
-import com.termux.x11.R;
-import com.termux.x11.controller.contentdialog.ContentDialog;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.Callback;
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.core.HttpUtils;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.ExternalController;
-import com.termux.x11.controller.inputcontrols.InputControlsManager;
-import com.termux.x11.controller.math.Mathf;
-import com.termux.x11.controller.widget.InputControlsView;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.contentdialog.ContentDialog;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.Callback;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.HttpUtils;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.ExternalController;
+import com.xodos.x11.controller.inputcontrols.InputControlsManager;
+import com.xodos.x11.controller.math.Mathf;
+import com.xodos.x11.controller.widget.InputControlsView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

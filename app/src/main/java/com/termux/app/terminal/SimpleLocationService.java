@@ -1,9 +1,9 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.termux.floatball.LocationService;
+import com.xodos.floatball.LocationService;
 
 public class SimpleLocationService implements LocationService {
     private SharedPreferences sharedPreferences;

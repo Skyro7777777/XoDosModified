@@ -1,4 +1,4 @@
-package com.termux.terminal;
+package com.xodos.terminal;
 
 /**
  * Implementation of wcwidth(3) for Unicode 15.
@@ -7,9 +7,9 @@ package com.termux.terminal;
  *
  * IMPORTANT:
  * Must be kept in sync with the following:
- * https://github.com/termux/wcwidth
- * https://github.com/termux/libandroid-support
- * https://github.com/termux/termux-packages/tree/master/packages/libandroid-support
+ * https://github.com/xodos/wcwidth
+ * https://github.com/xodos/libandroid-support
+ * https://github.com/xodos/xodos-packages/tree/master/packages/libandroid-support
  */
 public final class WcWidth {
 
@@ -523,7 +523,7 @@ public final class WcWidth {
         }
 
         // C0/C1 control characters
-        // Termux change: Return 0 instead of -1.
+        // xodos change: Return 0 instead of -1.
         if (ucs < 32 || (0x07F <= ucs && ucs < 0x0A0)) return 0;
 
         // combining characters with zero width

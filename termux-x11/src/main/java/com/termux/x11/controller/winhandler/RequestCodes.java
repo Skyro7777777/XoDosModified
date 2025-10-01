@@ -1,4 +1,4 @@
-package com.termux.x11.controller.winhandler;
+package com.xodos.x11.controller.winhandler;
 
 abstract class RequestCodes {
     public static final byte EXIT = 0;

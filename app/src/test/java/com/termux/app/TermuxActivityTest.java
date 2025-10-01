@@ -1,6 +1,6 @@
 package com.xodos.app;
 
-import com.termux.shared.termux.data.TermuxUrlUtils;
+import com.xodos.shared.xodos.data.xodosUrlUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,12 +8,12 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
-public class TermuxActivityTest {
+public class xodosActivityTest {
 
     private void assertUrlsAre(String text, String... urls) {
         LinkedHashSet<String> expected = new LinkedHashSet<>();
         Collections.addAll(expected, urls);
-        Assert.assertEquals(expected, TermuxUrlUtils.extractUrls(text));
+        Assert.assertEquals(expected, xodosUrlUtils.extractUrls(text));
     }
 
     @Test

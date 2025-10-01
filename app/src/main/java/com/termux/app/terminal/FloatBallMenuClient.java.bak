@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.app.Activity;
 import android.app.Application;
@@ -13,22 +13,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
-import com.termux.floatball.FloatBallManager;
-import com.termux.floatball.menu.FloatMenuCfg;
-import com.termux.floatball.menu.MenuItem;
-import com.termux.floatball.permission.FloatPermissionManager;
-import com.termux.floatball.utils.DensityUtil;
-import com.termux.floatball.widget.FloatBallCfg;
-import com.termux.x11.MainActivity;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
+import com.xodos.floatball.FloatBallManager;
+import com.xodos.floatball.menu.FloatMenuCfg;
+import com.xodos.floatball.menu.MenuItem;
+import com.xodos.floatball.permission.FloatPermissionManager;
+import com.xodos.floatball.utils.DensityUtil;
+import com.xodos.floatball.widget.FloatBallCfg;
+import com.xodos.x11.MainActivity;
 
 public class FloatBallMenuClient {
     private FloatBallManager mFloatballManager;
     private FloatPermissionManager mFloatPermissionManager;
     private ActivityLifeCycleListener mActivityLifeCycleListener = new ActivityLifeCycleListener();
     private int resumed;
-    private TermuxActivity mTermuxActivity;
+    private xodosActivity mxodosActivity;
     private boolean mAppNotOnFront = false;
     private boolean mShowKeyboard = false;
     private boolean mLockSlider = false;
@@ -38,8 +38,8 @@ public class FloatBallMenuClient {
     private FloatBallMenuClient() {
     }
 
-    public FloatBallMenuClient(TermuxActivity termuxActivity) {
-        mTermuxActivity = termuxActivity;
+    public FloatBallMenuClient(xodosActivity xodosActivity) {
+        mxodosActivity = xodosActivity;
     }
 
     public void onCreate() {
@@ -50,23 +50,23 @@ public class FloatBallMenuClient {
       //  mFloatballManager.show();
         //5 set float ball click handler
         if (mFloatballManager.getMenuItemSize() == 0) {
-            toast(mTermuxActivity.getString(R.string.add_menu_item));
+            toast(mxodosActivity.getString(R.string.add_menu_item));
         } else {
             mFloatballManager.setOnFloatBallClickListener(() -> {
                 if (mAppNotOnFront) {
-                    PackageManager packageManager = mTermuxActivity.getPackageManager();
-                    Intent intent = packageManager.getLaunchIntentForPackage("com.termux");
+                    PackageManager packageManager = mxodosActivity.getPackageManager();
+                    Intent intent = packageManager.getLaunchIntentForPackage("com.xodos");
                     if (intent != null) {
 //                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mTermuxActivity.startActivity(intent);
-                        toast(mTermuxActivity.getString(R.string.raise_termux_app));
+                        mxodosActivity.startActivity(intent);
+                        toast(mxodosActivity.getString(R.string.raise_xodos_app));
                     }
                 }
             });
         }
         //     6 if only float ball within app, register it to Application(out data, actually, it is enough within activity )
-        mTermuxActivity.getApplication().registerActivityLifecycleCallbacks(mActivityLifeCycleListener);
+        mxodosActivity.getApplication().registerActivityLifecycleCallbacks(mActivityLifeCycleListener);
     }
 
     public void onAttachedToWindow() {
@@ -78,7 +78,7 @@ public class FloatBallMenuClient {
             mFloatballManager.onFloatBallClick();
         } catch (RuntimeException e) {
             e.printStackTrace();
-            toast(mTermuxActivity.getString(R.string.apply_display_over_other_app_permission));
+            toast(mxodosActivity.getString(R.string.apply_display_over_other_app_permission));
         }
 
     }
@@ -89,8 +89,8 @@ public class FloatBallMenuClient {
 
     private void init() {
 //      1 set position of float ball, set size, icon and drawable
-        int ballSize = DensityUtil.dip2px(mTermuxActivity, 40);
-        Drawable ballIcon = AppCompatResources.getDrawable(mTermuxActivity, R.drawable.icon_float_ball_shape);
+        int ballSize = DensityUtil.dip2px(mxodosActivity, 40);
+        Drawable ballIcon = AppCompatResources.getDrawable(mxodosActivity, R.drawable.icon_float_ball_shape);
 //      different config below
 //      FloatBallCfg ballCfg = new FloatBallCfg(ballSize, ballIcon);
 //      FloatBallCfg ballCfg = new FloatBallCfg(ballSize, ballIcon, FloatBallCfg.Gravity.LEFT_CENTER,false);
@@ -99,16 +99,16 @@ public class FloatBallMenuClient {
         FloatBallCfg ballCfg = new FloatBallCfg(ballSize, ballIcon, FloatBallCfg.Gravity.RIGHT_CENTER);
 //      set float ball weather hide
         ballCfg.setHideHalfLater(true);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mTermuxActivity);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mxodosActivity);
         boolean floatBallOverOtherApp = preferences.getBoolean("enableGlobalFloatBallMenu", false);
-        Context ctx = mTermuxActivity;
+        Context ctx = mxodosActivity;
         if (floatBallOverOtherApp) {
-            ctx = mTermuxActivity.getApplicationContext();
+            ctx = mxodosActivity.getApplicationContext();
         }
         //2 display float ball menu
         //2.1 init float ball menu config, every size of menu item and number of item
-        int menuSize = DensityUtil.dip2px(mTermuxActivity, 110);
-        int menuItemSize = DensityUtil.dip2px(mTermuxActivity, 20);
+        int menuSize = DensityUtil.dip2px(mxodosActivity, 110);
+        int menuItemSize = DensityUtil.dip2px(mxodosActivity, 20);
         FloatMenuCfg menuCfg = new FloatMenuCfg(menuSize, menuItemSize);
         //3 create float ball Manager
         mFloatballManager = new FloatBallManager(ctx, ballCfg, menuCfg);
@@ -126,7 +126,7 @@ public class FloatBallMenuClient {
         mFloatballManager.setPermission(new FloatBallManager.IFloatBallPermission() {
             @Override
             public boolean onRequestFloatBallPermission() {
-                requestFloatBallPermission(mTermuxActivity);
+                requestFloatBallPermission(mxodosActivity);
                 return true;
             }
 
@@ -189,86 +189,86 @@ public class FloatBallMenuClient {
     }
 
     private void toast(String msg) {
-        Toast.makeText(mTermuxActivity, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mxodosActivity, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void addFloatMenuItem() {
-        MenuItem terminalItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_start_terminal_shape)) {
+        MenuItem terminalItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_start_terminal_shape)) {
             @Override
             public void action() {
                 boolean preState = mShowTerminal;
                 mShowTerminal = !mShowTerminal;
                 if (!preState) {
-                    mTermuxActivity.getMainContentView().setTerminalViewSwitchSlider(true);
-                    toast(mTermuxActivity.getString(R.string.open_terminal));
+                    mxodosActivity.getMainContentView().setTerminalViewSwitchSlider(true);
+                    toast(mxodosActivity.getString(R.string.open_terminal));
                 } else {
-                    mTermuxActivity.getMainContentView().setTerminalViewSwitchSlider(false);
-                    toast(mTermuxActivity.getString(R.string.hide_terminal));
+                    mxodosActivity.getMainContentView().setTerminalViewSwitchSlider(false);
+                    toast(mxodosActivity.getString(R.string.hide_terminal));
                 }
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem stopItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_kill_current_process_shape)) {
+        MenuItem stopItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_kill_current_process_shape)) {
             @Override
             public void action() {
-                mTermuxActivity.stopDesktop();
-                toast(mTermuxActivity.getString(R.string.terminate_current_process));
+                mxodosActivity.stopDesktop();
+                toast(mxodosActivity.getString(R.string.terminate_current_process));
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem gamePadItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_game_pad_shape)) {
+        MenuItem gamePadItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_game_pad_shape)) {
             @Override
             public void action() {
-                mTermuxActivity.showInputControlsDialog();
+                mxodosActivity.showInputControlsDialog();
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem unLockLayoutItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_unlock_layout_shape)) {
+        MenuItem unLockLayoutItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_unlock_layout_shape)) {
             @Override
             public void action() {
                 if (mLockSlider) {
-                    mDrawable = mTermuxActivity.getDrawable(R.drawable.icon_menu_unlock_layout_open_shape);
+                    mDrawable = mxodosActivity.getDrawable(R.drawable.icon_menu_unlock_layout_open_shape);
                 } else {
-                    mDrawable = mTermuxActivity.getDrawable(R.drawable.icon_menu_unlock_layout_shape);
+                    mDrawable = mxodosActivity.getDrawable(R.drawable.icon_menu_unlock_layout_shape);
                 }
                 mLockSlider = !mLockSlider;
-                mTermuxActivity.getMainContentView().releaseSlider(true);
-                toast(mTermuxActivity.getString(R.string.unlock_layout));
+                mxodosActivity.getMainContentView().releaseSlider(true);
+                toast(mxodosActivity.getString(R.string.unlock_layout));
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem keyboardItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_show_keyboard_shape)) {
+        MenuItem keyboardItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_show_keyboard_shape)) {
             @Override
             public void action() {
                 if (mShowKeyboard) {
-                    mDrawable = mTermuxActivity.getDrawable(R.drawable.icon_menu_show_keyboard_open_shape);
+                    mDrawable = mxodosActivity.getDrawable(R.drawable.icon_menu_show_keyboard_open_shape);
                 } else {
-                    mDrawable = mTermuxActivity.getDrawable(R.drawable.icon_menu_show_keyboard_shape);
+                    mDrawable = mxodosActivity.getDrawable(R.drawable.icon_menu_show_keyboard_shape);
                 }
                 mShowKeyboard = !mShowKeyboard;
-                MainActivity.toggleKeyboardVisibility(mTermuxActivity);
+                MainActivity.toggleKeyboardVisibility(mxodosActivity);
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem taskManagerItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_show_task_manager_shape)) {
+        MenuItem taskManagerItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_show_task_manager_shape)) {
             @Override
             public void action() {
-                mTermuxActivity.showProcessManagerDialog();
-                toast(mTermuxActivity.getString(com.termux.x11.R.string.task_manager));
+                mxodosActivity.showProcessManagerDialog();
+                toast(mxodosActivity.getString(com.xodos.x11.R.string.task_manager));
                 mFloatballManager.closeMenu();
             }
         };
-        MenuItem settingItem = new MenuItem(mTermuxActivity.getDrawable(R.drawable.icon_menu_show_setting_shape)) {
+        MenuItem settingItem = new MenuItem(mxodosActivity.getDrawable(R.drawable.icon_menu_show_setting_shape)) {
             @Override
             public void action() {
                 boolean preState = mShowPreference;
                 mShowPreference = !mShowPreference;
                 if (!preState) {
-                    mTermuxActivity.getMainContentView().setX11PreferenceSwitchSlider(true);
-                    toast(mTermuxActivity.getString(com.termux.x11.R.string.open_x11_settings));
+                    mxodosActivity.getMainContentView().setX11PreferenceSwitchSlider(true);
+                    toast(mxodosActivity.getString(com.xodos.x11.R.string.open_x11_settings));
                 } else {
-                    mTermuxActivity.getMainContentView().setX11PreferenceSwitchSlider(false);
-                    toast(mTermuxActivity.getString(com.termux.x11.R.string.hide_x11_settings));
+                    mxodosActivity.getMainContentView().setX11PreferenceSwitchSlider(false);
+                    toast(mxodosActivity.getString(com.xodos.x11.R.string.hide_x11_settings));
                 }
                 mFloatballManager.closeMenu();
             }
@@ -300,7 +300,7 @@ public class FloatBallMenuClient {
     public void onDestroy() {
         onDetachedFromWindow();
         //unregister ActivityLifeCycle listener once register it, in case of memory leak
-        mTermuxActivity.getApplication().unregisterActivityLifecycleCallbacks(mActivityLifeCycleListener);
+        mxodosActivity.getApplication().unregisterActivityLifecycleCallbacks(mActivityLifeCycleListener);
     }
 
     public boolean isGlobalFloatBallMenu() {

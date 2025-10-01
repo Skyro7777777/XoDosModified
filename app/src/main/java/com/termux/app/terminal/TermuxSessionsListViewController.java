@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -18,23 +18,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
-import com.termux.shared.termux.shell.command.runner.terminal.TermuxSession;
-import com.termux.shared.theme.NightMode;
-import com.termux.shared.theme.ThemeUtils;
-import com.termux.terminal.TerminalSession;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
+import com.xodos.shared.xodos.shell.command.runner.terminal.xodosSession;
+import com.xodos.shared.theme.NightMode;
+import com.xodos.shared.theme.ThemeUtils;
+import com.xodos.terminal.TerminalSession;
 
 import java.util.List;
 
-public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession> implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class xodosSessionsListViewController extends ArrayAdapter<xodosSession> implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
-    final TermuxActivity mActivity;
+    final xodosActivity mActivity;
 
     final StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
     final StyleSpan italicSpan = new StyleSpan(Typeface.ITALIC);
 
-    public TermuxSessionsListViewController(TermuxActivity activity, List<TermuxSession> sessionList) {
+    public xodosSessionsListViewController(xodosActivity activity, List<xodosSession> sessionList) {
         super(activity.getApplicationContext(), R.layout.item_terminal_sessions_list, sessionList);
         this.mActivity = activity;
     }
@@ -94,15 +94,15 @@ public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TermuxSession clickedSession = getItem(position);
-        mActivity.getTermuxTerminalSessionClient().setCurrentSession(clickedSession.getTerminalSession());
+        xodosSession clickedSession = getItem(position);
+        mActivity.getxodosTerminalSessionClient().setCurrentSession(clickedSession.getTerminalSession());
         mActivity.getDrawer().closeDrawers();
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        final TermuxSession selectedSession = getItem(position);
-        mActivity.getTermuxTerminalSessionClient().renameSession(selectedSession.getTerminalSession());
+        final xodosSession selectedSession = getItem(position);
+        mActivity.getxodosTerminalSessionClient().renameSession(selectedSession.getTerminalSession());
         return true;
     }
 

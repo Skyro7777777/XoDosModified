@@ -1,17 +1,17 @@
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.xodos"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_DISPLAY_APP_NAME "Termux:X11">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_DISPLAY_APP_NAME "xodos:X11">]>
 <resources>
-    <string name="app_name">&TERMUX_DISPLAY_APP_NAME; </string>
-    <string name="plugin_info">&TERMUX_DISPLAY_APP_NAME; is a plugin app for the &TERMUX_APP_NAME;
+    <string name="app_name">&xodos_DISPLAY_APP_NAME; </string>
+    <string name="plugin_info">&xodos_DISPLAY_APP_NAME; is a plugin app for the &xodos_APP_NAME;
         app.
-        \n\nCheck &TERMUX_APP_NAME; app github %1$s and &TERMUX_DISPLAY_APP_NAME; app github %2$s for more info.</string>
+        \n\nCheck &xodos_APP_NAME; app github %1$s and &xodos_DISPLAY_APP_NAME; app github %2$s for more info.</string>
 
-    <!-- TermuxX11Activity -->
+    <!-- xodosX11Activity -->
     <string name="msg_storage_permission_not_granted_warning">The storage permission must be granted
-        to &TERMUX_DISPLAY_APP_NAME; app to...</string>
+        to &xodos_DISPLAY_APP_NAME; app to...</string>
     <string name="action_grant_storage_permission">Grant Storage Permission</string>
 
     <string name="msg_battery_optimization_not_disabled_warning">Android battery optimizations
-        should be disabled for the &TERMUX_DISPLAY_APP_NAME; app so that…
+        should be disabled for the &xodos_DISPLAY_APP_NAME; app so that…
         Check https://developer.android.com/about/versions/oreo/background for more info and
         https://developer.android.com/guide/components/foreground-services#background-start-restrictions
         for more info.
@@ -22,7 +22,7 @@
     <string name="action_disable_battery_optimizations">Disable Battery Optimizations</string>
 
     <string name="msg_display_over_other_apps_permission_not_granted_warning">The display over other
-        apps permission should be granted to &TERMUX_DISPLAY_APP_NAME; app for starting foreground
+        apps permission should be granted to &xodos_DISPLAY_APP_NAME; app for starting foreground
         activities from background. Check https://developer.android.com/guide/components/activities/background-starts
         for more info.
     </string>
@@ -33,7 +33,7 @@
     <string name="not_connected">Not connected</string>
     <string name="help_button_text">   Help   </string>
     <string name="preferences_button_text">   Preferences   </string>
-    <string name="extra_keys_config_desc">Here you can set value of extra-keys variable like in Termux app (read <a href="http://wiki.termux.com/wiki/Touch_Keyboard#Extra_Keys_Row">this</a>) and more (e.g. META).</string>
+    <string name="extra_keys_config_desc">Here you can set value of extra-keys variable like in xodos app (read <a href="http://wiki.xodos.com/wiki/Touch_Keyboard#Extra_Keys_Row">this</a>) and more (e.g. META).</string>
     <!--    preference-->
     <string name="pref_main">Preferences</string>
     <string name="pref_output">Output🖥️</string>
@@ -106,8 +106,8 @@
 
     <string name="pref_adjustHeightForEK">Adjust display height for extra keys bar</string>
     <string name="pref_adjustHeightForEK_summary">May cause screen flickering during toggling EK bar.</string>
-    <string name="pref_useTermuxEKBarBehaviour">Deactivate special keys on additional key bar after each keypress</string>
-    <string name="pref_useTermuxEKBarBehaviour_summary">Use long-tap to lock special keys</string>
+    <string name="pref_usexodosEKBarBehaviour">Deactivate special keys on additional key bar after each keypress</string>
+    <string name="pref_usexodosEKBarBehaviour_summary">Use long-tap to lock special keys</string>
     <string name="pref_opacityEKBar">Opacity of extra keys bar, %</string>
     <string name="pref_extra_keys_config">Extra keys config</string>
 
@@ -215,7 +215,7 @@
     <string name="log_level_value">Logcat log level set to \"%1$s\"</string>
     <string name="start_button_start_x11">start x11 server</string>
     <string name="exit_button_exit_app">Exit</string>
-    <string name="x11_server_bridge_config">Reinstall the bridge that the x11 server uses to communicate with termux. The installation will cause the current graphical interface to stop running and require a restart. If any file is not saved, save it and retry.</string>
+    <string name="x11_server_bridge_config">Reinstall the bridge that the x11 server uses to communicate with xodos. The installation will cause the current graphical interface to stop running and require a restart. If any file is not saved, save it and retry.</string>
 
     <!--inpt controller-->
     <string name="run">Run</string>

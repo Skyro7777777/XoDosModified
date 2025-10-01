@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,13 +22,13 @@ import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.ControlsEditorActivity;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.core.ImageUtils;
-import com.termux.x11.controller.core.UnitUtils;
-import com.termux.x11.controller.core.WineThemeManager;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.ControlsEditorActivity;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.ImageUtils;
+import com.xodos.x11.controller.core.UnitUtils;
+import com.xodos.x11.controller.core.WineThemeManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import com.termux.x11.MainActivity;
+import com.xodos.x11.MainActivity;
 
 public class ImagePickerView extends View implements View.OnClickListener {
     private final Bitmap icon;

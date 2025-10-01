@@ -1,38 +1,38 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-        app:key="termux"
-        app:title="@string/termux_preferences_title"
-        app:summary="@string/termux_preferences_summary"
-        app:fragment="com.termux.app.fragments.settings.TermuxPreferencesFragment"/>
+        app:key="xodos"
+        app:title="@string/xodos_preferences_title"
+        app:summary="@string/xodos_preferences_summary"
+        app:fragment="com.xodos.app.fragments.settings.xodosPreferencesFragment"/>
 
     <Preference
-        app:key="termux_api"
-        app:title="@string/termux_api_preferences_title"
-        app:summary="@string/termux_api_preferences_summary"
+        app:key="xodos_api"
+        app:title="@string/xodos_api_preferences_title"
+        app:summary="@string/xodos_api_preferences_summary"
         app:isPreferenceVisible="false"
-        app:fragment="com.termux.app.fragments.settings.TermuxAPIPreferencesFragment"/>
+        app:fragment="com.xodos.app.fragments.settings.xodosAPIPreferencesFragment"/>
 
     <Preference
-        app:key="termux_float"
-        app:title="@string/termux_float_preferences_title"
-        app:summary="@string/termux_float_preferences_summary"
+        app:key="xodos_float"
+        app:title="@string/xodos_float_preferences_title"
+        app:summary="@string/xodos_float_preferences_summary"
         app:isPreferenceVisible="false"
-        app:fragment="com.termux.app.fragments.settings.TermuxFloatPreferencesFragment"/>
+        app:fragment="com.xodos.app.fragments.settings.xodosFloatPreferencesFragment"/>
 
     <Preference
-        app:key="termux_tasker"
-        app:title="@string/termux_tasker_preferences_title"
-        app:summary="@string/termux_tasker_preferences_summary"
+        app:key="xodos_tasker"
+        app:title="@string/xodos_tasker_preferences_title"
+        app:summary="@string/xodos_tasker_preferences_summary"
         app:isPreferenceVisible="false"
-        app:fragment="com.termux.app.fragments.settings.TermuxTaskerPreferencesFragment"/>
+        app:fragment="com.xodos.app.fragments.settings.xodosTaskerPreferencesFragment"/>
 
     <Preference
-        app:key="termux_widget"
-        app:title="@string/termux_widget_preferences_title"
-        app:summary="@string/termux_widget_preferences_summary"
+        app:key="xodos_widget"
+        app:title="@string/xodos_widget_preferences_title"
+        app:summary="@string/xodos_widget_preferences_summary"
         app:isPreferenceVisible="false"
-        app:fragment="com.termux.app.fragments.settings.TermuxWidgetPreferencesFragment"/>
+        app:fragment="com.xodos.app.fragments.settings.xodosWidgetPreferencesFragment"/>
 
     <Preference
         app:key="about"

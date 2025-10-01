@@ -8,9 +8,9 @@ import android.os.SystemClock;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.widget.TermuxWidgetProvider;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.widget.xodosWidgetProvider;
 
 public class SystemEventReceiver extends BroadcastReceiver {
 
@@ -44,7 +44,7 @@ public class SystemEventReceiver extends BroadcastReceiver {
 
 
     public synchronized void sendIntentToRefreshAllWidgets(@NonNull Context context) {
-        TermuxWidgetProvider.sendIntentToRefreshAllWidgets(context, LOG_TAG);
+        xodosWidgetProvider.sendIntentToRefreshAllWidgets(context, LOG_TAG);
     }
 
 }

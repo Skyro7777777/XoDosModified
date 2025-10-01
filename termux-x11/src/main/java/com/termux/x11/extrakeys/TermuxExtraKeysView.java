@@ -1,4 +1,4 @@
-package com.termux.x11.extrakeys;
+package com.xodos.x11.extrakeys;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -42,7 +42,7 @@ import androidx.annotation.Nullable;
  * it with a {@link androidx.viewpager.widget.ViewPager}.:
  * {@code
  * <?xml version="1.0" encoding="utf-8"?>
- * <com.termux.x11.extrakeys.ExtraKeysView xmlns:android="http://schemas.android.com/apk/res/android"
+ * <com.xodos.x11.extrakeys.ExtraKeysView xmlns:android="http://schemas.android.com/apk/res/android"
  *     android:id="@+id/extra_keys"
  *     style="?android:attr/buttonBarStyle"
  *     android:layout_width="match_parent"
@@ -55,52 +55,52 @@ import androidx.annotation.Nullable;
  * or {@link LayoutInflater#inflate(int, ViewGroup)} if using {@link androidx.viewpager.widget.ViewPager}.
  * Then call {@link #setExtraKeysViewClient(IExtraKeysView)} and pass it the implementation of
  * {@link IExtraKeysView} so that you can receive callbacks. You can also override other values set
- * in {@link TermuxExtraKeysView#TermuxExtraKeysView(Context, AttributeSet)} by calling the respective functions.
- * If you extend {@link TermuxExtraKeysView}, you can also set them in the constructor, but do call super().
+ * in {@link xodosExtraKeysView#xodosExtraKeysView(Context, AttributeSet)} by calling the respective functions.
+ * If you extend {@link xodosExtraKeysView}, you can also set them in the constructor, but do call super().
  * <p>
- * After this you will have to make a call to {@link TermuxExtraKeysView#reload(TermuxX11ExtraKeysInfo, float) and pass
- * it the {@link TermuxX11ExtraKeysInfo } to load and x11 the extra keys. Read its class javadocs for more
+ * After this you will have to make a call to {@link xodosExtraKeysView#reload(xodosX11ExtraKeysInfo, float) and pass
+ * it the {@link xodosX11ExtraKeysInfo } to load and x11 the extra keys. Read its class javadocs for more
  * info on how to create it.
  * <p>
- * Termux app defines the view in res/layout/view_terminal_toolbar_extra_keys and
- * inflates it in TerminalToolbarViewPager.instantiateItem() and sets the {@link TermuxExtraKeysView } client
- * and calls {@link TermuxExtraKeysView#reload(TermuxX11ExtraKeysInfo).
- * The {@link TermuxX11ExtraKeysInfo } is created by TermuxAppSharedProperties.setExtraKeys().
- * Then its got and the view height is adjusted in TermuxActivity.setTerminalToolbarHeight().
- * The client used is TermuxTerminalExtraKeys, which extends
- * {@link com.termux.x11.utils.TermuxX11ExtraKeys } to handle Termux app specific logic and
+ * xodos app defines the view in res/layout/view_terminal_toolbar_extra_keys and
+ * inflates it in TerminalToolbarViewPager.instantiateItem() and sets the {@link xodosExtraKeysView } client
+ * and calls {@link xodosExtraKeysView#reload(xodosX11ExtraKeysInfo).
+ * The {@link xodosX11ExtraKeysInfo } is created by xodosAppSharedProperties.setExtraKeys().
+ * Then its got and the view height is adjusted in xodosActivity.setTerminalToolbarHeight().
+ * The client used is xodosTerminalExtraKeys, which extends
+ * {@link com.xodos.x11.utils.xodosX11ExtraKeys } to handle xodos app specific logic and
  * leave the rest to the super class.
  */
-public final class TermuxExtraKeysView extends GridLayout {
-    /** The client for the {@link TermuxExtraKeysView}. */
+public final class xodosExtraKeysView extends GridLayout {
+    /** The client for the {@link xodosExtraKeysView}. */
     public interface IExtraKeysView {
         /**
-         * This is called by {@link TermuxExtraKeysView} when a button is clicked. This is also called
-         * for {@link #mRepetitiveKeys} and {@link TermuxX11ExtraKeyButton} that have a popup set.
+         * This is called by {@link xodosExtraKeysView} when a button is clicked. This is also called
+         * for {@link #mRepetitiveKeys} and {@link xodosX11ExtraKeyButton} that have a popup set.
          * However, this is not called for {@link #mSpecialButtons}, whose state can instead be read
-         * via a call to {@link #readSpecialButton(TermuxX11SpecialButton, boolean)}.
+         * via a call to {@link #readSpecialButton(xodosX11SpecialButton, boolean)}.
          *
          * @param view The view that was clicked.
-         * @param buttonInfo The {@link TermuxX11ExtraKeyButton} for the button that was clicked.
-         *                   The button may be a {@link TermuxX11ExtraKeyButton#KEY_MACRO} set which can be
-         *                   checked with a call to {@link TermuxX11ExtraKeyButton#macro}.
+         * @param buttonInfo The {@link xodosX11ExtraKeyButton} for the button that was clicked.
+         *                   The button may be a {@link xodosX11ExtraKeyButton#KEY_MACRO} set which can be
+         *                   checked with a call to {@link xodosX11ExtraKeyButton#macro}.
          * @param button The {@link Button} that was clicked.
          */
-        void onExtraKeyButtonClick(View view, TermuxX11ExtraKeyButton buttonInfo, Button button);
+        void onExtraKeyButtonClick(View view, xodosX11ExtraKeyButton buttonInfo, Button button);
 
         /**
-         * This is called by {@link TermuxExtraKeysView} when a button is clicked so that the client
+         * This is called by {@link xodosExtraKeysView} when a button is clicked so that the client
          * can perform any hepatic feedback. This is only called in the {@link OnClickListener}
          * and not for every repeat. Its also called for {@link #mSpecialButtons}.
          *
          * @param view The view that was clicked.
-         * @param buttonInfo The {@link TermuxX11ExtraKeyButton} for the button that was clicked.
+         * @param buttonInfo The {@link xodosX11ExtraKeyButton} for the button that was clicked.
          * @param button The {@link Button} that was clicked.
          * @return Return {@code true} if the client handled the feedback, otherwise {@code false}
-         * so that {@link TermuxExtraKeysView#performExtraKeyButtonHapticFeedback(View, TermuxX11ExtraKeyButton, Button)}
+         * so that {@link xodosExtraKeysView#performExtraKeyButtonHapticFeedback(View, xodosX11ExtraKeyButton, Button)}
          * can handle it depending on system settings.
          */
-        boolean performExtraKeyButtonHapticFeedback(View view, TermuxX11ExtraKeyButton buttonInfo, Button button);
+        boolean performExtraKeyButtonHapticFeedback(View view, xodosX11ExtraKeyButton buttonInfo, Button button);
     }
 
     /** Defines the default value for {@link #mButtonTextColor} */
@@ -128,23 +128,23 @@ public final class TermuxExtraKeysView extends GridLayout {
 
 
 
-    /** The implementation of the {@link IExtraKeysView} that acts as a client for the {@link TermuxExtraKeysView}. */
+    /** The implementation of the {@link IExtraKeysView} that acts as a client for the {@link xodosExtraKeysView}. */
     private IExtraKeysView mExtraKeysViewClient;
 
-    /** The map for the {@link TermuxX11SpecialButton} and their {@link TermuxX11SpecialButtonState}. Defaults to
-     * the one returned by {@link #getDefaultSpecialButtons(TermuxExtraKeysView)}. */
-    private Map<TermuxX11SpecialButton, TermuxX11SpecialButtonState> mSpecialButtons;
+    /** The map for the {@link xodosX11SpecialButton} and their {@link xodosX11SpecialButtonState}. Defaults to
+     * the one returned by {@link #getDefaultSpecialButtons(xodosExtraKeysView)}. */
+    private Map<xodosX11SpecialButton, xodosX11SpecialButtonState> mSpecialButtons;
 
-    /** The keys for the {@link TermuxX11SpecialButton} added to {@link #mSpecialButtons}. This is automatically
+    /** The keys for the {@link xodosX11SpecialButton} added to {@link #mSpecialButtons}. This is automatically
      * set when the call to {@link #setSpecialButtons(Map)} is made. */
     private Set<String> mSpecialButtonsKeys;
 
 
     /**
      * The list of keys for which auto repeat of key should be triggered if its extra keys button
-     * is long pressed. This is done by calling {@link IExtraKeysView#onExtraKeyButtonClick(View, TermuxX11ExtraKeyButton, Button)}
+     * is long pressed. This is done by calling {@link IExtraKeysView#onExtraKeyButtonClick(View, xodosX11ExtraKeyButton, Button)}
      * every {@link #mLongPressRepeatDelay} seconds after {@link #mLongPressTimeout} has passed.
-     * The default keys are defined by {@link TermuxX11ExtraKeysConstants#PRIMARY_REPETITIVE_KEYS}.
+     * The default keys are defined by {@link xodosX11ExtraKeysConstants#PRIMARY_REPETITIVE_KEYS}.
      */
     private List<String> mRepetitiveKeys;
 
@@ -182,7 +182,7 @@ public final class TermuxExtraKeysView extends GridLayout {
     private int mLongPressRepeatDelay;
 
 
-    /** The popup window shown if {@link TermuxX11ExtraKeyButton#popup} returns a {@code non-null} value
+    /** The popup window shown if {@link xodosX11ExtraKeyButton#popup} returns a {@code non-null} value
      * and a swipe up action is done on an extra key. */
     private PopupWindow mPopupWindow;
 
@@ -192,10 +192,10 @@ public final class TermuxExtraKeysView extends GridLayout {
     private int mLongPressCount;
 
 
-    public TermuxExtraKeysView(Context context, AttributeSet attrs) {
+    public xodosExtraKeysView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setRepetitiveKeys(TermuxX11ExtraKeysConstants.PRIMARY_REPETITIVE_KEYS);
+        setRepetitiveKeys(xodosX11ExtraKeysConstants.PRIMARY_REPETITIVE_KEYS);
         setSpecialButtons(getDefaultSpecialButtons(this));
 
         setButtonColors(DEFAULT_BUTTON_TEXT_COLOR, DEFAULT_BUTTON_ACTIVE_TEXT_COLOR, DEFAULT_BUTTON_BACKGROUND_COLOR, DEFAULT_BUTTON_ACTIVE_BACKGROUND_COLOR);
@@ -216,14 +216,14 @@ public final class TermuxExtraKeysView extends GridLayout {
     }
 
     /** Set {@link #mSpecialButtonsKeys}. Must not be {@code null}. */
-    public void setSpecialButtons(@NonNull Map<TermuxX11SpecialButton, TermuxX11SpecialButtonState> specialButtons) {
+    public void setSpecialButtons(@NonNull Map<xodosX11SpecialButton, xodosX11SpecialButtonState> specialButtons) {
         mSpecialButtons = specialButtons;
-        mSpecialButtonsKeys = this.mSpecialButtons.keySet().stream().map(TermuxX11SpecialButton::getKey).collect(Collectors.toSet());
+        mSpecialButtonsKeys = this.mSpecialButtons.keySet().stream().map(xodosX11SpecialButton::getKey).collect(Collectors.toSet());
     }
 
 
     /**
-     * Set the {@link TermuxExtraKeysView} button colors.
+     * Set the {@link xodosExtraKeysView} button colors.
      *
      * @param buttonTextColor The value for {@link #mButtonTextColor}.
      * @param buttonActiveTextColor The value for {@link #mButtonActiveTextColor}.
@@ -268,41 +268,41 @@ public final class TermuxExtraKeysView extends GridLayout {
 
     /** Get the default map that can be used for {@link #mSpecialButtons}. */
     @NonNull
-    public Map<TermuxX11SpecialButton, TermuxX11SpecialButtonState> getDefaultSpecialButtons(TermuxExtraKeysView termuxExtraKeysView) {
+    public Map<xodosX11SpecialButton, xodosX11SpecialButtonState> getDefaultSpecialButtons(xodosExtraKeysView xodosExtraKeysView) {
         return new HashMap<>() {{
-            put(TermuxX11SpecialButton.CTRL, new TermuxX11SpecialButtonState(termuxExtraKeysView));
-            put(TermuxX11SpecialButton.ALT, new TermuxX11SpecialButtonState(termuxExtraKeysView));
-            put(TermuxX11SpecialButton.SHIFT, new TermuxX11SpecialButtonState(termuxExtraKeysView));
-            put(TermuxX11SpecialButton.META, new TermuxX11SpecialButtonState(termuxExtraKeysView));
-            put(TermuxX11SpecialButton.FN, new TermuxX11SpecialButtonState(termuxExtraKeysView));
+            put(xodosX11SpecialButton.CTRL, new xodosX11SpecialButtonState(xodosExtraKeysView));
+            put(xodosX11SpecialButton.ALT, new xodosX11SpecialButtonState(xodosExtraKeysView));
+            put(xodosX11SpecialButton.SHIFT, new xodosX11SpecialButtonState(xodosExtraKeysView));
+            put(xodosX11SpecialButton.META, new xodosX11SpecialButtonState(xodosExtraKeysView));
+            put(xodosX11SpecialButton.FN, new xodosX11SpecialButtonState(xodosExtraKeysView));
         }};
     }
 
     /**
-     * Reload this instance of {@link TermuxExtraKeysView} with the info passed in {@code extraKeysInfo}.
+     * Reload this instance of {@link xodosExtraKeysView} with the info passed in {@code extraKeysInfo}.
      *
-     * @param termuxX11ExtraKeysInfo The {@link TermuxX11ExtraKeysInfo} that defines the necessary info for the extra keys.
-     * @param heightPx The height in pixels of the parent surrounding the {@link TermuxExtraKeysView}. It must
+     * @param xodosX11ExtraKeysInfo The {@link xodosX11ExtraKeysInfo} that defines the necessary info for the extra keys.
+     * @param heightPx The height in pixels of the parent surrounding the {@link xodosExtraKeysView}. It must
      *                 be a single child.
      */
     @SuppressLint("ClickableViewAccessibility")
-    public void reload(TermuxX11ExtraKeysInfo termuxX11ExtraKeysInfo, float heightPx) {
-        if (termuxX11ExtraKeysInfo == null)
+    public void reload(xodosX11ExtraKeysInfo xodosX11ExtraKeysInfo, float heightPx) {
+        if (xodosX11ExtraKeysInfo == null)
             return;
 
-        for(TermuxX11SpecialButtonState state : mSpecialButtons.values())
+        for(xodosX11SpecialButtonState state : mSpecialButtons.values())
             state.buttons = new ArrayList<>();
 
         removeAllViews();
 
-        TermuxX11ExtraKeyButton[][] buttons = termuxX11ExtraKeysInfo.getMatrix();
+        xodosX11ExtraKeyButton[][] buttons = xodosX11ExtraKeysInfo.getMatrix();
 
         setRowCount(buttons.length);
         setColumnCount(maximumLength(buttons));
 
         for (int row = 0; row < buttons.length; row++) {
             for (int col = 0; col < buttons[row].length; col++) {
-                final TermuxX11ExtraKeyButton buttonInfo = buttons[row][col];
+                final xodosX11ExtraKeyButton buttonInfo = buttons[row][col];
 
                 Button button;
                 if (isSpecialButton(buttonInfo)) {
@@ -393,12 +393,12 @@ public final class TermuxExtraKeysView extends GridLayout {
         }
     }
 
-    public void onExtraKeyButtonClick(View view, TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public void onExtraKeyButtonClick(View view, xodosX11ExtraKeyButton buttonInfo, Button button) {
         if (mExtraKeysViewClient != null)
             mExtraKeysViewClient.onExtraKeyButtonClick(view, buttonInfo, button);
     }
 
-    public void performExtraKeyButtonHapticFeedback(View view, TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public void performExtraKeyButtonHapticFeedback(View view, xodosX11ExtraKeyButton buttonInfo, Button button) {
         if (mExtraKeysViewClient != null) {
             // If client handled the feedback, then just return
             if (mExtraKeysViewClient.performExtraKeyButtonHapticFeedback(view, buttonInfo, button))
@@ -419,10 +419,10 @@ public final class TermuxExtraKeysView extends GridLayout {
         }
     }
 
-    public void onAnyExtraKeyButtonClick(View view, @NonNull TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public void onAnyExtraKeyButtonClick(View view, @NonNull xodosX11ExtraKeyButton buttonInfo, Button button) {
         if (isSpecialButton(buttonInfo)) {
             if (mLongPressCount > 0) return;
-            TermuxX11SpecialButtonState state = mSpecialButtons.get(TermuxX11SpecialButton.valueOf(buttonInfo.key));
+            xodosX11SpecialButtonState state = mSpecialButtons.get(xodosX11SpecialButton.valueOf(buttonInfo.key));
             if (state == null) return;
 
             // Toggle active state and disable lock state if new state is not active
@@ -434,7 +434,7 @@ public final class TermuxExtraKeysView extends GridLayout {
         }
     }
 
-    public void startScheduledExecutors(View view, TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public void startScheduledExecutors(View view, xodosX11ExtraKeyButton buttonInfo, Button button) {
         stopScheduledExecutors();
         mLongPressCount = 0;
         if (mRepetitiveKeys.contains(buttonInfo.key)) {
@@ -450,7 +450,7 @@ public final class TermuxExtraKeysView extends GridLayout {
             // waiting for mLongPressTimeout milliseconds. If user does not long press, then the
             // ACTION_UP triggered will cancel the runnable by calling stopScheduledExecutors before
             // it has a chance to run.
-            TermuxX11SpecialButtonState state = mSpecialButtons.get(TermuxX11SpecialButton.valueOf(buttonInfo.key));
+            xodosX11SpecialButtonState state = mSpecialButtons.get(xodosX11SpecialButton.valueOf(buttonInfo.key));
             if (state == null) return;
             if (mHandler == null)
                 mHandler = new Handler(Looper.getMainLooper());
@@ -472,9 +472,9 @@ public final class TermuxExtraKeysView extends GridLayout {
     }
 
     public class SpecialButtonsLongHoldRunnable implements Runnable {
-        public final TermuxX11SpecialButtonState mState;
+        public final xodosX11SpecialButtonState mState;
 
-        public SpecialButtonsLongHoldRunnable(TermuxX11SpecialButtonState state) {
+        public SpecialButtonsLongHoldRunnable(xodosX11SpecialButtonState state) {
             mState = state;
         }
 
@@ -486,7 +486,7 @@ public final class TermuxExtraKeysView extends GridLayout {
         }
     }
 
-    void showPopup(View view, TermuxX11ExtraKeyButton extraButton) {
+    void showPopup(View view, xodosX11ExtraKeyButton extraButton) {
         int width = view.getMeasuredWidth();
         int height = view.getMeasuredHeight();
         Button button;
@@ -522,24 +522,24 @@ public final class TermuxExtraKeysView extends GridLayout {
         mPopupWindow = null;
     }
 
-    /** Check whether a {@link TermuxX11ExtraKeyButton} is a {@link TermuxX11SpecialButton}. */
-    public boolean isSpecialButton(TermuxX11ExtraKeyButton button) {
+    /** Check whether a {@link xodosX11ExtraKeyButton} is a {@link xodosX11SpecialButton}. */
+    public boolean isSpecialButton(xodosX11ExtraKeyButton button) {
         return mSpecialButtonsKeys.contains(button.key);
     }
 
     /**
-     * Read whether {@link TermuxX11SpecialButton} registered in {@link #mSpecialButtons} is active or not.
+     * Read whether {@link xodosX11SpecialButton} registered in {@link #mSpecialButtons} is active or not.
      *
-     * @param termuxX11SpecialButton The {@link TermuxX11SpecialButton} to read.
-     * @param autoSetInActive Set to {@code true} if {@link TermuxX11SpecialButtonState#isActive} should be
+     * @param xodosX11SpecialButton The {@link xodosX11SpecialButton} to read.
+     * @param autoSetInActive Set to {@code true} if {@link xodosX11SpecialButtonState#isActive} should be
      *                        set {@code false} if button is not locked.
      * @return Returns {@code null} if button does not exist in {@link #mSpecialButtons}. If button
-     *         exists, then returns {@code true} if the button is created in {@link TermuxExtraKeysView}
+     *         exists, then returns {@code true} if the button is created in {@link xodosExtraKeysView}
      *         and is active, otherwise {@code false}.
      */
     @Nullable
-    public Boolean readSpecialButton(TermuxX11SpecialButton termuxX11SpecialButton, boolean autoSetInActive) {
-        TermuxX11SpecialButtonState state = mSpecialButtons.get(termuxX11SpecialButton);
+    public Boolean readSpecialButton(xodosX11SpecialButton xodosX11SpecialButton, boolean autoSetInActive) {
+        xodosX11SpecialButtonState state = mSpecialButtons.get(xodosX11SpecialButton);
         if (state == null) return null;
 
         if (!state.isCreated || !state.isActive)
@@ -553,7 +553,7 @@ public final class TermuxExtraKeysView extends GridLayout {
     }
 
     public Button createSpecialButton(String buttonKey, boolean needUpdate) {
-        TermuxX11SpecialButtonState state = mSpecialButtons.get(TermuxX11SpecialButton.valueOf(buttonKey));
+        xodosX11SpecialButtonState state = mSpecialButtons.get(xodosX11SpecialButton.valueOf(buttonKey));
         if (state == null) return null;
         state.setIsCreated(true);
         Button button = new Button(getContext(), null, android.R.attr.buttonBarButtonStyle);

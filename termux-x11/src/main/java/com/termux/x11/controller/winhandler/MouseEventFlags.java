@@ -1,7 +1,7 @@
-package com.termux.x11.controller.winhandler;
+package com.xodos.x11.controller.winhandler;
 
 
-import com.termux.x11.controller.xserver.Pointer;
+import com.xodos.x11.controller.xserver.Pointer;
 
 public abstract class MouseEventFlags {
     public static final int MOVE = 0x0001;

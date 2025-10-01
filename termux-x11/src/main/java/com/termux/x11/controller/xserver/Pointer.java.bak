@@ -1,9 +1,9 @@
-package com.termux.x11.controller.xserver;
+package com.xodos.x11.controller.xserver;
 
 import static androidx.core.math.MathUtils.clamp;
 
-import com.termux.x11.LorieView;
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.LorieView;
+import com.xodos.x11.controller.math.Mathf;
 
 import java.util.ArrayList;
 

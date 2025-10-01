@@ -1,4 +1,4 @@
-package com.termux.x11;
+package com.xodos.x11;
 
 
 
@@ -60,14 +60,14 @@ import android.view.inputmethod.TextSnapshot;
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
-import com.termux.x11.controller.core.CursorLocker;
-import com.termux.x11.controller.winhandler.WinHandler;
-import com.termux.x11.controller.xserver.InputDeviceManager;
-import com.termux.x11.controller.xserver.Keyboard;
-import com.termux.x11.controller.xserver.Pointer;
-import com.termux.x11.controller.xserver.XKeycode;
-import com.termux.x11.input.InputStub;
-import com.termux.x11.input.TouchInputHandler;
+import com.xodos.x11.controller.core.CursorLocker;
+import com.xodos.x11.controller.winhandler.WinHandler;
+import com.xodos.x11.controller.xserver.InputDeviceManager;
+import com.xodos.x11.controller.xserver.Keyboard;
+import com.xodos.x11.controller.xserver.Pointer;
+import com.xodos.x11.controller.xserver.XKeycode;
+import com.xodos.x11.input.InputStub;
+import com.xodos.x11.input.TouchInputHandler;
 
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -554,7 +554,7 @@ public boolean onGenericMotionEvent(MotionEvent event) {
 
             currentComposingText = reuse ? newText : null;
 
-            if (a.useTermuxEKBarBehaviour && a.mExtraKeys != null)
+            if (a.usexodosEKBarBehaviour && a.mExtraKeys != null)
                 a.mExtraKeys.unsetSpecialKeys();
             commitedText = true;
             return true;
@@ -936,7 +936,7 @@ public boolean onGenericMotionEvent(MotionEvent event) {
             outAttrs.inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_VARIATION_NORMAL;
         outAttrs.actionLabel = "↵";
         // Note that IME_ACTION_NONE cannot be used as that makes it impossible to input newlines using the on-screen
-        // keyboard on Android TV (see https://github.com/termux/termux-app/issues/221).
+        // keyboard on Android TV (see https://github.com/xodos/x11-app/issues/221).
         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_FULLSCREEN;
         return mConnection;
     }

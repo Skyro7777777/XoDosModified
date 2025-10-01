@@ -1,7 +1,7 @@
-package com.termux.x11.controller.winhandler;
+package com.xodos.x11.controller.winhandler;
 
 
-import com.termux.x11.controller.core.StringUtils;
+import com.xodos.x11.controller.core.StringUtils;
 
 import java.util.ArrayList;
 

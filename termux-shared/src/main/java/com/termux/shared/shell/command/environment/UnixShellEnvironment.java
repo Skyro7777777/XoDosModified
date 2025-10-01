@@ -1,12 +1,12 @@
-package com.termux.shared.shell.command.environment;
+package com.xodos.shared.shell.command.environment;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.shell.ShellUtils;
-import com.termux.shared.shell.command.ExecutionCommand;
+import com.xodos.shared.shell.ShellUtils;
+import com.xodos.shared.shell.command.ExecutionCommand;
 
 import java.util.HashMap;
 

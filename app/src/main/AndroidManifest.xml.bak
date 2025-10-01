@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="internalOnly"
-    android:sharedUserId="${TERMUX_PACKAGE_NAME}"
+    android:sharedUserId="${xodos_PACKAGE_NAME}"
     android:sharedUserLabel="@string/shared_user_label">
 
-    <uses-sdk tools:overrideLibrary="com.termux.x11" />
+    <uses-sdk tools:overrideLibrary="com.xodos.x11" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -15,7 +15,7 @@
         android:required="false" />
 
     <permission
-        android:name="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND"
+        android:name="${xodos_PACKAGE_NAME}.permission.RUN_COMMAND"
         android:description="@string/permission_run_command_description"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/permission_run_command_label"
@@ -47,7 +47,7 @@
 
 
     <application
-        android:name=".app.TermuxApplication"
+        android:name=".app.xodosApplication"
         android:allowBackup="false"
         android:banner="@drawable/banner"
         android:icon="@mipmap/ic_launcher"
@@ -57,20 +57,20 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.ForceBlack"
         tools:targetApi="m">
-        <!--termux-x11-->
+        <!--xodos-x11-->
         <activity
-            android:name="com.termux.x11.controller.ControlsEditorActivity"
+            android:name="com.xodos.x11.controller.ControlsEditorActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.ForceBlack" />
 
         <activity
-            android:name="com.termux.x11.controller.ExternalControllerBindingsActivity"
+            android:name="com.xodos.x11.controller.ExternalControllerBindingsActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.ForceBlack" />
         <activity
-            android:name="com.termux.x11.controller.InputControllerActivity"
+            android:name="com.xodos.x11.controller.InputControllerActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.ForceBlack" />
@@ -78,15 +78,15 @@
         <meta-data
             android:name="android.allow_multiple_resumed_activities"
             android:value="true" />
-        <!--termux-x11-->
+        <!--xodos-x11-->
         <activity
-            android:name=".app.TermuxActivity"
+            android:name=".app.xodosActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|density|screenLayout|keyboard|keyboardHidden|navigation"
             android:exported="true"
             android:label="@string/application_name"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
-            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar"
+            android:theme="@style/Theme.xodosActivity.DayNight.NoActionBar"
             tools:targetApi="n">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -105,7 +105,7 @@
         <activity-alias
             android:name=".HomeActivity"
             android:exported="true"
-            android:targetActivity=".app.TermuxActivity">
+            android:targetActivity=".app.xodosActivity">
 
             <!-- Launch activity automatically on boot on Android Things devices -->
             <intent-filter>
@@ -120,14 +120,14 @@
             android:name=".app.activities.HelpActivity"
             android:exported="false"
             android:label="@string/application_name"
-            android:parentActivityName=".app.TermuxActivity"
+            android:parentActivityName=".app.xodosActivity"
             android:resizeableActivity="true"
             tools:targetApi="n" />
 
         <activity
             android:name=".app.activities.SettingsActivity"
             android:exported="true"
-            android:label="@string/title_activity_termux_settings"
+            android:label="@string/title_activity_xodos_settings"
             android:theme="@style/Theme.ForceBlack" />
 
         <activity
@@ -141,7 +141,7 @@
             android:exported="false"
             android:noHistory="true"
             android:resizeableActivity="true"
-            android:taskAffinity="${TERMUX_PACKAGE_NAME}.filereceiver"
+            android:taskAffinity="${xodos_PACKAGE_NAME}.filereceiver"
             tools:targetApi="n"></activity>
 
         <activity-alias
@@ -170,7 +170,7 @@
             android:exported="true"
             android:targetActivity=".app.api.file.FileReceiverActivity">
 
-            <!-- Accept multiple file types to let Termux be usable as generic file viewer. -->
+            <!-- Accept multiple file types to let xodos be usable as generic file viewer. -->
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -185,8 +185,8 @@
         </activity-alias>
 
         <!--                <provider-->
-        <!--                    android:name=".filepicker.TermuxDocumentsProvider"-->
-        <!--                    android:authorities="${TERMUX_PACKAGE_NAME}.documents"-->
+        <!--                    android:name=".filepicker.xodosDocumentsProvider"-->
+        <!--                    android:authorities="${xodos_PACKAGE_NAME}.documents"-->
         <!--                    android:exported="true"-->
         <!--                    android:grantUriPermissions="true"-->
         <!--                    android:permission="android.permission.MANAGE_DOCUMENTS">-->
@@ -198,7 +198,7 @@
             android:name="bin.mt.file.content.MTDataFilesProvider"
             android:permission="android.permission.MANAGE_DOCUMENTS"
             android:exported="true"
-            android:authorities="com.termux.MTDataFilesProvider"
+            android:authorities="com.xodos.MTDataFilesProvider"
             android:grantUriPermissions="true">
             <intent-filter>
                 <action
@@ -207,15 +207,15 @@
         </provider>
 
         <provider
-            android:name=".app.TermuxOpenReceiver$ContentProvider"
-            android:authorities="${TERMUX_PACKAGE_NAME}.files"
+            android:name=".app.xodosOpenReceiver$ContentProvider"
+            android:authorities="${xodos_PACKAGE_NAME}.files"
             android:exported="true"
             android:grantUriPermissions="true"
-            android:permission="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND" />
+            android:permission="${xodos_PACKAGE_NAME}.permission.RUN_COMMAND" />
 
 
         <receiver
-            android:name=".app.TermuxOpenReceiver"
+            android:name=".app.xodosOpenReceiver"
             android:exported="false" />
 
         <receiver
@@ -232,15 +232,15 @@
 
 
         <service
-            android:name=".app.TermuxService"
+            android:name=".app.xodosService"
             android:exported="false" />
 
         <service
             android:name=".app.RunCommandService"
             android:exported="true"
-            android:permission="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND">
+            android:permission="${xodos_PACKAGE_NAME}.permission.RUN_COMMAND">
             <intent-filter>
-                <action android:name="${TERMUX_PACKAGE_NAME}.RUN_COMMAND" />
+                <action android:name="${xodos_PACKAGE_NAME}.RUN_COMMAND" />
             </intent-filter>
         </service>
 

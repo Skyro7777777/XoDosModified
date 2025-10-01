@@ -1,4 +1,4 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +30,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.tabs.TabLayout;
-import com.termux.x11.R;
+import com.xodos.x11.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

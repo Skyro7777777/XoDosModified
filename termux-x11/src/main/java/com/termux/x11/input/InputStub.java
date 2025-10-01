@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-package com.termux.x11.input;
+package com.xodos.x11.input;
 
 /**
  * A set of functions to send client users' activities to remote host machine. This interface

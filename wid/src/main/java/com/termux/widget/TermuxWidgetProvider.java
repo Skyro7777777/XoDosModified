@@ -16,23 +16,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.common.base.Joiner;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.errors.Error;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.file.filesystem.FileType;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.shell.ShellUtils;
-import com.termux.shared.shell.command.ExecutionCommand;
-import com.termux.shared.shell.command.ExecutionCommand.Runner;
-import com.termux.shared.shell.command.result.ResultData;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE;
-import com.termux.shared.termux.TermuxConstants.TERMUX_WIDGET.TERMUX_WIDGET_PROVIDER;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.file.filesystem.FileType;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.shell.ShellUtils;
+import com.xodos.shared.shell.command.ExecutionCommand;
+import com.xodos.shared.shell.command.ExecutionCommand.Runner;
+import com.xodos.shared.shell.command.result.ResultData;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_SERVICE;
+import com.xodos.shared.xodos.xodosConstants.xodos_WIDGET.xodos_WIDGET_PROVIDER;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosWidgetAppSharedPreferences;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,14 +44,14 @@ import java.util.List;
  * <p>
  * See https://developer.android.com/guide/topics/appwidgets/index.html
  */
-public final class TermuxWidgetProvider extends AppWidgetProvider {
+public final class xodosWidgetProvider extends AppWidgetProvider {
 
-    private static final String LOG_TAG = "TermuxWidgetProvider";
+    private static final String LOG_TAG = "xodosWidgetProvider";
 
     public void onEnabled(Context context) {
         Logger.logDebug(LOG_TAG, "onEnabled");
 
-        String errmsg = TermuxUtils.isTermuxAppAccessible(context);
+        String errmsg = xodosUtils.isxodosAppAccessible(context);
         if (errmsg != null) {
             Logger.logErrorAndShowToast(context, LOG_TAG, errmsg);
         }
@@ -88,8 +88,8 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         remoteViews.setEmptyView(R.id.widget_list, R.id.empty_view);
         remoteViews.setTextViewText(R.id.empty_view, context.getString(R.string.msg_no_shortcut_scripts));
 
-        // Setup intent which points to the TermuxWidgetService which will provide the views for this collection.
-        Intent intent = new Intent(context, TermuxWidgetService.class);
+        // Setup intent which points to the xodosWidgetService which will provide the views for this collection.
+        Intent intent = new Intent(context, xodosWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         // When intents are compared, the extras are ignored, so we need to embed the extras
         // into the data so that the extras will not be ignored.
@@ -97,8 +97,8 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         remoteViews.setRemoteAdapter(R.id.widget_list, intent);
 
         // Setup refresh button:
-        Intent refreshIntent = new Intent(context, TermuxWidgetProvider.class);
-        refreshIntent.setAction(TERMUX_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET);
+        Intent refreshIntent = new Intent(context, xodosWidgetProvider.class);
+        refreshIntent.setAction(xodos_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET);
         refreshIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         refreshIntent.setData(Uri.parse(refreshIntent.toUri(Intent.URI_INTENT_SCHEME)));
         @SuppressLint("UnspecifiedImmutableFlag") // Must be mutable
@@ -110,8 +110,8 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         // cannot setup their own pending intents, instead, the collection as a whole can
         // setup a pending intent template, and the individual items can set a fillInIntent
         // to create unique before on an item to item basis.
-        Intent toastIntent = new Intent(context, TermuxWidgetProvider.class);
-        toastIntent.setAction(TERMUX_WIDGET_PROVIDER.ACTION_WIDGET_ITEM_CLICKED);
+        Intent toastIntent = new Intent(context, xodosWidgetProvider.class);
+        toastIntent.setAction(xodos_WIDGET_PROVIDER.ACTION_WIDGET_ITEM_CLICKED);
         toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         @SuppressLint("UnspecifiedImmutableFlag") // Must be mutable
@@ -144,13 +144,13 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
             case AppWidgetManager.ACTION_APPWIDGET_UPDATE: {
                 // The super class already handles this to call onUpdate to update remove views, but
                 // we handle this ourselves and call notifyAppWidgetViewDataChanged as well afterwards.
-                if (!ShortcutUtils.isTermuxAppAccessible(context, LOG_TAG, false)) return;
+                if (!ShortcutUtils.isxodosAppAccessible(context, LOG_TAG, false)) return;
 
                 refreshAppWidgets(context, intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS), true);
 
                 return;
-            } case TERMUX_WIDGET_PROVIDER.ACTION_WIDGET_ITEM_CLICKED: {
-                String clickedFilePath = intent.getStringExtra(TERMUX_WIDGET_PROVIDER.EXTRA_FILE_CLICKED);
+            } case xodos_WIDGET_PROVIDER.ACTION_WIDGET_ITEM_CLICKED: {
+                String clickedFilePath = intent.getStringExtra(xodos_WIDGET_PROVIDER.EXTRA_FILE_CLICKED);
                 if (clickedFilePath == null || clickedFilePath.isEmpty()) {
                     Logger.logError(LOG_TAG, "Ignoring unset clicked file");
                     return;
@@ -161,11 +161,11 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
                     return;
                 }
                 
-                sendExecutionIntentToTermuxService(context, clickedFilePath, LOG_TAG);
+                sendExecutionIntentToxodosService(context, clickedFilePath, LOG_TAG);
                 return;
 
-            } case TERMUX_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET: {
-                if (!ShortcutUtils.isTermuxAppAccessible(context, LOG_TAG, true)) return;
+            } case xodos_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET: {
+                if (!ShortcutUtils.isxodosAppAccessible(context, LOG_TAG, true)) return;
 
                 int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
                 int[] appWidgetIds;
@@ -173,7 +173,7 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
                 if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
                     appWidgetIds = new int[]{appWidgetId};
                 } else {
-                    appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, TermuxWidgetProvider.class));
+                    appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, xodosWidgetProvider.class));
                     Logger.logDebug(LOG_TAG, "Refreshing all widget ids: " + Arrays.toString(appWidgetIds));
 
                     // Only update remote views if sendIntentToRefreshAllWidgets() is called or if
@@ -217,8 +217,8 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
     }
 
     public static void sendIntentToRefreshAllWidgets(@NonNull Context context, @NonNull String logTag) {
-        Intent intent = new Intent(TERMUX_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET);
-        intent.setClass(context, TermuxWidgetProvider.class);
+        Intent intent = new Intent(xodos_WIDGET_PROVIDER.ACTION_REFRESH_WIDGET);
+        intent.setClass(context, xodosWidgetProvider.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         try {
             Logger.logDebug(logTag, "Sending intent to refresh all widgets");
@@ -230,32 +230,32 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Extract termux shortcut file path from an intent and send intent to TermuxService to execute it.
+     * Extract xodos shortcut file path from an intent and send intent to xodosService to execute it.
      *
-     * @param context The {@link Context} that will be used to send execution intent to the TermuxService.
+     * @param context The {@link Context} that will be used to send execution intent to the xodosService.
      * @param intent The {@link Intent} received for the shortcut file.
      */
-    public static void handleTermuxShortcutExecutionIntent(Context context, Intent intent, String logTag) {
+    public static void handlexodosShortcutExecutionIntent(Context context, Intent intent, String logTag) {
         if (context == null || intent == null) return;
         logTag = DataUtils.getDefaultIfNull(logTag, LOG_TAG);
         
-     /*   String token = intent.getStringExtra(TermuxConstants.TERMUX_WIDGET.EXTRA_TOKEN_NAME);
-        if (token == null || !token.equals(TermuxWidgetAppSharedPreferences.getGeneratedToken(context))) {
+     /*   String token = intent.getStringExtra(xodosConstants.xodos_WIDGET.EXTRA_TOKEN_NAME);
+        if (token == null || !token.equals(xodosWidgetAppSharedPreferences.getGeneratedToken(context))) {
             Logger.logWarn(logTag, "Invalid token \"" + token + "\" for intent:\n" + IntentUtils.getIntentString(intent));
             Toast.makeText(context, R.string.msg_bad_token, Toast.LENGTH_LONG).show();
             return;
         } */
 
-        sendExecutionIntentToTermuxService(context, intent.getData().getPath(), logTag);
+        sendExecutionIntentToxodosService(context, intent.getData().getPath(), logTag);
     }
 
     /**
-     * Send execution intent to TermuxService for a shortcut file.
+     * Send execution intent to xodosService for a shortcut file.
      *
-     * @param context The {@link Context} that will be used to send execution intent to the TermuxService.
+     * @param context The {@link Context} that will be used to send execution intent to the xodosService.
      * @param shortcutFilePath The path to the shortcut file.
      */
-    public static void sendExecutionIntentToTermuxService(final Context context, String shortcutFilePath, String logTag) {
+    public static void sendExecutionIntentToxodosService(final Context context, String shortcutFilePath, String logTag) {
         if (context == null) return;
 
         logTag = DataUtils.getDefaultIfNull(logTag, LOG_TAG);
@@ -265,10 +265,10 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         ExecutionCommand executionCommand = new ExecutionCommand(-1);
         executionCommand.executable = shortcutFilePath;
 
-        // If Termux app is not installed, enabled or accessible with current context or if
-        // TermuxConstants.TERMUX_PREFIX_DIR_PATH does not exist or has required permissions, then
+        // If xodos app is not installed, enabled or accessible with current context or if
+        // xodosConstants.xodos_PREFIX_DIR_PATH does not exist or has required permissions, then
         // just return.
-        errmsg = TermuxUtils.isTermuxAppAccessible(context);
+        errmsg = xodosUtils.isxodosAppAccessible(context);
         if (errmsg != null) {
             Logger.logErrorAndShowToast(context, logTag, errmsg);
             return;
@@ -288,7 +288,7 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         // If executable is not under SHORTCUT_FILES_ALLOWED_PATHS_LIST
         if (!FileUtils.isPathInDirPaths(executionCommand.executable, ShortcutUtils.SHORTCUT_FILES_ALLOWED_PATHS_LIST, true)) {
             errmsg = context.getString(R.string.error_executable_not_under_shortcuts_directories,
-                    Joiner.on(", ").skipNulls().join(TermuxFileUtils.getUnExpandedTermuxPaths(ShortcutUtils.SHORTCUT_FILES_ALLOWED_PATHS_LIST))) +
+                    Joiner.on(", ").skipNulls().join(xodosFileUtils.getUnExpandedxodosPaths(ShortcutUtils.SHORTCUT_FILES_ALLOWED_PATHS_LIST))) +
                     "\n" + context.getString(R.string.msg_executable_absolute_path, executionCommand.executable);
             Logger.logErrorAndShowToast(context, logTag, errmsg);
             return;
@@ -296,9 +296,9 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
 
         // If executable is not a regular file, or is not readable or executable, then return
         // RESULT_CODE_FAILED to plugin host app
-        // Setting of read and execute permissions are only done if executable is under TermuxConstants#TERMUX_SHORTCUT_SCRIPTS_DIR_PATH
+        // Setting of read and execute permissions are only done if executable is under xodosConstants#xodos_SHORTCUT_SCRIPTS_DIR_PATH
         error = FileUtils.validateRegularFileExistenceAndPermissions("executable", executionCommand.executable,
-                TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR_PATH,
+                xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR_PATH,
                 FileUtils.APP_EXECUTABLE_FILE_PERMISSIONS,
                 true, true,
                 false);
@@ -310,31 +310,31 @@ public final class TermuxWidgetProvider extends AppWidgetProvider {
         }
 
 
-        // If executable is under a directory with the basename matching TermuxConstants#TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME
+        // If executable is under a directory with the basename matching xodosConstants#xodos_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME
         File shortcutFile = new File(executionCommand.executable);
         File shortcutParentDirFile = shortcutFile.getParentFile();
-        if (shortcutParentDirFile != null && shortcutParentDirFile.getName().equals(TermuxConstants.TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME)) {
+        if (shortcutParentDirFile != null && shortcutParentDirFile.getName().equals(xodosConstants.xodos_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME)) {
             executionCommand.runner = Runner.APP_SHELL.getName();
             // Show feedback for background task
             Toast toast = Toast.makeText(context, context.getString(R.string.msg_executing_task,
                     ShellUtils.getExecutableBasename(executionCommand.executable)),
                     Toast.LENGTH_SHORT);
             // Put the toast at the top of the screen, to avoid blocking eventual
-            // toasts made from the task with termux-toast.
-            // See https://github.com/termux/termux-widget/issues/33
+            // toasts made from the task with xodos-toast.
+            // See https://github.com/xodos/xodos-widget/issues/33
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
         } else {
             executionCommand.runner = Runner.TERMINAL_SESSION.getName();
         }
 
-        // Create execution intent with the action TERMUX_SERVICE#ACTION_SERVICE_EXECUTE to be sent to the TERMUX_SERVICE
-        executionCommand.executableUri = new Uri.Builder().scheme(TERMUX_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(executionCommand.executable).build();
-        Intent executionIntent = new Intent(TERMUX_SERVICE.ACTION_SERVICE_EXECUTE, executionCommand.executableUri);
-        executionIntent.setClassName(TermuxConstants.TERMUX_PACKAGE_NAME, TermuxConstants.TERMUX_APP.TERMUX_SERVICE_NAME);
-        executionIntent.putExtra(TERMUX_SERVICE.EXTRA_RUNNER, executionCommand.runner); // Runner extra will be prioritized over background extra
-        executionIntent.putExtra(TERMUX_SERVICE.EXTRA_BACKGROUND, Runner.APP_SHELL.getName().equals(executionCommand.runner)); // Backward compatibility for runner
-        executionIntent.putExtra(TERMUX_SERVICE.EXTRA_PLUGIN_API_HELP, context.getString(R.string.plugin_api_help, TermuxConstants.TERMUX_WIDGET_GITHUB_REPO_URL));
+        // Create execution intent with the action xodos_SERVICE#ACTION_SERVICE_EXECUTE to be sent to the xodos_SERVICE
+        executionCommand.executableUri = new Uri.Builder().scheme(xodos_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(executionCommand.executable).build();
+        Intent executionIntent = new Intent(xodos_SERVICE.ACTION_SERVICE_EXECUTE, executionCommand.executableUri);
+        executionIntent.setClassName(xodosConstants.xodos_PACKAGE_NAME, xodosConstants.xodos_APP.xodos_SERVICE_NAME);
+        executionIntent.putExtra(xodos_SERVICE.EXTRA_RUNNER, executionCommand.runner); // Runner extra will be prioritized over background extra
+        executionIntent.putExtra(xodos_SERVICE.EXTRA_BACKGROUND, Runner.APP_SHELL.getName().equals(executionCommand.runner)); // Backward compatibility for runner
+        executionIntent.putExtra(xodos_SERVICE.EXTRA_PLUGIN_API_HELP, context.getString(R.string.plugin_api_help, xodosConstants.xodos_WIDGET_GITHUB_REPO_URL));
 
         Logger.logVerboseExtended(logTag, executionCommand.toString());
         Logger.logDebug(logTag, "Sending execution intent to " + executionIntent.getComponent().toString() + " for \"" + executionCommand.executable + "\" with runner " + executionCommand.runner);

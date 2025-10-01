@@ -12,14 +12,14 @@
         android:layout_weight="1"
         android:entries="@array/desktop_background_type_entries" />
 
-    <com.termux.x11.controller.widget.ColorPickerView
+    <com.xodos.x11.controller.widget.ColorPickerView
         android:id="@+id/CPVControllerBackgroundColor"
         android:layout_width="84dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:activityTypeCode="@integer/load_button_icon_code" />
 
-    <com.termux.x11.controller.widget.ImagePickerView
+    <com.xodos.x11.controller.widget.ImagePickerView
         android:id="@+id/IPVControllerBackgroundImage"
         android:layout_width="84dp"
         android:layout_height="wrap_content"

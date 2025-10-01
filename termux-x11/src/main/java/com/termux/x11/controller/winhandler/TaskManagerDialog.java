@@ -1,4 +1,4 @@
-package com.termux.x11.controller.winhandler;
+package com.xodos.x11.controller.winhandler;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -12,13 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.termux.x11.MainActivity;
-import com.termux.x11.R;
-import com.termux.x11.controller.contentdialog.ContentDialog;
-import com.termux.x11.controller.core.CPUStatus;
-import com.termux.x11.controller.core.ProcessHelper;
-import com.termux.x11.controller.core.StringUtils;
-import com.termux.x11.controller.widget.CPUListView;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.contentdialog.ContentDialog;
+import com.xodos.x11.controller.core.CPUStatus;
+import com.xodos.x11.controller.core.ProcessHelper;
+import com.xodos.x11.controller.core.StringUtils;
+import com.xodos.x11.controller.widget.CPUListView;
 
 import java.util.List;
 import java.util.Timer;
@@ -49,7 +49,7 @@ public class TaskManagerDialog extends ContentDialog implements OnGetProcessInfo
                 timer.cancel();
                 timer = null;
             }
-            activity.getTermuxProcessorInfo("1");
+            activity.getxodosProcessorInfo("1");
             final LinearLayout container = findViewById(R.id.LLProcessList);
             container.removeAllViews();
             activity.getWinHandler().setOnGetProcessInfoListener(null);
@@ -76,7 +76,7 @@ public class TaskManagerDialog extends ContentDialog implements OnGetProcessInfo
     }
 
     private void listAndroidProcess() {
-        List<ProcessInfo> processInfoList = activity.getTermuxProcessorInfo("0");
+        List<ProcessInfo> processInfoList = activity.getxodosProcessorInfo("0");
         if (processInfoList == null) {
             return;
         }

@@ -15,18 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.google.common.base.Joiner;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.file.filesystem.FileType;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.shell.ShellUtils;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE;
-import com.termux.shared.termux.TermuxConstants.TERMUX_WIDGET.TERMUX_WIDGET_PROVIDER;
-import com.termux.shared.termux.TermuxConstants.TERMUX_WIDGET;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.file.filesystem.FileType;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.shell.ShellUtils;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_SERVICE;
+import com.xodos.shared.xodos.xodosConstants.xodos_WIDGET.xodos_WIDGET_PROVIDER;
+import com.xodos.shared.xodos.xodosConstants.xodos_WIDGET;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosWidgetAppSharedPreferences;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import java.io.File;
 
@@ -67,7 +67,7 @@ public final class ShortcutFile {
 
     @NonNull
     public String getUnExpandedPath() {
-        return TermuxFileUtils.getUnExpandedTermuxPath(getCanonicalPath());
+        return xodosFileUtils.getUnExpandedxodosPath(getCanonicalPath());
     }
 
     @NonNull
@@ -84,11 +84,11 @@ public final class ShortcutFile {
     }
 
     public Intent getExecutionIntent(Context context) {
-        Uri scriptUri = new Uri.Builder().scheme(TERMUX_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(getPath()).build();
-        Intent executionIntent = new Intent(context, TermuxLaunchShortcutActivity.class);
-        executionIntent.setAction(TERMUX_SERVICE.ACTION_SERVICE_EXECUTE); // Mandatory for pinned shortcuts
+        Uri scriptUri = new Uri.Builder().scheme(xodos_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(getPath()).build();
+        Intent executionIntent = new Intent(context, xodosLaunchShortcutActivity.class);
+        executionIntent.setAction(xodos_SERVICE.ACTION_SERVICE_EXECUTE); // Mandatory for pinned shortcuts
         executionIntent.setData(scriptUri);
-     //   executionIntent.putExtra(TermuxConstants.TERMUX_WIDGET.EXTRA_TOKEN_NAME, TermuxWidgetAppSharedPreferences.getGeneratedToken(context));
+     //   executionIntent.putExtra(xodosConstants.xodos_WIDGET.EXTRA_TOKEN_NAME, xodosWidgetAppSharedPreferences.getGeneratedToken(context));
         return executionIntent;
     }
 
@@ -130,8 +130,8 @@ public final class ShortcutFile {
         remoteViews.setTextViewText(R.id.widget_item, getLabel());
 
         // Next, we set a fill-intent which will be used to fill-in the pending intent template
-        // which is set on the collection view in TermuxAppWidgetProvider.
-        Intent fillInIntent = new Intent().putExtra(TERMUX_WIDGET_PROVIDER.EXTRA_FILE_CLICKED, getPath());
+        // which is set on the collection view in xodosAppWidgetProvider.
+        Intent fillInIntent = new Intent().putExtra(xodos_WIDGET_PROVIDER.EXTRA_FILE_CLICKED, getPath());
         remoteViews.setOnClickFillInIntent(R.id.widget_item_layout, fillInIntent);
 
         return remoteViews;
@@ -140,7 +140,7 @@ public final class ShortcutFile {
     @Nullable
     private File getIconFile(Context context, boolean showToastForIconUsed) {
         String errmsg;
-        String shortcutIconFilePath = TermuxConstants.TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH +
+        String shortcutIconFilePath = xodosConstants.xodos_SHORTCUT_SCRIPT_ICONS_DIR_PATH +
                 "/" + ShellUtils.getExecutableBasename(getPath()) + ".png";
 
         FileType fileType = FileUtils.getFileType(shortcutIconFilePath, true);
@@ -157,7 +157,7 @@ public final class ShortcutFile {
         // Do not allow shortcut icons files not under SHORTCUT_ICONS_FILES_ALLOWED_PATHS_LIST
         if (!FileUtils.isPathInDirPaths(shortcutIconFilePath, ShortcutUtils.SHORTCUT_ICONS_FILES_ALLOWED_PATHS_LIST, true)) {
             errmsg = context.getString(R.string.error_icon_not_under_shortcut_icons_directories,
-                    Joiner.on(", ").skipNulls().join(TermuxFileUtils.getUnExpandedTermuxPaths(ShortcutUtils.SHORTCUT_ICONS_FILES_ALLOWED_PATHS_LIST))) +
+                    Joiner.on(", ").skipNulls().join(xodosFileUtils.getUnExpandedxodosPaths(ShortcutUtils.SHORTCUT_ICONS_FILES_ALLOWED_PATHS_LIST))) +
                     "\n" + context.getString(R.string.msg_icon_absolute_path, shortcutIconFilePath);
             Logger.logErrorAndShowToast(context, LOG_TAG, errmsg);
             return null;

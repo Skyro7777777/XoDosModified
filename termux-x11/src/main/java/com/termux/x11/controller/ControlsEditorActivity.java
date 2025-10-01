@@ -1,4 +1,4 @@
-package com.termux.x11.controller;
+package com.xodos.x11.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,19 +26,19 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.core.UnitUtils;
-import com.termux.x11.controller.inputcontrols.Binding;
-import com.termux.x11.controller.inputcontrols.ControlElement;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.InputControlsManager;
-import com.termux.x11.controller.math.Mathf;
-import com.termux.x11.controller.widget.ColorPickerView;
-import com.termux.x11.controller.widget.ImagePickerView;
-import com.termux.x11.controller.widget.InputControlsView;
-import com.termux.x11.controller.widget.NumberPicker;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.UnitUtils;
+import com.xodos.x11.controller.inputcontrols.Binding;
+import com.xodos.x11.controller.inputcontrols.ControlElement;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.InputControlsManager;
+import com.xodos.x11.controller.math.Mathf;
+import com.xodos.x11.controller.widget.ColorPickerView;
+import com.xodos.x11.controller.widget.ImagePickerView;
+import com.xodos.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.widget.NumberPicker;
 
 import java.io.IOException;
 import java.io.InputStream;

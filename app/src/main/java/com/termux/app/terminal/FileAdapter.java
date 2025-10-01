@@ -1,6 +1,6 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_FILES_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_FILES_DIR_PATH;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.termux.R;
+import com.xodos.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
     private ArrayList<FileInfo> mFileList;
     private final List<FileInfo> mEntireFileList = new ArrayList<>();
     private final OnItemClickListener mListener;
-    private String mLastPath = TERMUX_FILES_DIR_PATH;
+    private String mLastPath = xodos_FILES_DIR_PATH;
 
     public FileAdapter(ArrayList<FileInfo> fileList, OnItemClickListener listener) {
         this.mFileList = fileList;

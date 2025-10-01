@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.termux.x11.R;
+import com.xodos.x11.R;
 
 import java.util.Arrays;
 import java.util.List;

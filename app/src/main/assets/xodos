@@ -4,7 +4,7 @@ pkill -f wine
 
 export GTK_THEME="Dracula:dark"
 export XCURSOR_THEME="WineTrix"
-kill -9 $(pgrep -f "termux.x11") >/dev/null 2>&1
+kill -9 $(pgrep -f "xodos.x11") >/dev/null 2>&1
 pkill virgl_*
 pkill xfwm4
 echo "Booting XoDos..."
@@ -35,20 +35,20 @@ if echo "$ugpu" | grep -qi "adreno" ; then
     # Continue with your code her
 echo "you can use turnip driver for better performance"
 echo "Setting up turnip driver"
-	driv=/data/data/com.termux/files/usr/lib/libvulkan_wrapper.so
+	driv=/data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so
 if [ -f $driv ]; then
 unset VK_ICD_FILENAMES
-export VK_ICD_FILENAMES=/data/data/com.termux/files/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json
-#mv /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so.0
+export VK_ICD_FILENAMES=/data/data/com.xodos/files/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json
+#mv /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so.0
 fi
 else 
 echo "CPU supported for turnip driver but GPU is unknown if it's not supported with turnip driver Try universal or Vulkan wrapper"
 echo "Setting up turnip driver"
-	driv=/data/data/com.termux/files/usr/lib/libvulkan_wrapper.so
+	driv=/data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so
 if [ -f $driv ]; then
 unset VK_ICD_FILENAMES
-export VK_ICD_FILENAMES=/data/data/com.termux/files/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json
-#mv /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so.0
+export VK_ICD_FILENAMES=/data/data/com.xodos/files/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json
+#mv /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so.0
 fi
 		
 fi
@@ -57,26 +57,26 @@ else
     # Exit or handle unsupported CPUs here
 sleep 1
 			echo "setting up wrapper,,,"
-			driv=/data/data/com.termux/files/usr/lib/libvulkan_wrapper.so.0
+			driv=/data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so.0
 if [ -f $driv ]; then
 unset VK_ICD_FILENAMES
-export VK_ICD_FILENAMES=/data/data/com.termux/files/usr/share/vulkan/icd.d/wrapper_icd.aarch64.json
-mv /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so.0 /data/data/com.termux/files/usr/lib/libvulkan_wrapper.so
+export VK_ICD_FILENAMES=/data/data/com.xodos/files/usr/share/vulkan/icd.d/wrapper_icd.aarch64.json
+mv /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so.0 /data/data/com.xodos/files/usr/lib/libvulkan_wrapper.so
 fi
 						
 fi
 	
 	sleep 0.5
-#export VK_ICD_FILENAMES=/data/data/com.termux/files/usr/share/vulkan/icd.d/wrapper_icd.aarch64.json
+#export VK_ICD_FILENAMES=/data/data/com.xodos/files/usr/share/vulkan/icd.d/wrapper_icd.aarch64.json
 
 # Setup audio
 pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 >/dev/null 2>&1
 
 # Start X11
 export XDG_RUNTIME_DIR=${TMPDIR}
-termux-x11 -ac :0 >/dev/null 2>&1 &
+xodos-x11 -ac :0 >/dev/null 2>&1 &
 sleep 2
-am start --user 0 -n com.termux/com.termux.x11.h.MainActivity >/dev/null 2>&1
+am start --user 0 -n com.xodos/com.xodos.x11.h.MainActivity >/dev/null 2>&1
 
 
 export VK_INSTANCE_LAYERS=VK_LAYER_KHRONOS_validation
@@ -129,8 +129,8 @@ zenity --question \
 result=$?
 
 # Vulkan paths
-vulkan_dir="/data/data/com.termux/files/usr/share/vulkan/icd.d"
-lib_dir="/data/data/com.termux/files/usr/lib"
+vulkan_dir="/data/data/com.xodos/files/usr/share/vulkan/icd.d"
+lib_dir="/data/data/com.xodos/files/usr/lib"
 wrapper_lib="$lib_dir/libvulkan_wrapper.so"
 backup_lib="$lib_dir/libvulkan_wrapper.so.0"
 
@@ -195,7 +195,7 @@ pkill xfwm4
         ;;
     *)  # User closed window
         echo "Session cancelled"
-        kill -9 $(pgrep -f "termux.x11") >/dev/null 2>&1
+        kill -9 $(pgrep -f "xodos.x11") >/dev/null 2>&1
         pkill xfwm4
         exit 1
         ;;

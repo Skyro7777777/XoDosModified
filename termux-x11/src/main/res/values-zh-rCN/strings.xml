@@ -1,14 +1,14 @@
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_DISPLAY_APP_NAME "Termux:X11">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_DISPLAY_APP_NAME "xodos:X11">]>
 <resources>
-    <string name="app_name">&TERMUX_DISPLAY_APP_NAME; </string>
-    <string name="plugin_info">&TERMUX_DISPLAY_APP_NAME; 是 &TERMUX_APP_NAME; 应用的插件应用。
-        \n\n查看 &TERMUX_APP_NAME; 应用 GitHub %1$s 和 &TERMUX_DISPLAY_APP_NAME; 应用 GitHub %2$s 获取更多信息。</string>
+    <string name="app_name">&xodos_DISPLAY_APP_NAME; </string>
+    <string name="plugin_info">&xodos_DISPLAY_APP_NAME; 是 &xodos_APP_NAME; 应用的插件应用。
+        \n\n查看 &xodos_APP_NAME; 应用 GitHub %1$s 和 &xodos_DISPLAY_APP_NAME; 应用 GitHub %2$s 获取更多信息。</string>
 
-    <!-- TermuxX11Activity -->
-    <string name="msg_storage_permission_not_granted_warning">必须授予 &TERMUX_DISPLAY_APP_NAME; 应用存储权限以...</string>
+    <!-- xodosX11Activity -->
+    <string name="msg_storage_permission_not_granted_warning">必须授予 &xodos_DISPLAY_APP_NAME; 应用存储权限以...</string>
     <string name="action_grant_storage_permission">授予存储权限</string>
 
-    <string name="msg_battery_optimization_not_disabled_warning">应为 &TERMUX_DISPLAY_APP_NAME; 应用禁用 Android 电池优化，以便…
+    <string name="msg_battery_optimization_not_disabled_warning">应为 &xodos_DISPLAY_APP_NAME; 应用禁用 Android 电池优化，以便…
         查看 https://developer.android.com/about/versions/oreo/background 获取更多信息和
         https://developer.android.com/guide/components/foreground-services#background-start-restrictions
         获取更多信息。
@@ -18,7 +18,7 @@
         为应用启用“在后台运行时显示弹出窗口”。</string>
     <string name="action_disable_battery_optimizations">禁用电池优化</string>
 
-    <string name="msg_display_over_other_apps_permission_not_granted_warning">应授予 &TERMUX_DISPLAY_APP_NAME; 应用“在其他应用上层显示”权限以便从后台启动前台活动。查看 https://developer.android.com/guide/components/activities/background-starts
+    <string name="msg_display_over_other_apps_permission_not_granted_warning">应授予 &xodos_DISPLAY_APP_NAME; 应用“在其他应用上层显示”权限以便从后台启动前台活动。查看 https://developer.android.com/guide/components/activities/background-starts
         获取更多信息。
     </string>
     <string name="action_grant_display_over_other_apps_permission">授予“在其他应用上层显示”权限</string>
@@ -28,7 +28,7 @@
     <string name="not_connected">未连接</string>
     <string name="help_button_text">   帮助   </string>
     <string name="preferences_button_text">   首选项   </string>
-    <string name="extra_keys_config_desc">在此可以设置 extra-keys 变量的值，类似于 Termux 应用（阅读 <a href="http://wiki.termux.com/wiki/Touch_Keyboard#Extra_Keys_Row">此链接</a>）以及其他（例如 META）。</string>
+    <string name="extra_keys_config_desc">在此可以设置 extra-keys 变量的值，类似于 xodos 应用（阅读 <a href="http://wiki.xodos.com/wiki/Touch_Keyboard#Extra_Keys_Row">此链接</a>）以及其他（例如 META）。</string>
     <!--    preference-->
     <string name="pref_main">首选项</string>
     <string name="pref_output">输出🖥️</string>
@@ -101,8 +101,8 @@
 
     <string name="pref_adjustHeightForEK">为额外键栏调整显示高度</string>
     <string name="pref_adjustHeightForEK_summary">切换 EK 栏时可能导致屏幕闪烁。</string>
-    <string name="pref_useTermuxEKBarBehaviour">每次按键后停用额外键栏上的特殊键</string>
-    <string name="pref_useTermuxEKBarBehaviour_summary">使用长按锁定特殊键</string>
+    <string name="pref_usexodosEKBarBehaviour">每次按键后停用额外键栏上的特殊键</string>
+    <string name="pref_usexodosEKBarBehaviour_summary">使用长按锁定特殊键</string>
     <string name="pref_opacityEKBar">额外键栏不透明度，%</string>
     <string name="pref_extra_keys_config">额外键配置</string>
 
@@ -209,7 +209,7 @@
     <string name="log_level_value">Logcat 日志级别设置为 \"%1$s\"</string>
     <string name="start_button_start_x11">启动 x11 服务器</string>
     <string name="exit_button_exit_app">退出</string>
-    <string name="x11_server_bridge_config">重新安装 x11 服务器用于与 termux 通信的桥接。安装将导致当前图形界面停止运行并需要重新启动。如果有任何文件未保存，请保存后重试。</string>
+    <string name="x11_server_bridge_config">重新安装 x11 服务器用于与 xodos 通信的桥接。安装将导致当前图形界面停止运行并需要重新启动。如果有任何文件未保存，请保存后重试。</string>
 
     <!--inpt controller-->
     <string name="run">运行</string>

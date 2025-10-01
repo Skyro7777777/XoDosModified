@@ -1,12 +1,12 @@
-package com.termux.x11.controller.container;
+package com.xodos.x11.controller.container;
 
 import android.os.Environment;
 
-import com.termux.x11.controller.core.EnvVars;
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.core.KeyValueSet;
-import com.termux.x11.controller.core.WineInfo;
-import com.termux.x11.controller.core.WineThemeManager;
+import com.xodos.x11.controller.core.EnvVars;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.KeyValueSet;
+import com.xodos.x11.controller.core.WineInfo;
+import com.xodos.x11.controller.core.WineThemeManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;

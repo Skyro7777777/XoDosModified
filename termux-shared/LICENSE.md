@@ -1,12 +1,12 @@
-The `termux-shared` library is released under [MIT](https://opensource.org/licenses/MIT) license.
+The `xodos-shared` library is released under [MIT](https://opensource.org/licenses/MIT) license.
 
 ### Exceptions
 
 #### [GPLv3 only](https://www.gnu.org/licenses/gpl-3.0.html)
 
-- [`src/main/java/com/xodos/shared/termux/*`](src/main/java/com/xodos/shared/termux).
+- [`src/main/java/com/xodos/shared/xodos/*`](src/main/java/com/xodos/shared/xodos).
 
-The `GPLv3 only` license applies to all files unless specifically specified by a file/directory, like the [`src/main/java/com/xodos/shared/termux/TermuxConstants.java`](src/main/java/com/xodos/shared/termux/TermuxConstants.java) and [`src/main/java/com/xodos/shared/termux/settings/properties/TermuxPropertyConstants.java`](src/main/java/com/xodos/shared/termux/settings/properties/TermuxPropertyConstants.java) files are released under the `MIT` license.
+The `GPLv3 only` license applies to all files unless specifically specified by a file/directory, like the [`src/main/java/com/xodos/shared/xodos/xodosConstants.java`](src/main/java/com/xodos/shared/xodos/xodosConstants.java) and [`src/main/java/com/xodos/shared/xodos/settings/properties/xodosPropertyConstants.java`](src/main/java/com/xodos/shared/xodos/settings/properties/xodosPropertyConstants.java) files are released under the `MIT` license.
 ##
 
 

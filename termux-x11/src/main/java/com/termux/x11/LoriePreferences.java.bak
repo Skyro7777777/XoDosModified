@@ -1,4 +1,4 @@
-package com.termux.x11;
+package com.xodos.x11;
 
 // Add these imports instead
 import java.io.IOException;
@@ -72,21 +72,21 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SeekBarPreference;
 
-import com.termux.x11.controller.InputControllerActivity;
-import com.termux.x11.controller.container.Container;
-import com.termux.x11.controller.container.Shortcut;
-import com.termux.x11.controller.contentdialog.ContentDialog;
-import com.termux.x11.controller.core.Callback;
-import com.termux.x11.controller.core.DownloadProgressDialog;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.InputControlsManager;
-import com.termux.x11.controller.widget.InputControlsView;
-import com.termux.x11.controller.widget.TouchpadView;
-import com.termux.x11.controller.winhandler.ProcessInfo;
-import com.termux.x11.controller.winhandler.WinHandler;
-import com.termux.x11.utils.KeyInterceptor;
-import com.termux.x11.utils.SamsungDexUtils;
-import com.termux.x11.utils.TermuxX11ExtraKeys;
+import com.xodos.x11.controller.InputControllerActivity;
+import com.xodos.x11.controller.container.Container;
+import com.xodos.x11.controller.container.Shortcut;
+import com.xodos.x11.controller.contentdialog.ContentDialog;
+import com.xodos.x11.controller.core.Callback;
+import com.xodos.x11.controller.core.DownloadProgressDialog;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.InputControlsManager;
+import com.xodos.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.widget.TouchpadView;
+import com.xodos.x11.controller.winhandler.ProcessInfo;
+import com.xodos.x11.controller.winhandler.WinHandler;
+import com.xodos.x11.utils.KeyInterceptor;
+import com.xodos.x11.utils.SamsungDexUtils;
+import com.xodos.x11.utils.xodosX11ExtraKeys;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -101,10 +101,10 @@ import java.util.regex.PatternSyntaxException;
 
 @SuppressWarnings("deprecation")
 public class LoriePreferences extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
-    static final String ACTION_PREFERENCES_CHANGED = "com.termux.x11.ACTION_PREFERENCES_CHANGED";
+    static final String ACTION_PREFERENCES_CHANGED = "com.xodos.x11.ACTION_PREFERENCES_CHANGED";
     public static Prefs prefs = null;
     
-private static final String USR_PREFIX = "/data/data/com.termux/files/usr";
+private static final String USR_PREFIX = "/data/data/com.xodos/files/usr";
 
 
     public static int OPEN_FILE_REQUEST_CODE = 102;
@@ -132,14 +132,14 @@ public boolean isActivityValid() {
     protected Container container;
     public static boolean mLorieViewConnected = false;
 
-    public List<ProcessInfo> getTermuxProcessorInfo(String tag) {
-        if (termuxActivityListener != null) {
-            return termuxActivityListener.collectProcessorInfo(tag);
+    public List<ProcessInfo> getxodosProcessorInfo(String tag) {
+        if (xodosActivityListener != null) {
+            return xodosActivityListener.collectProcessorInfo(tag);
         }
         return null;
     }
 
-    protected interface TermuxActivityListener {
+    protected interface xodosActivityListener {
 
         void onX11PreferenceSwitchChange(boolean isOpen);
 
@@ -164,11 +164,11 @@ public boolean isActivityValid() {
         void onExitApp();
     }
 
-    public TermuxActivityListener getTermuxActivityListener() {
-        return termuxActivityListener;
+    public xodosActivityListener getxodosActivityListener() {
+        return xodosActivityListener;
     }
 
-    protected TermuxActivityListener termuxActivityListener;
+    protected xodosActivityListener xodosActivityListener;
 
     private int id_preference_view;
 
@@ -292,8 +292,8 @@ public boolean isActivityValid() {
     }
 
     public void installX11ServerBridge() {
-        if (termuxActivityListener != null) {
-            termuxActivityListener.reInstallX11StartScript(this);
+        if (xodosActivityListener != null) {
+            xodosActivityListener.reInstallX11StartScript(this);
         }
     }
     
@@ -346,7 +346,7 @@ private void performRestartSequence() {
     String[] commands = {
         USR_PREFIX + "/glibc/bin/box64 " + USR_PREFIX + "/glibc/bin/wineserver -k",
         USR_PREFIX + "/bin/box64 " + USR_PREFIX + "/opt/wine/bin/wineserver -k",
-        "pkill -f \"termux.x11\""  // Alternative to kill -9 $(pgrep -f)
+        "pkill -f \"xodos.x11\""  // Alternative to kill -9 $(pgrep -f)
     };
     
     for (String cmd : commands) {
@@ -361,8 +361,8 @@ private void performRestartSequence() {
     public void stopDesktop() {
 
                 //    performRestartSequence();
-                            if (termuxActivityListener != null) {
-            termuxActivityListener.stopDesktop();
+                            if (xodosActivityListener != null) {
+            xodosActivityListener.stopDesktop();
         }
                //     Toast.makeText(this, "Stopping Wine desktop...", Toast.LENGTH_SHORT).show();
     
@@ -629,7 +629,7 @@ if (p.getKey().contentEquals("wine_settings")) {
     if (loriePreferences != null && loriePreferences.isActivityValid()) {
         // Use reflection to call XoDosWizard
         try {
-            Class<?> xoDosWizardClass = Class.forName("com.termux.app.XoDosWizard");
+            Class<?> xoDosWizardClass = Class.forName("com.xodos.app.XoDosWizard");
             Object xoDosWizardInstance = xoDosWizardClass
                 .getDeclaredConstructor(Activity.class)
                 .newInstance(loriePreferences);
@@ -667,7 +667,7 @@ if (p.getKey().contentEquals("wine_settings")) {
                 handler.postDelayed(() -> {
                     if (loriePreferences != null) {
                         loriePreferences.openPreference(false);
-                        loriePreferences.termuxActivityListener.openSoftwareKeyboard();
+                        loriePreferences.xodosActivityListener.openSoftwareKeyboard();
                     }
                 }, 500);
             }
@@ -675,7 +675,7 @@ if (p.getKey().contentEquals("wine_settings")) {
                 loriePreferences.showInputControlsDialog();
             }
             if (p.getKey().contentEquals("open_progress_manager")) {
-                loriePreferences.termuxActivityListener.showProcessManager();
+                loriePreferences.xodosActivityListener.showProcessManager();
             }
             if (p.getKey().contentEquals("install_x11_server_bridge")) {
                 View view = getLayoutInflater().inflate(R.layout.x11_server_bridge_config, null, false);
@@ -755,7 +755,7 @@ if (p.getKey().contentEquals("wine_settings")) {
                         .setTitle("Permission denied")
                         .setMessage("Android requires WRITE_SECURE_SETTINGS permission to start accessibility service automatically.\n" +
                             "Please, launch this command using ADB:\n" +
-                            "adb shell pm grant com.termux.x11 android.permission.WRITE_SECURE_SETTINGS")
+                            "adb shell pm grant com.xodos.x11 android.permission.WRITE_SECURE_SETTINGS")
                         .setNegativeButton("OK", null)
                         .create()
                         
@@ -768,7 +768,7 @@ if (p.getKey().contentEquals("wine_settings")) {
 //            requireContext().sendBroadcast(new Intent(ACTION_PREFERENCES_CHANGED) {{
 //                putExtra("key", key);
 //                putExtra("fromBroadcast", true);
-//                setPackage("com.termux.x11");
+//                setPackage("com.xodos.x11");
 //            }});
             if ("enableFloatBallMenu".contentEquals(key)) {
                 prefs.enableFloatBallMenu.put((Boolean) newValue);
@@ -776,7 +776,7 @@ if (p.getKey().contentEquals("wine_settings")) {
             if ("enableGlobalFloatBallMenu".contentEquals(key)) {
                 prefs.enableGlobalFloatBallMenu.put((Boolean) newValue);
             }
-            loriePreferences.termuxActivityListener.changePreference(key);
+            loriePreferences.xodosActivityListener.changePreference(key);
             return true;
         }
 
@@ -799,11 +799,11 @@ if (p.getKey().contentEquals("wine_settings")) {
                     .setPositiveButton("OK",
                         (dialog, whichButton) -> {
                             String text = config.getText().toString();
-                            prefs.extra_keys_config.put(!text.isEmpty() ? text : TermuxX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS);
+                            prefs.extra_keys_config.put(!text.isEmpty() ? text : xodosX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS);
                         }
                     )
                     .setNeutralButton("Reset",
-                        (dialog, whichButton) -> prefs.extra_keys_config.put(TermuxX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS))
+                        (dialog, whichButton) -> prefs.extra_keys_config.put(xodosX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS))
                     .setNegativeButton("Cancel", (dialog, whichButton) -> dialog.dismiss())
                     .create()
                     
@@ -889,7 +889,7 @@ if (p.getKey().contentEquals("wine_settings")) {
                                     sendResponse(remote, 1, 1, "Permission denied.\n" +
                                         "Android requires WRITE_SECURE_SETTINGS permission to change `enableAccessibilityServiceAutomatically` setting.\n" +
                                         "Please, launch this command using ADB:\n" +
-                                        "adb shell pm grant com.termux.x11 android.permission.WRITE_SECURE_SETTINGS");
+                                        "adb shell pm grant com.xodos.x11 android.permission.WRITE_SECURE_SETTINGS");
                                     return;
                                 }
 
@@ -940,7 +940,7 @@ if (p.getKey().contentEquals("wine_settings")) {
                         Intent intent0 = new Intent(ACTION_PREFERENCES_CHANGED);
                         intent0.putExtra("key", key);
                         intent0.putExtra("fromBroadcast", true);
-                        intent0.setPackage("com.termux");
+                        intent0.setPackage("com.xodos");
                         context.sendBroadcast(intent0);
                     }
                     edit.commit();
@@ -975,7 +975,7 @@ if (p.getKey().contentEquals("wine_settings")) {
         };
 
         private static void help() {
-            System.err.print("termux-x11-preference [list] {key:value} [{key2:value2}]...");
+            System.err.print("xodos-x11-preference [list] {key:value} [{key2:value2}]...");
             System.exit(0);
         }
 
@@ -985,13 +985,13 @@ if (p.getKey().contentEquals("wine_settings")) {
             android.util.Log.i("LoriePreferences$Receiver", "commit " + BuildConfig.COMMIT);
             //noinspection resource
             ParcelFileDescriptor in = ParcelFileDescriptor.adoptFd(0);
-            Intent i = new Intent("com.termux.x11.CHANGE_PREFERENCE");
+            Intent i = new Intent("com.xodos.x11.CHANGE_PREFERENCE");
             Bundle bundle = new Bundle();
             boolean inputIsFile = !android.system.Os.isatty(in.getFileDescriptor());
 
             in.detachFd();
             bundle.putBinder(null, iface);
-            i.setPackage("com.termux");
+            i.setPackage("com.xodos");
             i.putExtra(null, bundle);
             if (getuid() == 0 || getuid() == 2000)
                 i.setFlags(0x00400000 /* FLAG_RECEIVER_FROM_SHELL */);
@@ -1267,8 +1267,8 @@ if (p.getKey().contentEquals("wine_settings")) {
     }
 
     private void callProgressManager() {
-        if (termuxActivityListener != null) {
-            termuxActivityListener.showProcessManager();
+        if (xodosActivityListener != null) {
+            xodosActivityListener.showProcessManager();
         }
     }
 
@@ -1343,7 +1343,7 @@ if (p.getKey().contentEquals("wine_settings")) {
         });
 
         dialog.setOnConfirmCallback(() -> {
-            if (termuxActivityListener == null) {
+            if (xodosActivityListener == null) {
                 return;
             }
             xServer.cursorLocker.setEnabled(cbLockCursor.isChecked() ? true : false);
@@ -1377,8 +1377,8 @@ if (p.getKey().contentEquals("wine_settings")) {
         touchpadView.setVisibility(View.VISIBLE);
 
         inputControlsView.invalidate();
-        if (termuxActivityListener != null) {
-            termuxActivityListener.onX11PreferenceSwitchChange(false);
+        if (xodosActivityListener != null) {
+            xodosActivityListener.onX11PreferenceSwitchChange(false);
         }
     }
 
@@ -1393,18 +1393,18 @@ if (p.getKey().contentEquals("wine_settings")) {
     }
 
     public void prepareToExit() {
-        if (termuxActivityListener != null) {
-            termuxActivityListener.onExitApp();
+        if (xodosActivityListener != null) {
+            xodosActivityListener.onExitApp();
         }
     }
 
     public void openPreference(boolean open) {
-        if (termuxActivityListener != null)
-            termuxActivityListener.onX11PreferenceSwitchChange(open);
+        if (xodosActivityListener != null)
+            xodosActivityListener.onX11PreferenceSwitchChange(open);
     }
 
     public void releaseSlider(boolean release) {
-        if (termuxActivityListener != null)
-            termuxActivityListener.releaseSlider(release);
+        if (xodosActivityListener != null)
+            xodosActivityListener.releaseSlider(release);
     }
 }

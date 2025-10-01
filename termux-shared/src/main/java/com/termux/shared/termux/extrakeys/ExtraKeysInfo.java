@@ -1,4 +1,4 @@
-package com.termux.shared.termux.extrakeys;
+package com.xodos.shared.xodos.extrakeys;
 
 import android.view.View;
 import android.widget.Button;
@@ -6,8 +6,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.button.MaterialButton;
-import com.termux.shared.termux.extrakeys.ExtraKeysConstants.EXTRA_KEY_DISPLAY_MAPS;
-import com.termux.shared.termux.terminal.io.TerminalExtraKeys;
+import com.xodos.shared.xodos.extrakeys.ExtraKeysConstants.EXTRA_KEY_DISPLAY_MAPS;
+import com.xodos.shared.xodos.terminal.io.TerminalExtraKeys;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +84,7 @@ import org.json.JSONObject;
  * "-_-" will input the string "-_-"
  * }
  *
- * For more info, check https://wiki.termux.com/wiki/Touch_Keyboard.
+ * For more info, check https://wiki.xodos.com/wiki/Touch_Keyboard.
  */
 public class ExtraKeysInfo {
 

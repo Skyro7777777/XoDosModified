@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 public class FileInfo {
     private final String name;

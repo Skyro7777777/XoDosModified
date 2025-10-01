@@ -1,6 +1,6 @@
-package com.termux.x11;
+package com.xodos.x11;
 
-import com.termux.shell.BuildConfig;
+import com.xodos.shell.BuildConfig;
 
 public class Loader {
     /**
@@ -15,7 +15,7 @@ public class Loader {
      * @param args The command-line arguments
      */
         public static void main(String[] args) {
-            String cls = System.getenv("TERMUX_X11_LOADER_OVERRIDE_CMDENTRYPOINT_CLASS");
+            String cls = System.getenv("xodos_X11_LOADER_OVERRIDE_CMDENTRYPOINT_CLASS");
             cls = cls != null ? cls : BuildConfig.CLASS_ID;
             try {
                 android.content.pm.PackageInfo targetInfo = (android.os.Build.VERSION.SDK_INT <= 32) ?

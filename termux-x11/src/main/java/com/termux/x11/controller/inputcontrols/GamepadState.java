@@ -1,4 +1,4 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

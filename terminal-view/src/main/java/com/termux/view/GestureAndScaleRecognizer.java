@@ -1,4 +1,4 @@
-package com.termux.view;
+package com.xodos.view;
 
 import android.content.Context;
 import android.view.GestureDetector;

@@ -2,7 +2,7 @@
 export GREEN='\033[0;32m'
 export WHITE='\033[0;37m' 
 export RED='\033[0;31m'
-kill -9 $(pgrep -f "termux.x11") &>/dev/null
+kill -9 $(pgrep -f "xodos.x11") &>/dev/null
 cd
 unset XCURSOR_THEME
 ################
@@ -24,13 +24,13 @@ echo "your CPU is $ucpu $cpu_info2  "
 ############
 
 
-mkdir -p /sdcard/Android/data/com.termux/files/Download
+mkdir -p /sdcard/Android/data/com.xodos/files/Download
 #mkdir -p /sdcard/gamingtrace
 . $PREFIX/glibc/opt/scripts/configs
 load_configs
 WINEPREFIXG=$WINEPREFIX
 function stop-all {
-	pkill -f "app_process / com.termux.x11"
+	pkill -f "app_process / com.xodos.x11"
 	rm -rf $PREFIX/tmp/pulse-*
 	pulseaudio -k &>/dev/null
 	unset PULSE_SERVER
@@ -102,7 +102,7 @@ if [ -e $PREFIX/glibc/opt/virgl/virgl-enabled ]; then
 	TMPDIR=$PREFIX/tmp $PREFIX/glibc/opt/virgl/libvirgl_test_server.so &>/dev/null &
 fi
 pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
-termux-x11 :0 &>/dev/null &
+xodos-x11 :0 &>/dev/null &
 sleep 1
 
 if [ -e $PREFIX/glibc/opt/virgl/virgl-enabled ]; then
@@ -136,7 +136,7 @@ if [ ! -e $WINEPREFIX/.update-timestamp ]; then
 	rm -rf $WINEPREFIX
 	unset BOX64_DYNAREC_BIGBLOCK
 	unset WINEESYNC
-	unset WINEESYNC_TERMUX
+	unset WINEESYNC_xodos
 	unset BOX64_DYNAREC_CALLRET
 	if [ -e $WINE_PATH/lib/wine/i386-windows/shell32-bak.dll ] || [ -e $WINE_PATH/lib64/wine/x86_64-windows/shell32-bak.dll ]; then
 		mv $WINE_PATH/lib/wine/i386-windows/shell32-bak.dll $WINE_PATH/lib/wine/i386-windows/shell32.dll &>/dev/null
@@ -150,11 +150,11 @@ if [ ! -e $WINEPREFIX/.update-timestamp ]; then
 	if [ ! -e $WINEPREFIX/.update-timestamp ]; then
 		echo -e "${RED}Cannot configure. See ${LOG_PATH}_wineboot.txt${WHITE}"
 		$GLIBC_BIN/box64 $GLIBC_BIN/wineserver -k &>/dev/null
-		export LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so
+		export LD_PRELOAD=/data/data/com.xodos/files/usr/lib/libxodos-exec.so
 		rm -rf $PREFIX/tmp/pulse-*
 		pulseaudio -k &>/dev/null
 		pkill -f pulseaudio
-		pkill -f "app_process / com.termux.x11"
+		pkill -f "app_process / com.xodos.x11"
 		sleep 5
 		exit
 	fi
@@ -169,9 +169,9 @@ if [ ! -e $WINEPREFIX/.update-timestamp ]; then
 #sleep 0.5
 	cp -r $PREFIX/glibc/opt/prefix/start/* "$WINEPREFIX/drive_c/ProgramData/Microsoft/Windows/Start Menu"
 	rm -rf "$WINEPREFIX/dosdevices/z:"
-	ln -sf /data/data/com.termux/files "$WINEPREFIX/dosdevices/z:"
+	ln -sf /data/data/com.xodos/files "$WINEPREFIX/dosdevices/z:"
 	ln -sf /sdcard/Download "$WINEPREFIX/dosdevices/d:"
-	ln -sf /sdcard/Android/data/com.termux/files/Download "$WINEPREFIX/dosdevices/e:"
+	ln -sf /sdcard/Android/data/com.xodos/files/Download "$WINEPREFIX/dosdevices/e:"
 	echo "Installing registry tweaks"
 	cp $PREFIX/glibc/opt/prefix/marlett.ttf $WINEPREFIX/drive_c/windows/Fonts
 	taskset -c $PRIMARY_CORES $GLIBC_BIN/box64 $GLIBC_BIN/wine regedit $PREFIX/glibc/opt/prefix/user.reg &>/dev/null
@@ -333,7 +333,7 @@ sleep 2
 if [ "$STARTUP_WINEDEVICE_MODE" = "0" ]; then
 	$GLIBC_BIN/box64 $GLIBC_BIN/wine taskkill /f /im services.exe &>/dev/null &
 fi
-am start --user 0 -n com.termux.HomeActivity >/dev/null 2>&1 & 
+am start --user 0 -n com.xodos.HomeActivity >/dev/null 2>&1 & 
 sleep 1
 echo "for more settings write xmnu"
 echo "Enter xx to stop"
@@ -342,7 +342,7 @@ while true; do
 if [ -e $PREFIX/glibc/opt/shutdown ]; then
 	rm -rf $PREFIX/glibc/opt/shutdown
 	$GLIBC_BIN/box64 $GLIBC_BIN/wineserver -k &>/dev/null
-kill -9 $(pgrep -f "termux.x11") &>/dev/null
+kill -9 $(pgrep -f "xodos.x11") &>/dev/null
 	break
 fi
 if [ -e $PREFIX/glibc/opt/setup ]; then
@@ -361,13 +361,13 @@ read -t 3 i
 case "$i" in
 xx)
 	$GLIBC_BIN/box64 $GLIBC_BIN/wineserver -k &>/dev/null
-kill -9 $(pgrep -f "termux.x11") &>/dev/null
+kill -9 $(pgrep -f "xodos.x11") &>/dev/null
 	break
 ;;
 esac
 done
 
-export LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so
+export LD_PRELOAD=/data/data/com.xodos/files/usr/lib/libxodos-exec.so
 stop-all
 
 if [ "$REBOOT" = "1" ]; then

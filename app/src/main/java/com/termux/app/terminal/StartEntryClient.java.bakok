@@ -1,16 +1,16 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 import android.util.DisplayMetrics;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_BIN_PREFIX_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_BIN_PREFIX_DIR_PATH;
 
 import android.widget.GridLayout;
 import android.widget.PopupWindow;
 import android.view.Gravity;
 import android.widget.ScrollView;
-import com.termux.app.terminal.utils.ScreenUtils;
+import com.xodos.app.terminal.utils.ScreenUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.termux.app.terminal.utils.FilePathUtils; ///////
+import com.xodos.app.terminal.utils.FilePathUtils; ///////
 import android.os.Handler;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -40,11 +40,11 @@ import android.text.TextUtils;
 import android.graphics.Typeface;
 //////////
 import android.os.Handler;
-import com.termux.app.XoDosWizard;
+import com.xodos.app.XoDosWizard;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_HOME_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_HOME_DIR_PATH;
 import org.json.JSONException;
-import com.termux.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.FileUtils;
 
 
 import android.view.View;
@@ -56,8 +56,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,8 +76,8 @@ private PopupWindow mToolboxPopup;
 private GridLayout mToolboxGrid;
 private View mConfigPopupContent;
 
-    private TermuxActivity mTermuxActivity;
-    private TermuxTerminalSessionActivityClient mTermuxTerminalSessionActivityClient;
+    private xodosActivity mxodosActivity;
+    private xodosTerminalSessionActivityClient mxodosTerminalSessionActivityClient;
     private LinearLayout mStartItemEntriesConfig;
     private Button mLaunchButton;
     private ImageButton mSelectConfigButton;
@@ -98,7 +98,7 @@ private void startTutorial() {
 
 
 private void showTutorialStep() {
-    String[] steps = mTermuxActivity.getResources().getStringArray(R.array.tutorial_steps);
+    String[] steps = mxodosActivity.getResources().getStringArray(R.array.tutorial_steps);
     if (mTutorialStep >= steps.length) {
         mToolboxPopup.setFocusable(true);
         return;
@@ -109,7 +109,7 @@ private void showTutorialStep() {
         mToolboxGrid.getChildAt(i).setBackgroundResource(R.drawable.tool_box_background);
     }
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(mTermuxActivity);
+    AlertDialog.Builder builder = new AlertDialog.Builder(mxodosActivity);
 builder.setMessage(steps[mTutorialStep])
        .setCancelable(false)
        .setPositiveButton(mTutorialStep < steps.length-1 ? 
@@ -177,7 +177,7 @@ int[] highlightOrder = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 
 private void showBlockingView() {
     // Create root container
-    RelativeLayout blockingLayout = new RelativeLayout(mTermuxActivity);
+    RelativeLayout blockingLayout = new RelativeLayout(mxodosActivity);
     blockingLayout.setLayoutParams(new ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.MATCH_PARENT
@@ -185,16 +185,16 @@ private void showBlockingView() {
     blockingLayout.setBackgroundColor(Color.parseColor("#80000000")); // Semi-transparent dark
     
     // Create loading container
-    LinearLayout loadingContainer = new LinearLayout(mTermuxActivity);
+    LinearLayout loadingContainer = new LinearLayout(mxodosActivity);
     loadingContainer.setOrientation(LinearLayout.VERTICAL);
     loadingContainer.setGravity(Gravity.CENTER);
     
     // Create progress spinner
-    ProgressBar progress = new ProgressBar(mTermuxActivity, null, android.R.attr.progressBarStyleLarge);
+    ProgressBar progress = new ProgressBar(mxodosActivity, null, android.R.attr.progressBarStyleLarge);
     progress.setIndeterminate(true);
     
     // Create loading text
-    TextView text = new TextView(mTermuxActivity);
+    TextView text = new TextView(mxodosActivity);
     text.setText("Loading...");
     text.setTextColor(Color.WHITE);
     text.setTextSize(18);
@@ -213,7 +213,7 @@ private void showBlockingView() {
     });
     
     // Add to window
-    ViewGroup rootView = (ViewGroup) mTermuxActivity.getWindow().getDecorView();
+    ViewGroup rootView = (ViewGroup) mxodosActivity.getWindow().getDecorView();
     rootView.addView(blockingLayout);
     
     mBlockingView = blockingLayout;
@@ -248,13 +248,13 @@ public static String getRealPath(Context context, Uri uri) {
 
 private String mSelectedWineCommand;
 private final String[] wineCommands = {
-    "/data/data/com.termux/files/usr/glibc/opt/scripts/xodos_wine2",
-    "/data/data/com.termux/files/usr/bin/xbio2"
+    "/data/data/com.xodos/files/usr/glibc/opt/scripts/xodos_wine2",
+    "/data/data/com.xodos/files/usr/bin/xbio2"
 };
 
 
 private void saveToStartMenuEntries() {
-    File file = new File(TERMUX_HOME_DIR_PATH, ".startMenuEntries");
+    File file = new File(xodos_HOME_DIR_PATH, ".startMenuEntries");
     try {
         JSONObject data = new JSONObject();
         data.put("version", "1.0");
@@ -277,12 +277,12 @@ private void saveToStartMenuEntries() {
         file.getParentFile().mkdirs();
         FileUtils.writeString(file, data.toString());
     } catch (JSONException e) {
-        Toast.makeText(mTermuxActivity, "Failed to save entries: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mxodosActivity, "Failed to save entries: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
 
 private void loadFromStartMenuEntries() {
-    File file = new File(TERMUX_HOME_DIR_PATH, ".startMenuEntries");
+    File file = new File(xodos_HOME_DIR_PATH, ".startMenuEntries");
     if (!file.exists() || !file.isFile()) {
         return;
     }
@@ -306,14 +306,14 @@ private void loadFromStartMenuEntries() {
             mCurrentCommand = config.getInt("currentStartItem");
         }
     } catch (Exception e) {
-        Toast.makeText(mTermuxActivity, "Failed to load entries: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mxodosActivity, "Failed to load entries: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
 
 private void addCommandButton(String type, String title, String command) {
     LinearLayout btn = createToolboxButton(type, title);
     btn.setOnClickListener(v -> {   
-        mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command + "\n");
+        mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command + "\n");
         mToolboxPopup.dismiss();
     });
     mToolboxGrid.addView(btn);
@@ -335,12 +335,12 @@ private LinearLayout createToolboxButton(String type, String title) {
     if (type == null) {
         type = "unknown"; // Default fallback
         // Log the error for debugging
-        Toast.makeText(mTermuxActivity, "Null type encountered for: " + title, 
+        Toast.makeText(mxodosActivity, "Null type encountered for: " + title, 
         Toast.LENGTH_SHORT).show();
     }
 
-    LinearLayout layout = new LinearLayout(mTermuxActivity);
-    int size = ScreenUtils.getScreenWidth(mTermuxActivity) / 5;
+    LinearLayout layout = new LinearLayout(mxodosActivity);
+    int size = ScreenUtils.getScreenWidth(mxodosActivity) / 5;
     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(size, size);
     param.setMargins(10, 10, 10, 10);
     layout.setLayoutParams(param);
@@ -352,11 +352,11 @@ layout.setBackgroundResource(R.drawable.button_press_effect);
     // Add for better interaction:
     layout.setClickable(true);
     layout.setFocusable(true);
-    layout.setForeground(mTermuxActivity.getResources()
+    layout.setForeground(mxodosActivity.getResources()
         .getDrawable(R.drawable.button_press_effect));
 
 
-    ImageView iv = new ImageView(mTermuxActivity);
+    ImageView iv = new ImageView(mxodosActivity);
     // Set image based on type
 // Add weight to image view like original
     int imageSize = (int) (size * 0.6);
@@ -438,7 +438,7 @@ case "restore":
 
 
     
-   TextView tv = new TextView(mTermuxActivity);
+   TextView tv = new TextView(mxodosActivity);
     // Match original text styling
         tv.setLayoutParams(new LinearLayout.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -481,9 +481,9 @@ private LinearLayout createToolboxButton(StartEntry.Entry entry) {
     private StartEntryClient() {
     }
 
-    public StartEntryClient(TermuxActivity activity, TermuxTerminalSessionActivityClient termuxTerminalSessionActivityClient) {
-        this.mTermuxActivity = activity;
-        this.mTermuxTerminalSessionActivityClient = termuxTerminalSessionActivityClient;
+    public StartEntryClient(xodosActivity activity, xodosTerminalSessionActivityClient xodosTerminalSessionActivityClient) {
+        this.mxodosActivity = activity;
+        this.mxodosTerminalSessionActivityClient = xodosTerminalSessionActivityClient;
     }
 
     public void init() {
@@ -493,26 +493,26 @@ private LinearLayout createToolboxButton(StartEntry.Entry entry) {
     StartEntry.loadStartItems(); // Original .startItemEntries
     loadFromStartMenuEntries(); // New .startMenuEntries
         
-        mStartItemEntriesConfig = mTermuxActivity.findViewById(com.termux.x11.R.id.LConfigStartItems);
-        mLaunchButton = mTermuxActivity.findViewById(com.termux.x11.R.id.BLaunch_item);
+        mStartItemEntriesConfig = mxodosActivity.findViewById(com.xodos.x11.R.id.LConfigStartItems);
+        mLaunchButton = mxodosActivity.findViewById(com.xodos.x11.R.id.BLaunch_item);
         mLaunchButton.setVisibility(View.GONE); // Hide but keep code
-        mSelectConfigButton = mTermuxActivity.findViewById(com.termux.x11.R.id.BAdd_item);
-        mAddConfigButton = mTermuxActivity.findViewById(com.termux.x11.R.id.BConfig_item);
-        mRemoveConfigButton = mTermuxActivity.findViewById(com.termux.x11.R.id.BRemove_item);
-        mLaunchItemSpinner = mTermuxActivity.findViewById(com.termux.x11.R.id.SLaunchItemList);
+        mSelectConfigButton = mxodosActivity.findViewById(com.xodos.x11.R.id.BAdd_item);
+        mAddConfigButton = mxodosActivity.findViewById(com.xodos.x11.R.id.BConfig_item);
+        mRemoveConfigButton = mxodosActivity.findViewById(com.xodos.x11.R.id.BRemove_item);
+        mLaunchItemSpinner = mxodosActivity.findViewById(com.xodos.x11.R.id.SLaunchItemList);
      //   mLaunchButton.setVisibility(View.VISIBLE);
         setupToolboxPopup();
      
     // Initialize Toolbox button (reusing MenuEntryClient's functionality)
-    Button btnToolbox = mTermuxActivity.findViewById(com.termux.x11.R.id.toggle_tool_box2);
+    Button btnToolbox = mxodosActivity.findViewById(com.xodos.x11.R.id.toggle_tool_box2);
 btnToolbox.setOnClickListener(v -> {
     // First create/update the popup contents
     refreshToolboxItems();
     
     // recalculate popup width/height for current orientation
-int width = ScreenUtils.getScreenWidth(mTermuxActivity);
+int width = ScreenUtils.getScreenWidth(mxodosActivity);
 DisplayMetrics metrics = new DisplayMetrics();
-mTermuxActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+mxodosActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 int height = (int)(metrics.heightPixels * 0.7);
 
 mToolboxPopup.setWidth(width);
@@ -520,11 +520,11 @@ mToolboxPopup.setHeight(height);
     
     // Then show the popup
     int y = 120;
-    if (mTermuxActivity.getExtraKeysView().getVisibility() == View.VISIBLE) {
-        y += mTermuxActivity.getExtraKeysView().getHeight();
+    if (mxodosActivity.getExtraKeysView().getVisibility() == View.VISIBLE) {
+        y += mxodosActivity.getExtraKeysView().getHeight();
     }
     mToolboxPopup.showAtLocation(
-        mTermuxActivity.findViewById(R.id.left_drawer),
+        mxodosActivity.findViewById(R.id.left_drawer),
         Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM,
         0, y
     );
@@ -549,7 +549,7 @@ mToolboxPopup.setOnDismissListener(() -> {
 
 
 
-        mAdapter = new StartEntryArrayAdapter(mTermuxActivity, StartEntry.getStartItemList());
+        mAdapter = new StartEntryArrayAdapter(mxodosActivity, StartEntry.getStartItemList());
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mLaunchItemSpinner.setAdapter(mAdapter);
         mLaunchItemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -561,38 +561,38 @@ mToolboxPopup.setOnDismissListener(() -> {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                mLaunchButton.setText(mTermuxActivity.getResources().getString(com.termux.x11.R.string.launch_button_text));
+                mLaunchButton.setText(mxodosActivity.getResources().getString(com.xodos.x11.R.string.launch_button_text));
             }
         });
 
         mLaunchButton.setOnClickListener((v) -> {
             if(StartEntry.getStartItemList().isEmpty()){
-                Toast.makeText(mTermuxActivity, mTermuxActivity.getResources().getString(R.string.select_command_first), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mxodosActivity, mxodosActivity.getResources().getString(R.string.select_command_first), Toast.LENGTH_SHORT).show();
                 mLaunchButton.setVisibility(View.GONE);
                 mStartItemEntriesConfig.setVisibility(View.VISIBLE);
                 return;
             }
             if (mCurrentCommand >= StartEntry.getStartItemList().size()) {
-                Toast.makeText(mTermuxActivity, mTermuxActivity.getResources().getString(R.string.no_such_file) + ": " + "empty command", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mxodosActivity, mxodosActivity.getResources().getString(R.string.no_such_file) + ": " + "empty command", Toast.LENGTH_SHORT).show();
                 return;
             }
             File file = new File(StartEntry.getStartItemList().get(mCurrentCommand).getPath());
             if (!file.exists()) {
-                Toast.makeText(mTermuxActivity, mTermuxActivity.getResources().getString(R.string.no_such_file) + ": " + StartEntry.getStartItemList().get(mCurrentCommand).getFileName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mxodosActivity, mxodosActivity.getResources().getString(R.string.no_such_file) + ": " + StartEntry.getStartItemList().get(mCurrentCommand).getFileName(), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!file.canExecute()) {
-                Toast.makeText(mTermuxActivity, mTermuxActivity.getResources().getString(R.string.not_executable) + ": " + StartEntry.getStartItemList().get(mCurrentCommand).getFileName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mxodosActivity, mxodosActivity.getResources().getString(R.string.not_executable) + ": " + StartEntry.getStartItemList().get(mCurrentCommand).getFileName(), Toast.LENGTH_SHORT).show();
                 return;
             }
             String command = "^c";
-            if (StartEntry.getStartItemList().get(mCurrentCommand).getPath().contains(TERMUX_BIN_PREFIX_DIR_PATH)) {
+            if (StartEntry.getStartItemList().get(mCurrentCommand).getPath().contains(xodos_BIN_PREFIX_DIR_PATH)) {
                 command = StartEntry.getStartItemList().get(mCurrentCommand).getFileName() + "\n";
             } else {
                 command = StartEntry.getStartItemList().get(mCurrentCommand).getPath() + "\n";
             }
 
-            mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+            mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
         });
         mLaunchButton.setOnLongClickListener(l -> {
             mLaunchButton.setVisibility(View.GONE);
@@ -611,7 +611,7 @@ mToolboxPopup.setOnDismissListener(() -> {
             }
         });
 
-        mFileBrowser = new FileBrowser(mTermuxActivity, this);
+        mFileBrowser = new FileBrowser(mxodosActivity, this);
         mFileBrowser.init();
         mAddConfigButton.setOnClickListener(v -> {
             mFileBrowser.showFileBrowser(mStartItemEntriesConfig);
@@ -634,7 +634,7 @@ private void launchWineFilePicker() {
     Intent intent = new Intent(Intent.ACTION_GET_CONTENT)
         .setType("*/*")
         .addCategory(Intent.CATEGORY_OPENABLE);
-    mTermuxActivity.startActivityForResult(intent, TermuxActivity.FILE_REQUEST_WINE_CODE);
+    mxodosActivity.startActivityForResult(intent, xodosActivity.FILE_REQUEST_WINE_CODE);
 }
 
 public void handleWineFile(Uri uri) {
@@ -644,7 +644,7 @@ public void handleWineFile(Uri uri) {
         }
 
         // Get direct path using restore's method
-        String path = FilePathUtils.getPath(mTermuxActivity, uri);
+        String path = FilePathUtils.getPath(mxodosActivity, uri);
         if (path == null) {
             throw new Exception("Could not resolve file path");
         }
@@ -657,11 +657,11 @@ public void handleWineFile(Uri uri) {
 
         // Build and execute command
         String command = mSelectedWineCommand + " \"" + path + "\"\n";
-        mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+        mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
         mToolboxPopup.dismiss();
 
     } catch (Exception e) {
-        Toast.makeText(mTermuxActivity, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(mxodosActivity, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
 
@@ -677,26 +677,26 @@ Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT)            // <-- use OP
     // ...and ask Android to let us persist that grant across reboots
     .addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
 
-mTermuxActivity.startActivityForResult(intent, TermuxActivity.FILE_REQUEST_BACKUP_CODE);
+mxodosActivity.startActivityForResult(intent, xodosActivity.FILE_REQUEST_BACKUP_CODE);
     }
 
 
 private void setupToolboxPopup() {
     // 1. Create main popup window
-    mToolboxPopup = new PopupWindow(mTermuxActivity);
-    mToolboxPopup.setBackgroundDrawable(mTermuxActivity.getDrawable(R.drawable.tool_box_background));
+    mToolboxPopup = new PopupWindow(mxodosActivity);
+    mToolboxPopup.setBackgroundDrawable(mxodosActivity.getDrawable(R.drawable.tool_box_background));
     // 2. Create grid for items
-    mToolboxGrid = new GridLayout(mTermuxActivity);
+    mToolboxGrid = new GridLayout(mxodosActivity);
     mToolboxGrid.setColumnCount(4);
-    int padding = (int) (ScreenUtils.getScreenWidth(mTermuxActivity) * 0.05f);
+    int padding = (int) (ScreenUtils.getScreenWidth(mxodosActivity) * 0.05f);
     mToolboxGrid.setPadding(padding, padding/2, padding, padding/2);
     // 3. Create container layout
-    ScrollView scrollView = new ScrollView(mTermuxActivity);
-    LinearLayout mainContainer = new LinearLayout(mTermuxActivity);
+    ScrollView scrollView = new ScrollView(mxodosActivity);
+    LinearLayout mainContainer = new LinearLayout(mxodosActivity);
     mainContainer.setOrientation(LinearLayout.VERTICAL);
     
     // 4. Add close button
-    ImageButton closeBtn = new ImageButton(mTermuxActivity);
+    ImageButton closeBtn = new ImageButton(mxodosActivity);
     closeBtn.setImageResource(R.drawable.ic_close);
     closeBtn.setOnClickListener(v -> mToolboxPopup.dismiss());
     
@@ -708,13 +708,13 @@ private void setupToolboxPopup() {
     mToolboxPopup.setContentView(mainContainer);
     
     // Set dimensions
-int width = ScreenUtils.getScreenWidth(mTermuxActivity);
+int width = ScreenUtils.getScreenWidth(mxodosActivity);
     mToolboxPopup.setWidth(width);
     mToolboxPopup.setHeight(width * 3/3);
     
         // Set dimensions
     DisplayMetrics metrics = new DisplayMetrics();
-    mTermuxActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    mxodosActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 mToolboxPopup.setWidth(width);
     int height = (int)(metrics.heightPixels * 0.7);
     
@@ -733,7 +733,7 @@ if (mToolboxGrid == null) {
 for (StartEntry.Entry entry : StartEntry.getStartItemList()) {
         // Validate entry before use
         if (entry.getType() == null || entry.getFileName() == null) {
-           // Toast.makeText(mTermuxActivity, "Skipping invalid entry", 
+           // Toast.makeText(mxodosActivity, "Skipping invalid entry", 
         // Toast.LENGTH_SHORT).show();
             continue;
         }
@@ -745,7 +745,7 @@ for (StartEntry.Entry entry : StartEntry.getStartItemList()) {
         
         // Long press to remove
         btn.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(mTermuxActivity)
+            new AlertDialog.Builder(mxodosActivity)
                 .setTitle("Remove Shortcut")
                 .setMessage("Delete " + entry.getFileName() + "?")
                 .setPositiveButton("Yes", (dialog, which) -> {
@@ -778,7 +778,7 @@ private void addSystemButtons() {
 
 // Xodos Button
 // Modified XoDos button with wizard launch
-LinearLayout xodosBtn = createToolboxButton("xodos", mTermuxActivity.getString(R.string.toolbox_xodos));
+LinearLayout xodosBtn = createToolboxButton("xodos", mxodosActivity.getString(R.string.toolbox_xodos));
 xodosBtn.setOnClickListener(v -> {
     // Immediate feedback
     showBlockingView();
@@ -787,64 +787,64 @@ xodosBtn.setOnClickListener(v -> {
     // Delay before showing wizard
     mHandler.postDelayed(() -> {
         hideBlockingView();
-        mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xodos\n");
+        mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xodos\n");
         // Start configuration wizard
-       // new XoDosWizard(mTermuxActivity).start();
+       // new XoDosWizard(mxodosActivity).start();
     }, 2000); // 2-second delay
 });
 mToolboxGrid.addView(xodosBtn);
 
 // Proot Button
-LinearLayout prootBtn = createToolboxButton("proot", mTermuxActivity.getString(R.string.toolbox_proot));
+LinearLayout prootBtn = createToolboxButton("proot", mxodosActivity.getString(R.string.toolbox_proot));
 prootBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xodxd\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xodxd\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 4000);
 });
 mToolboxGrid.addView(prootBtn);
 
 // Kali Button 
-LinearLayout kaliBtn = createToolboxButton("kali", mTermuxActivity.getString(R.string.toolbox_kali));
+LinearLayout kaliBtn = createToolboxButton("kali", mxodosActivity.getString(R.string.toolbox_kali));
 kaliBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xkali\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xkali\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 4000);
 });
 mToolboxGrid.addView(kaliBtn);
 
 // Xgl Button (Wine Glibc) - FIXED
-LinearLayout xglBtn = createToolboxButton("xgl", mTermuxActivity.getString(R.string.toolbox_wine_glibc));
+LinearLayout xglBtn = createToolboxButton("xgl", mxodosActivity.getString(R.string.toolbox_wine_glibc));
 xglBtn.setOnClickListener(v -> {
-    File glibcPath = new File("/data/data/com.termux/files/usr/glibc");
+    File glibcPath = new File("/data/data/com.xodos/files/usr/glibc");
     if (!glibcPath.exists()) {
-        new AlertDialog.Builder(mTermuxActivity)
+        new AlertDialog.Builder(mxodosActivity)
             .setMessage(R.string.wine_glibc_missing)
             .setPositiveButton(android.R.string.ok, null)
             .show();
         return;
     }
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xodxx\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xodxx\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 4000);
 }); // Removed duplicate code block
 mToolboxGrid.addView(xglBtn);
 
 // Xbio Button (Wine Bionic) - FIXED
-LinearLayout xbioBtn = createToolboxButton("xbio", mTermuxActivity.getString(R.string.toolbox_wine_bionic));
+LinearLayout xbioBtn = createToolboxButton("xbio", mxodosActivity.getString(R.string.toolbox_wine_bionic));
 xbioBtn.setOnClickListener(v -> {
-    File bionicPath = new File("/data/data/com.termux/files/usr/opt/wine");
+    File bionicPath = new File("/data/data/com.xodos/files/usr/opt/wine");
     if (!bionicPath.exists()) {
-        new AlertDialog.Builder(mTermuxActivity)
+        new AlertDialog.Builder(mxodosActivity)
             .setMessage(R.string.wine_bionic_missing)
             .setPositiveButton(android.R.string.ok, null)
             .show();
         return;
     }
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xodxx2\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xodxx2\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 4000);
 }); // Removed duplicate code block
@@ -852,17 +852,17 @@ mToolboxGrid.addView(xbioBtn);
 
 // Wine Button (from error log)
 // Wine Button - FIXED
-LinearLayout wineBtn = createToolboxButton("wine", mTermuxActivity.getString(R.string.toolbox_wine));
+LinearLayout wineBtn = createToolboxButton("wine", mxodosActivity.getString(R.string.toolbox_wine));
 wineBtn.setOnClickListener(v -> {
-    new AlertDialog.Builder(mTermuxActivity)
-        .setTitle(mTermuxActivity.getString(R.string.choose_wine_env))
+    new AlertDialog.Builder(mxodosActivity)
+        .setTitle(mxodosActivity.getString(R.string.choose_wine_env))
         .setItems(new CharSequence[]{
-                mTermuxActivity.getString(R.string.wine_glibc),
-                mTermuxActivity.getString(R.string.wine_bionic)
+                mxodosActivity.getString(R.string.wine_glibc),
+                mxodosActivity.getString(R.string.wine_bionic)
             }, (dialog, which) -> {
                 String pathToCheck = (which == 0) ? 
-                    "/data/data/com.termux/files/usr/glibc" :
-                    "/data/data/com.termux/files/usr/opt/wine";
+                    "/data/data/com.xodos/files/usr/glibc" :
+                    "/data/data/com.xodos/files/usr/opt/wine";
                     
                 File wineDir = new File(pathToCheck);
                 
@@ -871,7 +871,7 @@ wineBtn.setOnClickListener(v -> {
                         R.string.wine_glibc_missing : 
                         R.string.wine_bionic_missing;
                         
-                    new AlertDialog.Builder(mTermuxActivity)
+                    new AlertDialog.Builder(mxodosActivity)
                         .setMessage(messageRes)
                         .setPositiveButton(android.R.string.ok, null)
                         .show();
@@ -891,30 +891,30 @@ mToolboxGrid.addView(wineBtn);
 
 // With proper implementations:
 // Xbox Button
-LinearLayout xboxBtn = createToolboxButton("xbox", mTermuxActivity.getString(R.string.toolbox_xbox));
+LinearLayout xboxBtn = createToolboxButton("xbox", mxodosActivity.getString(R.string.toolbox_xbox));
 xboxBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xbox-z\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xbox-z\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 2000);
 });
 mToolboxGrid.addView(xboxBtn);
 
 // Settings (Xset) Button
-LinearLayout settingsBtn = createToolboxButton("xset", mTermuxActivity.getString(R.string.toolbox_settings));
+LinearLayout settingsBtn = createToolboxButton("xset", mxodosActivity.getString(R.string.toolbox_settings));
 settingsBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xmnu2\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xmnu2\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 4000);
 });
 mToolboxGrid.addView(settingsBtn);
 
 // Ai Button
-addCommandButton("ai", mTermuxActivity.getString(R.string.toolbox_ai), "/data/data/com.termux/files/usr/bin/xodai");
+addCommandButton("ai", mxodosActivity.getString(R.string.toolbox_ai), "/data/data/com.xodos/files/usr/bin/xodai");
 
 // Restore Button
-LinearLayout restoreBtn = createToolboxButton("restore", mTermuxActivity.getString(R.string.toolbox_restore));
+LinearLayout restoreBtn = createToolboxButton("restore", mxodosActivity.getString(R.string.toolbox_restore));
 restoreBtn.setOnClickListener(v -> {
     showBlockingView();
     launchRestoreFilePicker();
@@ -924,10 +924,10 @@ restoreBtn.setOnClickListener(v -> {
 mToolboxGrid.addView(restoreBtn);
 
 // Backup Button
-LinearLayout backupBtn = createToolboxButton("backup", mTermuxActivity.getString(R.string.toolbox_backup));
+LinearLayout backupBtn = createToolboxButton("backup", mxodosActivity.getString(R.string.toolbox_backup));
 backupBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.termux/files ./home ./usr\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.xodos/files ./home ./usr\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 3000);
 });
@@ -935,7 +935,7 @@ mToolboxGrid.addView(backupBtn);
 
 // wizard Button
 // addCommandButton
-LinearLayout wizardBtn = createToolboxButton("wizard", mTermuxActivity.getString(R.string.toolbox_wizard));
+LinearLayout wizardBtn = createToolboxButton("wizard", mxodosActivity.getString(R.string.toolbox_wizard));
 wizardBtn.setOnClickListener(v -> {
     // Immediate feedback
     showBlockingView();
@@ -944,18 +944,18 @@ wizardBtn.setOnClickListener(v -> {
     // Delay before showing wizard
     mHandler.postDelayed(() -> {
         hideBlockingView();
-     // mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/xodos\n");
+     // mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/xodos\n");
         // Start configuration wizard
-        new XoDosWizard(mTermuxActivity).start();
+        new XoDosWizard(mxodosActivity).start();
     }, 1000); // 2-second delay
 });
 mToolboxGrid.addView(wizardBtn);
 
 // Switch Button
-LinearLayout switchBtn = createToolboxButton("switch", mTermuxActivity.getString(R.string.toolbox_switch));
+LinearLayout switchBtn = createToolboxButton("switch", mxodosActivity.getString(R.string.toolbox_switch));
 switchBtn.setOnClickListener(v -> {
     showBlockingView();
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.termux/files/usr/bin/switch\n");
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write("/data/data/com.xodos/files/usr/bin/switch\n");
     mToolboxPopup.dismiss();
     mHandler.postDelayed(() -> hideBlockingView(), 6000);
 });
@@ -970,12 +970,12 @@ mToolboxGrid.addView(switchBtn);
     mToolboxGrid.addView(addBtn);
   
   // Add Clean Wine Button
-    LinearLayout cleanWineBtn = createToolboxButton("clean", mTermuxActivity.getString(R.string.toolbox_clean_wine));
+    LinearLayout cleanWineBtn = createToolboxButton("clean", mxodosActivity.getString(R.string.toolbox_clean_wine));
     cleanWineBtn.setOnClickListener(v -> showWineCleanDialog());
     mToolboxGrid.addView(cleanWineBtn);
 
       // Help Button
-LinearLayout helpBtn = createToolboxButton("help", mTermuxActivity.getString(R.string.toolbox_help));
+LinearLayout helpBtn = createToolboxButton("help", mxodosActivity.getString(R.string.toolbox_help));
 helpBtn.setOnClickListener(v -> {
    // mToolboxPopup.dismiss();
     startTutorial();
@@ -985,7 +985,7 @@ mToolboxGrid.addView(helpBtn);
 ////////////////
     
 private void showWineCleanDialog() {
-    new AlertDialog.Builder(mTermuxActivity)
+    new AlertDialog.Builder(mxodosActivity)
         .setTitle(R.string.clean_wine_title)
         .setMessage(R.string.clean_wine_warning)
         .setPositiveButton(R.string.delete_glibc, (d, w) -> cleanWineEnvironment(true))
@@ -1014,13 +1014,13 @@ private void cleanWineEnvironment(boolean isGlibc) {
     new Thread(() -> {
         try {
             for(String cmd : commands) {
-                mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast()
+                mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast()
                     .write(cmd + "\n");
                 Thread.sleep(500);
             }
             mHandler.post(() -> 
                 Toast.makeText(
-                    mTermuxActivity, 
+                    mxodosActivity, 
                     R.string.cleanup_completed, 
                     Toast.LENGTH_SHORT
                 ).show()
@@ -1028,8 +1028,8 @@ private void cleanWineEnvironment(boolean isGlibc) {
         } catch (Exception e) {
             mHandler.post(() -> 
                 Toast.makeText(
-                    mTermuxActivity, 
-                    mTermuxActivity.getString(R.string.cleanup_error, e.getMessage()), 
+                    mxodosActivity, 
+                    mxodosActivity.getString(R.string.cleanup_error, e.getMessage()), 
                     Toast.LENGTH_LONG
                 ).show()
             );
@@ -1043,17 +1043,17 @@ private void cleanWineEnvironment(boolean isGlibc) {
 private void executeEntry(StartEntry.Entry entry) {
     // Reuse existing launch logic from mLaunchButton's onClickListener
     String command = entry.getPath() + "\n";
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
     mToolboxPopup.dismiss();
 }
 
 private void executeBackupCommand() {
-    String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.termux/files ./home ./usr \n";
-    File storageDir = new File(mTermuxActivity.getFilesDir(), "home/storage");
+    String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.xodos/files ./home ./usr \n";
+    File storageDir = new File(mxodosActivity.getFilesDir(), "home/storage");
     if (!storageDir.exists()) {
-        command = "termux-setup-storage; sleep 5; " + command;
+        command = "xodos-setup-storage; sleep 5; " + command;
     }
-    mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+    mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
 }
 
 ///////////
@@ -1094,7 +1094,7 @@ private void executeBackupCommand() {
             // Keep toolbox popup open after selection
     refreshToolboxItems();
     mToolboxPopup.showAtLocation(
-        mTermuxActivity.findViewById(R.id.left_drawer),
+        mxodosActivity.findViewById(R.id.left_drawer),
         Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 120
     );
     }

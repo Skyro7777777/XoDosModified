@@ -1,4 +1,4 @@
-package com.termux.app.api.file;
+package com.xodos.app.api.file;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,21 +10,21 @@ import android.util.Patterns;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.termux.R;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.net.uri.UriUtils;
-import com.termux.shared.interact.MessageDialogUtils;
-import com.termux.shared.net.uri.UriScheme;
-import com.termux.shared.termux.interact.TextInputDialogUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE;
-import com.termux.app.TermuxService;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
+import com.xodos.R;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.net.uri.UriUtils;
+import com.xodos.shared.interact.MessageDialogUtils;
+import com.xodos.shared.net.uri.UriScheme;
+import com.xodos.shared.xodos.interact.TextInputDialogUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_SERVICE;
+import com.xodos.app.xodosService;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
+import com.xodos.shared.xodos.settings.properties.xodosPropertyConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -38,9 +38,9 @@ import java.util.regex.Pattern;
 
 public class FileReceiverActivity extends AppCompatActivity {
 
-    static final String TERMUX_RECEIVEDIR = TermuxConstants.TERMUX_FILES_DIR_PATH + "/home/downloads";
-    static final String EDITOR_PROGRAM = TermuxConstants.TERMUX_HOME_DIR_PATH + "/bin/termux-file-editor";
-    static final String URL_OPENER_PROGRAM = TermuxConstants.TERMUX_HOME_DIR_PATH + "/bin/termux-url-opener";
+    static final String xodos_RECEIVEDIR = xodosConstants.xodos_FILES_DIR_PATH + "/home/downloads";
+    static final String EDITOR_PROGRAM = xodosConstants.xodos_HOME_DIR_PATH + "/bin/xodos-file-editor";
+    static final String URL_OPENER_PROGRAM = xodosConstants.xodos_HOME_DIR_PATH + "/bin/xodos-url-opener";
 
     /**
      * If the activity should be finished when the name input dialog is dismissed. This is disabled
@@ -50,7 +50,7 @@ public class FileReceiverActivity extends AppCompatActivity {
      */
     boolean mFinishOnDismissNameDialog = true;
 
-    private static final String API_TAG = TermuxConstants.TERMUX_APP_NAME + "FileReceiver";
+    private static final String API_TAG = xodosConstants.xodos_APP_NAME + "FileReceiver";
 
     private static final String LOG_TAG = "FileReceiverActivity";
 
@@ -165,7 +165,7 @@ public class FileReceiverActivity extends AppCompatActivity {
 
                 final File editorProgramFile = new File(EDITOR_PROGRAM);
                 if (!editorProgramFile.isFile()) {
-                    showErrorDialogAndQuit("The following file does not exist:\n$HOME/bin/termux-file-editor\n\n"
+                    showErrorDialogAndQuit("The following file does not exist:\n$HOME/bin/xodos-file-editor\n\n"
                         + "Create this file as a script or a symlink - it will be called with the received file as only argument.");
                     return;
                 }
@@ -176,18 +176,18 @@ public class FileReceiverActivity extends AppCompatActivity {
 
                 final Uri scriptUri = UriUtils.getFileUri(EDITOR_PROGRAM);
 
-                Intent executeIntent = new Intent(TERMUX_SERVICE.ACTION_SERVICE_EXECUTE, scriptUri);
-                executeIntent.setClass(FileReceiverActivity.this, TermuxService.class);
-                executeIntent.putExtra(TERMUX_SERVICE.EXTRA_ARGUMENTS, new String[]{outFile.getAbsolutePath()});
+                Intent executeIntent = new Intent(xodos_SERVICE.ACTION_SERVICE_EXECUTE, scriptUri);
+                executeIntent.setClass(FileReceiverActivity.this, xodosService.class);
+                executeIntent.putExtra(xodos_SERVICE.EXTRA_ARGUMENTS, new String[]{outFile.getAbsolutePath()});
                 startService(executeIntent);
                 finish();
             },
             R.string.action_file_received_open_directory, text -> {
                 if (saveStreamWithName(in, text) == null) return;
 
-                Intent executeIntent = new Intent(TERMUX_SERVICE.ACTION_SERVICE_EXECUTE);
-                executeIntent.putExtra(TERMUX_SERVICE.EXTRA_WORKDIR, TERMUX_RECEIVEDIR);
-                executeIntent.setClass(FileReceiverActivity.this, TermuxService.class);
+                Intent executeIntent = new Intent(xodos_SERVICE.ACTION_SERVICE_EXECUTE);
+                executeIntent.putExtra(xodos_SERVICE.EXTRA_WORKDIR, xodos_RECEIVEDIR);
+                executeIntent.setClass(FileReceiverActivity.this, xodosService.class);
                 startService(executeIntent);
                 finish();
             },
@@ -197,7 +197,7 @@ public class FileReceiverActivity extends AppCompatActivity {
     }
 
     public File saveStreamWithName(InputStream in, String attachmentFileName) {
-        File receiveDir = new File(TERMUX_RECEIVEDIR);
+        File receiveDir = new File(xodos_RECEIVEDIR);
 
         if (DataUtils.isNullOrEmpty(attachmentFileName)) {
             showErrorDialogAndQuit("File name cannot be null or empty");
@@ -229,7 +229,7 @@ public class FileReceiverActivity extends AppCompatActivity {
     void handleUrlAndFinish(final String url) {
         final File urlOpenerProgramFile = new File(URL_OPENER_PROGRAM);
         if (!urlOpenerProgramFile.isFile()) {
-            showErrorDialogAndQuit("The following file does not exist:\n$HOME/bin/termux-url-opener\n\n"
+            showErrorDialogAndQuit("The following file does not exist:\n$HOME/bin/xodos-url-opener\n\n"
                 + "Create this file as a script or a symlink - it will be called with the shared URL as the first argument.");
             return;
         }
@@ -240,40 +240,40 @@ public class FileReceiverActivity extends AppCompatActivity {
 
         final Uri urlOpenerProgramUri = UriUtils.getFileUri(URL_OPENER_PROGRAM);
 
-        Intent executeIntent = new Intent(TERMUX_SERVICE.ACTION_SERVICE_EXECUTE, urlOpenerProgramUri);
-        executeIntent.setClass(FileReceiverActivity.this, TermuxService.class);
-        executeIntent.putExtra(TERMUX_SERVICE.EXTRA_ARGUMENTS, new String[]{url});
+        Intent executeIntent = new Intent(xodos_SERVICE.ACTION_SERVICE_EXECUTE, urlOpenerProgramUri);
+        executeIntent.setClass(FileReceiverActivity.this, xodosService.class);
+        executeIntent.putExtra(xodos_SERVICE.EXTRA_ARGUMENTS, new String[]{url});
         startService(executeIntent);
         finish();
     }
 
     /**
-     * Update {@link TERMUX_APP#FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME} component state depending on
-     * {@link TermuxPropertyConstants#KEY_DISABLE_FILE_SHARE_RECEIVER} value and
-     * {@link TERMUX_APP#FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME} component state depending on
-     * {@link TermuxPropertyConstants#KEY_DISABLE_FILE_VIEW_RECEIVER} value.
+     * Update {@link xodos_APP#FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME} component state depending on
+     * {@link xodosPropertyConstants#KEY_DISABLE_FILE_SHARE_RECEIVER} value and
+     * {@link xodos_APP#FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME} component state depending on
+     * {@link xodosPropertyConstants#KEY_DISABLE_FILE_VIEW_RECEIVER} value.
      */
     public static void updateFileReceiverActivityComponentsState(@NonNull Context context) {
         new Thread() {
             @Override
             public void run() {
-                TermuxAppSharedProperties properties = TermuxAppSharedProperties.getProperties();
+                xodosAppSharedProperties properties = xodosAppSharedProperties.getProperties();
 
                 String errmsg;
                 boolean state;
 
                 state = !properties.isFileShareReceiverDisabled();
-                Logger.logVerbose(LOG_TAG, "Setting " + TERMUX_APP.FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME + " component state to " + state);
-                errmsg = PackageUtils.setComponentState(context,TermuxConstants.TERMUX_PACKAGE_NAME,
-                    TERMUX_APP.FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME,
+                Logger.logVerbose(LOG_TAG, "Setting " + xodos_APP.FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME + " component state to " + state);
+                errmsg = PackageUtils.setComponentState(context,xodosConstants.xodos_PACKAGE_NAME,
+                    xodos_APP.FILE_SHARE_RECEIVER_ACTIVITY_CLASS_NAME,
                     state, null, false, false);
                 if (errmsg != null)
                     Logger.logError(LOG_TAG, errmsg);
 
                 state = !properties.isFileViewReceiverDisabled();
-                Logger.logVerbose(LOG_TAG, "Setting " + TERMUX_APP.FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME + " component state to " + state);
-                errmsg = PackageUtils.setComponentState(context,TermuxConstants.TERMUX_PACKAGE_NAME,
-                    TERMUX_APP.FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME,
+                Logger.logVerbose(LOG_TAG, "Setting " + xodos_APP.FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME + " component state to " + state);
+                errmsg = PackageUtils.setComponentState(context,xodosConstants.xodos_PACKAGE_NAME,
+                    xodos_APP.FILE_VIEW_RECEIVER_ACTIVITY_CLASS_NAME,
                     state, null, false, false);
                 if (errmsg != null)
                     Logger.logError(LOG_TAG, errmsg);

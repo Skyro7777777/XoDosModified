@@ -1,7 +1,7 @@
-package com.termux.x11.controller.inputcontrols;
-import com.termux.x11.R;
-import static com.termux.x11.controller.inputcontrols.ControlElement.Shape.CIRCLE;
-import static com.termux.x11.controller.inputcontrols.ControlElement.Shape.SQUARE;
+package com.xodos.x11.controller.inputcontrols;
+import com.xodos.x11.R;
+import static com.xodos.x11.controller.inputcontrols.ControlElement.Shape.CIRCLE;
+import static com.xodos.x11.controller.inputcontrols.ControlElement.Shape.SQUARE;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,11 +13,11 @@ import android.graphics.Rect;
 
 import androidx.core.graphics.ColorUtils;
 
-import com.termux.x11.controller.core.CubicBezierInterpolator;
+import com.xodos.x11.controller.core.CubicBezierInterpolator;
 
-import com.termux.x11.controller.math.Mathf;
-import com.termux.x11.controller.widget.InputControlsView;
-import com.termux.x11.controller.xserver.XKeycode;
+import com.xodos.x11.controller.math.Mathf;
+import com.xodos.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.xserver.XKeycode;
 
 import org.json.JSONArray;
 import org.json.JSONException;

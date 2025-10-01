@@ -1,4 +1,4 @@
-package com.termux.shared.termux.models;
+package com.xodos.shared.xodos.models;
 
 public enum UserAction {
 

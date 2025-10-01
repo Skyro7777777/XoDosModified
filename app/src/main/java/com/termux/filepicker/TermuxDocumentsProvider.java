@@ -11,8 +11,8 @@ import android.provider.DocumentsContract.Root;
 import android.provider.DocumentsProvider;
 import android.webkit.MimeTypeMap;
 
-import com.termux.R;
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.R;
+import com.xodos.shared.xodos.xodosConstants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,11 +31,11 @@ import java.util.LinkedList;
  * offering two different ways of accessing your stored data. This would be confusing for users."
  * - http://developer.android.com/guide/topics/providers/document-provider.html#43
  */
-public class TermuxDocumentsProvider extends DocumentsProvider {
+public class xodosDocumentsProvider extends DocumentsProvider {
 
     private static final String ALL_MIME_TYPES = "*/*";
 
-    private static final File BASE_DIR = TermuxConstants.TERMUX_FILES_DIR;
+    private static final File BASE_DIR = xodosConstants.xodos_FILES_DIR;
 
 
     // The default columns to return information about a root if no specific
@@ -171,7 +171,7 @@ public class TermuxDocumentsProvider extends DocumentsProvider {
             // through the whole SD card).
             boolean isInsideHome;
             try {
-                isInsideHome = file.getCanonicalPath().startsWith(TermuxConstants.TERMUX_HOME_DIR_PATH);
+                isInsideHome = file.getCanonicalPath().startsWith(xodosConstants.xodos_HOME_DIR_PATH);
             } catch (IOException e) {
                 isInsideHome = true;
             }

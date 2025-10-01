@@ -1,4 +1,4 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import android.view.KeyEvent;
 import android.view.MotionEvent;

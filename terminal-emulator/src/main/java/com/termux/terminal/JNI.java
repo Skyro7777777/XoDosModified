@@ -1,12 +1,12 @@
-package com.termux.terminal;
+package com.xodos.terminal;
 
 /**
- * Native methods for creating and managing pseudoterminal subprocesses. C code is in jni/termux.c.
+ * Native methods for creating and managing pseudoterminal subprocesses. C code is in jni/xodos.c.
  */
 final class JNI {
 
     static {
-        System.loadLibrary("termux");
+        System.loadLibrary("xodos");
     }
 
     /**

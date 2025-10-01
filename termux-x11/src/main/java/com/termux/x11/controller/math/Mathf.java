@@ -1,4 +1,4 @@
-package com.termux.x11.controller.math;
+package com.xodos.x11.controller.math;
 
 public abstract class Mathf {
     public static float clamp(float x, float min, float max) {

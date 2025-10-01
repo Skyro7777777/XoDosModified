@@ -1,14 +1,14 @@
-package com.termux.x11.controller.xserver;
+package com.xodos.x11.controller.xserver;
 
 import android.view.KeyEvent;
 
 import androidx.collection.ArraySet;
 
-import com.termux.x11.controller.inputcontrols.ExternalController;
+import com.xodos.x11.controller.inputcontrols.ExternalController;
 
 import java.util.ArrayList;
 
-import com.termux.x11.LorieView;
+import com.xodos.x11.LorieView;
 
 public class Keyboard {
     public static final byte KEYSYMS_PER_KEYCODE = 2;

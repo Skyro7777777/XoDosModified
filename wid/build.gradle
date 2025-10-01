@@ -20,9 +20,9 @@ android {
 
         // Manifest placeholders for app metadata
         manifestPlaceholders = [
-            TERMUX_PACKAGE_NAME: "com.xodos",
-            TERMUX_APP_NAME: "Termux",
-            TERMUX_WIDGET_APP_NAME: "Termux:Widget"
+            xodos_PACKAGE_NAME: "com.xodos",
+            xodos_APP_NAME: "xodos",
+            xodos_WIDGET_APP_NAME: "xodos:Widget"
         ]
     }
 
@@ -43,9 +43,9 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
-    // Exclude conflicting native libs from termux-shared
+    // Exclude conflicting native libs from xodos-shared
     packagingOptions {
-        exclude 'lib/*/libtermux.so'
+        exclude 'lib/*/libxodos.so'
     }
 }
 
@@ -58,8 +58,8 @@ dependencies {
     implementation "androidx.annotation:annotation:1.9.1"
     implementation "com.google.android.material:material:1.12.0"
 
-    // Termux core dependency (local or published)
-     implementation project(":termux-shared")
+    // xodos core dependency (local or published)
+     implementation project(":xodos-shared")
 
     // Guava compatibility
     implementation "com.google.guava:guava:24.1-jre"

@@ -1,15 +1,15 @@
-package com.termux.x11.controller.winhandler;
+package com.xodos.x11.controller.winhandler;
 
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 
-import com.termux.x11.MainActivity;
-import com.termux.x11.controller.core.StringUtils;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.ExternalController;
-import com.termux.x11.controller.inputcontrols.GamepadState;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.controller.core.StringUtils;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.ExternalController;
+import com.xodos.x11.controller.inputcontrols.GamepadState;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

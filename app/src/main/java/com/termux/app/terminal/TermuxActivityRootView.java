@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -15,19 +15,19 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.termux.app.TermuxActivity;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.view.ViewUtils;
+import com.xodos.app.xodosActivity;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.view.ViewUtils;
 
 
 /**
- * The {@link TermuxActivity} relies on {@link android.view.WindowManager.LayoutParams#SOFT_INPUT_ADJUST_RESIZE)}
- * set by {@link TermuxTerminalViewClient#setSoftKeyboardState(boolean, boolean)} to automatically
+ * The {@link xodosActivity} relies on {@link android.view.WindowManager.LayoutParams#SOFT_INPUT_ADJUST_RESIZE)}
+ * set by {@link xodosTerminalViewClient#setSoftKeyboardState(boolean, boolean)} to automatically
  * resize the view and push the terminal up when soft keyboard is opened. However, this does not
- * always work properly. When `enforce-char-based-input=true` is set in `termux.properties`
- * and {@link com.termux.view.TerminalView#onCreateInputConnection(EditorInfo)} sets the inputType
+ * always work properly. When `enforce-char-based-input=true` is set in `xodos.properties`
+ * and {@link com.xodos.view.TerminalView#onCreateInputConnection(EditorInfo)} sets the inputType
  * to `InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS`
- * instead of the default `InputType.TYPE_NULL` for termux, some keyboards may still show suggestions.
+ * instead of the default `InputType.TYPE_NULL` for xodos, some keyboards may still show suggestions.
  * Gboard does too, but only when text is copied and clipboard suggestions **and** number keys row
  * toggles are enabled in its settings. When number keys row toggle is not enabled, Gboard will still
  * show the row but will switch it with suggestions if needed. If its enabled, then number keys row
@@ -45,14 +45,14 @@ import com.termux.shared.view.ViewUtils;
  * where `keyboard_height = screen_height - height_for_app - header_height` (62 is a hardcoded value in Gboard source code and may be a version number)
  * So this may in fact be due to Gboard but https://stackoverflow.com/questions/57567272 suggests
  * otherwise. Another similar report https://stackoverflow.com/questions/66761661.
- * Also check https://github.com/termux/termux-app/issues/1539.
+ * Also check https://github.com/xodos/xodos-emulator/issues/1539.
  *
  * This overlap may happen even without `enforce-char-based-input=true` for keyboards with extended layouts
  * like number row, etc.
  *
- * To fix these issues, `activity_termux.xml` has the constant 1sp transparent
- * `activity_termux_bottom_space_view` View at the bottom. This will appear as a line matching the
- * activity theme. When {@link TermuxActivity} {@link ViewTreeObserver.OnGlobalLayoutListener} is
+ * To fix these issues, `activity_xodos.xml` has the constant 1sp transparent
+ * `activity_xodos_bottom_space_view` View at the bottom. This will appear as a line matching the
+ * activity theme. When {@link xodosActivity} {@link ViewTreeObserver.OnGlobalLayoutListener} is
  * called when any of the sub view layouts change,  like keyboard opening/closing keyboard,
  * extra keys/input view switched, etc, we check if the bottom space view is visible or not.
  * If its not, then we add a margin to the bottom of the root view, so that the keyboard does not
@@ -61,8 +61,8 @@ import com.termux.shared.view.ViewUtils;
  * hidden part equals the `header_height`. The updates to margins may cause a jitter in some cases
  * when the view is redrawn if the margin is incorrect, but logic has been implemented to avoid that.
  */
-public class TermuxActivityRootView extends LinearLayout implements ViewTreeObserver.OnGlobalLayoutListener {
-    public TermuxActivity mActivity;
+public class xodosActivityRootView extends LinearLayout implements ViewTreeObserver.OnGlobalLayoutListener {
+    public xodosActivity mActivity;
     public Integer marginBottom;
     public Integer lastMarginBottom;
     public long lastMarginBottomTime;
@@ -71,23 +71,23 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
     /** Log root view events. */
     private boolean ROOT_VIEW_LOGGING_ENABLED = false;
 
-    private static final String LOG_TAG = "TermuxActivityRootView";
+    private static final String LOG_TAG = "xodosActivityRootView";
 
     private static int mStatusBarHeight;
 
-    public TermuxActivityRootView(Context context) {
+    public xodosActivityRootView(Context context) {
         super(context);
     }
 
-    public TermuxActivityRootView(Context context, @Nullable AttributeSet attrs) {
+    public xodosActivityRootView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TermuxActivityRootView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public xodosActivityRootView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setActivity(TermuxActivity activity) {
+    public void setActivity(xodosActivity activity) {
         mActivity = activity;
     }
 
@@ -123,7 +123,7 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
     public void onGlobalLayout() {
         if (mActivity == null || !mActivity.isVisible()) return;
 
-        View bottomSpaceView = mActivity.getTermuxActivityBottomSpaceView();
+        View bottomSpaceView = mActivity.getxodosActivityBottomSpaceView();
         if (bottomSpaceView == null) return;
 
         boolean root_view_logging_enabled = ROOT_VIEW_LOGGING_ENABLED;
@@ -166,7 +166,7 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
             // will call OnGlobalLayoutListener again and next time bottom space view
             // will be visible and margin will be set to 0, which again will call
             // OnGlobalLayoutListener...
-            // Calling addTermuxActivityRootViewGlobalLayoutListener with a delay fails to
+            // Calling addxodosActivityRootViewGlobalLayoutListener with a delay fails to
             // set appropriate margins when views are changed quickly since some changes
             // may be missed.
             if (isVisibleBecauseMargin) {

@@ -13,13 +13,13 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
-import com.termux.shared.termux.plugins.TermuxPluginUtils;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.net.uri.UriUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.net.uri.UriScheme;
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.xodos.plugins.xodosPluginUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.net.uri.UriUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.net.uri.UriScheme;
+import com.xodos.shared.xodos.xodosConstants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,9 +27,9 @@ import java.io.IOException;
 
 import androidx.annotation.NonNull;
 
-public class TermuxOpenReceiver extends BroadcastReceiver {
+public class xodosOpenReceiver extends BroadcastReceiver {
 
-    private static final String LOG_TAG = "TermuxOpenReceiver";
+    private static final String LOG_TAG = "xodosOpenReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -104,7 +104,7 @@ public class TermuxOpenReceiver extends BroadcastReceiver {
         }
 
         // Do not create Uri with Uri.parse() and use Uri.Builder().path(), check UriUtils.getUriFilePath().
-        Uri uriToShare = UriUtils.getContentUri(TermuxConstants.TERMUX_FILE_SHARE_URI_AUTHORITY, fileToShare.getAbsolutePath());
+        Uri uriToShare = UriUtils.getContentUri(xodosConstants.xodos_FILE_SHARE_URI_AUTHORITY, fileToShare.getAbsolutePath());
 
         if (Intent.ACTION_SEND.equals(intentAction)) {
             sendIntent.putExtra(Intent.EXTRA_STREAM, uriToShare);
@@ -126,7 +126,7 @@ public class TermuxOpenReceiver extends BroadcastReceiver {
 
     public static class ContentProvider extends android.content.ContentProvider {
 
-        private static final String LOG_TAG = "TermuxContentProvider";
+        private static final String LOG_TAG = "xodosContentProvider";
 
         @Override
         public boolean onCreate() {
@@ -199,21 +199,21 @@ public class TermuxOpenReceiver extends BroadcastReceiver {
                 Logger.logDebug(LOG_TAG, "Open file request received from " + callingPackageName + " for \"" + path + "\" with mode \"" + mode + "\"");
                 String storagePath = Environment.getExternalStorageDirectory().getCanonicalPath();
                 // See https://support.google.com/faqs/answer/7496913:
-                if (!(path.startsWith(TermuxConstants.TERMUX_FILES_DIR_PATH) || path.startsWith(storagePath))) {
+                if (!(path.startsWith(xodosConstants.xodos_FILES_DIR_PATH) || path.startsWith(storagePath))) {
                     throw new IllegalArgumentException("Invalid path: " + path);
                 }
 
-                // If TermuxConstants.PROP_ALLOW_EXTERNAL_APPS property to not set to "true", then throw exception
-                String errmsg = TermuxPluginUtils.checkIfAllowExternalAppsPolicyIsViolated(getContext(), LOG_TAG);
+                // If xodosConstants.PROP_ALLOW_EXTERNAL_APPS property to not set to "true", then throw exception
+                String errmsg = xodosPluginUtils.checkIfAllowExternalAppsPolicyIsViolated(getContext(), LOG_TAG);
                 if (errmsg != null) {
                     throw new IllegalArgumentException(errmsg);
                 }
 
                 // **DO NOT** allow these files to be modified by ContentProvider exposed to external
                 // apps, since they may silently modify the values for security properties like
-                // TermuxConstants.PROP_ALLOW_EXTERNAL_APPS set by users without their explicit consent.
-                if (TermuxConstants.TERMUX_PROPERTIES_FILE_PATHS_LIST.contains(path) ||
-                    TermuxConstants.TERMUX_FLOAT_PROPERTIES_FILE_PATHS_LIST.contains(path)) {
+                // xodosConstants.PROP_ALLOW_EXTERNAL_APPS set by users without their explicit consent.
+                if (xodosConstants.xodos_PROPERTIES_FILE_PATHS_LIST.contains(path) ||
+                    xodosConstants.xodos_FLOAT_PROPERTIES_FILE_PATHS_LIST.contains(path)) {
                     mode = "r";
                 }
 

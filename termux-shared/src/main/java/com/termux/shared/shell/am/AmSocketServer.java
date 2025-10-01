@@ -1,4 +1,4 @@
-package com.termux.shared.shell.am;
+package com.xodos.shared.shell.am;
 
 import android.Manifest;
 import android.app.Application;
@@ -7,20 +7,20 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.am.Am;
-import com.termux.shared.R;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.android.PermissionUtils;
-import com.termux.shared.errors.Error;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.net.socket.local.ILocalSocketManager;
-import com.termux.shared.net.socket.local.LocalClientSocket;
-import com.termux.shared.net.socket.local.LocalServerSocket;
-import com.termux.shared.net.socket.local.LocalSocketManager;
-import com.termux.shared.net.socket.local.LocalSocketManagerClientBase;
-import com.termux.shared.net.socket.local.LocalSocketRunConfig;
-import com.termux.shared.shell.ArgumentTokenizer;
-import com.termux.shared.shell.command.ExecutionCommand;
+import com.xodos.am.Am;
+import com.xodos.shared.R;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.android.PermissionUtils;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.net.socket.local.ILocalSocketManager;
+import com.xodos.shared.net.socket.local.LocalClientSocket;
+import com.xodos.shared.net.socket.local.LocalServerSocket;
+import com.xodos.shared.net.socket.local.LocalSocketManager;
+import com.xodos.shared.net.socket.local.LocalSocketManagerClientBase;
+import com.xodos.shared.net.socket.local.LocalSocketRunConfig;
+import com.xodos.shared.shell.ArgumentTokenizer;
+import com.xodos.shared.shell.command.ExecutionCommand;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -32,13 +32,13 @@ import java.util.List;
 /**
  * A AF_UNIX/SOCK_STREAM local server managed with {@link LocalSocketManager} whose
  * {@link LocalServerSocket} receives android activity manager (am) commands from {@link LocalClientSocket}
- * and runs them with termux-am-library. It would normally only allow processes belonging to the
+ * and runs them with xodos-am-library. It would normally only allow processes belonging to the
  * server app's user and root user to connect to it.
  *
  * The client must send the am command as a string without the initial "am" arg on its output stream
  * and then wait for the result on its input stream. The result of the execution or error is sent
  * back in the format `exit_code\0stdout\0stderr\0` where `\0` represents a null character.
- * Check termux/termux-am-socket for implementation of a native c client.
+ * Check xodos/xodos-am-socket for implementation of a native c client.
  *
  * Usage:
  * 1. Optionally extend {@link AmSocketServerClient}, the implementation for
@@ -52,8 +52,8 @@ import java.util.List;
  * 4. Stop server if needed with a call to {@link LocalSocketManager#stop()} on the
  *    {@link LocalSocketManager} instance returned by start call.
  *
- * https://github.com/termux/termux-am-library/blob/main/termux-am-library/src/main/java/com/termux/am/Am.java
- * https://github.com/termux/termux-am-socket
+ * https://github.com/xodos/xodos-am-library/blob/main/xodos-am-library/src/main/java/com/xodos/am/Am.java
+ * https://github.com/xodos/xodos-am-socket
  * https://developer.android.com/studio/command-line/adb#am
  * https://cs.android.com/android/platform/superproject/+/android-12.0.0_r32:frameworks/base/services/core/java/com/android/server/am/ActivityManagerShellCommand.java
  */
@@ -196,7 +196,7 @@ public class AmSocketServer {
     }
 
     /**
-     * Call termux-am-library to run the am command.
+     * Call xodos-am-library to run the am command.
      *
      * @param context The {@link Context} to run am command with.
      * @param amCommandArray The am command array.

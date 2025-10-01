@@ -1,4 +1,4 @@
-package com.termux.shared.settings.properties;
+package com.xodos.shared.settings.properties;
 
 import android.content.Context;
 

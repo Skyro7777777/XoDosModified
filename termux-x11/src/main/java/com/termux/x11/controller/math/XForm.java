@@ -1,4 +1,4 @@
-package com.termux.x11.controller.math;
+package com.xodos.x11.controller.math;
 
 public class XForm {
     private static final float[] tmpXForm = XForm.getInstance();

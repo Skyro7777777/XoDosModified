@@ -12,48 +12,48 @@ import android.widget.ListView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.termux.shared.activity.media.AppCompatActivityUtils;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.activity.media.AppCompatActivityUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import java.io.File;
 import java.util.Arrays;
 
-public class TermuxCreateShortcutActivity extends AppCompatActivity {
+public class xodosCreateShortcutActivity extends AppCompatActivity {
 
     private ListView mListView;
     private File mCurrentDirectory;
     private File[] mCurrentFiles;
 
-    private static final String LOG_TAG = "TermuxCreateShortcutActivity";
+    private static final String LOG_TAG = "xodosCreateShortcutActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_termux_create_shortcut);
+        setContentView(R.layout.activity_xodos_create_shortcut);
         mListView = findViewById(R.id.list);
 
-        AppCompatActivityUtils.setToolbar(this, com.termux.shared.R.id.toolbar);
+        AppCompatActivityUtils.setToolbar(this, com.xodos.shared.R.id.toolbar);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        String errmsg = TermuxUtils.isTermuxAppAccessible(this);
+        String errmsg = xodosUtils.isxodosAppAccessible(this);
         if (errmsg != null) {
             Logger.logErrorAndShowToast(this, LOG_TAG, errmsg);
             finish();
             return;
         }
 
-        updateListview(TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR);
+        updateListview(xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR);
 
         mListView.setOnItemClickListener((parent, view, position, id) -> {
-            final Context context = TermuxCreateShortcutActivity.this;
+            final Context context = xodosCreateShortcutActivity.this;
             File clickedFile = mCurrentFiles[position];
             if (clickedFile.isDirectory()) {
                 updateListview(clickedFile);
@@ -72,12 +72,12 @@ public class TermuxCreateShortcutActivity extends AppCompatActivity {
 
         Arrays.sort(mCurrentFiles, (f1, f2) -> f1.getName().compareTo(f2.getName()));
 
-        final boolean isTopDir = directory.equals(TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR);
+        final boolean isTopDir = directory.equals(xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR);
         AppCompatActivityUtils.setShowBackButtonInActionBar(this, !isTopDir);
 
         if (isTopDir && mCurrentFiles.length == 0) {
             // Create if necessary so user can more easily add.
-            TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR.mkdirs();
+            xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR.mkdirs();
             new AlertDialog.Builder(this)
                     .setMessage(R.string.msg_no_shortcut_scripts)
                     .setOnDismissListener(dialog -> finish()).show();

@@ -1,4 +1,4 @@
-package com.termux.shared.termux.plugins;
+package com.xodos.shared.xodos.plugins;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -10,36 +10,36 @@ import android.os.Environment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.R;
-import com.termux.shared.activities.ReportActivity;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.shell.command.result.ResultConfig;
-import com.termux.shared.shell.command.result.ResultData;
-import com.termux.shared.errors.Errno;
-import com.termux.shared.errors.Error;
-import com.termux.shared.notification.NotificationUtils;
-import com.termux.shared.termux.models.UserAction;
-import com.termux.shared.termux.notification.TermuxNotificationUtils;
-import com.termux.shared.termux.settings.preferences.TermuxPreferenceConstants;
-import com.termux.shared.shell.command.result.ResultSender;
-import com.termux.shared.shell.ShellUtils;
-import com.termux.shared.android.AndroidUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.settings.preferences.TermuxAppSharedPreferences;
-import com.termux.shared.termux.settings.preferences.TermuxPreferenceConstants.TERMUX_APP;
-import com.termux.shared.models.ReportInfo;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.shell.command.ExecutionCommand;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.markdown.MarkdownUtils;
-import com.termux.shared.termux.TermuxUtils;
+import com.xodos.shared.R;
+import com.xodos.shared.activities.ReportActivity;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.shell.command.result.ResultConfig;
+import com.xodos.shared.shell.command.result.ResultData;
+import com.xodos.shared.errors.Errno;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.notification.NotificationUtils;
+import com.xodos.shared.xodos.models.UserAction;
+import com.xodos.shared.xodos.notification.xodosNotificationUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosPreferenceConstants;
+import com.xodos.shared.shell.command.result.ResultSender;
+import com.xodos.shared.shell.ShellUtils;
+import com.xodos.shared.android.AndroidUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_SERVICE;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.settings.preferences.xodosAppSharedPreferences;
+import com.xodos.shared.xodos.settings.preferences.xodosPreferenceConstants.xodos_APP;
+import com.xodos.shared.models.ReportInfo;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
+import com.xodos.shared.shell.command.ExecutionCommand;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.markdown.MarkdownUtils;
+import com.xodos.shared.xodos.xodosUtils;
 
-public class TermuxPluginUtils {
+public class xodosPluginUtils {
 
-    private static final String LOG_TAG = "TermuxPluginUtils";
+    private static final String LOG_TAG = "xodosPluginUtils";
 
     /**
      * Process {@link ExecutionCommand} result.
@@ -94,7 +94,7 @@ public class TermuxPluginUtils {
                 sendPluginCommandErrorNotification(context, logTag, null,
                     ResultData.getErrorsListMinimalString(resultData),
                     ExecutionCommand.getExecutionCommandMarkdownString(executionCommand),
-                    false, true, TermuxUtils.AppInfoMode.TERMUX_AND_CALLING_PACKAGE,true,
+                    false, true, xodosUtils.AppInfoMode.xodos_AND_CALLING_PACKAGE,true,
                     executionCommand.resultConfig.resultPendingIntent != null ? executionCommand.resultConfig.resultPendingIntent.getCreatorPackage(): null);
             }
 
@@ -114,7 +114,7 @@ public class TermuxPluginUtils {
      * @param executionCommand The {@link ExecutionCommand} that failed.
      * @param forceNotification If set to {@code true}, then a flash and notification will be shown
      *                          regardless of if pending intent is {@code null} or
-     *                          {@link TERMUX_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
+     *                          {@link xodos_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
      *                          is {@code false}.
      * @param errmsg The error message to set.
      */
@@ -138,9 +138,9 @@ public class TermuxPluginUtils {
      * {@link ResultConfig#resultPendingIntent} or {@link ResultConfig#resultDirectoryPath}
      * is not {@code null}, then the errors of commands are sent back to the command caller.
      *
-     * Otherwise if the {@link TERMUX_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED} is
+     * Otherwise if the {@link xodos_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED} is
      * enabled, then a flash and a notification will be shown for the error as well
-     * on the {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME} channel instead of just logging
+     * on the {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME} channel instead of just logging
      * the error.
      *
      * @param context The {@link Context} for operations.
@@ -148,7 +148,7 @@ public class TermuxPluginUtils {
      * @param executionCommand The {@link ExecutionCommand} that failed.
      * @param forceNotification If set to {@code true}, then a flash and notification will be shown
      *                          regardless of if pending intent is {@code null} or
-     *                          {@link TERMUX_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
+     *                          {@link xodos_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
      *                          is {@code false}.
      */
     public static void processPluginExecutionCommandError(final Context context, String logTag,
@@ -200,7 +200,7 @@ public class TermuxPluginUtils {
         sendPluginCommandErrorNotification(context, logTag, null,
             ResultData.getErrorsListMinimalString(resultData),
             ExecutionCommand.getExecutionCommandMarkdownString(executionCommand),
-            forceNotification, true, TermuxUtils.AppInfoMode.TERMUX_AND_CALLING_PACKAGE, true,
+            forceNotification, true, xodosUtils.AppInfoMode.xodos_AND_CALLING_PACKAGE, true,
             executionCommand.resultConfig.resultPendingIntent != null ? executionCommand.resultConfig.resultPendingIntent.getCreatorPackage(): null);
     }
 
@@ -209,14 +209,14 @@ public class TermuxPluginUtils {
     public static void setPluginResultPendingIntentVariables(ExecutionCommand executionCommand) {
         ResultConfig resultConfig = executionCommand.resultConfig;
 
-        resultConfig.resultBundleKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE;
-        resultConfig.resultStdoutKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDOUT;
-        resultConfig.resultStdoutOriginalLengthKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDOUT_ORIGINAL_LENGTH;
-        resultConfig.resultStderrKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDERR;
-        resultConfig.resultStderrOriginalLengthKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDERR_ORIGINAL_LENGTH;
-        resultConfig.resultExitCodeKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_EXIT_CODE;
-        resultConfig.resultErrCodeKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_ERR;
-        resultConfig.resultErrmsgKey = TERMUX_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_ERRMSG;
+        resultConfig.resultBundleKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE;
+        resultConfig.resultStdoutKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDOUT;
+        resultConfig.resultStdoutOriginalLengthKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDOUT_ORIGINAL_LENGTH;
+        resultConfig.resultStderrKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDERR;
+        resultConfig.resultStderrOriginalLengthKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_STDERR_ORIGINAL_LENGTH;
+        resultConfig.resultExitCodeKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_EXIT_CODE;
+        resultConfig.resultErrCodeKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_ERR;
+        resultConfig.resultErrmsgKey = xodos_SERVICE.EXTRA_PLUGIN_RESULT_BUNDLE_ERRMSG;
     }
 
     /** Set variables which will be used by {@link ResultSender#sendCommandResultData(Context, String, String, ResultConfig, ResultData, boolean)}
@@ -224,8 +224,8 @@ public class TermuxPluginUtils {
     public static void setPluginResultDirectoryVariables(ExecutionCommand executionCommand) {
         ResultConfig resultConfig = executionCommand.resultConfig;
 
-        resultConfig.resultDirectoryPath = TermuxFileUtils.getCanonicalPath(resultConfig.resultDirectoryPath, null, true);
-        resultConfig.resultDirectoryAllowedParentPath = TermuxFileUtils.getMatchedAllowedTermuxWorkingDirectoryParentPathForPath(resultConfig.resultDirectoryPath);
+        resultConfig.resultDirectoryPath = xodosFileUtils.getCanonicalPath(resultConfig.resultDirectoryPath, null, true);
+        resultConfig.resultDirectoryAllowedParentPath = xodosFileUtils.getMatchedAllowedxodosWorkingDirectoryParentPathForPath(resultConfig.resultDirectoryPath);
 
         // Set default resultFileBasename if resultSingleFile is true to `<executable_basename>-<timestamp>.log`
         if (resultConfig.resultSingleFile && resultConfig.resultFileBasename == null)
@@ -236,8 +236,8 @@ public class TermuxPluginUtils {
 
 
     /**
-     * Send a plugin error report notification for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * and {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Send a plugin error report notification for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * and {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param currentPackageContext The {@link Context} of current package.
      * @param logTag The log tag to use for logging.
@@ -254,8 +254,8 @@ public class TermuxPluginUtils {
     }
 
     /**
-     * Send a plugin error report notification for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * and {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Send a plugin error report notification for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * and {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param currentPackageContext The {@link Context} of current package.
      * @param logTag The log tag to use for logging.
@@ -272,8 +272,8 @@ public class TermuxPluginUtils {
     }
 
     /**
-     * Send a plugin error report notification for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * and {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Send a plugin error report notification for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * and {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param currentPackageContext The {@link Context} of current package.
      * @param logTag The log tag to use for logging.
@@ -282,7 +282,7 @@ public class TermuxPluginUtils {
      * @param message The message for the error report.
      * @param forceNotification If set to {@code true}, then a notification will be shown
      *                          regardless of if pending intent is {@code null} or
-     *                          {@link TermuxPreferenceConstants.TERMUX_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
+     *                          {@link xodosPreferenceConstants.xodos_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
      *                          is {@code false}.
      * @param showToast If set to {@code true}, then a toast will be shown for {@code notificationTextString}.
      * @param addDeviceInfo If set to {@code true}, then device info should be appended to the message.
@@ -294,12 +294,12 @@ public class TermuxPluginUtils {
                                                          boolean addDeviceInfo) {
         sendPluginCommandErrorNotification(currentPackageContext, logTag,
             title, notificationTextString, "## " + title + "\n\n" + message + "\n\n",
-            forceNotification, showToast, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGE, addDeviceInfo, null);
+            forceNotification, showToast, xodosUtils.AppInfoMode.xodos_AND_PLUGIN_PACKAGE, addDeviceInfo, null);
     }
 
     /**
-     * Send a plugin error notification for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * and {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Send a plugin error notification for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * and {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param currentPackageContext The {@link Context} of current package.
      * @param logTag The log tag to use for logging.
@@ -308,10 +308,10 @@ public class TermuxPluginUtils {
      * @param message The message for the error report.
      * @param forceNotification If set to {@code true}, then a notification will be shown
      *                          regardless of if pending intent is {@code null} or
-     *                          {@link TermuxPreferenceConstants.TERMUX_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
+     *                          {@link xodosPreferenceConstants.xodos_APP#KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED}
      *                          is {@code false}.
      * @param showToast If set to {@code true}, then a toast will be shown for {@code notificationTextString}.
-     * @param appInfoMode The {@link TermuxUtils.AppInfoMode} to use to add app info to the message.
+     * @param appInfoMode The {@link xodosUtils.AppInfoMode} to use to add app info to the message.
      *                    Set to {@code null} if app info should not be appended to the message.
      * @param addDeviceInfo If set to {@code true}, then device info should be appended to the message.
      * @param callingPackageName The optional package name of the app for which the plugin command
@@ -322,21 +322,21 @@ public class TermuxPluginUtils {
                                                           String notificationTextString,
                                                           String message, boolean forceNotification,
                                                           boolean showToast,
-                                                          TermuxUtils.AppInfoMode appInfoMode,
+                                                          xodosUtils.AppInfoMode appInfoMode,
                                                           boolean addDeviceInfo,
                                                           String callingPackageName) {
-        // Note: Do not change currentPackageContext or termuxPackageContext passed to functions or things will break
+        // Note: Do not change currentPackageContext or xodosPackageContext passed to functions or things will break
 
         if (currentPackageContext == null) return;
         String currentPackageName = currentPackageContext.getPackageName();
 
-        final Context termuxPackageContext = TermuxUtils.getTermuxPackageContext(currentPackageContext);
-        if (termuxPackageContext == null) {
-            Logger.logWarn(LOG_TAG, "Ignoring call to sendPluginCommandErrorNotification() since failed to get \"" + TermuxConstants.TERMUX_PACKAGE_NAME + "\" package context from \"" + currentPackageName + "\" context");
+        final Context xodosPackageContext = xodosUtils.getxodosPackageContext(currentPackageContext);
+        if (xodosPackageContext == null) {
+            Logger.logWarn(LOG_TAG, "Ignoring call to sendPluginCommandErrorNotification() since failed to get \"" + xodosConstants.xodos_PACKAGE_NAME + "\" package context from \"" + currentPackageName + "\" context");
             return;
         }
 
-        TermuxAppSharedPreferences preferences = TermuxAppSharedPreferences.build(termuxPackageContext);
+        xodosAppSharedPreferences preferences = xodosAppSharedPreferences.build(xodosPackageContext);
         if (preferences == null) return;
 
         // If user has disabled notifications for plugin commands, then just return
@@ -351,14 +351,14 @@ public class TermuxPluginUtils {
         // Send a notification to show the error which when clicked will open the ReportActivity
         // to show the details of the error
         if (title == null || title.toString().isEmpty())
-            title = TermuxConstants.TERMUX_APP_NAME + " Plugin Execution Command Error";
+            title = xodosConstants.xodos_APP_NAME + " Plugin Execution Command Error";
 
         Logger.logDebug(logTag, "Sending \"" + title + "\" notification.");
 
         StringBuilder reportString = new StringBuilder(message);
 
         if (appInfoMode != null)
-            reportString.append("\n\n").append(TermuxUtils.getAppInfoMarkdownString(currentPackageContext, appInfoMode,
+            reportString.append("\n\n").append(xodosUtils.getAppInfoMarkdownString(currentPackageContext, appInfoMode,
                 callingPackageName != null ? callingPackageName : currentPackageName));
 
         if (addDeviceInfo)
@@ -368,49 +368,49 @@ public class TermuxPluginUtils {
 
         ReportInfo reportInfo = new ReportInfo(userActionName, logTag, title.toString());
         reportInfo.setReportString(reportString.toString());
-        reportInfo.setReportStringSuffix("\n\n" + TermuxUtils.getReportIssueMarkdownString(currentPackageContext));
+        reportInfo.setReportStringSuffix("\n\n" + xodosUtils.getReportIssueMarkdownString(currentPackageContext));
         reportInfo.setAddReportInfoHeaderToMarkdown(true);
         reportInfo.setReportSaveFileLabelAndPath(userActionName,
             Environment.getExternalStorageDirectory() + "/" +
-                FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+                FileUtils.sanitizeFileName(xodosConstants.xodos_APP_NAME + "-" + userActionName + ".log", true, true));
 
-        ReportActivity.NewInstanceResult result = ReportActivity.newInstance(termuxPackageContext, reportInfo);
+        ReportActivity.NewInstanceResult result = ReportActivity.newInstance(xodosPackageContext, reportInfo);
         if (result.contentIntent == null) return;
 
         // Must ensure result code for PendingIntents and id for notification are unique otherwise will override previous
-        int nextNotificationId = TermuxNotificationUtils.getNextNotificationId(termuxPackageContext);
+        int nextNotificationId = xodosNotificationUtils.getNextNotificationId(xodosPackageContext);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(termuxPackageContext, nextNotificationId, result.contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(xodosPackageContext, nextNotificationId, result.contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         PendingIntent deleteIntent = null;
         if (result.deleteIntent != null)
-            deleteIntent = PendingIntent.getBroadcast(termuxPackageContext, nextNotificationId, result.deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            deleteIntent = PendingIntent.getBroadcast(xodosPackageContext, nextNotificationId, result.deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Setup the notification channel if not already set up
-        setupPluginCommandErrorsNotificationChannel(termuxPackageContext);
+        setupPluginCommandErrorsNotificationChannel(xodosPackageContext);
 
         // Use markdown in notification
-        CharSequence notificationTextCharSequence = MarkdownUtils.getSpannedMarkdownText(termuxPackageContext, notificationTextString);
+        CharSequence notificationTextCharSequence = MarkdownUtils.getSpannedMarkdownText(xodosPackageContext, notificationTextString);
         //CharSequence notificationTextCharSequence = notificationTextString;
 
         // Build the notification
-        Notification.Builder builder = getPluginCommandErrorsNotificationBuilder(currentPackageContext, termuxPackageContext,
+        Notification.Builder builder = getPluginCommandErrorsNotificationBuilder(currentPackageContext, xodosPackageContext,
             title, notificationTextCharSequence, notificationTextCharSequence, contentIntent, deleteIntent,
             NotificationUtils.NOTIFICATION_MODE_VIBRATE);
         if (builder == null) return;
 
         // Send the notification
-        NotificationManager notificationManager = NotificationUtils.getNotificationManager(termuxPackageContext);
+        NotificationManager notificationManager = NotificationUtils.getNotificationManager(xodosPackageContext);
         if (notificationManager != null)
             notificationManager.notify(nextNotificationId, builder.build());
     }
 
     /**
-     * Get {@link Notification.Builder} for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * and {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Get {@link Notification.Builder} for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * and {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param currentPackageContext The {@link Context} of current package.
-     * @param termuxPackageContext The {@link Context} of termux package.
+     * @param xodosPackageContext The {@link Context} of xodos package.
      * @param title The title for the notification.
      * @param notificationText The second line text of the notification.
      * @param notificationBigText The full text of the notification that may optionally be styled.
@@ -421,35 +421,35 @@ public class TermuxPluginUtils {
      */
     @Nullable
     public static Notification.Builder getPluginCommandErrorsNotificationBuilder(final Context currentPackageContext,
-                                                                                 final Context termuxPackageContext,
+                                                                                 final Context xodosPackageContext,
                                                                                  final CharSequence title,
                                                                                  final CharSequence notificationText,
                                                                                  final CharSequence notificationBigText,
                                                                                  final PendingIntent contentIntent,
                                                                                  final PendingIntent deleteIntent,
                                                                                  final int notificationMode) {
-        return TermuxNotificationUtils.getTermuxOrPluginAppNotificationBuilder(
-            currentPackageContext, termuxPackageContext,
-            TermuxConstants.TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID, Notification.PRIORITY_HIGH,
+        return xodosNotificationUtils.getxodosOrPluginAppNotificationBuilder(
+            currentPackageContext, xodosPackageContext,
+            xodosConstants.xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID, Notification.PRIORITY_HIGH,
             title, notificationText, notificationBigText, contentIntent, deleteIntent, notificationMode);
     }
 
     /**
-     * Setup the notification channel for {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID} and
-     * {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
+     * Setup the notification channel for {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID} and
+     * {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME}.
      *
      * @param context The {@link Context} for operations.
      */
     public static void setupPluginCommandErrorsNotificationChannel(final Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
-        NotificationUtils.setupNotificationChannel(context, TermuxConstants.TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID,
-            TermuxConstants.TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+        NotificationUtils.setupNotificationChannel(context, xodosConstants.xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID,
+            xodosConstants.xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
     }
 
 
 
     /**
-     * Check if {@link TermuxConstants#PROP_ALLOW_EXTERNAL_APPS} property is not set to "true".
+     * Check if {@link xodosConstants#PROP_ALLOW_EXTERNAL_APPS} property is not set to "true".
      *
      * @param context The {@link Context} to get error string.
      * @return Returns the {@code error} if policy is violated, otherwise {@code null}.
@@ -457,10 +457,10 @@ public class TermuxPluginUtils {
     public static String checkIfAllowExternalAppsPolicyIsViolated(final Context context, String apiName) {
         String errmsg = null;
 
-        TermuxAppSharedProperties mProperties = TermuxAppSharedProperties.getProperties();
+        xodosAppSharedProperties mProperties = xodosAppSharedProperties.getProperties();
         if (mProperties == null || !mProperties.shouldAllowExternalApps()) {
             errmsg = context.getString(R.string.error_allow_external_apps_ungranted, apiName,
-                TermuxFileUtils.getUnExpandedTermuxPath(TermuxConstants.TERMUX_PROPERTIES_PRIMARY_FILE_PATH));
+                xodosFileUtils.getUnExpandedxodosPath(xodosConstants.xodos_PROPERTIES_PRIMARY_FILE_PATH));
         }
 
         return errmsg;

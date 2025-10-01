@@ -4,15 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.crash.TermuxCrashUtils;
-import com.termux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences;
-import com.termux.shared.termux.theme.TermuxThemeUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.crash.xodosCrashUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosWidgetAppSharedPreferences;
+import com.xodos.shared.xodos.theme.xodosThemeUtils;
 
-public class TermuxWidgetApplication extends Application {
+public class xodosWidgetApplication extends Application {
 
-    public static final String LOG_TAG = "TermuxWidgetApplication";
+    public static final String LOG_TAG = "xodosWidgetApplication";
 
     public void onCreate() {
         super.onCreate();
@@ -22,20 +22,20 @@ public class TermuxWidgetApplication extends Application {
         Context context = getApplicationContext();
 
         // Set crash handler for the app
-        TermuxCrashUtils.setCrashHandler(context);
+        xodosCrashUtils.setCrashHandler(context);
 
         // Set log config for the app
         setLogConfig(context, true);
 
         // Set NightMode.APP_NIGHT_MODE
-        TermuxThemeUtils.setAppNightMode(context);
+        xodosThemeUtils.setAppNightMode(context);
     }
 
     public static void setLogConfig(Context context, boolean commitToFile) {
-        Logger.setDefaultLogTag(TermuxConstants.TERMUX_WIDGET_APP_NAME.replaceAll("[: ]", ""));
+        Logger.setDefaultLogTag(xodosConstants.xodos_WIDGET_APP_NAME.replaceAll("[: ]", ""));
 
         // Load the log level from shared preferences and set it to the {@link Logger.CURRENT_LOG_LEVEL}
-        TermuxWidgetAppSharedPreferences preferences = TermuxWidgetAppSharedPreferences.build(context);
+        xodosWidgetAppSharedPreferences preferences = xodosWidgetAppSharedPreferences.build(context);
         if (preferences == null) return;
         preferences.setLogLevel(null, preferences.getLogLevel(true), commitToFile);
     }

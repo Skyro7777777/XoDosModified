@@ -1,14 +1,14 @@
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_DISPLAY_APP_NAME "Termux:X11">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_DISPLAY_APP_NAME "xodos:X11">]>
 <resources>
-    <string name="app_name">&TERMUX_DISPLAY_APP_NAME; </string>
-    <string name="plugin_info">&TERMUX_DISPLAY_APP_NAME; هو تطبيق إضافي لتطبيق &TERMUX_APP_NAME;.
-        \n\nتحقق من تطبيق &TERMUX_APP_NAME; على جيثب %1$s وتطبيق &TERMUX_DISPLAY_APP_NAME; على جيثب %2$s لمزيد من المعلومات.</string>
+    <string name="app_name">&xodos_DISPLAY_APP_NAME; </string>
+    <string name="plugin_info">&xodos_DISPLAY_APP_NAME; هو تطبيق إضافي لتطبيق &xodos_APP_NAME;.
+        \n\nتحقق من تطبيق &xodos_APP_NAME; على جيثب %1$s وتطبيق &xodos_DISPLAY_APP_NAME; على جيثب %2$s لمزيد من المعلومات.</string>
 
-    <!-- TermuxX11Activity -->
-    <string name="msg_storage_permission_not_granted_warning">يجب منح إذن التخزين لتطبيق &TERMUX_DISPLAY_APP_NAME; ل...</string>
+    <!-- xodosX11Activity -->
+    <string name="msg_storage_permission_not_granted_warning">يجب منح إذن التخزين لتطبيق &xodos_DISPLAY_APP_NAME; ل...</string>
     <string name="action_grant_storage_permission">منح إذن التخزين</string>
 
-    <string name="msg_battery_optimization_not_disabled_warning">يجب تعطيل تحسينات البطارية لأندرويد لتطبيق &TERMUX_DISPLAY_APP_NAME; حتى...
+    <string name="msg_battery_optimization_not_disabled_warning">يجب تعطيل تحسينات البطارية لأندرويد لتطبيق &xodos_DISPLAY_APP_NAME; حتى...
         تحقق من https://developer.android.com/about/versions/oreo/background لمزيد من المعلومات و
         https://developer.android.com/guide/components/foreground-services#background-start-restrictions
         لمزيد من المعلومات.
@@ -18,7 +18,7 @@
         أو تمكين "عرض النوافذ المنبثقة أثناء التشغيل في الخلفية" للتطبيق.</string>
     <string name="action_disable_battery_optimizations">تعطيل تحسينات البطارية</string>
 
-    <string name="msg_display_over_other_apps_permission_not_granted_warning">يجب منح إذن العرض فوق التطبيقات الأخرى لتطبيق &TERMUX_DISPLAY_APP_NAME; لبدء أنشطة المقدمة من الخلفية. تحقق من https://developer.android.com/guide/components/activities/background-starts لمزيد من المعلومات.
+    <string name="msg_display_over_other_apps_permission_not_granted_warning">يجب منح إذن العرض فوق التطبيقات الأخرى لتطبيق &xodos_DISPLAY_APP_NAME; لبدء أنشطة المقدمة من الخلفية. تحقق من https://developer.android.com/guide/components/activities/background-starts لمزيد من المعلومات.
     </string>
     <string name="action_grant_display_over_other_apps_permission">منح إذن الرسم فوق التطبيقات</string>
 
@@ -27,7 +27,7 @@
     <string name="not_connected">غير متصل</string>
     <string name="help_button_text">   مساعدة   </string>
     <string name="preferences_button_text">   التفضيلات   </string>
-    <string name="extra_keys_config_desc">هنا يمكنك تعيين قيمة متغير extra-keys كما في تطبيق Termux (اقرأ <a href="http://wiki.termux.com/wiki/Touch_Keyboard#Extra_Keys_Row">هذا</a>) والمزيد (مثل META).</string>
+    <string name="extra_keys_config_desc">هنا يمكنك تعيين قيمة متغير extra-keys كما في تطبيق xodos (اقرأ <a href="http://wiki.xodos.com/wiki/Touch_Keyboard#Extra_Keys_Row">هذا</a>) والمزيد (مثل META).</string>
     <!--    preference-->
     <string name="pref_main">التفضيلات</string>
     <string name="pref_output">الشاشة 🖥️</string>
@@ -100,8 +100,8 @@
 
     <string name="pref_adjustHeightForEK">ضبط ارتفاع الشاشة لشريط المفاتيح الإضافية</string>
     <string name="pref_adjustHeightForEK_summary">قد يسبب وميض الشاشة أثناء تبديل شريط EK.</string>
-    <string name="pref_useTermuxEKBarBehaviour">إلغاء تنشيط المفاتيح الخاصة على شريط المفاتيح الإضافية بعد كل ضغطة</string>
-    <string name="pref_useTermuxEKBarBehaviour_summary">استخدم النقر الطويل لقفل المفاتيح الخاصة</string>
+    <string name="pref_usexodosEKBarBehaviour">إلغاء تنشيط المفاتيح الخاصة على شريط المفاتيح الإضافية بعد كل ضغطة</string>
+    <string name="pref_usexodosEKBarBehaviour_summary">استخدم النقر الطويل لقفل المفاتيح الخاصة</string>
     <string name="pref_opacityEKBar">شفافية شريط المفاتيح الإضافية، %</string>
     <string name="pref_extra_keys_config">تكوين المفاتيح الإضافية</string>
 
@@ -208,7 +208,7 @@
     <string name="log_level_value">تم تعيين مستوى سجل Logcat إلى \"%1$s\"</string>
     <string name="start_button_start_x11">بدء خادم x11</string>
     <string name="exit_button_exit_app">خروج</string>
-    <string name="x11_server_bridge_config">إعادة تثبيت الجسر الذي يستخدمه خادم x11 للتواصل مع termux. سيؤدي التثبيت إلى إيقاف الواجهة الرسومية الحالية ويتطلب إعادة التشغيل. إذا لم يتم حفظ أي ملف، احفظه وحاول مرة أخرى.</string>
+    <string name="x11_server_bridge_config">إعادة تثبيت الجسر الذي يستخدمه خادم x11 للتواصل مع xodos. سيؤدي التثبيت إلى إيقاف الواجهة الرسومية الحالية ويتطلب إعادة التشغيل. إذا لم يتم حفظ أي ملف، احفظه وحاول مرة أخرى.</string>
 
     <!--inpt controller-->
     <string name="run">تشغيل</string>

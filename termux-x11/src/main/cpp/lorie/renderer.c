@@ -320,7 +320,7 @@ void rendererTestCapabilities(int* legacy_drawing, uint8_t* flip) {
     } else {
         // For some reason all devices I checked had no GL_EXT_texture_format_BGRA8888 support, but some of them still provided BGRA extension.
         // EGL does not provide functions to query texture format in runtime.
-        // Workarounds are less performant but at least they let us use Termux:X11 on devices with missing BGRA support.
+        // Workarounds are less performant but at least they let us use xodos:X11 on devices with missing BGRA support.
         // We handle two cases.
         // If resulting texture has BGRA format but still drawing RGBA we should flip format to RGBA and flip pixels manually in shader.
         // In the case if for some reason we can not use HAL_PIXEL_FORMAT_BGRA_8888 we should fallback to legacy drawing method (uploading pixels via glTexImage2D).

@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -97,7 +97,7 @@ Java_com_xodos_x11_CmdEntryPoint_start(JNIEnv *env, __unused jclass cls, jobject
             log(ERROR, "Failed to set process affinity: %s", strerror(errno));
     }
 
-    if (getenv("TERMUX_X11_DEBUG") && !fork()) {
+    if (getenv("xodos_X11_DEBUG") && !fork()) {
         // Printing logs of local logcat.
         char pid[32] = {0};
         prctl(PR_SET_PDEATHSIG, SIGTERM);
@@ -107,10 +107,10 @@ Java_com_xodos_x11_CmdEntryPoint_start(JNIEnv *env, __unused jclass cls, jobject
 
     // No matter what tracer is attached.
     // In the case of gdb or lldb LD_PRELOAD is already set.
-    // In the case of proot or proot-distro libtermux-exec in LD_PRELOAD will break linking.
-    if (access("/data/data/com.xodos/files/usr/lib/libtermux-exec.so", F_OK) == 0 && !detectTracer()
+    // In the case of proot or proot-distro libxodos-exec in LD_PRELOAD will break linking.
+    if (access("/data/data/com.xodos/files/usr/lib/libxodos-exec.so", F_OK) == 0 && !detectTracer()
             && !getenv("XSTARTUP_LD_PRELOAD"))
-        setenv("LD_PRELOAD", "/data/data/com.xodos/files/usr/lib/libtermux-exec.so", 1);
+        setenv("LD_PRELOAD", "/data/data/com.xodos/files/usr/lib/libxodos-exec.so", 1);
 
     // adb sets TMPDIR to /data/local/tmp which is pretty useless.
     if (!strcmp("/data/local/tmp", getenv("TMPDIR") ?: ""))
@@ -174,7 +174,7 @@ Java_com_xodos_x11_CmdEntryPoint_start(JNIEnv *env, __unused jclass cls, jobject
         // proot case
         if (access("/usr/share/X11/xkb", F_OK) == 0)
             setenv("XKB_CONFIG_ROOT", "/usr/share/X11/xkb", 1);
-        // Termux case
+        // xodos case
         else if (access("/data/data/com.xodos/files/usr/share/X11/xkb", F_OK) == 0)
             setenv("XKB_CONFIG_ROOT", "/data/data/com.xodos/files/usr/share/X11/xkb", 1);
     }
@@ -504,7 +504,7 @@ JNIEXPORT jobject JNICALL
 Java_com_xodos_x11_CmdEntryPoint_getLogcatOutput(JNIEnv *env, __unused jobject cls) {
     jclass ParcelFileDescriptorClass = (*env)->FindClass(env, "android/os/ParcelFileDescriptor");
     jmethodID adoptFd = (*env)->GetStaticMethodID(env, ParcelFileDescriptorClass, "adoptFd", "(I)Landroid/os/ParcelFileDescriptor;");
-    const char *debug = getenv("TERMUX_X11_DEBUG");
+    const char *debug = getenv("xodos_X11_DEBUG");
     if (debug && !strcmp(debug, "1")) {
         pthread_t t;
         int p[2];

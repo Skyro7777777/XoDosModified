@@ -1,4 +1,4 @@
-package com.termux.app.terminal.utils;
+package com.xodos.app.terminal.utils;
 
 import android.content.ContentUris;
 import android.content.Context;

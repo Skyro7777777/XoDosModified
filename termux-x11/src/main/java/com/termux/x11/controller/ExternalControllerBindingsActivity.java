@@ -1,4 +1,4 @@
-package com.termux.x11.controller;
+package com.xodos.x11.controller;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -26,14 +26,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.inputcontrols.Binding;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.ExternalController;
-import com.termux.x11.controller.inputcontrols.ExternalControllerBinding;
-import com.termux.x11.controller.inputcontrols.InputControlsManager;
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.inputcontrols.Binding;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.ExternalController;
+import com.xodos.x11.controller.inputcontrols.ExternalControllerBinding;
+import com.xodos.x11.controller.inputcontrols.InputControlsManager;
+import com.xodos.x11.controller.math.Mathf;
 
 public class ExternalControllerBindingsActivity extends AppCompatActivity {
     private TextView emptyTextView;

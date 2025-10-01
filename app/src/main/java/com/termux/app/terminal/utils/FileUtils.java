@@ -1,6 +1,6 @@
-package com.termux.app.terminal.utils;
+package com.xodos.app.terminal.utils;
 
-import static com.termux.shared.logger.Logger.showToast;
+import static com.xodos.shared.logger.Logger.showToast;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,7 +17,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.termux.R;
+import com.xodos.R;
 
 import java.io.File;
 import java.io.FileInputStream;

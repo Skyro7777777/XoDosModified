@@ -19,7 +19,7 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp">
 
-        <com.termux.x11.LorieView
+        <com.xodos.x11.LorieView
             android:id="@+id/lorieView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -230,7 +230,7 @@
         android:visibility="gone" />
 
     <View
-        android:id="@+id/display_termux_bottom_space_view"
+        android:id="@+id/display_xodos_bottom_space_view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom|center"

@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.termux.R;
+import com.xodos.R;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,10 +30,10 @@ import java.util.List;
 
 public class XoDosWizard {
     private final Activity mActivity;
-    private static final String USR_PREFIX = "/data/data/com.termux/files/usr";
-    private static final String HOME_PREFIX = "/data/data/com.termux/files/home";
-    private static final String PREF_FILE = "com.termux_preferences";
-//private final Activity mTermuxActivity;
+    private static final String USR_PREFIX = "/data/data/com.xodos/files/usr";
+    private static final String HOME_PREFIX = "/data/data/com.xodos/files/home";
+    private static final String PREF_FILE = "com.xodos_preferences";
+//private final Activity mxodosActivity;
     
     // runtime fields
     private String androidChoice;
@@ -425,7 +425,7 @@ private void performRestartSequence() {
     String[] commands = {
         USR_PREFIX + "/glibc/bin/box64 " + USR_PREFIX + "/glibc/bin/wineserver -k",
         USR_PREFIX + "/bin/box64 " + USR_PREFIX + "/opt/wine/bin/wineserver -k",
-        "pkill -f \"termux.x11\""  // Alternative to kill -9 $(pgrep -f)
+        "pkill -f \"xodos.x11\""  // Alternative to kill -9 $(pgrep -f)
     };
     
     for (String cmd : commands) {

@@ -1,4 +1,4 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
 public abstract class CPUStatus {
     public static short[] getCurrentClockSpeeds() {

@@ -1,13 +1,13 @@
-package com.termux.x11.utils;
+package com.xodos.x11.utils;
 
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
-import com.termux.x11.MainActivity;
+import com.xodos.x11.MainActivity;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.termux.x11.Prefs;
+import com.xodos.x11.Prefs;
 
 public class FullscreenWorkaround {
     // For more information, see https://issuetracker.google.com/issues/36911528

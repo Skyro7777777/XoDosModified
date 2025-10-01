@@ -1,14 +1,14 @@
-package com.termux.shared.file.tests;
+package com.xodos.shared.file.tests;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.termux.shared.errors.Errno;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.file.FileUtilsErrno;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.errors.Error;
+import com.xodos.shared.errors.Errno;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.file.FileUtilsErrno;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.errors.Error;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -27,7 +27,7 @@ public class FileUtilsTests {
      * The log level must be set to verbose.
      *
      * Run at app startup like in an activity
-     * FileUtilsTests.runTests(this, TermuxConstants.TERMUX_HOME_DIR_PATH + "/FileUtilsTests");
+     * FileUtilsTests.runTests(this, xodosConstants.xodos_HOME_DIR_PATH + "/FileUtilsTests");
      *
      * @param context The {@link Context} for operations.
      */

@@ -1,15 +1,15 @@
-package com.termux.shared.termux.terminal;
+package com.xodos.shared.xodos.terminal;
 
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.termux.shared.logger.Logger;
-import com.termux.terminal.TerminalSession;
-import com.termux.view.TerminalViewClient;
+import com.xodos.shared.logger.Logger;
+import com.xodos.terminal.TerminalSession;
+import com.xodos.view.TerminalViewClient;
 
-public class TermuxTerminalViewClientBase implements TerminalViewClient {
+public class xodosTerminalViewClientBase implements TerminalViewClient {
 
-    public TermuxTerminalViewClientBase() {
+    public xodosTerminalViewClientBase() {
     }
 
     @Override

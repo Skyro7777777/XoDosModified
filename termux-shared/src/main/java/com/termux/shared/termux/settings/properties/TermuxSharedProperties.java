@@ -1,14 +1,14 @@
-package com.termux.shared.termux.settings.properties;
+package com.xodos.shared.xodos.settings.properties;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.termux.shared.logger.Logger;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.settings.properties.SharedProperties;
-import com.termux.shared.settings.properties.SharedPropertiesParser;
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.settings.properties.SharedProperties;
+import com.xodos.shared.settings.properties.SharedPropertiesParser;
+import com.xodos.shared.xodos.xodosConstants;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-public abstract class TermuxSharedProperties {
+public abstract class xodosSharedProperties {
 
     protected final Context mContext;
     protected final String mLabel;
@@ -27,22 +27,22 @@ public abstract class TermuxSharedProperties {
     protected File mPropertiesFile;
     protected SharedProperties mSharedProperties;
 
-    public static final String LOG_TAG = "TermuxSharedProperties";
+    public static final String LOG_TAG = "xodosSharedProperties";
 
-    public TermuxSharedProperties(@NonNull Context context, @NonNull String label, List<String> propertiesFilePaths,
+    public xodosSharedProperties(@NonNull Context context, @NonNull String label, List<String> propertiesFilePaths,
                                   @NonNull Set<String> propertiesList, @NonNull SharedPropertiesParser sharedPropertiesParser) {
         mContext = context.getApplicationContext();
         mLabel = label;
         mPropertiesFilePaths = propertiesFilePaths;
         mPropertiesList = propertiesList;
         mSharedPropertiesParser = sharedPropertiesParser;
-        loadTermuxPropertiesFromDisk();
+        loadxodosPropertiesFromDisk();
     }
 
     /**
-     * Reload the termux properties from disk into an in-memory cache.
+     * Reload the xodos properties from disk into an in-memory cache.
      */
-    public synchronized void loadTermuxPropertiesFromDisk() {
+    public synchronized void loadxodosPropertiesFromDisk() {
         // Properties files must be searched everytime since no file may exist when constructor is
         // called or a higher priority file may have been created afterward. Otherwise, if no file
         // was found, then default props would keep loading, since mSharedProperties would be null. #2836
@@ -128,7 +128,7 @@ public abstract class TermuxSharedProperties {
 
     /**
      * Get the internal value {@link Object} {@link HashMap <>} in-memory cache for the
-     * {@link #mPropertiesFile} file. A call to {@link #loadTermuxPropertiesFromDisk()} must be made
+     * {@link #mPropertiesFile} file. A call to {@link #loadxodosPropertiesFromDisk()} must be made
      * before this.
      *
      * @return Returns a copy of {@link Map} object.
@@ -140,7 +140,7 @@ public abstract class TermuxSharedProperties {
     /**
      * Get the internal {@link Object} value for the key passed from the {@link #mPropertiesFile} file.
      * If cache is {@code true}, then value is returned from the {@link HashMap <>} in-memory cache,
-     * so a call to {@link #loadTermuxPropertiesFromDisk()} must be made before this.
+     * so a call to {@link #loadxodosPropertiesFromDisk()} must be made before this.
      *
      * @param key The key to read from the {@link HashMap<>} in-memory cache.
      * @param cached If {@code true}, then the value is returned from the the {@link HashMap <>} in-memory cache,
@@ -161,16 +161,16 @@ public abstract class TermuxSharedProperties {
                 return value;
             } else {
                 // This should not happen normally unless mMap was modified after the
-                // {@link #loadTermuxPropertiesFromDisk()} call
+                // {@link #loadxodosPropertiesFromDisk()} call
                 // A null value can still be returned by
                 // {@link #getInternalPropertyValueFromValue(Context,String,String)} for some keys
-                value = getInternalTermuxPropertyValueFromValue(mContext, key, null);
+                value = getInternalxodosPropertyValueFromValue(mContext, key, null);
                 Logger.logWarn(LOG_TAG, "The value for \"" + key + "\" not found in SharedProperties cache, force returning default value: `" + value +  "`");
                 return value;
             }
         } else {
             // We get the property value directly from file and return its internal value
-            return getInternalTermuxPropertyValueFromValue(mContext, key, mSharedProperties.getProperty(key, false));
+            return getInternalxodosPropertyValueFromValue(mContext, key, mSharedProperties.getProperty(key, false));
         }
     }
 
@@ -180,7 +180,7 @@ public abstract class TermuxSharedProperties {
 
     /**
      * Get the internal {@link Object} value for the key passed from the first file found in
-     * {@link TermuxConstants#TERMUX_PROPERTIES_FILE_PATHS_LIST}. The {@link Properties} object is
+     * {@link xodosConstants#xodos_PROPERTIES_FILE_PATHS_LIST}. The {@link Properties} object is
      * read directly from the file and internal value is returned for the property value against the key.
      *
      * @param context The context for operations.
@@ -188,9 +188,9 @@ public abstract class TermuxSharedProperties {
      * @return Returns the {@link Object} object. This will be {@code null} if key is not found or
      * the object stored against the key is {@code null}.
      */
-    public static Object getTermuxInternalPropertyValue(Context context, String key) {
+    public static Object getxodosInternalPropertyValue(Context context, String key) {
         return SharedProperties.getInternalProperty(context,
-            SharedProperties.getPropertiesFileFromList(TermuxConstants.TERMUX_PROPERTIES_FILE_PATHS_LIST, LOG_TAG),
+            SharedProperties.getPropertiesFileFromList(xodosConstants.xodos_PROPERTIES_FILE_PATHS_LIST, LOG_TAG),
             key, new SharedPropertiesParserClient());
     }
 
@@ -211,26 +211,26 @@ public abstract class TermuxSharedProperties {
          */
         @Override
         public Object getInternalPropertyValueFromValue(@NonNull Context context, String key, String value) {
-            return getInternalTermuxPropertyValueFromValue(context, key, value);
+            return getInternalxodosPropertyValueFromValue(context, key, value);
         }
     }
 
     @NonNull
     public static Properties replaceUseBlackUIProperty(@NonNull Properties properties) {
-        String useBlackUIStringValue = properties.getProperty(TermuxPropertyConstants.KEY_USE_BLACK_UI);
+        String useBlackUIStringValue = properties.getProperty(xodosPropertyConstants.KEY_USE_BLACK_UI);
         if (useBlackUIStringValue == null) return properties;
 
-        Logger.logWarn(LOG_TAG, "Removing deprecated property " + TermuxPropertyConstants.KEY_USE_BLACK_UI + "=" + useBlackUIStringValue);
-        properties.remove(TermuxPropertyConstants.KEY_USE_BLACK_UI);
+        Logger.logWarn(LOG_TAG, "Removing deprecated property " + xodosPropertyConstants.KEY_USE_BLACK_UI + "=" + useBlackUIStringValue);
+        properties.remove(xodosPropertyConstants.KEY_USE_BLACK_UI);
 
         // If KEY_NIGHT_MODE is not set
-        if (properties.getProperty(TermuxPropertyConstants.KEY_NIGHT_MODE) == null) {
+        if (properties.getProperty(xodosPropertyConstants.KEY_NIGHT_MODE) == null) {
             Boolean useBlackUI = SharedProperties.getBooleanValueForStringValue(useBlackUIStringValue);
             if (useBlackUI != null) {
-                String termuxAppTheme = useBlackUI ? TermuxPropertyConstants.IVALUE_NIGHT_MODE_TRUE :
-                    TermuxPropertyConstants.IVALUE_NIGHT_MODE_FALSE;
-                Logger.logWarn(LOG_TAG, "Replacing deprecated property " + TermuxPropertyConstants.KEY_USE_BLACK_UI + "=" + useBlackUI + " with " + TermuxPropertyConstants.KEY_NIGHT_MODE + "=" + termuxAppTheme);
-                properties.put(TermuxPropertyConstants.KEY_NIGHT_MODE, termuxAppTheme);
+                String xodosAppTheme = useBlackUI ? xodosPropertyConstants.IVALUE_NIGHT_MODE_TRUE :
+                    xodosPropertyConstants.IVALUE_NIGHT_MODE_FALSE;
+                Logger.logWarn(LOG_TAG, "Replacing deprecated property " + xodosPropertyConstants.KEY_USE_BLACK_UI + "=" + useBlackUI + " with " + xodosPropertyConstants.KEY_NIGHT_MODE + "=" + xodosAppTheme);
+                properties.put(xodosPropertyConstants.KEY_NIGHT_MODE, xodosAppTheme);
             }
         }
 
@@ -240,15 +240,15 @@ public abstract class TermuxSharedProperties {
 
 
     /**
-     * A static function that should return the internal termux {@link Object} for a key/value pair
+     * A static function that should return the internal xodos {@link Object} for a key/value pair
      * read from properties file.
      *
      * @param context The context for operations.
      * @param key The key for which the internal object is required.
      * @param value The literal value for the property found is the properties file.
-     * @return Returns the internal termux {@link Object} object.
+     * @return Returns the internal xodos {@link Object} object.
      */
-    public static Object getInternalTermuxPropertyValueFromValue(Context context, String key, String value) {
+    public static Object getInternalxodosPropertyValueFromValue(Context context, String key, String value) {
         if (key == null) return null;
         /*
           For keys where a MAP_* is checked by respective functions. Note that value to this function
@@ -259,60 +259,60 @@ public abstract class TermuxSharedProperties {
          */
         switch (key) {
             /* int */
-            case TermuxPropertyConstants.KEY_BELL_BEHAVIOUR:
+            case xodosPropertyConstants.KEY_BELL_BEHAVIOUR:
                 return (int) getBellBehaviourInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT:
+            case xodosPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT:
                 return (int) getDeleteTMPDIRFilesOlderThanXDaysOnExitInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE:
+            case xodosPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE:
                 return (int) getTerminalCursorBlinkRateInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_TERMINAL_CURSOR_STYLE:
+            case xodosPropertyConstants.KEY_TERMINAL_CURSOR_STYLE:
                 return (int) getTerminalCursorStyleInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL:
+            case xodosPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL:
                 return (int) getTerminalMarginHorizontalInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL:
+            case xodosPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL:
                 return (int) getTerminalMarginVerticalInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS:
+            case xodosPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS:
                 return (int) getTerminalTranscriptRowsInternalPropertyValueFromValue(value);
 
             /* float */
-            case TermuxPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR:
+            case xodosPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR:
                 return (float) getTerminalToolbarHeightScaleFactorInternalPropertyValueFromValue(value);
 
             /* Integer (may be null) */
-            case TermuxPropertyConstants.KEY_SHORTCUT_CREATE_SESSION:
-            case TermuxPropertyConstants.KEY_SHORTCUT_NEXT_SESSION:
-            case TermuxPropertyConstants.KEY_SHORTCUT_PREVIOUS_SESSION:
-            case TermuxPropertyConstants.KEY_SHORTCUT_RENAME_SESSION:
+            case xodosPropertyConstants.KEY_SHORTCUT_CREATE_SESSION:
+            case xodosPropertyConstants.KEY_SHORTCUT_NEXT_SESSION:
+            case xodosPropertyConstants.KEY_SHORTCUT_PREVIOUS_SESSION:
+            case xodosPropertyConstants.KEY_SHORTCUT_RENAME_SESSION:
                 return (Integer) getCodePointForSessionShortcuts(key, value);
 
             /* String (may be null) */
-            case TermuxPropertyConstants.KEY_BACK_KEY_BEHAVIOUR:
+            case xodosPropertyConstants.KEY_BACK_KEY_BEHAVIOUR:
                 return (String) getBackKeyBehaviourInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY:
+            case xodosPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY:
                 return (String) getDefaultWorkingDirectoryInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_EXTRA_KEYS:
+            case xodosPropertyConstants.KEY_EXTRA_KEYS:
                 return (String) getExtraKeysInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_EXTRA_KEYS_STYLE:
+            case xodosPropertyConstants.KEY_EXTRA_KEYS_STYLE:
                 return (String) getExtraKeysStyleInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_NIGHT_MODE:
+            case xodosPropertyConstants.KEY_NIGHT_MODE:
                 return (String) getNightModeInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR:
+            case xodosPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR:
                 return (String) getSoftKeyboardToggleBehaviourInternalPropertyValueFromValue(value);
-            case TermuxPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR:
+            case xodosPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR:
                 return (String) getVolumeKeysBehaviourInternalPropertyValueFromValue(value);
 
             default:
                 // default false boolean behaviour
-                if (TermuxPropertyConstants.TERMUX_DEFAULT_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
+                if (xodosPropertyConstants.xodos_DEFAULT_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
                     return (boolean) SharedProperties.getBooleanValueForStringValue(key, value, false, true, LOG_TAG);
                 // default true boolean behaviour
-                if (TermuxPropertyConstants.TERMUX_DEFAULT_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
+                if (xodosPropertyConstants.xodos_DEFAULT_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
                     return (boolean) SharedProperties.getBooleanValueForStringValue(key, value, true, true, LOG_TAG);
                 // default inverted false boolean behaviour
-                //else if (TermuxPropertyConstants.TERMUX_DEFAULT_INVERETED_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
+                //else if (xodosPropertyConstants.xodos_DEFAULT_INVERETED_FALSE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
                 //    return (boolean) SharedProperties.getInvertedBooleanValueForStringValue(key, value, false, true, LOG_TAG);
                 // default inverted true boolean behaviour
-                // else if (TermuxPropertyConstants.TERMUX_DEFAULT_INVERETED_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
+                // else if (xodosPropertyConstants.xodos_DEFAULT_INVERETED_TRUE_BOOLEAN_BEHAVIOUR_PROPERTIES_LIST.contains(key))
                 //    return (boolean) SharedProperties.getInvertedBooleanValueForStringValue(key, value, true, true, LOG_TAG);
                 // just use String object as is (may be null)
                 else
@@ -326,133 +326,133 @@ public abstract class TermuxSharedProperties {
 
     /**
      * Returns the internal value after mapping it based on
-     * {@code TermuxPropertyConstants#MAP_BELL_BEHAVIOUR} if the value is not {@code null}
-     * and is valid, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_BELL_BEHAVIOUR}.
+     * {@code xodosPropertyConstants#MAP_BELL_BEHAVIOUR} if the value is not {@code null}
+     * and is valid, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_BELL_BEHAVIOUR}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getBellBehaviourInternalPropertyValueFromValue(String value) {
-        return (int) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_BELL_BEHAVIOUR, TermuxPropertyConstants.MAP_BELL_BEHAVIOUR, SharedProperties.toLowerCase(value), TermuxPropertyConstants.DEFAULT_IVALUE_BELL_BEHAVIOUR, true, LOG_TAG);
+        return (int) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_BELL_BEHAVIOUR, xodosPropertyConstants.MAP_BELL_BEHAVIOUR, SharedProperties.toLowerCase(value), xodosPropertyConstants.DEFAULT_IVALUE_BELL_BEHAVIOUR, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT}.
+     * {@link xodosPropertyConstants#IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getDeleteTMPDIRFilesOlderThanXDaysOnExitInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT,
-            DataUtils.getIntFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT),
-            TermuxPropertyConstants.DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT,
-            TermuxPropertyConstants.IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MIN,
-            TermuxPropertyConstants.IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT,
+            DataUtils.getIntFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT),
+            xodosPropertyConstants.DEFAULT_IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT,
+            xodosPropertyConstants.IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MIN,
+            xodosPropertyConstants.IVALUE_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT_MAX,
             true, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_CURSOR_BLINK_RATE_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_CURSOR_BLINK_RATE_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE}.
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_CURSOR_BLINK_RATE_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_CURSOR_BLINK_RATE_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getTerminalCursorBlinkRateInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE,
-            DataUtils.getIntFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE),
-            TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE,
-            TermuxPropertyConstants.IVALUE_TERMINAL_CURSOR_BLINK_RATE_MIN,
-            TermuxPropertyConstants.IVALUE_TERMINAL_CURSOR_BLINK_RATE_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE,
+            DataUtils.getIntFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE),
+            xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_BLINK_RATE,
+            xodosPropertyConstants.IVALUE_TERMINAL_CURSOR_BLINK_RATE_MIN,
+            xodosPropertyConstants.IVALUE_TERMINAL_CURSOR_BLINK_RATE_MAX,
             true, true, LOG_TAG);
     }
 
     /**
      * Returns the internal value after mapping it based on
-     * {@link TermuxPropertyConstants#MAP_TERMINAL_CURSOR_STYLE} if the value is not {@code null}
-     * and is valid, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_CURSOR_STYLE}.
+     * {@link xodosPropertyConstants#MAP_TERMINAL_CURSOR_STYLE} if the value is not {@code null}
+     * and is valid, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_CURSOR_STYLE}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getTerminalCursorStyleInternalPropertyValueFromValue(String value) {
-        return (int) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_TERMINAL_CURSOR_STYLE, TermuxPropertyConstants.MAP_TERMINAL_CURSOR_STYLE, SharedProperties.toLowerCase(value), TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_STYLE, true, LOG_TAG);
+        return (int) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_TERMINAL_CURSOR_STYLE, xodosPropertyConstants.MAP_TERMINAL_CURSOR_STYLE, SharedProperties.toLowerCase(value), xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_CURSOR_STYLE, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_MARGIN_HORIZONTAL_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_MARGIN_HORIZONTAL_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL}.
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_MARGIN_HORIZONTAL_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_MARGIN_HORIZONTAL_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getTerminalMarginHorizontalInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL,
-            DataUtils.getIntFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL),
-            TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL,
-            TermuxPropertyConstants.IVALUE_TERMINAL_MARGIN_HORIZONTAL_MIN,
-            TermuxPropertyConstants.IVALUE_TERMINAL_MARGIN_HORIZONTAL_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL,
+            DataUtils.getIntFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL),
+            xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_HORIZONTAL,
+            xodosPropertyConstants.IVALUE_TERMINAL_MARGIN_HORIZONTAL_MIN,
+            xodosPropertyConstants.IVALUE_TERMINAL_MARGIN_HORIZONTAL_MAX,
             true, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_MARGIN_VERTICAL_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_MARGIN_VERTICAL_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL}.
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_MARGIN_VERTICAL_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_MARGIN_VERTICAL_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getTerminalMarginVerticalInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL,
-            DataUtils.getIntFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL),
-            TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL,
-            TermuxPropertyConstants.IVALUE_TERMINAL_MARGIN_VERTICAL_MIN,
-            TermuxPropertyConstants.IVALUE_TERMINAL_MARGIN_VERTICAL_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL,
+            DataUtils.getIntFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL),
+            xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_MARGIN_VERTICAL,
+            xodosPropertyConstants.IVALUE_TERMINAL_MARGIN_VERTICAL_MIN,
+            xodosPropertyConstants.IVALUE_TERMINAL_MARGIN_VERTICAL_MAX,
             true, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_TRANSCRIPT_ROWS_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_TRANSCRIPT_ROWS_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS}.
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_TRANSCRIPT_ROWS_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_TRANSCRIPT_ROWS_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static int getTerminalTranscriptRowsInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS,
-            DataUtils.getIntFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS),
-            TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS,
-            TermuxPropertyConstants.IVALUE_TERMINAL_TRANSCRIPT_ROWS_MIN,
-            TermuxPropertyConstants.IVALUE_TERMINAL_TRANSCRIPT_ROWS_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS,
+            DataUtils.getIntFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS),
+            xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_TRANSCRIPT_ROWS,
+            xodosPropertyConstants.IVALUE_TERMINAL_TRANSCRIPT_ROWS_MIN,
+            xodosPropertyConstants.IVALUE_TERMINAL_TRANSCRIPT_ROWS_MAX,
             true, true, LOG_TAG);
     }
 
     /**
      * Returns the int for the value if its not null and is between
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MIN} and
-     * {@link TermuxPropertyConstants#IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MAX},
-     * otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR}.
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MIN} and
+     * {@link xodosPropertyConstants#IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MAX},
+     * otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static float getTerminalToolbarHeightScaleFactorInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNotInRange(TermuxPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR,
-            DataUtils.getFloatFromString(value, TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR),
-            TermuxPropertyConstants.DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR,
-            TermuxPropertyConstants.IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MIN,
-            TermuxPropertyConstants.IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MAX,
+        return SharedProperties.getDefaultIfNotInRange(xodosPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR,
+            DataUtils.getFloatFromString(value, xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR),
+            xodosPropertyConstants.DEFAULT_IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR,
+            xodosPropertyConstants.IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MIN,
+            xodosPropertyConstants.IVALUE_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR_MAX,
             true, true, LOG_TAG);
     }
 
@@ -489,85 +489,85 @@ public abstract class TermuxSharedProperties {
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_BACK_KEY_BEHAVIOUR}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_BACK_KEY_BEHAVIOUR}.
      *
      * @param value {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getBackKeyBehaviourInternalPropertyValueFromValue(String value) {
-        return (String) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_BACK_KEY_BEHAVIOUR, TermuxPropertyConstants.MAP_BACK_KEY_BEHAVIOUR, SharedProperties.toLowerCase(value), TermuxPropertyConstants.DEFAULT_IVALUE_BACK_KEY_BEHAVIOUR, true, LOG_TAG);
+        return (String) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_BACK_KEY_BEHAVIOUR, xodosPropertyConstants.MAP_BACK_KEY_BEHAVIOUR, SharedProperties.toLowerCase(value), xodosPropertyConstants.DEFAULT_IVALUE_BACK_KEY_BEHAVIOUR, true, LOG_TAG);
     }
 
     /**
      * Returns the path itself if a directory exists at it and is readable, otherwise returns
-     *  {@link TermuxPropertyConstants#DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY}.
+     *  {@link xodosPropertyConstants#DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY}.
      *
      * @param path The {@link String} path to check.
      * @return Returns the internal value for value.
      */
     public static String getDefaultWorkingDirectoryInternalPropertyValueFromValue(String path) {
-        if (path == null || path.isEmpty()) return TermuxPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY;
+        if (path == null || path.isEmpty()) return xodosPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY;
         File workDir = new File(path);
         if (!workDir.exists() || !workDir.isDirectory() || !workDir.canRead()) {
             // Fallback to default directory if user configured working directory does not exist,
             // is not a directory or is not readable.
-            Logger.logError(LOG_TAG, "The path \"" + path + "\" for the key \"" + TermuxPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY + "\" does not exist, is not a directory or is not readable. Using default value \"" + TermuxPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY + "\" instead.");
-            return TermuxPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY;
+            Logger.logError(LOG_TAG, "The path \"" + path + "\" for the key \"" + xodosPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY + "\" does not exist, is not a directory or is not readable. Using default value \"" + xodosPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY + "\" instead.");
+            return xodosPropertyConstants.DEFAULT_IVALUE_DEFAULT_WORKING_DIRECTORY;
         } else {
             return path;
         }
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_EXTRA_KEYS}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_EXTRA_KEYS}.
      *
      * @param value The {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getExtraKeysInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNullOrEmpty(value, TermuxPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS);
+        return SharedProperties.getDefaultIfNullOrEmpty(value, xodosPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS);
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_EXTRA_KEYS_STYLE}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_EXTRA_KEYS_STYLE}.
      *
      * @param value {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getExtraKeysStyleInternalPropertyValueFromValue(String value) {
-        return SharedProperties.getDefaultIfNullOrEmpty(value, TermuxPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS_STYLE);
+        return SharedProperties.getDefaultIfNullOrEmpty(value, xodosPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS_STYLE);
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_NIGHT_MODE}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_NIGHT_MODE}.
      *
      * @param value {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getNightModeInternalPropertyValueFromValue(String value) {
-        return (String) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_NIGHT_MODE,
-            TermuxPropertyConstants.MAP_NIGHT_MODE, SharedProperties.toLowerCase(value),
-            TermuxPropertyConstants.DEFAULT_IVALUE_NIGHT_MODE, true, LOG_TAG);
+        return (String) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_NIGHT_MODE,
+            xodosPropertyConstants.MAP_NIGHT_MODE, SharedProperties.toLowerCase(value),
+            xodosPropertyConstants.DEFAULT_IVALUE_NIGHT_MODE, true, LOG_TAG);
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR}.
      *
      * @param value {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getSoftKeyboardToggleBehaviourInternalPropertyValueFromValue(String value) {
-        return (String) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, TermuxPropertyConstants.MAP_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, SharedProperties.toLowerCase(value), TermuxPropertyConstants.DEFAULT_IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, true, LOG_TAG);
+        return (String) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, xodosPropertyConstants.MAP_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, SharedProperties.toLowerCase(value), xodosPropertyConstants.DEFAULT_IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, true, LOG_TAG);
     }
 
     /**
-     * Returns the value itself if it is not {@code null}, otherwise returns {@link TermuxPropertyConstants#DEFAULT_IVALUE_VOLUME_KEYS_BEHAVIOUR}.
+     * Returns the value itself if it is not {@code null}, otherwise returns {@link xodosPropertyConstants#DEFAULT_IVALUE_VOLUME_KEYS_BEHAVIOUR}.
      *
      * @param value {@link String} value to convert.
      * @return Returns the internal value for value.
      */
     public static String getVolumeKeysBehaviourInternalPropertyValueFromValue(String value) {
-        return (String) SharedProperties.getDefaultIfNotInMap(TermuxPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR, TermuxPropertyConstants.MAP_VOLUME_KEYS_BEHAVIOUR, SharedProperties.toLowerCase(value), TermuxPropertyConstants.DEFAULT_IVALUE_VOLUME_KEYS_BEHAVIOUR, true, LOG_TAG);
+        return (String) SharedProperties.getDefaultIfNotInMap(xodosPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR, xodosPropertyConstants.MAP_VOLUME_KEYS_BEHAVIOUR, SharedProperties.toLowerCase(value), xodosPropertyConstants.DEFAULT_IVALUE_VOLUME_KEYS_BEHAVIOUR, true, LOG_TAG);
     }
 
 
@@ -575,113 +575,113 @@ public abstract class TermuxSharedProperties {
 
 
     public boolean shouldAllowExternalApps() {
-        return (boolean) getInternalPropertyValue(TermuxConstants.PROP_ALLOW_EXTERNAL_APPS, true);
+        return (boolean) getInternalPropertyValue(xodosConstants.PROP_ALLOW_EXTERNAL_APPS, true);
     }
 
     public boolean isFileShareReceiverDisabled() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_DISABLE_FILE_SHARE_RECEIVER, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_DISABLE_FILE_SHARE_RECEIVER, true);
     }
 
     public boolean isFileViewReceiverDisabled() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_DISABLE_FILE_VIEW_RECEIVER, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_DISABLE_FILE_VIEW_RECEIVER, true);
     }
 
     public boolean areHardwareKeyboardShortcutsDisabled() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_DISABLE_HARDWARE_KEYBOARD_SHORTCUTS, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_DISABLE_HARDWARE_KEYBOARD_SHORTCUTS, true);
     }
 
     public boolean areTerminalSessionChangeToastsDisabled() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_DISABLE_TERMINAL_SESSION_CHANGE_TOAST, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_DISABLE_TERMINAL_SESSION_CHANGE_TOAST, true);
     }
 
     public boolean isEnforcingCharBasedInput() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_ENFORCE_CHAR_BASED_INPUT, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_ENFORCE_CHAR_BASED_INPUT, true);
     }
 
     public boolean shouldExtraKeysTextBeAllCaps() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_EXTRA_KEYS_TEXT_ALL_CAPS, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_EXTRA_KEYS_TEXT_ALL_CAPS, true);
     }
 
     public boolean shouldSoftKeyboardBeHiddenOnStartup() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_HIDE_SOFT_KEYBOARD_ON_STARTUP, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_HIDE_SOFT_KEYBOARD_ON_STARTUP, true);
     }
 
-    public boolean shouldRunTermuxAmSocketServer() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_RUN_TERMUX_AM_SOCKET_SERVER, true);
+    public boolean shouldRunxodosAmSocketServer() {
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_RUN_xodos_AM_SOCKET_SERVER, true);
     }
 
     public boolean shouldOpenTerminalTranscriptURLOnClick() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_ONCLICK_URL_OPEN, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_ONCLICK_URL_OPEN, true);
     }
 
     public boolean isUsingCtrlSpaceWorkaround() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_USE_CTRL_SPACE_WORKAROUND, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_USE_CTRL_SPACE_WORKAROUND, true);
     }
 
     public boolean isUsingFullScreen() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_USE_FULLSCREEN, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_USE_FULLSCREEN, true);
     }
 
     public boolean isUsingFullScreenWorkAround() {
-        return (boolean) getInternalPropertyValue(TermuxPropertyConstants.KEY_USE_FULLSCREEN_WORKAROUND, true);
+        return (boolean) getInternalPropertyValue(xodosPropertyConstants.KEY_USE_FULLSCREEN_WORKAROUND, true);
     }
 
     public int getBellBehaviour() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_BELL_BEHAVIOUR, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_BELL_BEHAVIOUR, true);
     }
 
     public int getDeleteTMPDIRFilesOlderThanXDaysOnExit() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_DELETE_TMPDIR_FILES_OLDER_THAN_X_DAYS_ON_EXIT, true);
     }
 
     public int getTerminalCursorBlinkRate() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_CURSOR_BLINK_RATE, true);
     }
 
     public int getTerminalCursorStyle() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_CURSOR_STYLE, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_CURSOR_STYLE, true);
     }
 
     public int getTerminalMarginHorizontal() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_MARGIN_HORIZONTAL, true);
     }
 
     public int getTerminalMarginVertical() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_MARGIN_VERTICAL, true);
     }
 
     public int getTerminalTranscriptRows() {
-        return (int) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS, true);
+        return (int) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_TRANSCRIPT_ROWS, true);
     }
 
     public float getTerminalToolbarHeightScaleFactor() {
-        return (float) getInternalPropertyValue(TermuxPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR, true);
+        return (float) getInternalPropertyValue(xodosPropertyConstants.KEY_TERMINAL_TOOLBAR_HEIGHT_SCALE_FACTOR, true);
     }
 
     public boolean isBackKeyTheEscapeKey() {
-        return (boolean) TermuxPropertyConstants.IVALUE_BACK_KEY_BEHAVIOUR_ESCAPE.equals(getInternalPropertyValue(TermuxPropertyConstants.KEY_BACK_KEY_BEHAVIOUR, true));
+        return (boolean) xodosPropertyConstants.IVALUE_BACK_KEY_BEHAVIOUR_ESCAPE.equals(getInternalPropertyValue(xodosPropertyConstants.KEY_BACK_KEY_BEHAVIOUR, true));
     }
 
     public String getDefaultWorkingDirectory() {
-        return (String) getInternalPropertyValue(TermuxPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY, true);
+        return (String) getInternalPropertyValue(xodosPropertyConstants.KEY_DEFAULT_WORKING_DIRECTORY, true);
     }
 
     public String getNightMode() {
-        return (String) getInternalPropertyValue(TermuxPropertyConstants.KEY_NIGHT_MODE, true);
+        return (String) getInternalPropertyValue(xodosPropertyConstants.KEY_NIGHT_MODE, true);
     }
 
-    /** Get the {@link TermuxPropertyConstants#KEY_NIGHT_MODE} value from the properties file on disk. */
+    /** Get the {@link xodosPropertyConstants#KEY_NIGHT_MODE} value from the properties file on disk. */
     public static String getNightMode(Context context) {
-        return (String) TermuxSharedProperties.getTermuxInternalPropertyValue(context,
-            TermuxPropertyConstants.KEY_NIGHT_MODE);
+        return (String) xodosSharedProperties.getxodosInternalPropertyValue(context,
+            xodosPropertyConstants.KEY_NIGHT_MODE);
     }
 
     public boolean shouldEnableDisableSoftKeyboardOnToggle() {
-        return (boolean) TermuxPropertyConstants.IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR_ENABLE_DISABLE.equals(getInternalPropertyValue(TermuxPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, true));
+        return (boolean) xodosPropertyConstants.IVALUE_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR_ENABLE_DISABLE.equals(getInternalPropertyValue(xodosPropertyConstants.KEY_SOFT_KEYBOARD_TOGGLE_BEHAVIOUR, true));
     }
 
     public boolean areVirtualVolumeKeysDisabled() {
-        return (boolean) TermuxPropertyConstants.IVALUE_VOLUME_KEY_BEHAVIOUR_VOLUME.equals(getInternalPropertyValue(TermuxPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR, true));
+        return (boolean) xodosPropertyConstants.IVALUE_VOLUME_KEY_BEHAVIOUR_VOLUME.equals(getInternalPropertyValue(xodosPropertyConstants.KEY_VOLUME_KEYS_BEHAVIOUR, true));
     }
 
 
@@ -692,7 +692,7 @@ public abstract class TermuxSharedProperties {
         Properties properties = getProperties(true);
         StringBuilder propertiesDump = new StringBuilder();
 
-        propertiesDump.append(mLabel).append(" Termux Properties:");
+        propertiesDump.append(mLabel).append(" xodos Properties:");
         if (properties != null) {
             for (String key : properties.stringPropertyNames()) {
                 propertiesDump.append("\n").append(key).append(": `").append(properties.get(key)).append("`");

@@ -6,17 +6,17 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class TermuxWidgetService extends RemoteViewsService {
+public final class xodosWidgetService extends RemoteViewsService {
 
-    private static final String LOG_TAG = "TermuxWidgetService";
+    private static final String LOG_TAG = "xodosWidgetService";
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -94,7 +94,7 @@ public final class TermuxWidgetService extends RemoteViewsService {
             // locking up the widget.
             shortcutFiles.clear();
             // Create directory if necessary so user more easily finds where to put shortcuts:
-            TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR.mkdirs();
+            xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR.mkdirs();
 
             ShortcutUtils.enumerateShortcutFiles(shortcutFiles, true);
         }

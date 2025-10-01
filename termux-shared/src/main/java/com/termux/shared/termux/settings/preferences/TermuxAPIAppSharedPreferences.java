@@ -1,84 +1,84 @@
-package com.termux.shared.termux.settings.preferences;
+package com.xodos.shared.xodos.settings.preferences;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.logger.Logger;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.settings.preferences.AppSharedPreferences;
-import com.termux.shared.settings.preferences.SharedPreferenceUtils;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.settings.preferences.TermuxPreferenceConstants.TERMUX_API_APP;
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.settings.preferences.AppSharedPreferences;
+import com.xodos.shared.settings.preferences.SharedPreferenceUtils;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosPreferenceConstants.xodos_API_APP;
+import com.xodos.shared.xodos.xodosConstants;
 
-public class TermuxAPIAppSharedPreferences extends AppSharedPreferences {
+public class xodosAPIAppSharedPreferences extends AppSharedPreferences {
 
-    private static final String LOG_TAG = "TermuxAPIAppSharedPreferences";
+    private static final String LOG_TAG = "xodosAPIAppSharedPreferences";
 
-    private TermuxAPIAppSharedPreferences(@NonNull Context context) {
+    private xodosAPIAppSharedPreferences(@NonNull Context context) {
         super(context,
             SharedPreferenceUtils.getPrivateSharedPreferences(context,
-                TermuxConstants.TERMUX_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION),
+                xodosConstants.xodos_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION),
             SharedPreferenceUtils.getPrivateAndMultiProcessSharedPreferences(context,
-                TermuxConstants.TERMUX_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION));
+                xodosConstants.xodos_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION));
     }
 
     /**
-     * Get {@link TermuxAPIAppSharedPreferences}.
+     * Get {@link xodosAPIAppSharedPreferences}.
      *
      * @param context The {@link Context} to use to get the {@link Context} of the
-     *                {@link TermuxConstants#TERMUX_API_PACKAGE_NAME}.
-     * @return Returns the {@link TermuxAPIAppSharedPreferences}. This will {@code null} if an exception is raised.
+     *                {@link xodosConstants#xodos_API_PACKAGE_NAME}.
+     * @return Returns the {@link xodosAPIAppSharedPreferences}. This will {@code null} if an exception is raised.
      */
     @Nullable
-    public static TermuxAPIAppSharedPreferences build(@NonNull final Context context) {
-        Context termuxAPIPackageContext = PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_API_PACKAGE_NAME);
-        if (termuxAPIPackageContext == null)
+    public static xodosAPIAppSharedPreferences build(@NonNull final Context context) {
+        Context xodosAPIPackageContext = PackageUtils.getContextForPackage(context, xodosConstants.xodos_API_PACKAGE_NAME);
+        if (xodosAPIPackageContext == null)
             return null;
         else
-            return new TermuxAPIAppSharedPreferences(termuxAPIPackageContext);
+            return new xodosAPIAppSharedPreferences(xodosAPIPackageContext);
     }
 
     /**
-     * Get {@link TermuxAPIAppSharedPreferences}.
+     * Get {@link xodosAPIAppSharedPreferences}.
      *
      * @param context The {@link Context} to use to get the {@link Context} of the
-     *                {@link TermuxConstants#TERMUX_API_PACKAGE_NAME}.
+     *                {@link xodosConstants#xodos_API_PACKAGE_NAME}.
      * @param exitAppOnError If {@code true} and failed to get package context, then a dialog will
      *                       be shown which when dismissed will exit the app.
-     * @return Returns the {@link TermuxAPIAppSharedPreferences}. This will {@code null} if an exception is raised.
+     * @return Returns the {@link xodosAPIAppSharedPreferences}. This will {@code null} if an exception is raised.
      */
-    public static TermuxAPIAppSharedPreferences build(@NonNull final Context context, final boolean exitAppOnError) {
-        Context termuxAPIPackageContext = TermuxUtils.getContextForPackageOrExitApp(context, TermuxConstants.TERMUX_API_PACKAGE_NAME, exitAppOnError);
-        if (termuxAPIPackageContext == null)
+    public static xodosAPIAppSharedPreferences build(@NonNull final Context context, final boolean exitAppOnError) {
+        Context xodosAPIPackageContext = xodosUtils.getContextForPackageOrExitApp(context, xodosConstants.xodos_API_PACKAGE_NAME, exitAppOnError);
+        if (xodosAPIPackageContext == null)
             return null;
         else
-            return new TermuxAPIAppSharedPreferences(termuxAPIPackageContext);
+            return new xodosAPIAppSharedPreferences(xodosAPIPackageContext);
     }
 
 
 
     public int getLogLevel(boolean readFromFile) {
         if (readFromFile)
-            return SharedPreferenceUtils.getInt(mMultiProcessSharedPreferences, TERMUX_API_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
+            return SharedPreferenceUtils.getInt(mMultiProcessSharedPreferences, xodos_API_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
         else
-            return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_API_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
+            return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_API_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
     }
 
     public void setLogLevel(Context context, int logLevel, boolean commitToFile) {
         logLevel = Logger.setLogLevel(context, logLevel);
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_API_APP.KEY_LOG_LEVEL, logLevel, commitToFile);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_API_APP.KEY_LOG_LEVEL, logLevel, commitToFile);
     }
 
 
     public int getLastPendingIntentRequestCode() {
-        return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_API_APP.KEY_LAST_PENDING_INTENT_REQUEST_CODE, TERMUX_API_APP.DEFAULT_VALUE_KEY_LAST_PENDING_INTENT_REQUEST_CODE);
+        return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_API_APP.KEY_LAST_PENDING_INTENT_REQUEST_CODE, xodos_API_APP.DEFAULT_VALUE_KEY_LAST_PENDING_INTENT_REQUEST_CODE);
     }
 
     public void setLastPendingIntentRequestCode(int lastPendingIntentRequestCode) {
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_API_APP.KEY_LAST_PENDING_INTENT_REQUEST_CODE, lastPendingIntentRequestCode, true);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_API_APP.KEY_LAST_PENDING_INTENT_REQUEST_CODE, lastPendingIntentRequestCode, true);
     }
 
 }

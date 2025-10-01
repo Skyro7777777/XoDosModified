@@ -15,11 +15,11 @@ import android.service.controls.templates.StatelessTemplate;
 
 import androidx.annotation.RequiresApi;
 
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE;
-import com.termux.shared.termux.TermuxConstants.TERMUX_WIDGET;
-import com.termux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_SERVICE;
+import com.xodos.shared.xodos.xodosConstants.xodos_WIDGET;
+import com.xodos.shared.xodos.settings.preferences.xodosWidgetAppSharedPreferences;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import org.reactivestreams.FlowAdapters;
 
@@ -35,12 +35,12 @@ import io.reactivex.processors.ReplayProcessor;
 
 /**
  * ControlProviderService for Android 11+ Device Control which allows running
- * Termux Widget shortcuts from device Power Menu.
+ * xodos Widget shortcuts from device Power Menu.
  * See:
  * https://developer.android.com/guide/topics/ui/device-control
  */
 @RequiresApi(api = Build.VERSION_CODES.R)
-public class TermuxWidgetControlsProviderService extends ControlsProviderService {
+public class xodosWidgetControlsProviderService extends ControlsProviderService {
 
     private static final int WIDGET_REQUEST_CODE = 2233;
     private static final String STATELESS_TEMPLATE_ID = "2";
@@ -137,7 +137,7 @@ public class TermuxWidgetControlsProviderService extends ControlsProviderService
      * @return Control
      */
     private Control createWidgetControlForInvalidShortcutFile(File shortcutFile) {
-        // If user taps "Open App" in error popup, it will display the error in Termux session
+        // If user taps "Open App" in error popup, it will display the error in xodos session
         PendingIntent pendingIntent = createPendingIntentForShortcutFile(shortcutFile);
 
         return new Control.StatefulBuilder(shortcutFile.getAbsolutePath(), pendingIntent)
@@ -199,12 +199,12 @@ public class TermuxWidgetControlsProviderService extends ControlsProviderService
     }
 
     /**
-     * Creates PendingIntent to run our widget shortcut file which will run via {@link TermuxLaunchShortcutActivity}
+     * Creates PendingIntent to run our widget shortcut file which will run via {@link xodosLaunchShortcutActivity}
      * @param file
      * @return PendingIntent
      */
     private PendingIntent createPendingIntentForShortcutFile(File file) {
-        Intent intent = new Intent(getBaseContext(), TermuxLaunchShortcutActivity.class);
+        Intent intent = new Intent(getBaseContext(), xodosLaunchShortcutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         addShortcutFileExtrasToIntent(file, intent);
 
@@ -212,24 +212,24 @@ public class TermuxWidgetControlsProviderService extends ControlsProviderService
     }
 
     private void addShortcutFileExtrasToIntent(File file, Intent intent) {
-        intent.putExtra(TermuxConstants.TERMUX_WIDGET.EXTRA_TOKEN_NAME, TermuxWidgetAppSharedPreferences.getGeneratedToken(getBaseContext()));
+        intent.putExtra(xodosConstants.xodos_WIDGET.EXTRA_TOKEN_NAME, xodosWidgetAppSharedPreferences.getGeneratedToken(getBaseContext()));
 
-        Uri scriptUri = new Uri.Builder().scheme(TERMUX_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(file.getAbsolutePath()).build();
+        Uri scriptUri = new Uri.Builder().scheme(xodos_SERVICE.URI_SCHEME_SERVICE_EXECUTE).path(file.getAbsolutePath()).build();
         intent.setData(scriptUri);
     }
 
     private Intent createBroadcastIntentForShortcutFile(File file) {
-        Intent intent = new Intent(getBaseContext(), TermuxWidgetControlExecutorReceiver.class);
+        Intent intent = new Intent(getBaseContext(), xodosWidgetControlExecutorReceiver.class);
         addShortcutFileExtrasToIntent(file, intent);
         return intent;
     }
 
     /**
-     * Recursively finds shortcut files starting from {@link TermuxConstants#TERMUX_SHORTCUT_SCRIPTS_DIR}
+     * Recursively finds shortcut files starting from {@link xodosConstants#xodos_SHORTCUT_SCRIPTS_DIR}
      * @return List<File>
      */
     private List<File> createShortcutFilesList() {
-        File shortcutDir = TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR;
+        File shortcutDir = xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR;
 
         List<File> shortcutFiles = new ArrayList<>();
         addShortcutFile(shortcutDir, shortcutFiles, 0);
@@ -247,7 +247,7 @@ public class TermuxWidgetControlsProviderService extends ControlsProviderService
      */
     private void addShortcutFile(File dir, List<File> shortcutFiles, int depth) {
         if (depth > 5) {
-            // max depth defined from TermuxWidgetService so using same here
+            // max depth defined from xodosWidgetService so using same here
             return;
         }
         File[] files = dir.listFiles(ShortcutUtils.SHORTCUT_FILES_FILTER);

@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 // ======== Imports =========
 
 import android.Manifest;
@@ -11,9 +11,9 @@ import java.io.FileOutputStream;
 // ======== Imports ========
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_FILES_DIR_PATH;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_HOME_DIR_PATH;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_FILES_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_HOME_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_TMP_PREFIX_DIR_PATH;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -60,48 +60,48 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import com.termux.R;
-import com.termux.app.activities.HelpActivity;
-import com.termux.app.activities.SettingsActivity;
-import com.termux.app.api.file.FileReceiverActivity;
-import com.termux.app.terminal.DisplaySlidingWindow;
-import com.termux.app.terminal.DisplayWindowLinearLayout;
-import com.termux.app.terminal.FloatBallMenuClient;
-import com.termux.app.terminal.MenuEntryClient;
-import com.termux.app.terminal.StartEntryClient;
-import com.termux.app.terminal.TermuxActivityRootView;
-import com.termux.app.terminal.TermuxSessionsListViewController;
-import com.termux.app.terminal.TermuxTerminalSessionActivityClient;
-import com.termux.app.terminal.TermuxTerminalViewClient;
-import com.termux.app.terminal.io.TerminalToolbarViewPager;
-import com.termux.app.terminal.io.TermuxTerminalExtraKeys;
-import com.termux.app.terminal.utils.CommandUtils;
-import com.termux.app.terminal.utils.FilePathUtils;
-import com.termux.app.terminal.utils.FileUtils;
-import com.termux.app.terminal.utils.ScreenUtils;
-import com.termux.shared.activities.ReportActivity;
-import com.termux.shared.activity.ActivityUtils;
-import com.termux.shared.activity.media.AppCompatActivityUtils;
-import com.termux.shared.android.PermissionUtils;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.data.IntentUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.crash.TermuxCrashUtils;
-import com.termux.shared.termux.extrakeys.ExtraKeysView;
-import com.termux.shared.termux.interact.TextInputDialogUtils;
-import com.termux.shared.termux.settings.preferences.TermuxAppSharedPreferences;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.termux.theme.TermuxThemeUtils;
-import com.termux.shared.theme.NightMode;
-import com.termux.shared.view.ViewUtils;
-import com.termux.terminal.TerminalSession;
-import com.termux.terminal.TerminalSessionClient;
-import com.termux.view.TerminalView;
-import com.termux.view.TerminalViewClient;
-import com.termux.x11.controller.winhandler.ProcessInfo;
+import com.xodos.R;
+import com.xodos.app.activities.HelpActivity;
+import com.xodos.app.activities.SettingsActivity;
+import com.xodos.app.api.file.FileReceiverActivity;
+import com.xodos.app.terminal.DisplaySlidingWindow;
+import com.xodos.app.terminal.DisplayWindowLinearLayout;
+import com.xodos.app.terminal.FloatBallMenuClient;
+import com.xodos.app.terminal.MenuEntryClient;
+import com.xodos.app.terminal.StartEntryClient;
+import com.xodos.app.terminal.xodosActivityRootView;
+import com.xodos.app.terminal.xodosSessionsListViewController;
+import com.xodos.app.terminal.xodosTerminalSessionActivityClient;
+import com.xodos.app.terminal.xodosTerminalViewClient;
+import com.xodos.app.terminal.io.TerminalToolbarViewPager;
+import com.xodos.app.terminal.io.xodosTerminalExtraKeys;
+import com.xodos.app.terminal.utils.CommandUtils;
+import com.xodos.app.terminal.utils.FilePathUtils;
+import com.xodos.app.terminal.utils.FileUtils;
+import com.xodos.app.terminal.utils.ScreenUtils;
+import com.xodos.shared.activities.ReportActivity;
+import com.xodos.shared.activity.ActivityUtils;
+import com.xodos.shared.activity.media.AppCompatActivityUtils;
+import com.xodos.shared.android.PermissionUtils;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.data.IntentUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosConstants.xodos_APP.xodos_ACTIVITY;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.crash.xodosCrashUtils;
+import com.xodos.shared.xodos.extrakeys.ExtraKeysView;
+import com.xodos.shared.xodos.interact.TextInputDialogUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosAppSharedPreferences;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
+import com.xodos.shared.xodos.theme.xodosThemeUtils;
+import com.xodos.shared.theme.NightMode;
+import com.xodos.shared.view.ViewUtils;
+import com.xodos.terminal.TerminalSession;
+import com.xodos.terminal.TerminalSessionClient;
+import com.xodos.view.TerminalView;
+import com.xodos.view.TerminalViewClient;
+import com.xodos.x11.controller.winhandler.ProcessInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -121,7 +121,7 @@ import java.util.List;
  * </ul>
  * about memory leaks.
  */
-public class TermuxActivity extends com.termux.x11.MainActivity implements ServiceConnection {
+public class xodosActivity extends com.xodos.x11.MainActivity implements ServiceConnection {
     public static final int FILE_REQUEST_BACKUP_CODE = 101;
 private static final int REQUEST_CODE_STORAGE_PERMISSION = 2000; // Add this line
 public static final int FILE_REQUEST_WINE_CODE = 1002;
@@ -132,48 +132,48 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
     //
     /**
-     * The connection to the {@link TermuxService}. Requested in {@link #onCreate(Bundle)} with a call to
+     * The connection to the {@link xodosService}. Requested in {@link #onCreate(Bundle)} with a call to
      * {@link #bindService(Intent, ServiceConnection, int)}, and obtained and stored in
      * {@link #onServiceConnected(ComponentName, IBinder)}.
      */
-    TermuxService mTermuxService;
+    xodosService mxodosService;
 
     /**
-     * The {@link TerminalView} shown in  {@link TermuxActivity} that displays the terminal.
+     * The {@link TerminalView} shown in  {@link xodosActivity} that displays the terminal.
      */
     TerminalView mTerminalView;
 
     /**
      * The {@link TerminalViewClient} interface implementation to allow for communication between
-     * {@link TerminalView} and {@link TermuxActivity}.
+     * {@link TerminalView} and {@link xodosActivity}.
      */
-    TermuxTerminalViewClient mTermuxTerminalViewClient;
+    xodosTerminalViewClient mxodosTerminalViewClient;
 
     /**
      * The {@link TerminalSessionClient} interface implementation to allow for communication between
-     * {@link TerminalSession} and {@link TermuxActivity}.
+     * {@link TerminalSession} and {@link xodosActivity}.
      */
-    TermuxTerminalSessionActivityClient mTermuxTerminalSessionActivityClient;
+    xodosTerminalSessionActivityClient mxodosTerminalSessionActivityClient;
 
     /**
-     * Termux app shared preferences manager.
+     * xodos app shared preferences manager.
      */
-    private TermuxAppSharedPreferences mPreferences;
+    private xodosAppSharedPreferences mPreferences;
 
     /**
-     * Termux app SharedProperties loaded from termux.properties
+     * xodos app SharedProperties loaded from xodos.properties
      */
-    private TermuxAppSharedProperties mProperties;
+    private xodosAppSharedProperties mProperties;
 
     /**
-     * The root view of the {@link TermuxActivity}.
+     * The root view of the {@link xodosActivity}.
      */
-    TermuxActivityRootView mTermuxActivityRootView;
+    xodosActivityRootView mxodosActivityRootView;
 
     /**
-     * The space at the bottom of {@link @mTermuxActivityRootView} of the {@link TermuxActivity}.
+     * The space at the bottom of {@link @mxodosActivityRootView} of the {@link xodosActivity}.
      */
-    View mTermuxActivityBottomSpaceView;
+    View mxodosActivityBottomSpaceView;
 
     /**
      * The terminal extra keys view.
@@ -183,17 +183,17 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
     /**
      * The client for the {@link #mExtraKeysView}.
      */
-    TermuxTerminalExtraKeys mTermuxTerminalExtraKeys;
+    xodosTerminalExtraKeys mxodosTerminalExtraKeys;
 
     /**
-     * The termux sessions list controller.
+     * The xodos sessions list controller.
      */
-    TermuxSessionsListViewController mTermuxSessionListViewController;
+    xodosSessionsListViewController mxodosSessionListViewController;
 
     /**
-     * The {@link TermuxActivity} broadcast receiver for various things like terminal style configuration changes.
+     * The {@link xodosActivity} broadcast receiver for various things like terminal style configuration changes.
      */
-    private final BroadcastReceiver mTermuxActivityBroadcastReceiver = new TermuxActivityBroadcastReceiver();
+    private final BroadcastReceiver mxodosActivityBroadcastReceiver = new xodosActivityBroadcastReceiver();
 
     /**
      * The last toast shown, used cancel current toast before showing new in {@link #showToast(String, boolean)}.
@@ -213,13 +213,13 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
     /**
      * If activity was restarted like due to call to {@link #recreate()} after receiving
-     * {@link TERMUX_ACTIVITY#ACTION_RELOAD_STYLE}, system dark night mode was changed or activity
+     * {@link xodos_ACTIVITY#ACTION_RELOAD_STYLE}, system dark night mode was changed or activity
      * was killed by android.
      */
     private boolean mIsActivityRecreated = false;
 
     /**
-     * The {@link TermuxActivity} is in an invalid state and must not be run.
+     * The {@link xodosActivity} is in an invalid state and must not be run.
      */
     private boolean mIsInvalidState;
 
@@ -244,7 +244,7 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
     private static final String ARG_TERMINAL_TOOLBAR_TEXT_INPUT = "terminal_toolbar_text_input";
     private static final String ARG_ACTIVITY_RECREATED = "activity_recreated";
 
-    private static final String LOG_TAG = "TermuxActivity";
+    private static final String LOG_TAG = "xodosActivity";
     private FloatBallMenuClient mFloatBallMenuClient;
 
 
@@ -315,17 +315,17 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
         // Delete ReportInfo serialized object files from cache older than 14 days
         ReportActivity.deleteReportInfoFilesOlderThanXDays(this, 14, false);
 
-        // Load Termux app SharedProperties from disk
-        mProperties = TermuxAppSharedProperties.getProperties();
+        // Load xodos app SharedProperties from disk
+        mProperties = xodosAppSharedProperties.getProperties();
         reloadProperties();
 
         setActivityTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_termux_main);
-        mMainContentView = findViewById(R.id.id_termux_layout);
-        mMainContentView.setTermuxActivity(this);
+        setContentView(R.layout.activity_xodos_main);
+        mMainContentView = findViewById(R.id.id_xodos_layout);
+        mMainContentView.setxodosActivity(this);
 
-        ViewGroup vGroup = findViewById(R.id.id_termux_layout);
+        ViewGroup vGroup = findViewById(R.id.id_xodos_layout);
 
         DisplayWindowLinearLayout viewContainer = (DisplayWindowLinearLayout) vGroup.getChildAt(0);
         LinearLayout lorieLayout = (LinearLayout) viewContainer.getChildAt(1);
@@ -333,9 +333,9 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
         getSupportFragmentManager().beginTransaction().replace(R.id.id_window_preference, loriePreferenceFragment).commit();
 
 
-        // Load termux shared preferences
-        // This will also fail if TermuxConstants.TERMUX_PACKAGE_NAME does not equal applicationId
-        mPreferences = TermuxAppSharedPreferences.build(this, true);
+        // Load xodos shared preferences
+        // This will also fail if xodosConstants.xodos_PACKAGE_NAME does not equal applicationId
+        mPreferences = xodosAppSharedPreferences.build(this, true);
         if (mPreferences == null) {
             // An AlertDialog should have shown to kill the app, so we don't continue running activity code
             mIsInvalidState = true;
@@ -344,24 +344,24 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
         setMargins();
 
-        mTermuxActivityRootView = findViewById(R.id.activity_termux_root_view);
-        mTermuxActivityRootView.setActivity(this);
-        mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
-        mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
+        mxodosActivityRootView = findViewById(R.id.activity_xodos_root_view);
+        mxodosActivityRootView.setActivity(this);
+        mxodosActivityBottomSpaceView = findViewById(R.id.activity_xodos_bottom_space_view);
+        mxodosActivityRootView.setOnApplyWindowInsetsListener(new xodosActivityRootView.WindowInsetsListener());
         Bitmap bitmap = null;
         int width = ScreenUtils.getScreenWidth(this);
         int height = ScreenUtils.getScreenHeight(this);
         bitmap = Bitmap.createBitmap(width, height,
             Bitmap.Config.ARGB_8888);
         bitmap.eraseColor(Color.parseColor("#CC000000"));
-        mTermuxActivityRootView.setBackground(new BitmapDrawable(getResources(), bitmap));
+        mxodosActivityRootView.setBackground(new BitmapDrawable(getResources(), bitmap));
         View content = findViewById(android.R.id.content);
         content.setOnApplyWindowInsetsListener((v, insets) -> {
             mNavBarHeight = insets.getSystemWindowInsetBottom();
             return insets;
         });
 
-        setTermuxTerminalViewAndClients();
+        setxodosTerminalViewAndClients();
 
         setTerminalToolbarView(savedInstanceState);
 
@@ -371,10 +371,10 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
         setToggleKeyboardView();
 
-        mMenuEntryClient = new MenuEntryClient(this, mTermuxTerminalSessionActivityClient);
+        mMenuEntryClient = new MenuEntryClient(this, mxodosTerminalSessionActivityClient);
         
-// After initializing mTermuxTerminalSessionActivityClient
-    mStartEntryClient = new StartEntryClient(this, mTermuxTerminalSessionActivityClient);
+// After initializing mxodosTerminalSessionActivityClient
+    mStartEntryClient = new StartEntryClient(this, mxodosTerminalSessionActivityClient);
     mStartEntryClient.init();
     
 
@@ -389,8 +389,8 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
 
         try {
-            // Start the {@link TermuxService} and make it run regardless of who is bound to it
-            Intent serviceIntent = new Intent(this, TermuxService.class);
+            // Start the {@link xodosService} and make it run regardless of who is bound to it
+            Intent serviceIntent = new Intent(this, xodosService.class);
             startService(serviceIntent);
 
             // Attempt to bind to the service, this will call the {@link #onServiceConnected(ComponentName, IBinder)}
@@ -398,19 +398,19 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
             if (!bindService(serviceIntent, this, 0))
                 throw new RuntimeException("bindService() failed");
         } catch (Exception e) {
-            Logger.logStackTraceWithMessage(LOG_TAG, "TermuxActivity failed to start TermuxService", e);
+            Logger.logStackTraceWithMessage(LOG_TAG, "xodosActivity failed to start xodosService", e);
             Logger.showToast(this,
                 getString(e.getMessage() != null && e.getMessage().contains("app is in background") ?
-                    R.string.error_termux_service_start_failed_bg : R.string.error_termux_service_start_failed_general),
+                    R.string.error_xodos_service_start_failed_bg : R.string.error_xodos_service_start_failed_general),
                 true);
             mIsInvalidState = true;
             return;
         }
 
-        // Send the {@link TermuxConstants#BROADCAST_TERMUX_OPENED} broadcast to notify apps that Termux
+        // Send the {@link xodosConstants#BROADCAST_xodos_OPENED} broadcast to notify apps that xodos
         // app has been opened.
-        TermuxUtils.sendTermuxOpenedBroadcast(this);
-        termuxActivityListener = new TermuxActivityListener() {
+        xodosUtils.sendxodosOpenedBroadcast(this);
+        xodosActivityListener = new xodosActivityListener() {
             @Override
             public void onX11PreferenceSwitchChange(boolean isOpen) {
                 mMainContentView.setX11PreferenceSwitchSlider(isOpen);
@@ -418,8 +418,8 @@ public static final int FILE_REQUEST_WINE_CODE = 1002;
 
             @Override
             public void releaseSlider(boolean open) {
-                if (!TermuxActivity.this.mEnableFloatBallMenu
-                    || TermuxActivity.this.mFloatBallMenuClient == null) {
+                if (!xodosActivity.this.mEnableFloatBallMenu
+                    || xodosActivity.this.mFloatBallMenuClient == null) {
                     mMainContentView.releaseSlider(open);
                 }
             }
@@ -442,9 +442,9 @@ FileUtils.copyAssetsFile2Phone(activity, "installkali");
 FileUtils.copyAssetsFile2Phone(activity, "switch");
 FileUtils.copyAssetsFile2Phone(activity, "fix");
                     FileUtils.copyAssetsFile2Phone(activity, "collect_process_info");
-                    CommandUtils.exec(activity, "chmod", new ArrayList<>(Arrays.asList("+x", TERMUX_FILES_DIR_PATH + "/home/install")));
-                    CommandUtils.exec(activity, "chmod", new ArrayList<>(Arrays.asList("+x", TERMUX_FILES_DIR_PATH + "/home/collect_process_info")));
-                    FileUtils.copyAssetsFile2Phone(activity, "termux-x11-nightly-1.03.10-0-all.deb");
+                    CommandUtils.exec(activity, "chmod", new ArrayList<>(Arrays.asList("+x", xodos_FILES_DIR_PATH + "/home/install")));
+                    CommandUtils.exec(activity, "chmod", new ArrayList<>(Arrays.asList("+x", xodos_FILES_DIR_PATH + "/home/collect_process_info")));
+                    FileUtils.copyAssetsFile2Phone(activity, "xodos-x11-nightly-1.03.10-0-all.deb");
                     FileUtils.copyAssetsFile2Phone(activity, "xkeyboard-config_2.45_all.deb");
                     CommandUtils.execInPath(activity, "install", null, "/home/");
                 });
@@ -475,7 +475,7 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
                 //collect，parse,fill
                 List<ProcessInfo> processInfoList = new ArrayList<>();
                 runOnUiThread(() -> {
-                    String path = String.format("%s/process_info", TERMUX_TMP_PREFIX_DIR_PATH);
+                    String path = String.format("%s/process_info", xodos_TMP_PREFIX_DIR_PATH);
                     CommandUtils.execInPath(getInstance(), "collect_process_info",
                         new ArrayList<>(Arrays.asList(tag)), "/home/");
                     if (tag.equals("1")) {
@@ -534,7 +534,7 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
                             mFloatBallMenuClient = null;
                             if (enableFloatBallMenu) {
                                 handler.postDelayed(() -> {
-                                    mFloatBallMenuClient = new FloatBallMenuClient(TermuxActivity.this);
+                                    mFloatBallMenuClient = new FloatBallMenuClient(xodosActivity.this);
                                     mFloatBallMenuClient.onCreate();
                                 }, 2000);
                             }
@@ -543,7 +543,7 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
                     }
                 } else {
                     if (enableFloatBallMenu) {
-                        mFloatBallMenuClient = new FloatBallMenuClient(TermuxActivity.this);
+                        mFloatBallMenuClient = new FloatBallMenuClient(xodosActivity.this);
                         mFloatBallMenuClient.onCreate();
                     }
                 }
@@ -576,16 +576,16 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
 
         mIsVisible = true;
 
-        if (mTermuxTerminalSessionActivityClient != null)
-            mTermuxTerminalSessionActivityClient.onStart();
+        if (mxodosTerminalSessionActivityClient != null)
+            mxodosTerminalSessionActivityClient.onStart();
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onStart();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onStart();
 
         if (mPreferences.isTerminalMarginAdjustmentEnabled())
-            addTermuxActivityRootViewGlobalLayoutListener();
+            addxodosActivityRootViewGlobalLayoutListener();
 
-        registerTermuxActivityBroadcastReceiver();
+        registerxodosActivityBroadcastReceiver();
         setSlideWindowLayout();
     }
 
@@ -598,15 +598,15 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
 
         if (mIsInvalidState) return;
 
-        if (mTermuxTerminalSessionActivityClient != null)
-            mTermuxTerminalSessionActivityClient.onResume();
+        if (mxodosTerminalSessionActivityClient != null)
+            mxodosTerminalSessionActivityClient.onResume();
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onResume();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onResume();
 
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
-        TermuxCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
+        xodosCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
 
         mIsOnResumeAfterOnCreate = false;
     }
@@ -621,15 +621,15 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
 
         mIsVisible = false;
 
-        if (mTermuxTerminalSessionActivityClient != null)
-            mTermuxTerminalSessionActivityClient.onStop();
+        if (mxodosTerminalSessionActivityClient != null)
+            mxodosTerminalSessionActivityClient.onStop();
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onStop();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onStop();
 
-        removeTermuxActivityRootViewGlobalLayoutListener();
+        removexodosActivityRootViewGlobalLayoutListener();
 
-        unregisterTermuxActivityBroadcastReceiver();
+        unregisterxodosActivityBroadcastReceiver();
         getDrawer().closeDrawers();
     }
 
@@ -641,10 +641,10 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
 
         if (mIsInvalidState) return;
 
-        if (mTermuxService != null) {
+        if (mxodosService != null) {
             // Do not leave service and session clients with references to activity.
-            mTermuxService.unsetTermuxTerminalSessionClient();
-            mTermuxService = null;
+            mxodosService.unsetxodosTerminalSessionClient();
+            mxodosService = null;
         }
 
         try {
@@ -694,23 +694,23 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
     public void onServiceConnected(ComponentName componentName, IBinder service) {
         Logger.logDebug(LOG_TAG, "onServiceConnected");
 
-        mTermuxService = ((TermuxService.LocalBinder) service).service;
+        mxodosService = ((xodosService.LocalBinder) service).service;
 
-        setTermuxSessionsListView();
+        setxodosSessionsListView();
 
         final Intent intent = getIntent();
         setIntent(null);
 
-        if (mTermuxService.isTermuxSessionsEmpty()) {
+        if (mxodosService.isxodosSessionsEmpty()) {
             if (mIsVisible) {                   
                      // ======== Add Permission Check  ========
             checkStoragePermissionsAndRun(() -> {
-                TermuxInstaller.setupBootstrapIfNeeded(TermuxActivity.this, () -> {
-                    if (mTermuxService == null) return;
+                xodosInstaller.setupBootstrapIfNeeded(xodosActivity.this, () -> {
+                    if (mxodosService == null) return;
                     try {
                         boolean launchFailsafe = (intent != null && intent.getExtras() != null) 
-                            && intent.getExtras().getBoolean(TERMUX_ACTIVITY.EXTRA_FAILSAFE_SESSION, false);
-                        mTermuxTerminalSessionActivityClient.addNewSession(launchFailsafe, null);
+                            && intent.getExtras().getBoolean(xodos_ACTIVITY.EXTRA_FAILSAFE_SESSION, false);
+                        mxodosTerminalSessionActivityClient.addNewSession(launchFailsafe, null);
                     } catch (WindowManager.BadTokenException e) {
                         finishActivityIfNotFinishing();
                     }
@@ -721,20 +721,20 @@ FileUtils.copyAssetsFile2Phone(activity, "fix");
                 finishActivityIfNotFinishing();
             }
         } else {
-            // If termux was started from launcher "New session" shortcut and activity is recreated,
+            // If xodos was started from launcher "New session" shortcut and activity is recreated,
             // then the original intent will be re-delivered, resulting in a new session being re-added
             // each time.
             if (!mIsActivityRecreated && intent != null && Intent.ACTION_RUN.equals(intent.getAction())) {
                 // Android 7.1 app shortcut from res/xml/shortcuts.xml.
-                boolean isFailSafe = intent.getBooleanExtra(TERMUX_ACTIVITY.EXTRA_FAILSAFE_SESSION, false);
-                mTermuxTerminalSessionActivityClient.addNewSession(isFailSafe, null);
+                boolean isFailSafe = intent.getBooleanExtra(xodos_ACTIVITY.EXTRA_FAILSAFE_SESSION, false);
+                mxodosTerminalSessionActivityClient.addNewSession(isFailSafe, null);
             } else {
-                mTermuxTerminalSessionActivityClient.setCurrentSession(mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast());
+                mxodosTerminalSessionActivityClient.setCurrentSession(mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast());
             }
         }
 
         // Update the {@link TerminalSession} and {@link TerminalEmulator} clients.
-        mTermuxService.setTermuxTerminalSessionClient(mTermuxTerminalSessionActivityClient);
+        mxodosService.setxodosTerminalSessionClient(mxodosTerminalSessionActivityClient);
     }
 
 // ======== Add These Methods ========
@@ -747,7 +747,7 @@ private void checkStoragePermissionsAndRun(Runnable onGranted) {
             .setMessage(R.string.storage_permission_message)
             .setPositiveButton(R.string.action_grant, (dialog, which) -> {
                 ActivityCompat.requestPermissions(
-                    TermuxActivity.this,
+                    xodosActivity.this,
                     new String[]{
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -770,21 +770,21 @@ private boolean hasStoragePermissions() {
     public void onServiceDisconnected(ComponentName name) {
         Logger.logDebug(LOG_TAG, "onServiceDisconnected");
 
-        // Respect being stopped from the {@link TermuxService} notification action.
+        // Respect being stopped from the {@link xodosService} notification action.
         finishActivityIfNotFinishing();
     }
 
     private void reloadProperties() {
-        mProperties.loadTermuxPropertiesFromDisk();
+        mProperties.loadxodosPropertiesFromDisk();
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onReloadProperties();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onReloadProperties();
     }
 
 
     private void setActivityTheme() {
         // Update NightMode.APP_NIGHT_MODE
-        TermuxThemeUtils.setAppNightMode(mProperties.getNightMode());
+        xodosThemeUtils.setAppNightMode(mProperties.getNightMode());
 
         // Set activity night mode. If NightMode.SYSTEM is set, then android will automatically
         // trigger recreation of activity when uiMode/dark mode configuration is changed so that
@@ -793,28 +793,28 @@ private boolean hasStoragePermissions() {
     }
 
     private void setMargins() {
-        RelativeLayout relativeLayout = findViewById(R.id.activity_termux_root_relative_layout);
+        RelativeLayout relativeLayout = findViewById(R.id.activity_xodos_root_relative_layout);
         int marginHorizontal = mProperties.getTerminalMarginHorizontal();
         int marginVertical = mProperties.getTerminalMarginVertical();
         ViewUtils.setLayoutMarginsInDp(relativeLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
     }
 
 
-    public void addTermuxActivityRootViewGlobalLayoutListener() {
-        getTermuxActivityRootView().getViewTreeObserver().addOnGlobalLayoutListener(getTermuxActivityRootView());
+    public void addxodosActivityRootViewGlobalLayoutListener() {
+        getxodosActivityRootView().getViewTreeObserver().addOnGlobalLayoutListener(getxodosActivityRootView());
     }
 
-    public void removeTermuxActivityRootViewGlobalLayoutListener() {
-        if (getTermuxActivityRootView() != null)
-            getTermuxActivityRootView().getViewTreeObserver().removeOnGlobalLayoutListener(getTermuxActivityRootView());
+    public void removexodosActivityRootViewGlobalLayoutListener() {
+        if (getxodosActivityRootView() != null)
+            getxodosActivityRootView().getViewTreeObserver().removeOnGlobalLayoutListener(getxodosActivityRootView());
     }
 
     private void setX11Server() {
-        findViewById(com.termux.x11.R.id.tx_exit_button).setOnClickListener((v) -> {
+        findViewById(com.xodos.x11.R.id.tx_exit_button).setOnClickListener((v) -> {
             if (isExit) {
                 finishActivityIfNotFinishing();
-                Intent exitIntent = new Intent(this, TermuxService.class)
-                    .setAction(TermuxConstants.TERMUX_APP.TERMUX_SERVICE.ACTION_STOP_SERVICE);
+                Intent exitIntent = new Intent(this, xodosService.class)
+                    .setAction(xodosConstants.xodos_APP.xodos_SERVICE.ACTION_STOP_SERVICE);
                 startService(exitIntent);
                 finishActivityIfNotFinishing();
             } else {
@@ -823,14 +823,14 @@ private boolean hasStoragePermissions() {
                 handler.postDelayed(() -> isExit = false, 2000);
             }
         });
-      //  StartEntryClient startEntryClient = new StartEntryClient(this, mTermuxTerminalSessionActivityClient);
+      //  StartEntryClient startEntryClient = new StartEntryClient(this, mxodosTerminalSessionActivityClient);
         mStartEntryClient.init();
     }
 
     private void startX11Display() {
         ArrayList<String> args = new ArrayList<>();
         args.add(":1");
-        CommandUtils.exec(this, "termux-x11", args);
+        CommandUtils.exec(this, "xodos-x11", args);
     }
 
     private void setRecoverView() {
@@ -849,12 +849,12 @@ private boolean hasStoragePermissions() {
         findViewById(R.id.backup_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.termux/files ./home ./usr \n";
+                String command = "tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.xodos/files ./home ./usr \n";
                 File file = new File(getFilesDir().getAbsolutePath() + File.separator + "home" + File.separator + "storage");
                 if (!file.exists()) {
-                    command = "termux-setup-storage;sleep 5s;tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.termux/files ./home ./usr \n";
+                    command = "xodos-setup-storage;sleep 5s;tar -Jcf /sdcard/xodos-backup.tar.xz -C /data/data/com.xodos/files ./home ./usr \n";
                 }
-                mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+                mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
                 mMainContentView.setTerminalViewSwitchSlider(true);
                 closeTerminalSessionListView();
             }
@@ -872,32 +872,32 @@ private boolean hasStoragePermissions() {
         getDrawer().closeDrawers();
     }
 
-    private void setTermuxTerminalViewAndClients() {
-        // Set termux terminal view and session clients
-        mTermuxTerminalSessionActivityClient = new TermuxTerminalSessionActivityClient(this);
-        mTermuxTerminalViewClient = new TermuxTerminalViewClient(this, mTermuxTerminalSessionActivityClient);
+    private void setxodosTerminalViewAndClients() {
+        // Set xodos terminal view and session clients
+        mxodosTerminalSessionActivityClient = new xodosTerminalSessionActivityClient(this);
+        mxodosTerminalViewClient = new xodosTerminalViewClient(this, mxodosTerminalSessionActivityClient);
 
-        // Set termux terminal view
+        // Set xodos terminal view
         mTerminalView = findViewById(R.id.terminal_view);
-        mTerminalView.setTerminalViewClient(mTermuxTerminalViewClient);
+        mTerminalView.setTerminalViewClient(mxodosTerminalViewClient);
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onCreate();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onCreate();
 
     }
 
-    private void setTermuxSessionsListView() {
-        ListView termuxSessionsListView = findViewById(R.id.terminal_sessions_list);
-        mTermuxSessionListViewController = new TermuxSessionsListViewController(this, mTermuxService.getTermuxSessions());
-        termuxSessionsListView.setAdapter(mTermuxSessionListViewController);
-        termuxSessionsListView.setOnItemClickListener(mTermuxSessionListViewController);
-        termuxSessionsListView.setOnItemLongClickListener(mTermuxSessionListViewController);
+    private void setxodosSessionsListView() {
+        ListView xodosSessionsListView = findViewById(R.id.terminal_sessions_list);
+        mxodosSessionListViewController = new xodosSessionsListViewController(this, mxodosService.getxodosSessions());
+        xodosSessionsListView.setAdapter(mxodosSessionListViewController);
+        xodosSessionsListView.setOnItemClickListener(mxodosSessionListViewController);
+        xodosSessionsListView.setOnItemLongClickListener(mxodosSessionListViewController);
     }
 
 
     private void setTerminalToolbarView(Bundle savedInstanceState) {
-        mTermuxTerminalExtraKeys = new TermuxTerminalExtraKeys(this, mTerminalView,
-            mTermuxTerminalViewClient, mTermuxTerminalSessionActivityClient);
+        mxodosTerminalExtraKeys = new xodosTerminalExtraKeys(this, mTerminalView,
+            mxodosTerminalViewClient, mxodosTerminalSessionActivityClient);
 
         final ViewPager terminalToolbarViewPager = getTerminalToolbarViewPager();
         if (mPreferences.shouldShowTerminalToolbar())
@@ -921,7 +921,7 @@ private boolean hasStoragePermissions() {
 
         ViewGroup.LayoutParams layoutParams = terminalToolbarViewPager.getLayoutParams();
         layoutParams.height = Math.round(mTerminalToolbarDefaultHeight *
-            (mTermuxTerminalExtraKeys.getExtraKeysInfo() == null ? 0 : mTermuxTerminalExtraKeys.getExtraKeysInfo().getMatrix().length) *
+            (mxodosTerminalExtraKeys.getExtraKeysInfo() == null ? 0 : mxodosTerminalExtraKeys.getExtraKeysInfo().getMatrix().length) *
             mProperties.getTerminalToolbarHeightScaleFactor());
         terminalToolbarViewPager.setLayoutParams(layoutParams);
     }
@@ -959,11 +959,11 @@ private boolean hasStoragePermissions() {
 
     private void setNewSessionButtonView() {
         View newSessionButton = findViewById(R.id.new_session_button);
-        newSessionButton.setOnClickListener(v -> mTermuxTerminalSessionActivityClient.addNewSession(false, null));
+        newSessionButton.setOnClickListener(v -> mxodosTerminalSessionActivityClient.addNewSession(false, null));
         newSessionButton.setOnLongClickListener(v -> {
-            TextInputDialogUtils.textInput(TermuxActivity.this, R.string.title_create_named_session, null,
-                R.string.action_create_named_session_confirm, text -> mTermuxTerminalSessionActivityClient.addNewSession(false, text),
-                R.string.action_new_session_failsafe, text -> mTermuxTerminalSessionActivityClient.addNewSession(true, text),
+            TextInputDialogUtils.textInput(xodosActivity.this, R.string.title_create_named_session, null,
+                R.string.action_create_named_session_confirm, text -> mxodosTerminalSessionActivityClient.addNewSession(false, text),
+                R.string.action_new_session_failsafe, text -> mxodosTerminalSessionActivityClient.addNewSession(true, text),
                 -1, null, null);
             return true;
         });
@@ -971,7 +971,7 @@ private boolean hasStoragePermissions() {
 
     private void setToggleKeyboardView() {
         findViewById(R.id.toggle_keyboard_button).setOnClickListener(v -> {
-            mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
+            mxodosTerminalViewClient.onToggleSoftKeyboardRequest();
             getDrawer().closeDrawers();
         });
 
@@ -996,7 +996,7 @@ private boolean hasStoragePermissions() {
 
     public void finishActivityIfNotFinishing() {
         // prevent duplicate calls to finish() if called from multiple places
-        if (!TermuxActivity.this.isFinishing()) {
+        if (!xodosActivity.this.isFinishing()) {
             finish();
         }
     }
@@ -1007,7 +1007,7 @@ private boolean hasStoragePermissions() {
     public void showToast(String text, boolean longDuration) {
         if (text == null || text.isEmpty()) return;
         if (mLastToast != null) mLastToast.cancel();
-        mLastToast = Toast.makeText(TermuxActivity.this, text, longDuration ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        mLastToast = Toast.makeText(xodosActivity.this, text, longDuration ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         mLastToast.setGravity(Gravity.TOP, 0, 0);
         mLastToast.show();
     }
@@ -1056,13 +1056,13 @@ private boolean hasStoragePermissions() {
 
         switch (item.getItemId()) {
             case CONTEXT_MENU_SELECT_URL_ID:
-                mTermuxTerminalViewClient.showUrlSelection();
+                mxodosTerminalViewClient.showUrlSelection();
                 return true;
             case CONTEXT_MENU_SHARE_TRANSCRIPT_ID:
-                mTermuxTerminalViewClient.shareSessionTranscript();
+                mxodosTerminalViewClient.shareSessionTranscript();
                 return true;
             case CONTEXT_MENU_SHARE_SELECTED_TEXT:
-                mTermuxTerminalViewClient.shareSelectedText();
+                mxodosTerminalViewClient.shareSelectedText();
                 return true;
             case CONTEXT_MENU_AUTOFILL_ID:
                 requestAutoFill();
@@ -1086,7 +1086,7 @@ private boolean hasStoragePermissions() {
                 ActivityUtils.startActivity(this, new Intent(this, SettingsActivity.class));
                 return true;
             case CONTEXT_MENU_REPORT_ID:
-                mTermuxTerminalViewClient.reportIssueFromTranscript();
+                mxodosTerminalViewClient.reportIssueFromTranscript();
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -1119,14 +1119,14 @@ private boolean hasStoragePermissions() {
             session.reset();
             showToast(getResources().getString(R.string.msg_terminal_reset), true);
 
-            if (mTermuxTerminalSessionActivityClient != null)
-                mTermuxTerminalSessionActivityClient.onResetTerminalSession();
+            if (mxodosTerminalSessionActivityClient != null)
+                mxodosTerminalSessionActivityClient.onResetTerminalSession();
         }
     }
 
     private void showStylingDialog() {
         Intent stylingIntent = new Intent();
-        stylingIntent.setClassName(TermuxConstants.TERMUX_STYLING_PACKAGE_NAME, TermuxConstants.TERMUX_STYLING.TERMUX_STYLING_ACTIVITY_NAME);
+        stylingIntent.setClassName(xodosConstants.xodos_STYLING_PACKAGE_NAME, xodosConstants.xodos_STYLING.xodos_STYLING_ACTIVITY_NAME);
         try {
             startActivity(stylingIntent);
         } catch (ActivityNotFoundException | IllegalArgumentException e) {
@@ -1134,7 +1134,7 @@ private boolean hasStoragePermissions() {
             // However, crash reporting shows that it sometimes does, so catch it here.
             new AlertDialog.Builder(this).setMessage(getString(R.string.error_styling_not_installed))
                 .setPositiveButton(R.string.action_styling_install,
-                    (dialog, which) -> ActivityUtils.startActivity(this, new Intent(Intent.ACTION_VIEW, Uri.parse(TermuxConstants.TERMUX_STYLING_FDROID_PACKAGE_URL))))
+                    (dialog, which) -> ActivityUtils.startActivity(this, new Intent(Intent.ACTION_VIEW, Uri.parse(xodosConstants.xodos_STYLING_FDROID_PACKAGE_URL))))
                 .setNegativeButton(android.R.string.cancel, null).show();
         }
     }
@@ -1161,7 +1161,7 @@ private boolean hasStoragePermissions() {
 
     /**
      * For processes to access primary external storage (/sdcard, /storage/emulated/0, ~/storage/shared),
-     * termux needs to be granted legacy WRITE_EXTERNAL_STORAGE or MANAGE_EXTERNAL_STORAGE permissions
+     * xodos needs to be granted legacy WRITE_EXTERNAL_STORAGE or MANAGE_EXTERNAL_STORAGE permissions
      * if targeting targetSdkVersion 30 (android 11) and running on sdk 30 (android 11) and higher.
      */
     public void requestStoragePermission(boolean isPermissionCallback) {
@@ -1173,16 +1173,16 @@ private boolean hasStoragePermissions() {
 
                 // If permission is granted, then also setup storage symlinks.
                 if (PermissionUtils.checkAndRequestLegacyOrManageExternalStoragePermission(
-                    TermuxActivity.this, requestCode, !isPermissionCallback)) {
+                    xodosActivity.this, requestCode, !isPermissionCallback)) {
                     if (isPermissionCallback)
-                        Logger.logInfoAndShowToast(TermuxActivity.this, LOG_TAG,
-                            getString(com.termux.shared.R.string.msg_storage_permission_granted_on_request));
+                        Logger.logInfoAndShowToast(xodosActivity.this, LOG_TAG,
+                            getString(com.xodos.shared.R.string.msg_storage_permission_granted_on_request));
 
-                    TermuxInstaller.setupStorageSymlinks(TermuxActivity.this);
+                    xodosInstaller.setupStorageSymlinks(xodosActivity.this);
                 } else {
                     if (isPermissionCallback)
-                        Logger.logInfoAndShowToast(TermuxActivity.this, LOG_TAG,
-                            getString(com.termux.shared.R.string.msg_storage_permission_not_granted_on_request));
+                        Logger.logInfoAndShowToast(xodosActivity.this, LOG_TAG,
+                            getString(com.xodos.shared.R.string.msg_storage_permission_not_granted_on_request));
                 }
             }
         }.start();
@@ -1223,12 +1223,12 @@ if (requestCode == FILE_REQUEST_BACKUP_CODE && resultCode == RESULT_OK) {
             FileUtils.copyAssetsFile2Phone(this, "switch");
             FileUtils.copyAssetsFile2Phone(this, "fix");
             FileUtils.copyAssetsFile2Phone(this, "wine.tar");
-            String command = "chmod +x " + TERMUX_HOME_DIR_PATH + "/install && " + TERMUX_HOME_DIR_PATH + "/install ";
+            String command = "chmod +x " + xodos_HOME_DIR_PATH + "/install && " + xodos_HOME_DIR_PATH + "/install ";
             if (mode != null) {
                 command = command + mode;
             }
             command = command + "\n";
-            mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+            mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
         });
     }
 
@@ -1255,16 +1255,16 @@ if (requestCode == FILE_REQUEST_BACKUP_CODE && resultCode == RESULT_OK) {
             }
         }
 String commandPrefix = new File(getFilesDir(), "home/storage").exists() ? 
-                "" : "termux-setup-storage; sleep 5s; ";
+                "" : "xodos-setup-storage; sleep 5s; ";
 
         String command = commandPrefix + 
     "tar -xvf " + tempFile.getAbsolutePath() + 
-    " -C " + TERMUX_FILES_DIR_PATH + 
+    " -C " + xodos_FILES_DIR_PATH + 
     " --preserve-permissions ; rm -f " + tempFile.getAbsolutePath() + "; fix && exit\n";
 
         runOnUiThread(() -> {
         Toast.makeText(this, "please wait: " + getString(R.string.toolbox_restore) , Toast.LENGTH_LONG).show();
-            mTermuxTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
+            mxodosTerminalSessionActivityClient.getCurrentStoredSessionOrLast().write(command);
             mMainContentView.setTerminalViewSwitchSlider(true);
         });
 
@@ -1287,9 +1287,9 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
             && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             // Retry setup if permissions granted
             checkStoragePermissionsAndRun(() -> {
-                TermuxInstaller.setupBootstrapIfNeeded(TermuxActivity.this, () -> {
-                    if (mTermuxService != null && mTermuxService.isTermuxSessionsEmpty()) {
-                        mTermuxTerminalSessionActivityClient.addNewSession(false, null);
+                xodosInstaller.setupBootstrapIfNeeded(xodosActivity.this, () -> {
+                    if (mxodosService != null && mxodosService.isxodosSessionsEmpty()) {
+                        mxodosTerminalSessionActivityClient.addNewSession(false, null);
                     }
                 });
             });
@@ -1313,20 +1313,20 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
         return mNavBarHeight;
     }
 
-    public TermuxActivityRootView getTermuxActivityRootView() {
-        return mTermuxActivityRootView;
+    public xodosActivityRootView getxodosActivityRootView() {
+        return mxodosActivityRootView;
     }
 
-    public View getTermuxActivityBottomSpaceView() {
-        return mTermuxActivityBottomSpaceView;
+    public View getxodosActivityBottomSpaceView() {
+        return mxodosActivityBottomSpaceView;
     }
 
     public ExtraKeysView getExtraKeysView() {
         return mExtraKeysView;
     }
 
-    public TermuxTerminalExtraKeys getTermuxTerminalExtraKeys() {
-        return mTermuxTerminalExtraKeys;
+    public xodosTerminalExtraKeys getxodosTerminalExtraKeys() {
+        return mxodosTerminalExtraKeys;
     }
 
     public void setExtraKeysView(ExtraKeysView extraKeysView) {
@@ -1355,8 +1355,8 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
     }
 
 
-    public void termuxSessionListNotifyUpdated() {
-        mTermuxSessionListViewController.notifyDataSetChanged();
+    public void xodosSessionListNotifyUpdated() {
+        mxodosSessionListViewController.notifyDataSetChanged();
     }
 
     public boolean isVisible() {
@@ -1372,20 +1372,20 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
     }
 
 
-    public TermuxService getTermuxService() {
-        return mTermuxService;
+    public xodosService getxodosService() {
+        return mxodosService;
     }
 
     public TerminalView getTerminalView() {
         return mTerminalView;
     }
 
-    public TermuxTerminalViewClient getTermuxTerminalViewClient() {
-        return mTermuxTerminalViewClient;
+    public xodosTerminalViewClient getxodosTerminalViewClient() {
+        return mxodosTerminalViewClient;
     }
 
-    public TermuxTerminalSessionActivityClient getTermuxTerminalSessionClient() {
-        return mTermuxTerminalSessionActivityClient;
+    public xodosTerminalSessionActivityClient getxodosTerminalSessionClient() {
+        return mxodosTerminalSessionActivityClient;
     }
 
     @Nullable
@@ -1396,63 +1396,63 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
             return null;
     }
 
-    public TermuxAppSharedPreferences getPreferences() {
+    public xodosAppSharedPreferences getPreferences() {
         return mPreferences;
     }
 
-    public TermuxAppSharedProperties getProperties() {
+    public xodosAppSharedProperties getProperties() {
         return mProperties;
     }
 
 
-    public static void updateTermuxActivityStyling(Context context, boolean recreateActivity) {
+    public static void updatexodosActivityStyling(Context context, boolean recreateActivity) {
         // Make sure that terminal styling is always applied.
-        Intent stylingIntent = new Intent(TERMUX_ACTIVITY.ACTION_RELOAD_STYLE);
-        stylingIntent.putExtra(TERMUX_ACTIVITY.EXTRA_RECREATE_ACTIVITY, recreateActivity);
+        Intent stylingIntent = new Intent(xodos_ACTIVITY.ACTION_RELOAD_STYLE);
+        stylingIntent.putExtra(xodos_ACTIVITY.EXTRA_RECREATE_ACTIVITY, recreateActivity);
         context.sendBroadcast(stylingIntent);
     }
 
-    private void registerTermuxActivityBroadcastReceiver() {
+    private void registerxodosActivityBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(TERMUX_ACTIVITY.ACTION_NOTIFY_APP_CRASH);
-        intentFilter.addAction(TERMUX_ACTIVITY.ACTION_RELOAD_STYLE);
-        intentFilter.addAction(TERMUX_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
+        intentFilter.addAction(xodos_ACTIVITY.ACTION_NOTIFY_APP_CRASH);
+        intentFilter.addAction(xodos_ACTIVITY.ACTION_RELOAD_STYLE);
+        intentFilter.addAction(xodos_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
 
-        registerReceiver(mTermuxActivityBroadcastReceiver, intentFilter);
+        registerReceiver(mxodosActivityBroadcastReceiver, intentFilter);
     }
 
-    private void unregisterTermuxActivityBroadcastReceiver() {
-        unregisterReceiver(mTermuxActivityBroadcastReceiver);
+    private void unregisterxodosActivityBroadcastReceiver() {
+        unregisterReceiver(mxodosActivityBroadcastReceiver);
     }
 
-    private void fixTermuxActivityBroadcastReceiverIntent(Intent intent) {
+    private void fixxodosActivityBroadcastReceiverIntent(Intent intent) {
         if (intent == null) return;
 
-        String extraReloadStyle = intent.getStringExtra(TERMUX_ACTIVITY.EXTRA_RELOAD_STYLE);
+        String extraReloadStyle = intent.getStringExtra(xodos_ACTIVITY.EXTRA_RELOAD_STYLE);
         if ("storage".equals(extraReloadStyle)) {
-            intent.removeExtra(TERMUX_ACTIVITY.EXTRA_RELOAD_STYLE);
-            intent.setAction(TERMUX_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
+            intent.removeExtra(xodos_ACTIVITY.EXTRA_RELOAD_STYLE);
+            intent.setAction(xodos_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
         }
     }
 
-    class TermuxActivityBroadcastReceiver extends BroadcastReceiver {
+    class xodosActivityBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent == null) return;
 
             if (mIsVisible) {
-                fixTermuxActivityBroadcastReceiverIntent(intent);
+                fixxodosActivityBroadcastReceiverIntent(intent);
 
                 switch (intent.getAction()) {
-                    case TERMUX_ACTIVITY.ACTION_NOTIFY_APP_CRASH:
+                    case xodos_ACTIVITY.ACTION_NOTIFY_APP_CRASH:
                         Logger.logDebug(LOG_TAG, "Received intent to notify app crash");
-                        TermuxCrashUtils.notifyAppCrashFromCrashLogFile(context, LOG_TAG);
+                        xodosCrashUtils.notifyAppCrashFromCrashLogFile(context, LOG_TAG);
                         return;
-                    case TERMUX_ACTIVITY.ACTION_RELOAD_STYLE:
+                    case xodos_ACTIVITY.ACTION_RELOAD_STYLE:
                         Logger.logDebug(LOG_TAG, "Received intent to reload styling");
-                        reloadActivityStyling(intent.getBooleanExtra(TERMUX_ACTIVITY.EXTRA_RECREATE_ACTIVITY, true));
+                        reloadActivityStyling(intent.getBooleanExtra(xodos_ACTIVITY.EXTRA_RECREATE_ACTIVITY, true));
                         return;
-                    case TERMUX_ACTIVITY.ACTION_REQUEST_PERMISSIONS:
+                    case xodos_ACTIVITY.ACTION_REQUEST_PERMISSIONS:
                         Logger.logDebug(LOG_TAG, "Received intent to request storage permissions");
                         requestStoragePermission(false);
                         return;
@@ -1468,11 +1468,11 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
 
             if (mExtraKeysView != null) {
                 mExtraKeysView.setButtonTextAllCaps(mProperties.shouldExtraKeysTextBeAllCaps());
-                mExtraKeysView.reload(mTermuxTerminalExtraKeys.getExtraKeysInfo(), mTerminalToolbarDefaultHeight);
+                mExtraKeysView.reload(mxodosTerminalExtraKeys.getExtraKeysInfo(), mTerminalToolbarDefaultHeight);
             }
 
             // Update NightMode.APP_NIGHT_MODE
-            TermuxThemeUtils.setAppNightMode(mProperties.getNightMode());
+            xodosThemeUtils.setAppNightMode(mProperties.getNightMode());
         }
 
         setMargins();
@@ -1480,28 +1480,28 @@ String commandPrefix = new File(getFilesDir(), "home/storage").exists() ?
 
         FileReceiverActivity.updateFileReceiverActivityComponentsState(this);
 
-        if (mTermuxTerminalSessionActivityClient != null)
-            mTermuxTerminalSessionActivityClient.onReloadActivityStyling();
+        if (mxodosTerminalSessionActivityClient != null)
+            mxodosTerminalSessionActivityClient.onReloadActivityStyling();
 
-        if (mTermuxTerminalViewClient != null)
-            mTermuxTerminalViewClient.onReloadActivityStyling();
+        if (mxodosTerminalViewClient != null)
+            mxodosTerminalViewClient.onReloadActivityStyling();
 
         // To change the activity and drawer theme, activity needs to be recreated.
         // It will destroy the activity, including all stored variables and views, and onCreate()
         // will be called again. Extra keys input text, terminal sessions and transcripts will be preserved.
         if (recreateActivity) {
             Logger.logDebug(LOG_TAG, "Recreating activity");
-            TermuxActivity.this.recreate();
+            xodosActivity.this.recreate();
         }
     }
 
 
-    public static void startTermuxActivity(@NonNull final Context context) {
+    public static void startxodosActivity(@NonNull final Context context) {
         ActivityUtils.startActivity(context, newInstance(context));
     }
 
     public static Intent newInstance(@NonNull final Context context) {
-        Intent intent = new Intent(context, TermuxActivity.class);
+        Intent intent = new Intent(context, xodosActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }

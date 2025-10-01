@@ -1,12 +1,12 @@
-package com.termux.x11;
+package com.xodos.x11;
 
 // new imports
 
-import com.termux.x11.R;
+import com.xodos.x11.R;
 import android.view.InputDevice; // For InputDevice.SOURCE_GAMEPAD
 import android.widget.Toast;
 import android.graphics.PointF;
-import com.termux.x11.input.InputEventSender;
+import com.xodos.x11.input.InputEventSender;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -38,7 +38,7 @@ import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_M
 import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
-import static com.termux.x11.CmdEntryPoint.ACTION_START;
+import static com.xodos.x11.CmdEntryPoint.ACTION_START;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -86,21 +86,21 @@ import androidx.annotation.NonNull;
 import androidx.core.math.MathUtils;
 import androidx.viewpager.widget.ViewPager;
 
-import com.termux.x11.controller.container.Container;
-import com.termux.x11.controller.container.Shortcut;
-import com.termux.x11.controller.inputcontrols.InputControlsManager;
-import com.termux.x11.controller.widget.InputControlsView;
-import com.termux.x11.controller.widget.TouchpadView;
-import com.termux.x11.controller.winhandler.TaskManagerDialog;
-import com.termux.x11.controller.winhandler.WinHandler;
-import com.termux.x11.input.InputEventSender;
-import com.termux.x11.input.InputStub;
-import com.termux.x11.input.TouchInputHandler;
-import com.termux.x11.utils.FullscreenWorkaround;
-import com.termux.x11.utils.KeyInterceptor;
-import com.termux.x11.utils.SamsungDexUtils;
-import com.termux.x11.utils.TermuxX11ExtraKeys;
-import com.termux.x11.utils.X11ToolbarViewPager;
+import com.xodos.x11.controller.container.Container;
+import com.xodos.x11.controller.container.Shortcut;
+import com.xodos.x11.controller.inputcontrols.InputControlsManager;
+import com.xodos.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.widget.TouchpadView;
+import com.xodos.x11.controller.winhandler.TaskManagerDialog;
+import com.xodos.x11.controller.winhandler.WinHandler;
+import com.xodos.x11.input.InputEventSender;
+import com.xodos.x11.input.InputStub;
+import com.xodos.x11.input.TouchInputHandler;
+import com.xodos.x11.utils.FullscreenWorkaround;
+import com.xodos.x11.utils.KeyInterceptor;
+import com.xodos.x11.utils.SamsungDexUtils;
+import com.xodos.x11.utils.xodosX11ExtraKeys;
+import com.xodos.x11.utils.X11ToolbarViewPager;
 
 import java.io.File;
 import java.util.Map;
@@ -109,10 +109,10 @@ import java.util.concurrent.Executors;
 @SuppressLint("ApplySharedPref")
 @SuppressWarnings({"deprecation", "unused"})
 public class MainActivity extends LoriePreferences {
-    static final String ACTION_STOP = "com.termux.x11.ACTION_STOP";
-    public static final String ACTION_CUSTOM = "com.termux.x11.ACTION_CUSTOM";
+    static final String ACTION_STOP = "com.xodos.x11.ACTION_STOP";
+    public static final String ACTION_CUSTOM = "com.xodos.x11.ACTION_CUSTOM";
     static final String REQUEST_LAUNCH_EXTERNAL_DISPLAY = "request_launch_external_display";
-    public TermuxX11ExtraKeys mExtraKeys;
+    public xodosX11ExtraKeys mExtraKeys;
     protected boolean inputControllerViewHandled = false;
     protected FrameLayout frm;
     protected View lorieContentView;
@@ -128,7 +128,7 @@ public class MainActivity extends LoriePreferences {
     private boolean isInPictureInPictureMode = false;
     private static boolean showIMEWhileExternalConnected = true;
     private static boolean externalKeyboardConnected = false;
-    boolean useTermuxEKBarBehaviour = false;
+    boolean usexodosEKBarBehaviour = false;
     static InputMethodManager inputMethodManager;
 
     private static boolean oldFullscreen = false, oldHideCutout = false;
@@ -258,8 +258,8 @@ public boolean isWineRunning() {
 
         frm = findViewById(R.id.frame);
         findViewById(R.id.preferences_button).setOnClickListener((l) -> {
-            if (null != termuxActivityListener) {
-                termuxActivityListener.onX11PreferenceSwitchChange(true);
+            if (null != xodosActivityListener) {
+                xodosActivityListener.onX11PreferenceSwitchChange(true);
             }
         });
         LorieView lorieView = findViewById(R.id.lorieView);
@@ -287,7 +287,7 @@ if (e.getDevice() == null) {
                     }
                     return true;
                 }
-                if (null != termuxActivityListener && !mEnableFloatBallMenu) {
+                if (null != xodosActivityListener && !mEnableFloatBallMenu) {
                     if (e.getAction() == ACTION_UP) {
                         releaseSlider(true);
                     }
@@ -295,7 +295,7 @@ if (e.getDevice() == null) {
                 if (!getX11Focus()) {
                     if (e.getAction() == ACTION_UP) {
                         if (!back2PreviousMenu()) {
-                            termuxActivityListener.onX11PreferenceSwitchChange(false);
+                            xodosActivityListener.onX11PreferenceSwitchChange(false);
                         }
                     }
                     return true;
@@ -328,7 +328,7 @@ if (e.getDevice() == null) {
         // call X11
         handledByX11 = inputControlsView.dispatchKeyEvent(e);
 
-        // call Termux fallback input        
+        // call xodos fallback input        
 handledByInputHandler = mInputHandler.sendKeyEvent(e);
 
         // Debug toast if needed
@@ -340,7 +340,7 @@ handledByInputHandler = mInputHandler.sendKeyEvent(e);
     
     
 }        // Do not steal dedicated buttons from a full external keyboard.
-            if (useTermuxEKBarBehaviour && mExtraKeys != null && (dev == null || dev.isVirtual()))
+            if (usexodosEKBarBehaviour && mExtraKeys != null && (dev == null || dev.isVirtual()))
                 mExtraKeys.unsetSpecialKeys();
                 
             return result;
@@ -754,8 +754,8 @@ checkConnectedControllers();
             key.contentEquals("enableGlobalFloatBallMenu")) {
             boolean enableGlobalFloatBallMenu = prefs.enableGlobalFloatBallMenu.get();
             mEnableFloatBallMenu = prefs.enableFloatBallMenu.get();
-            if (termuxActivityListener != null) {
-                termuxActivityListener.setFloatBallMenu(mEnableFloatBallMenu, enableGlobalFloatBallMenu);
+            if (xodosActivityListener != null) {
+                xodosActivityListener.setFloatBallMenu(mEnableFloatBallMenu, enableGlobalFloatBallMenu);
             }
             return;
         }
@@ -784,7 +784,7 @@ checkConnectedControllers();
         else if (checkSelfPermission(WRITE_SECURE_SETTINGS) == PERMISSION_GRANTED)
             KeyInterceptor.shutdown(true);
 
-        useTermuxEKBarBehaviour = prefs.useTermuxEKBarBehaviour.get();
+        usexodosEKBarBehaviour = prefs.usexodosEKBarBehaviour.get();
         showIMEWhileExternalConnected = prefs.showIMEWhileExternalConnected.get();
 
         findViewById(R.id.mouse_buttons).setVisibility(prefs.showMouseHelper.get() && "1".equals(prefs.touchMode.get()) && LorieView.connected() ? VISIBLE : View.GONE);
@@ -840,7 +840,7 @@ checkConnectedControllers();
 
         ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
         layoutParams.height = Math.round(37.5f * getResources().getDisplayMetrics().density *
-            (TermuxX11ExtraKeys.getExtraKeysInfo() == null ? 0 : TermuxX11ExtraKeys.getExtraKeysInfo().getMatrix().length));
+            (xodosX11ExtraKeys.getExtraKeysInfo() == null ? 0 : xodosX11ExtraKeys.getExtraKeysInfo().getMatrix().length));
         pager.setLayoutParams(layoutParams);
 
         frm.setPadding(0, 0, 0, prefs.adjustHeightForEK.get() && showNow ? layoutParams.height : 0);
@@ -881,13 +881,13 @@ checkConnectedControllers();
         }
 
         orientation = newConfig.orientation;
-        if (termuxActivityListener != null) {
+        if (xodosActivityListener != null) {
             SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(this);
             boolean forceLandscape = p.getBoolean("forceLandscape", false);
             if (!forceLandscape) {
-                termuxActivityListener.onChangeOrientation(newConfig.orientation);
+                xodosActivityListener.onChangeOrientation(newConfig.orientation);
             } else {
-                termuxActivityListener.onChangeOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                xodosActivityListener.onChangeOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             }
             handler.postDelayed(() -> {
                 getLorieView().regenerate();

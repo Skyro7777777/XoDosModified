@@ -2,44 +2,44 @@
 set -e
 cd "$(dirname "$0")"
 
-TERMUX_PKG_NAME="termux-x11-nightly"
-TERMUX_PKG_HOMEPAGE="https://github.com/termux/termux-x11"
-TERMUX_PKG_DESCRIPTION="Companion package for termux-x11 app"
-TERMUX_PKG_MAINTAINER="Twaik Yont @twaik"
-TERMUX_PKG_REVISION=0
-TERMUX_PKG_VERSION="1.03.10"
-#TERMUX_PKG_VERSION=$(grep versionName termux-x11/build.gradle | cut -d '"' -f 2)
-TERMUX_PKG_DEPENDS="xkeyboard-config"
+xodos_PKG_NAME="xodos-x11-nightly"
+xodos_PKG_HOMEPAGE="https://github.com/xodos/xodos-x11"
+xodos_PKG_DESCRIPTION="Companion package for xodos-x11 app"
+xodos_PKG_MAINTAINER="Twaik Yont @twaik"
+xodos_PKG_REVISION=0
+xodos_PKG_VERSION="1.03.10"
+#xodos_PKG_VERSION=$(grep versionName xodos-x11/build.gradle | cut -d '"' -f 2)
+xodos_PKG_DEPENDS="xkeyboard-config"
 
-TERMUX_PKG_FULLVERSION="$TERMUX_PKG_VERSION-$TERMUX_PKG_REVISION"
+xodos_PKG_FULLVERSION="$xodos_PKG_VERSION-$xodos_PKG_REVISION"
 
 ### Deploy .deb package
 
-DEB_PACKAGE_PATH=app/build/outputs/apk/debug/${TERMUX_PKG_NAME}-${TERMUX_PKG_FULLVERSION}-all.deb
-PACMAN_PACKAGE_PATH=app/build/outputs/apk/debug/${TERMUX_PKG_NAME}-${TERMUX_PKG_FULLVERSION}-any.pkg.tar.xz
+DEB_PACKAGE_PATH=app/build/outputs/apk/debug/${xodos_PKG_NAME}-${xodos_PKG_FULLVERSION}-all.deb
+PACMAN_PACKAGE_PATH=app/build/outputs/apk/debug/${xodos_PKG_NAME}-${xodos_PKG_FULLVERSION}-any.pkg.tar.xz
 ASSETS_PATH=app/src/main/assets/
 
 INTERMEDIATES=shell-loader/build/intermediates
 DATA_DIR=$INTERMEDIATES/data
 CONTROL_DIR=$INTERMEDIATES/control
 PACKAGE_DIR=$INTERMEDIATES/package
-PREFIX=$DATA_DIR/data/data/com.termux/files/usr
+PREFIX=$DATA_DIR/data/data/com.xodos/files/usr
 
 rm -rf $DEB_PACKAGE_PATH $PACMAN_PACKAGE_PATH $DATA_DIR $CONTROL_DIR $PACKAGE_DIR $INTERMEDIATES/.PKGINFO $INTERMEDIATES/.BUILDINFO $INTERMEDIATES/.MTREE
 
 mkdir -p $PREFIX/bin/
-mkdir -p $PREFIX/libexec/termux-x11
-mkdir -p $PREFIX/libexec/termux-display
+mkdir -p $PREFIX/libexec/xodos-x11
+mkdir -p $PREFIX/libexec/xodos-display
 mkdir -p "$(dirname $DEB_PACKAGE_PATH)"
 
-cp termux-x11-app $PREFIX/bin/
-mv $PREFIX/bin/termux-x11-app $PREFIX/bin/termux-x11
-cp termux-x11-display $PREFIX/bin/
-mv $PREFIX/bin/termux-x11-display $PREFIX/bin/termux-display
+cp xodos-x11-app $PREFIX/bin/
+mv $PREFIX/bin/xodos-x11-app $PREFIX/bin/xodos-x11
+cp xodos-x11-display $PREFIX/bin/
+mv $PREFIX/bin/xodos-x11-display $PREFIX/bin/xodos-display
 cp shell-loader/build/outputs/apk/debug/shell-loader-debug.apk \
-    $PREFIX/libexec/termux-x11/loader.apk
+    $PREFIX/libexec/xodos-x11/loader.apk
 cp shell-loader/build/outputs/apk/debug/shell-loader-debug.apk \
-    $PREFIX/libexec/termux-display/loader.apk
+    $PREFIX/libexec/xodos-display/loader.apk
 cp stopserver $PREFIX/bin/
 cp startxserver $PREFIX/bin/
 
@@ -49,21 +49,21 @@ cp collect_process_info $ASSETS_PATH
 
 mkdir -p $CONTROL_DIR
 cat <<EOF >$CONTROL_DIR/control
-Package: $TERMUX_PKG_NAME
+Package: $xodos_PKG_NAME
 Architecture: all
-Maintainer: $TERMUX_PKG_MAINTAINER
-Version: $TERMUX_PKG_FULLVERSION
-Homepage: $TERMUX_PKG_HOMEPAGE
-Depends: $TERMUX_PKG_DEPENDS
-Description: $TERMUX_PKG_DESCRIPTION
+Maintainer: $xodos_PKG_MAINTAINER
+Version: $xodos_PKG_FULLVERSION
+Homepage: $xodos_PKG_HOMEPAGE
+Depends: $xodos_PKG_DEPENDS
+Description: $xodos_PKG_DESCRIPTION
 EOF
 
 cat <<EOF >$CONTROL_DIR/postinst
-#!/data/data/com.termux/files/usr/bin/sh
-chmod -w /data/data/com.termux/files/usr/libexec/termux-x11/loader.apk
-chmod +x /data/data/com.termux/files/usr/bin/startxserver
-chmod +x /data/data/com.termux/files/usr/bin/stopserver
-chmod +x /data/data/com.termux/files/usr/bin/termux-x11
+#!/data/data/com.xodos/files/usr/bin/sh
+chmod -w /data/data/com.xodos/files/usr/libexec/xodos-x11/loader.apk
+chmod +x /data/data/com.xodos/files/usr/bin/startxserver
+chmod +x /data/data/com.xodos/files/usr/bin/stopserver
+chmod +x /data/data/com.xodos/files/usr/bin/xodos-x11
 EOF
 
 mkdir -p $PACKAGE_DIR
@@ -82,34 +82,34 @@ cp -rvf $DEB_PACKAGE_PATH $ASSETS_PATH
 BUILD_DATE=$(date +%s)
 
 {
-    echo "pkgname = $TERMUX_PKG_NAME"
-    echo "pkgbase = $TERMUX_PKG_NAME"
-    echo "pkgver = $TERMUX_PKG_FULLVERSION"
-    echo "pkgdesc = $(echo "$TERMUX_PKG_DESCRIPTION" | tr '\n' ' ')"
-    echo "url = $TERMUX_PKG_HOMEPAGE"
+    echo "pkgname = $xodos_PKG_NAME"
+    echo "pkgbase = $xodos_PKG_NAME"
+    echo "pkgver = $xodos_PKG_FULLVERSION"
+    echo "pkgdesc = $(echo "$xodos_PKG_DESCRIPTION" | tr '\n' ' ')"
+    echo "url = $xodos_PKG_HOMEPAGE"
     echo "builddate = $BUILD_DATE"
-    echo "packager = $TERMUX_PKG_MAINTAINER"
+    echo "packager = $xodos_PKG_MAINTAINER"
     echo "arch = any"
-    echo "license = TERMUX_PKG_LICENSE"
-    tr ',' '\n' <<<"$TERMUX_PKG_DEPENDS" | sed 's|(||g; s|)||g; s| ||g; s|>>|>|g; s|<<|<|g' | awk '{ printf "depend = " $1; if ( ($1 ~ /</ || $1 ~ />/ || $1 ~ /=/) && $1 !~ /-/ ) printf "-0"; printf "\n" }' | sed 's/|.*//'
+    echo "license = xodos_PKG_LICENSE"
+    tr ',' '\n' <<<"$xodos_PKG_DEPENDS" | sed 's|(||g; s|)||g; s| ||g; s|>>|>|g; s|<<|<|g' | awk '{ printf "depend = " $1; if ( ($1 ~ /</ || $1 ~ />/ || $1 ~ /=/) && $1 !~ /-/ ) printf "-0"; printf "\n" }' | sed 's/|.*//'
 } >$DATA_DIR/.PKGINFO
 
 {
     echo "format = 2"
-    echo "pkgname = $TERMUX_PKG_NAME"
-    echo "pkgbase = $TERMUX_PKG_NAME"
-    echo "pkgver = $TERMUX_PKG_FULLVERSION"
+    echo "pkgname = $xodos_PKG_NAME"
+    echo "pkgbase = $xodos_PKG_NAME"
+    echo "pkgver = $xodos_PKG_FULLVERSION"
     echo "pkgarch = any"
-    echo "packager = $TERMUX_PKG_MAINTAINER"
+    echo "packager = $xodos_PKG_MAINTAINER"
     echo "builddate = $BUILD_DATE"
 } >$DATA_DIR/.BUILDINFO
 {
     echo "post_install() {"
-    echo "    chmod -w /data/data/com.termux/files/usr/libexec/termux-x11/loader.apk"
-    echo "    chmod +x /data/data/com.termux/files/usr/bin/display"
-    echo "    chmod +x /data/data/com.termux/files/usr/bin/startxserver"
-    echo "    chmod +x /data/data/com.termux/files/usr/bin/stopserver"
-    echo "    chmod +x /data/data/com.termux/files/usr/bin/termux-x11"
+    echo "    chmod -w /data/data/com.xodos/files/usr/libexec/xodos-x11/loader.apk"
+    echo "    chmod +x /data/data/com.xodos/files/usr/bin/display"
+    echo "    chmod +x /data/data/com.xodos/files/usr/bin/startxserver"
+    echo "    chmod +x /data/data/com.xodos/files/usr/bin/stopserver"
+    echo "    chmod +x /data/data/com.xodos/files/usr/bin/xodos-x11"
     echo "}"
 } >$DATA_DIR/.INSTALL
 

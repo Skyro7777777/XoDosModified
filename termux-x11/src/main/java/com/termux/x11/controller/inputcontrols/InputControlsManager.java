@@ -1,4 +1,4 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,8 +10,8 @@ import android.util.JsonReader;
 import androidx.preference.PreferenceManager;
 
 
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.FileUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,21 +16,21 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.R;
-import com.termux.shared.interact.ShareUtils;
-import com.termux.shared.termux.shell.command.runner.terminal.TermuxSession;
-import com.termux.shared.termux.interact.TextInputDialogUtils;
-import com.termux.app.TermuxActivity;
-import com.termux.shared.termux.terminal.TermuxTerminalSessionClientBase;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.app.TermuxService;
-import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
-import com.termux.shared.termux.terminal.io.BellHandler;
-import com.termux.shared.logger.Logger;
-import com.termux.terminal.TerminalColors;
-import com.termux.terminal.TerminalSession;
-import com.termux.terminal.TerminalSessionClient;
-import com.termux.terminal.TextStyle;
+import com.xodos.R;
+import com.xodos.shared.interact.ShareUtils;
+import com.xodos.shared.xodos.shell.command.runner.terminal.xodosSession;
+import com.xodos.shared.xodos.interact.TextInputDialogUtils;
+import com.xodos.app.xodosActivity;
+import com.xodos.shared.xodos.terminal.xodosTerminalSessionClientBase;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.app.xodosService;
+import com.xodos.shared.xodos.settings.properties.xodosPropertyConstants;
+import com.xodos.shared.xodos.terminal.io.BellHandler;
+import com.xodos.shared.logger.Logger;
+import com.xodos.terminal.TerminalColors;
+import com.xodos.terminal.TerminalSession;
+import com.xodos.terminal.TerminalSessionClient;
+import com.xodos.terminal.TextStyle;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,9 +38,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /** The {@link TerminalSessionClient} implementation that may require an {@link Activity} for its interface methods. */
-public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionClientBase {
+public class xodosTerminalSessionActivityClient extends xodosTerminalSessionClientBase {
 
-    private final TermuxActivity mActivity;
+    private final xodosActivity mActivity;
 
     private static final int MAX_SESSIONS = 8;
 
@@ -48,9 +48,9 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
 
     private int mBellSoundId;
 
-    private static final String LOG_TAG = "TermuxTerminalSessionActivityClient";
+    private static final String LOG_TAG = "xodosTerminalSessionActivityClient";
 
-    public TermuxTerminalSessionActivityClient(TermuxActivity activity) {
+    public xodosTerminalSessionActivityClient(xodosActivity activity) {
         this.mActivity = activity;
     }
 
@@ -69,9 +69,9 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
         // The service has connected, but data may have changed since we were last in the foreground.
         // Get the session stored in shared preferences stored by {@link #onStop} if its valid,
         // otherwise get the last session currently running.
-        if (mActivity.getTermuxService() != null) {
+        if (mActivity.getxodosService() != null) {
             setCurrentSession(getCurrentStoredSessionOrLast());
-            termuxSessionListNotifyUpdated();
+            xodosSessionListNotifyUpdated();
         }
 
         // The current terminal session may have changed while being away, force
@@ -132,12 +132,12 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             mActivity.showToast(toToastTitle(updatedSession), true);
         }
 
-        termuxSessionListNotifyUpdated();
+        xodosSessionListNotifyUpdated();
     }
 
     @Override
     public void onSessionFinished(@NonNull TerminalSession finishedSession) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
 
         if (service == null || service.wantsToStop()) {
             // The service wants to stop as soon as possible.
@@ -151,9 +151,9 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
         // and send the result back instead of waiting fo the user to press enter.
         // The plugin can handle/show errors itself.
         boolean isPluginExecutionCommandWithPendingResult = false;
-        TermuxSession termuxSession = service.getTermuxSession(index);
-        if (termuxSession != null) {
-            isPluginExecutionCommandWithPendingResult = termuxSession.getExecutionCommand().isPluginExecutionCommandWithPendingResult();
+        xodosSession xodosSession = service.getxodosSession(index);
+        if (xodosSession != null) {
+            isPluginExecutionCommandWithPendingResult = xodosSession.getExecutionCommand().isPluginExecutionCommandWithPendingResult();
             if (isPluginExecutionCommandWithPendingResult)
                 Logger.logVerbose(LOG_TAG, "The \"" + finishedSession.mSessionName + "\" session will be force finished automatically since result in pending.");
         }
@@ -168,7 +168,7 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
         if (mActivity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {
             // On Android TV devices we need to use older behaviour because we may
             // not be able to have multiple launcher icons.
-            if (service.getTermuxSessionsSize() > 1 || isPluginExecutionCommandWithPendingResult) {
+            if (service.getxodosSessionsSize() > 1 || isPluginExecutionCommandWithPendingResult) {
                 removeFinishedSession(finishedSession);
             }
         } else {
@@ -201,15 +201,15 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
         if (!mActivity.isVisible()) return;
 
         switch (mActivity.getProperties().getBellBehaviour()) {
-            case TermuxPropertyConstants.IVALUE_BELL_BEHAVIOUR_VIBRATE:
+            case xodosPropertyConstants.IVALUE_BELL_BEHAVIOUR_VIBRATE:
                 BellHandler.getInstance(mActivity).doBell();
                 break;
-            case TermuxPropertyConstants.IVALUE_BELL_BEHAVIOUR_BEEP:
+            case xodosPropertyConstants.IVALUE_BELL_BEHAVIOUR_BEEP:
                 loadBellSoundPool();
                 if (mBellSoundPool != null)
                     mBellSoundPool.play(mBellSoundId, 1.f, 1.f, 1, 0, 1.f);
                 break;
-            case TermuxPropertyConstants.IVALUE_BELL_BEHAVIOUR_IGNORE:
+            case xodosPropertyConstants.IVALUE_BELL_BEHAVIOUR_IGNORE:
                 // Ignore the bell character.
                 break;
         }
@@ -236,12 +236,12 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
 
     @Override
     public void setTerminalShellPid(@NonNull TerminalSession terminalSession, int pid) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
         
-        TermuxSession termuxSession = service.getTermuxSessionForTerminalSession(terminalSession);
-        if (termuxSession != null)
-            termuxSession.getExecutionCommand().mPid = pid;
+        xodosSession xodosSession = service.getxodosSessionForTerminalSession(terminalSession);
+        if (xodosSession != null)
+            xodosSession.getExecutionCommand().mPid = pid;
     }
 
 
@@ -271,9 +271,9 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).build()).build();
 
             try {
-                mBellSoundId = mBellSoundPool.load(mActivity, com.termux.shared.R.raw.bell, 1);
+                mBellSoundId = mBellSoundPool.load(mActivity, com.xodos.shared.R.raw.bell, 1);
             } catch (Exception e){
-                // Catch java.lang.RuntimeException: Unable to resume activity {com.termux/com.termux.app.TermuxActivity}: android.content.res.Resources$NotFoundException: File res/raw/bell.ogg from drawable resource ID
+                // Catch java.lang.RuntimeException: Unable to resume activity {com.xodos/com.xodos.app.xodosActivity}: android.content.res.Resources$NotFoundException: File res/raw/bell.ogg from drawable resource ID
                 Logger.logStackTraceWithMessage(LOG_TAG, "Failed to load bell sound pool", e);
             }
         }
@@ -314,30 +314,30 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
     }
 
     public void switchToSession(boolean forward) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
 
         TerminalSession currentTerminalSession = mActivity.getCurrentSession();
         int index = service.getIndexOfSession(currentTerminalSession);
-        int size = service.getTermuxSessionsSize();
+        int size = service.getxodosSessionsSize();
         if (forward) {
             if (++index >= size) index = 0;
         } else {
             if (--index < 0) index = size - 1;
         }
 
-        TermuxSession termuxSession = service.getTermuxSession(index);
-        if (termuxSession != null)
-            setCurrentSession(termuxSession.getTerminalSession());
+        xodosSession xodosSession = service.getxodosSession(index);
+        if (xodosSession != null)
+            setCurrentSession(xodosSession.getTerminalSession());
     }
 
     public void switchToSession(int index) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
 
-        TermuxSession termuxSession = service.getTermuxSession(index);
-        if (termuxSession != null)
-            setCurrentSession(termuxSession.getTerminalSession());
+        xodosSession xodosSession = service.getxodosSession(index);
+        if (xodosSession != null)
+            setCurrentSession(xodosSession.getTerminalSession());
     }
 
     @SuppressLint("InflateParams")
@@ -346,26 +346,26 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
 
         TextInputDialogUtils.textInput(mActivity, R.string.title_rename_session, sessionToRename.mSessionName, R.string.action_rename_session_confirm, text -> {
             renameSession(sessionToRename, text);
-            termuxSessionListNotifyUpdated();
+            xodosSessionListNotifyUpdated();
         }, -1, null, -1, null, null);
     }
 
     private void renameSession(TerminalSession sessionToRename, String text) {
         if (sessionToRename == null) return;
         sessionToRename.mSessionName = text;
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service != null) {
-            TermuxSession termuxSession = service.getTermuxSessionForTerminalSession(sessionToRename);
-            if (termuxSession != null)
-                termuxSession.getExecutionCommand().shellName = text;
+            xodosSession xodosSession = service.getxodosSessionForTerminalSession(sessionToRename);
+            if (xodosSession != null)
+                xodosSession.getExecutionCommand().shellName = text;
         }
     }
 
     public void addNewSession(boolean isFailSafe, String sessionName) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
 
-        if (service.getTermuxSessionsSize() >= MAX_SESSIONS) {
+        if (service.getxodosSessionsSize() >= MAX_SESSIONS) {
             new AlertDialog.Builder(mActivity).setTitle(R.string.title_max_terminals_reached).setMessage(R.string.msg_max_terminals_reached)
                 .setPositiveButton(android.R.string.ok, null).show();
         } else {
@@ -378,10 +378,10 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
                 workingDirectory = currentSession.getCwd();
             }
 
-            TermuxSession newTermuxSession = service.createTermuxSession(null, null, null, workingDirectory, isFailSafe, sessionName);
-            if (newTermuxSession == null) return;
+            xodosSession newxodosSession = service.createxodosSession(null, null, null, workingDirectory, isFailSafe, sessionName);
+            if (newxodosSession == null) return;
 
-            TerminalSession newTerminalSession = newTermuxSession.getTerminalSession();
+            TerminalSession newTerminalSession = newxodosSession.getTerminalSession();
             setCurrentSession(newTerminalSession);
 
             mActivity.getDrawer().closeDrawers();
@@ -405,12 +405,12 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             return stored;
         } else {
             // Else return the last session currently running
-            TermuxService service = mActivity.getTermuxService();
+            xodosService service = mActivity.getxodosService();
             if (service == null) return null;
 
-            TermuxSession termuxSession = service.getLastTermuxSession();
-            if (termuxSession != null)
-                return termuxSession.getTerminalSession();
+            xodosSession xodosSession = service.getLastxodosSession();
+            if (xodosSession != null)
+                return xodosSession.getTerminalSession();
             else
                 return null;
         }
@@ -424,7 +424,7 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             return null;
 
         // Check if the session handle found matches one of the currently running sessions
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return null;
 
         return service.getTerminalSessionForHandle(sessionHandle);
@@ -432,12 +432,12 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
 
     public void removeFinishedSession(TerminalSession finishedSession) {
         // Return pressed with finished session - remove it.
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
 
-        int index = service.removeTermuxSession(finishedSession);
+        int index = service.removexodosSession(finishedSession);
 
-        int size = service.getTermuxSessionsSize();
+        int size = service.getxodosSessionsSize();
         if (size == 0) {
             // There are no sessions to show, so finish the activity.
             mActivity.finishActivityIfNotFinishing();
@@ -445,34 +445,34 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             if (index >= size) {
                 index = size - 1;
             }
-            TermuxSession termuxSession = service.getTermuxSession(index);
-            if (termuxSession != null)
-                setCurrentSession(termuxSession.getTerminalSession());
+            xodosSession xodosSession = service.getxodosSession(index);
+            if (xodosSession != null)
+                setCurrentSession(xodosSession.getTerminalSession());
         }
     }
 
-    public void termuxSessionListNotifyUpdated() {
-        mActivity.termuxSessionListNotifyUpdated();
+    public void xodosSessionListNotifyUpdated() {
+        mActivity.xodosSessionListNotifyUpdated();
     }
 
     public void checkAndScrollToSession(TerminalSession session) {
         if (!mActivity.isVisible()) return;
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return;
 
         final int indexOfSession = service.getIndexOfSession(session);
         if (indexOfSession < 0) return;
-        final ListView termuxSessionsListView = mActivity.findViewById(R.id.terminal_sessions_list);
-        if (termuxSessionsListView == null) return;
+        final ListView xodosSessionsListView = mActivity.findViewById(R.id.terminal_sessions_list);
+        if (xodosSessionsListView == null) return;
 
-        termuxSessionsListView.setItemChecked(indexOfSession, true);
+        xodosSessionsListView.setItemChecked(indexOfSession, true);
         // Delay is necessary otherwise sometimes scroll to newly added session does not happen
-        termuxSessionsListView.postDelayed(() -> termuxSessionsListView.smoothScrollToPosition(indexOfSession), 1000);
+        xodosSessionsListView.postDelayed(() -> xodosSessionsListView.smoothScrollToPosition(indexOfSession), 1000);
     }
 
 
     String toToastTitle(TerminalSession session) {
-        TermuxService service = mActivity.getTermuxService();
+        xodosService service = mActivity.getxodosService();
         if (service == null) return null;
 
         final int indexOfSession = service.getIndexOfSession(session);
@@ -493,8 +493,8 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
 
     public void checkForFontAndColors() {
         try {
-            File colorsFile = TermuxConstants.TERMUX_COLOR_PROPERTIES_FILE;
-            File fontFile = TermuxConstants.TERMUX_FONT_FILE;
+            File colorsFile = xodosConstants.xodos_COLOR_PROPERTIES_FILE;
+            File fontFile = xodosConstants.xodos_FONT_FILE;
 
             final Properties props = new Properties();
             if (colorsFile.isFile()) {

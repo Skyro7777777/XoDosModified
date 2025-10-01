@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_API_APP_NAME "Termux:API"><!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot"><!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float"><!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling"><!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker"><!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_API_APP_NAME "xodos:API"><!ENTITY xodos_BOOT_APP_NAME "xodos:Boot"><!ENTITY xodos_FLOAT_APP_NAME "xodos:Float"><!ENTITY xodos_STYLING_APP_NAME "xodos:Styling"><!ENTITY xodos_TASKER_APP_NAME "xodos:Tasker"><!ENTITY xodos_WIDGET_APP_NAME "xodos:Widget">]>
 <resources>
     <string name="application_name">XoDos</string>
     <string name="shared_user_label">user</string>
-    <!-- Termux RUN_COMMAND permission -->
-    <string name="permission_run_command_label">تشغيل الأوامر في بيئة &TERMUX_APP_NAME;</string>
-    <string name="permission_run_command_description">تنفيذ أوامر عشوائية داخل بيئة &TERMUX_APP_NAME; والوصول إلى الملفات</string>
+    <!-- xodos RUN_COMMAND permission -->
+    <string name="permission_run_command_label">تشغيل الأوامر في بيئة &xodos_APP_NAME;</string>
+    <string name="permission_run_command_description">تنفيذ أوامر عشوائية داخل بيئة &xodos_APP_NAME; والوصول إلى الملفات</string>
 
 
-    <!-- Termux Bootstrap Packages Installation -->
+    <!-- xodos Bootstrap Packages Installation -->
     <string name="bootstrap_installer_body">جارٍ تثبيت حزم Bootstrap…</string>
     <string name="bootstrap_error_title">تعذر تثبيت Bootstrap</string>
-    <string name="bootstrap_error_body">تعذر على &TERMUX_APP_NAME; تثبيت حزم Bootstrap.</string>
+    <string name="bootstrap_error_body">تعذر على &xodos_APP_NAME; تثبيت حزم Bootstrap.</string>
     <string name="bootstrap_error_abort">إلغاء</string>
     <string name="bootstrap_error_try_again">حاول مرة أخرى</string>
-    <string name="bootstrap_error_not_primary_user_message">يمكن تشغيل &TERMUX_APP_NAME;&TERMUX_APP_NAME;" فقط كمستخدم رئيسي. تم تجميع ثنائيات Bootstrap مع مسار $PREFIX ثابت ولا يمكن تثبيتها تحت أي مسار آخر غير:%1$s."</string>
-    <string name="bootstrap_error_installed_on_portable_sd">لا يمكن تثبيت &TERMUX_APP_NAME;&TERMUX_APP_NAME;" على بطاقة SD المحمولة/الخارجية/القابلة للإزالة على جهازك. تم تجميع ثنائيات Bootstrap مع مسار $PREFIX ثابت ولا يمكن تثبيتها تحت أي مسار آخر غير:%1$s."</string>
+    <string name="bootstrap_error_not_primary_user_message">يمكن تشغيل &xodos_APP_NAME;&xodos_APP_NAME;" فقط كمستخدم رئيسي. تم تجميع ثنائيات Bootstrap مع مسار $PREFIX ثابت ولا يمكن تثبيتها تحت أي مسار آخر غير:%1$s."</string>
+    <string name="bootstrap_error_installed_on_portable_sd">لا يمكن تثبيت &xodos_APP_NAME;&xodos_APP_NAME;" على بطاقة SD المحمولة/الخارجية/القابلة للإزالة على جهازك. تم تجميع ثنائيات Bootstrap مع مسار $PREFIX ثابت ولا يمكن تثبيتها تحت أي مسار آخر غير:%1$s."</string>
 
 
     <!-- Terminal Sidebar and Shortcuts -->
@@ -68,131 +68,131 @@
 
     <string name="action_report_issue">الإبلاغ عن مشكلة</string>
     <string name="msg_generating_report">جارٍ إنشاء التقرير</string>
-    <string name="msg_add_termux_debug_info">هل تريد إضافة معلومات تصحيح Termux إلى التقرير؟</string>
+    <string name="msg_add_xodos_debug_info">هل تريد إضافة معلومات تصحيح xodos إلى التقرير؟</string>
 
-    <string name="error_styling_not_installed">تطبيق الإضافة &TERMUX_STYLING_APP_NAME; غير مثبت.</string>
+    <string name="error_styling_not_installed">تطبيق الإضافة &xodos_STYLING_APP_NAME; غير مثبت.</string>
     <string name="action_styling_install">تثبيت</string>
 
 
-    <!-- Termux Notifications -->
+    <!-- xodos Notifications -->
     <string name="notification_action_exit">خروج</string>
     <string name="notification_action_wake_lock">الحصول على Wake Lock</string>
     <string name="notification_action_wake_unlock">إطلاق Wake Lock</string>
 
 
-    <!-- TermuxService -->
-    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">يتطلب &TERMUX_APP_NAME;
+    <!-- xodosService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">يتطلب &xodos_APP_NAME;
         إذن \"عرض فوق التطبيقات الأخرى\" لبدء جلسات المحطة من الخلفية على Android >= 10.
-        قم بمنحه من الإعدادات -> التطبيقات -> &TERMUX_APP_NAME; -> متقدم</string>
-    <string name="error_termux_service_invalid_execution_command_runner">مشغل أمر تنفيذ غير صالح لـ TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_runner">مشغل أمر تنفيذ غير مدعوم لـ TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">وضع إنشاء shell غير مدعوم لـ TermuxService: `%1$s`</string>
-    <string name="error_termux_service_execution_command_shell_name_unset">لم يتم تعيين اسم shell ولكن تم تمرير وضع إنشاء shell `%1$s`</string>
+        قم بمنحه من الإعدادات -> التطبيقات -> &xodos_APP_NAME; -> متقدم</string>
+    <string name="error_xodos_service_invalid_execution_command_runner">مشغل أمر تنفيذ غير صالح لـ xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_runner">مشغل أمر تنفيذ غير مدعوم لـ xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_shell_create_mode">وضع إنشاء shell غير مدعوم لـ xodosService: `%1$s`</string>
+    <string name="error_xodos_service_execution_command_shell_name_unset">لم يتم تعيين اسم shell ولكن تم تمرير وضع إنشاء shell `%1$s`</string>
 
 
-    <!-- Termux RunCommandService -->
+    <!-- xodos RunCommandService -->
     <string name="error_run_command_service_invalid_intent_action">إجراء نية غير صالح لـ RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_invalid_execution_command_runner">مشغل أمر تنفيذ غير صالح لـ RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_mandatory_extra_missing">بيانات إضافية إلزامية مفقودة لـ RunCommandService: \"%1$s\"</string>
     <string name="error_run_command_service_api_help">قم بزيارة %1$s لمزيد من المعلومات حول استخدام نية RUN_COMMAND.</string>
 
 
-    <!-- Termux File Receiver -->
+    <!-- xodos File Receiver -->
     <string name="title_file_received">حفظ الملف في ~/downloads/</string>
     <string name="action_file_received_edit">تحرير</string>
     <string name="action_file_received_open_directory">فتح الدليل</string>
 
 
     <!-- Miscellaneous -->
-    <string name="error_termux_service_start_failed_general">فشل بدء TermuxService. تحقق من logcat لمعرفة رسالة الاستثناء.</string>
-    <string name="error_termux_service_start_failed_bg">فشل بدء TermuxService أثناء وجود التطبيق في الخلفية بسبب قيود الخلفية في Android.</string>
+    <string name="error_xodos_service_start_failed_general">فشل بدء xodosService. تحقق من logcat لمعرفة رسالة الاستثناء.</string>
+    <string name="error_xodos_service_start_failed_bg">فشل بدء xodosService أثناء وجود التطبيق في الخلفية بسبب قيود الخلفية في Android.</string>
 
 
-    <!-- Termux Settings -->
-    <string name="title_activity_termux_settings">إعدادات &TERMUX_APP_NAME;</string>
+    <!-- xodos Settings -->
+    <string name="title_activity_xodos_settings">إعدادات &xodos_APP_NAME;</string>
 
-    <!-- Termux App Preferences -->
-    <string name="termux_preferences_title">تفضيلات &TERMUX_APP_NAME;</string>
-    <string name="termux_preferences_summary">تفضيلات تطبيق &TERMUX_APP_NAME;</string>
+    <!-- xodos App Preferences -->
+    <string name="xodos_preferences_title">تفضيلات &xodos_APP_NAME;</string>
+    <string name="xodos_preferences_summary">تفضيلات تطبيق &xodos_APP_NAME;</string>
 
     <!-- Debugging Preferences -->
-    <string name="termux_debugging_preferences_title">التصحيح</string>
-    <string name="termux_debugging_preferences_summary">تفضيلات التصحيح</string>
+    <string name="xodos_debugging_preferences_title">التصحيح</string>
+    <string name="xodos_debugging_preferences_summary">تفضيلات التصحيح</string>
 
     <!-- Logging Category -->
-    <string name="termux_logging_header">التسجيل</string>
+    <string name="xodos_logging_header">التسجيل</string>
 
     <!-- Log Level -->
-    <string name="termux_log_level_title">مستوى التسجيل</string>
+    <string name="xodos_log_level_title">مستوى التسجيل</string>
 
     <!-- Terminal View Key Logging -->
-    <string name="termux_terminal_view_key_logging_enabled_title">تسجيل مفاتيح عرض المحطة</string>
-    <string name="termux_terminal_view_key_logging_enabled_off">لن تحتوي السجلات على إدخالات لمفاتيح عرض المحطة. (افتراضي)</string>
-    <string name="termux_terminal_view_key_logging_enabled_on">ستحتوي سجلات logcat على إدخالات لمفاتيح عرض المحطة.
+    <string name="xodos_terminal_view_key_logging_enabled_title">تسجيل مفاتيح عرض المحطة</string>
+    <string name="xodos_terminal_view_key_logging_enabled_off">لن تحتوي السجلات على إدخالات لمفاتيح عرض المحطة. (افتراضي)</string>
+    <string name="xodos_terminal_view_key_logging_enabled_on">ستحتوي سجلات logcat على إدخالات لمفاتيح عرض المحطة.
                     هذه السجلات مفصلة جداً ويجب تعطيلها في الظروف العادية أو قد تسبب مشاكل في الأداء.</string>
 
     <!-- Plugin Error Notifications -->
-    <string name="termux_plugin_error_notifications_enabled_title">إشعارات أخطاء الإضافات</string>
-    <string name="termux_plugin_error_notifications_enabled_off">تعطيل الومضات والإشعارات لأخطاء الإضافات.</string>
-    <string name="termux_plugin_error_notifications_enabled_on">عرض الومضات والإشعارات لأخطاء الإضافات. (افتراضي)</string>
+    <string name="xodos_plugin_error_notifications_enabled_title">إشعارات أخطاء الإضافات</string>
+    <string name="xodos_plugin_error_notifications_enabled_off">تعطيل الومضات والإشعارات لأخطاء الإضافات.</string>
+    <string name="xodos_plugin_error_notifications_enabled_on">عرض الومضات والإشعارات لأخطاء الإضافات. (افتراضي)</string>
 
     <!-- Crash Report Notifications -->
-    <string name="termux_crash_report_notifications_enabled_title">إشعارات تقارير الأعطال</string>
-    <string name="termux_crash_report_notifications_enabled_off">تعطيل الإشعارات لتقارير الأعطال.</string>
-    <string name="termux_crash_report_notifications_enabled_on">عرض الإشعارات لتقارير الأعطال. (افتراضي)</string>
+    <string name="xodos_crash_report_notifications_enabled_title">إشعارات تقارير الأعطال</string>
+    <string name="xodos_crash_report_notifications_enabled_off">تعطيل الإشعارات لتقارير الأعطال.</string>
+    <string name="xodos_crash_report_notifications_enabled_on">عرض الإشعارات لتقارير الأعطال. (افتراضي)</string>
 
 
     <!-- Terminal IO Preferences -->
-    <string name="termux_terminal_io_preferences_title">إدخال/إخراج المحطة</string>
-    <string name="termux_terminal_io_preferences_summary">تفضيلات إدخال/إخراج المحطة</string>
+    <string name="xodos_terminal_io_preferences_title">إدخال/إخراج المحطة</string>
+    <string name="xodos_terminal_io_preferences_summary">تفضيلات إدخال/إخراج المحطة</string>
 
     <!-- Keyboard Category -->
-    <string name="termux_keyboard_header">لوحة المفاتيح</string>
+    <string name="xodos_keyboard_header">لوحة المفاتيح</string>
 
     <!-- Soft Keyboard -->
-    <string name="termux_soft_keyboard_enabled_title">تمكين لوحة المفاتيح اللينة</string>
-    <string name="termux_soft_keyboard_enabled_off">سيتم تعطيل لوحة المفاتيح اللينة.</string>
-    <string name="termux_soft_keyboard_enabled_on">سيتم تمكين لوحة المفاتيح اللينة. (افتراضي)</string>
+    <string name="xodos_soft_keyboard_enabled_title">تمكين لوحة المفاتيح اللينة</string>
+    <string name="xodos_soft_keyboard_enabled_off">سيتم تعطيل لوحة المفاتيح اللينة.</string>
+    <string name="xodos_soft_keyboard_enabled_on">سيتم تمكين لوحة المفاتيح اللينة. (افتراضي)</string>
 
     <!-- Soft Keyboard Only If No Hardware-->
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">لوحة المفاتيح اللينة فقط إذا لم يكن هناك هاردوير</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">سيتم تمكين لوحة المفاتيح اللينة حتى إذا تم توصيل لوحة مفاتيح هاردوير. (افتراضي)</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">سيتم تمكين لوحة المفاتيح اللينة فقط إذا لم يتم توصيل لوحة مفاتيح هاردوير.</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_title">لوحة المفاتيح اللينة فقط إذا لم يكن هناك هاردوير</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_off">سيتم تمكين لوحة المفاتيح اللينة حتى إذا تم توصيل لوحة مفاتيح هاردوير. (افتراضي)</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_on">سيتم تمكين لوحة المفاتيح اللينة فقط إذا لم يتم توصيل لوحة مفاتيح هاردوير.</string>
 
 
     <!-- Terminal View Preferences -->
-    <string name="termux_terminal_view_preferences_title">عرض المحطة</string>
-    <string name="termux_terminal_view_preferences_summary">تفضيلات عرض المحطة</string>
+    <string name="xodos_terminal_view_preferences_title">عرض المحطة</string>
+    <string name="xodos_terminal_view_preferences_summary">تفضيلات عرض المحطة</string>
 
     <!-- View Category -->
-    <string name="termux_terminal_view_view_header">العرض</string>
+    <string name="xodos_terminal_view_view_header">العرض</string>
 
     <!-- Terminal View Margin Adjustment -->
-    <string name="termux_terminal_view_terminal_margin_adjustment_title">ضبط هوامش المحطة</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_off">سيتم تعطيل ضبط هوامش المحطة.</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_on">سيتم تمكين ضبط هوامش المحطة.
+    <string name="xodos_terminal_view_terminal_margin_adjustment_title">ضبط هوامش المحطة</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_off">سيتم تعطيل ضبط هوامش المحطة.</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_on">سيتم تمكين ضبط هوامش المحطة.
                     يجب تمكينه لمحاولة إصلاح المشكلة التي تغطي فيها لوحة المفاتيح اللينة جزءاً من المفاتيح الإضافية/عرض المحطة.
                     إذا تسبب في وميض الشاشة على أجهزتك، قم بتعطيله. (افتراضي)</string>
 
 
-    <!-- Termux:API App Preferences -->
-    <string name="termux_api_preferences_title">تفضيلات &TERMUX_API_APP_NAME;</string>
-    <string name="termux_api_preferences_summary">تفضيلات تطبيق &TERMUX_API_APP_NAME;</string>
+    <!-- xodos:API App Preferences -->
+    <string name="xodos_api_preferences_title">تفضيلات &xodos_API_APP_NAME;</string>
+    <string name="xodos_api_preferences_summary">تفضيلات تطبيق &xodos_API_APP_NAME;</string>
 
 
-    <!-- Termux:Float App Preferences -->
-    <string name="termux_float_preferences_title">تفضيلات &TERMUX_FLOAT_APP_NAME;</string>
-    <string name="termux_float_preferences_summary">تفضيلات تطبيق &TERMUX_FLOAT_APP_NAME;</string>
+    <!-- xodos:Float App Preferences -->
+    <string name="xodos_float_preferences_title">تفضيلات &xodos_FLOAT_APP_NAME;</string>
+    <string name="xodos_float_preferences_summary">تفضيلات تطبيق &xodos_FLOAT_APP_NAME;</string>
 
 
-    <!-- Termux:Tasker App Preferences -->
-    <string name="termux_tasker_preferences_title">تفضيلات &TERMUX_TASKER_APP_NAME;</string>
-    <string name="termux_tasker_preferences_summary">تفضيلات تطبيق &TERMUX_TASKER_APP_NAME;</string>
+    <!-- xodos:Tasker App Preferences -->
+    <string name="xodos_tasker_preferences_title">تفضيلات &xodos_TASKER_APP_NAME;</string>
+    <string name="xodos_tasker_preferences_summary">تفضيلات تطبيق &xodos_TASKER_APP_NAME;</string>
 
 
-    <!-- Termux:Widget App Preferences -->
-    <string name="termux_widget_preferences_title">تفضيلات &TERMUX_WIDGET_APP_NAME;</string>
-    <string name="termux_widget_preferences_summary">ملخص تفضيلات &TERMUX_WIDGET_APP_NAME;</string>
+    <!-- xodos:Widget App Preferences -->
+    <string name="xodos_widget_preferences_title">تفضيلات &xodos_WIDGET_APP_NAME;</string>
+    <string name="xodos_widget_preferences_summary">ملخص تفضيلات &xodos_WIDGET_APP_NAME;</string>
 
 
     <!-- About Preference -->
@@ -213,7 +213,7 @@
     <string name="open_terminal">فتح المحطة</string>
     <string name="terminate_current_process">إنهاء العملية الحالية</string>
     <string name="unlock_layout">فتح قفل الشاشة</string>
-    <string name="raise_termux_app">رفع تطبيق Termux</string>
+    <string name="raise_xodos_app">رفع تطبيق xodos</string>
     <string name="add_menu_item">إضافة عنصر إلى قائمة الكرة العائمة</string>
     <string name="hide_terminal">إخفاء المحطة</string>
     <string name="set_dinput">dinput</string>
@@ -264,7 +264,7 @@
     <item>Wine🍷Bionic: محاكي Windows مع دعم السواقات الأصلية (إن لم يكن Snapdragon استخدم wrapper)</item>
     <item>Wine🍷: شغل ملفات EXE من أي مجلد</item>
     <item>محاكي Xbox🎮: العب ألعاب Xbox الأصلية باستخدام Xemu</item>
-            <item>Termux:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
+            <item>xodos:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
     <item>الإعدادات⚙️: تكوين Wine/DXVK/Box والسواقات</item>
     <item>دردشة AI🤖: ذكاء اصطناعي محلي خاص يدعم DeepSeek وLlama وأكثر</item>
     <item>استعادة♻️: تثبيت تحديثات XoDos وأنظمة أخرى مثل Kali/Proot</item>
@@ -324,7 +324,7 @@
   <string name="install_complete">✅ اكتمل التثبيت!</string>
   <string name="install_error">خطأ في التثبيت</string>
   <string name="install_failed">فشل تثبيت XoDos: %s</string>
-  <string name="launch_xodos_command">/data/data/com.termux/files/usr/bin/xodos\n</string>
+  <string name="launch_xodos_command">/data/data/com.xodos/files/usr/bin/xodos\n</string>
   <string name="cleanup_error">خطأ: %s</string>
   <string name="install_copying">جارٍ نسخ الملفات…</string>
   <string name="install_extracting">جارٍ تحديث النظام…</string>

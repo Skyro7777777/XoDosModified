@@ -129,7 +129,7 @@ afterEvaluate {
         out << 'package com.xodos.x11;\n'
         out << 'import java.util.HashMap;\n'
         out << 'import android.content.Context;\n'
-        out << 'import com.xodos.x11.utils.TermuxX11ExtraKeys;\n'
+        out << 'import com.xodos.x11.utils.xodosX11ExtraKeys;\n'
         out << '\n'
         out << 'public class Prefs extends LoriePreferences.PrefsProto {\n'
         preferences.each {
@@ -140,7 +140,7 @@ afterEvaluate {
             else if (it.type == 'List')
                 out << "  public final ${it.type}Preference ${it.key} = new ${it.type}Preference(\"${it.key}\", \"${it.default}\", R.array.${it.entries}, R.array.${it.values});\n"
         }
-        out << '  public final StringPreference extra_keys_config = new StringPreference("extra_keys_config", TermuxX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS);\n'
+        out << '  public final StringPreference extra_keys_config = new StringPreference("extra_keys_config", xodosX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS);\n'
         out << '  public final HashMap<String, Preference> keys = new HashMap<>() {{\n'
         preferences.each { out << '    put("' + it.key + '", ' + it.key + ');\n' }
         out << '    put("extra_keys_config", extra_keys_config);\n'

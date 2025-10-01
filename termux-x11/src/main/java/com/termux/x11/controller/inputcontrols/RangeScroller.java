@@ -1,9 +1,9 @@
-package com.termux.x11.controller.inputcontrols;
+package com.xodos.x11.controller.inputcontrols;
 
 import android.graphics.Rect;
 
 
-import com.termux.x11.controller.widget.InputControlsView;
+import com.xodos.x11.controller.widget.InputControlsView;
 
 import java.util.Timer;
 import java.util.TimerTask;

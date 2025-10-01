@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:sharedUserId="${TERMUX_PACKAGE_NAME}">
+    android:sharedUserId="${xodos_PACKAGE_NAME}">
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -16,7 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <receiver
-            android:name=".TermuxWidgetProvider"
+            android:name=".xodosWidgetProvider"
             android:exported="false"
             android:label="@string/title_shortcut_widget_name" >
             <intent-filter>
@@ -24,26 +24,26 @@
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/termux_appwidget_info" />
+                android:resource="@xml/xodos_appwidget_info" />
         </receiver>
 
-        <receiver android:name=".TermuxWidgetControlExecutorReceiver" />
+        <receiver android:name=".xodosWidgetControlExecutorReceiver" />
 
         <activity
-            android:name=".activities.TermuxWidgetMainActivity"
+            android:name=".activities.xodosWidgetMainActivity"
             android:exported="true"
             android:theme="@style/Theme.BaseActivity.DayNight.NoActionBar">
         </activity>
 
         <activity-alias
-            android:name=".activities.TermuxWidgetLauncherActivity"
+            android:name=".activities.xodosWidgetLauncherActivity"
             android:exported="true"
-            android:targetActivity=".activities.TermuxWidgetMainActivity">
+            android:targetActivity=".activities.xodosWidgetMainActivity">
 
         </activity-alias>
 
         <activity
-            android:name=".TermuxCreateShortcutActivity"
+            android:name=".xodosCreateShortcutActivity"
             android:exported="true"
             android:label="@string/title_single_shortcut_name"
             android:theme="@style/Theme.BaseActivity.DayNight.NoActionBar">
@@ -54,11 +54,11 @@
         </activity>
 
         <activity
-            android:name=".TermuxLaunchShortcutActivity"
+            android:name=".xodosLaunchShortcutActivity"
             android:exported="true"
             android:noHistory="true"
             android:launchMode="singleInstance"
-            android:taskAffinity=".TermuxLaunchShortcutActivity"
+            android:taskAffinity=".xodosLaunchShortcutActivity"
             android:theme="@android:style/Theme.NoDisplay" />
 
         <receiver
@@ -72,14 +72,14 @@
         </receiver>
 
         <service
-            android:name=".TermuxWidgetService"
+            android:name=".xodosWidgetService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
-            android:name=".TermuxWidgetControlsProviderService"
+            android:name=".xodosWidgetControlsProviderService"
             android:exported="true"
-            android:label="@string/title_termux_shortcuts"
+            android:label="@string/title_xodos_shortcuts"
             android:permission="android.permission.BIND_CONTROLS"
             tools:targetApi="r">
             <intent-filter>

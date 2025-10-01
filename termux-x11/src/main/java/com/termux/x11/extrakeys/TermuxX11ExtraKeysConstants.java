@@ -1,4 +1,4 @@
-package com.termux.x11.extrakeys;
+package com.xodos.x11.extrakeys;
 
 import android.view.KeyEvent;
 
@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TermuxX11ExtraKeysConstants {
+public class xodosX11ExtraKeysConstants {
 
-    /** Defines the repetitive keys that can be passed to {@link TermuxExtraKeysView#setRepetitiveKeys(List)}. */
+    /** Defines the repetitive keys that can be passed to {@link xodosExtraKeysView#setRepetitiveKeys(List)}. */
     public static List<String> PRIMARY_REPETITIVE_KEYS = Arrays.asList(
         "UP", "DOWN", "LEFT", "RIGHT",
         "BKSP", "DEL",
@@ -189,7 +189,7 @@ public class TermuxX11ExtraKeysConstants {
         put("DELETE", "DEL");
         put("BACKSPACE", "BKSP");
 
-        // easier for writing in termux.properties
+        // easier for writing in xodos.properties
         put("BACKSLASH", "\\");
         put("QUOTE", "\"");
         put("APOSTROPHE", "'");

@@ -1,10 +1,10 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_HOME_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_HOME_DIR_PATH;
 
 import android.util.Log;
 
-import com.termux.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.FileUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +63,7 @@ public class MenuEntry {
 
 
     public static void saveMenuItems() {
-        File file = new File(TERMUX_HOME_DIR_PATH, ".startMenuEntries");
+        File file = new File(xodos_HOME_DIR_PATH, ".startMenuEntries");
         try {
             JSONObject data = new JSONObject();
             data.put("version", "1.0");
@@ -82,7 +82,7 @@ public class MenuEntry {
 
     public static void loadMenuItems() {
         mMenuEntryList.clear();
-        File file = new File(TERMUX_HOME_DIR_PATH, ".startMenuEntries");
+        File file = new File(xodos_HOME_DIR_PATH, ".startMenuEntries");
         if (!file.exists() || !file.isFile()) {
             return;
         }

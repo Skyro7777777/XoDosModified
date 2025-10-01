@@ -1,6 +1,6 @@
-package com.termux.x11;
+package com.xodos.x11;
 
-import static com.termux.x11.input.InputStub.BUTTON_UNDEFINED;
+import static com.xodos.x11.input.InputStub.BUTTON_UNDEFINED;
 
 import android.graphics.PointF;
 

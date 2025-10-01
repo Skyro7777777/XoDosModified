@@ -1,4 +1,4 @@
-package com.termux.app.fragments.settings;
+package com.xodos.app.fragments.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.termux.R;
-import com.termux.shared.termux.settings.preferences.TermuxAPIAppSharedPreferences;
+import com.xodos.R;
+import com.xodos.shared.xodos.settings.preferences.xodosAPIAppSharedPreferences;
 
 @Keep
-public class TermuxAPIPreferencesFragment extends PreferenceFragmentCompat {
+public class xodosAPIPreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -20,28 +20,28 @@ public class TermuxAPIPreferencesFragment extends PreferenceFragmentCompat {
         if (context == null) return;
 
         PreferenceManager preferenceManager = getPreferenceManager();
-        preferenceManager.setPreferenceDataStore(TermuxAPIPreferencesDataStore.getInstance(context));
+        preferenceManager.setPreferenceDataStore(xodosAPIPreferencesDataStore.getInstance(context));
 
-        setPreferencesFromResource(R.xml.termux_api_preferences, rootKey);
+        setPreferencesFromResource(R.xml.xodos_api_preferences, rootKey);
     }
 
 }
 
-class TermuxAPIPreferencesDataStore extends PreferenceDataStore {
+class xodosAPIPreferencesDataStore extends PreferenceDataStore {
 
     private final Context mContext;
-    private final TermuxAPIAppSharedPreferences mPreferences;
+    private final xodosAPIAppSharedPreferences mPreferences;
 
-    private static TermuxAPIPreferencesDataStore mInstance;
+    private static xodosAPIPreferencesDataStore mInstance;
 
-    private TermuxAPIPreferencesDataStore(Context context) {
+    private xodosAPIPreferencesDataStore(Context context) {
         mContext = context;
-        mPreferences = TermuxAPIAppSharedPreferences.build(context, true);
+        mPreferences = xodosAPIAppSharedPreferences.build(context, true);
     }
 
-    public static synchronized TermuxAPIPreferencesDataStore getInstance(Context context) {
+    public static synchronized xodosAPIPreferencesDataStore getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new TermuxAPIPreferencesDataStore(context);
+            mInstance = new xodosAPIPreferencesDataStore(context);
         }
         return mInstance;
     }

@@ -1,4 +1,4 @@
-package com.termux.x11.controller.core;
+package com.xodos.x11.controller.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,8 +11,8 @@ import android.graphics.RectF;
 import android.util.DisplayMetrics;
 
 
-import com.termux.x11.R;
-import com.termux.x11.controller.xserver.ScreenInfo;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.xserver.ScreenInfo;
 
 import java.io.File;
 
@@ -41,15 +41,15 @@ public abstract class WineThemeManager {
     }
 
     public static void apply(Context context, ThemeInfo themeInfo, ScreenInfo screenInfo) {
-        File rootDir = new File("/data/data/com.termux/files/usr/glibc/", "");
-        File userRegFile = new File(rootDir, "/data/data/com.termux/files/usr/glibc/.wine"+"/user.reg");
+        File rootDir = new File("/data/data/com.xodos/files/usr/glibc/", "");
+        File userRegFile = new File(rootDir, "/data/data/com.xodos/files/usr/glibc/.wine"+"/user.reg");
         String background = Color.red(themeInfo.backgroundColor)+" "+Color.green(themeInfo.backgroundColor)+" "+Color.blue(themeInfo.backgroundColor);
 
         if (themeInfo.backgroundType == BackgroundType.IMAGE) createWallpaperBMPFile(context, screenInfo);
 
         try (WineRegistryEditor registryEditor = new WineRegistryEditor(userRegFile)) {
             if (themeInfo.backgroundType == BackgroundType.IMAGE) {
-                registryEditor.setStringValue("Control Panel\\Desktop", "Wallpaper", "/data/data/com.termux/files/usr/glibc/.wine"+"/wallpaper.bmp");
+                registryEditor.setStringValue("Control Panel\\Desktop", "Wallpaper", "/data/data/com.xodos/files/usr/glibc/.wine"+"/wallpaper.bmp");
             }
             else registryEditor.removeValue("Control Panel\\Desktop", "Wallpaper");
 
@@ -153,10 +153,10 @@ public abstract class WineThemeManager {
             canvas.drawBitmap(wallpaperBitmap, srcRect, dstRect, paint);
         }
 
-        MSBitmap.create(outputBitmap, new File("/data/data/com.termux/files/usr/glibc", "wallpaper.bmp"));
+        MSBitmap.create(outputBitmap, new File("/data/data/com.xodos/files/usr/glibc", "wallpaper.bmp"));
     }
 
     public static File getUserWallpaperFile(Context context) {
-        return new File("/data/data/com.termux/files/usr/glibc", "user-wallpaper.png");
+        return new File("/data/data/com.xodos/files/usr/glibc", "user-wallpaper.png");
     }
 }

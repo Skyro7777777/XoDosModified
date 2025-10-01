@@ -1,4 +1,4 @@
-package com.termux.x11.utils;
+package com.xodos.x11.utils;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -12,7 +12,7 @@ import android.view.accessibility.AccessibilityEvent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.termux.x11.MainActivity;
+import com.xodos.x11.MainActivity;
 
 import java.util.LinkedHashSet;
 
@@ -30,7 +30,7 @@ public class KeyInterceptor extends AccessibilityService {
 
     public static void launch(@NonNull Context ctx) {
         try {
-            Settings.Secure.putString(ctx.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, "com.termux.x11/.utils.KeyInterceptor");
+            Settings.Secure.putString(ctx.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, "com.xodos.x11/.utils.KeyInterceptor");
             Settings.Secure.putString(ctx.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, "1");
             launchedAutomatically = true;
         } catch (SecurityException e) {
@@ -38,7 +38,7 @@ public class KeyInterceptor extends AccessibilityService {
                 .setTitle("Permission denied")
                 .setMessage("Android requires WRITE_SECURE_SETTINGS permission to start accessibility service automatically.\n" +
                     "Please, launch this command using ADB:\n" +
-                    "adb shell pm grant com.termux.x11 android.permission.WRITE_SECURE_SETTINGS")
+                    "adb shell pm grant com.xodos.x11 android.permission.WRITE_SECURE_SETTINGS")
                 .setNegativeButton("OK", null)
                 .create()
                 .show();

@@ -1,4 +1,4 @@
-package com.termux.widget.activities;
+package com.xodos.widget.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,37 +14,37 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.termux.shared.activity.media.AppCompatActivityUtils;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.errors.Error;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.markdown.MarkdownUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.theme.NightMode;
-import com.termux.widget.R;
-import com.termux.widget.ShortcutFile;
-import com.termux.widget.TermuxWidgetApplication;
-import com.termux.widget.TermuxWidgetProvider;
-import com.termux.widget.utils.ShortcutUtils;
+import com.xodos.shared.activity.media.AppCompatActivityUtils;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.markdown.MarkdownUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.theme.NightMode;
+import com.xodos.widget.R;
+import com.xodos.widget.ShortcutFile;
+import com.xodos.widget.xodosWidgetApplication;
+import com.xodos.widget.xodosWidgetProvider;
+import com.xodos.widget.utils.ShortcutUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class TermuxWidgetMainActivity extends AppCompatActivity {
+public class xodosWidgetMainActivity extends AppCompatActivity {
 
-    public static final String LOG_TAG = "TermuxWidgetMainActivity";
+    public static final String LOG_TAG = "xodosWidgetMainActivity";
 
-    /** Termux:Widget app data home directory path. */
-    public static final String TERMUX_WIDGET_DATA_HOME_DIR_PATH = TermuxConstants.TERMUX_DATA_HOME_DIR_PATH + "/widget"; // Default: "/data/data/com.termux/files/home/.termux/widget"
+    /** xodos:Widget app data home directory path. */
+    public static final String xodos_WIDGET_DATA_HOME_DIR_PATH = xodosConstants.xodos_DATA_HOME_DIR_PATH + "/widget"; // Default: "/data/data/com.xodos/files/home/.xodos/widget"
 
-    /** Termux:Widget app directory path to store scripts/binaries to be used as dynamic shortcuts. */
-    public static final String TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH = TERMUX_WIDGET_DATA_HOME_DIR_PATH + "/dynamic_shortcuts"; // Default: "/data/data/com.termux/files/home/.termux/widget/dynamic_shortcuts"
+    /** xodos:Widget app directory path to store scripts/binaries to be used as dynamic shortcuts. */
+    public static final String xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH = xodos_WIDGET_DATA_HOME_DIR_PATH + "/dynamic_shortcuts"; // Default: "/data/data/com.xodos/files/home/.xodos/widget/dynamic_shortcuts"
 
-    public static final String MAX_SHORTCUTS_LIMIT_DOCS_URL = TermuxConstants.TERMUX_WIDGET_GITHUB_REPO_URL + "#max-shortcuts-limit-optional"; // Default: "https://github.com/termux/termux-widget#max-shortcuts-limit-optional"
+    public static final String MAX_SHORTCUTS_LIMIT_DOCS_URL = xodosConstants.xodos_WIDGET_GITHUB_REPO_URL + "#max-shortcuts-limit-optional"; // Default: "https://github.com/xodos/xodos-widget#max-shortcuts-limit-optional"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +52,16 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
 
         Logger.logDebug(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.activity_termux_widget_main);
+        setContentView(R.layout.activity_xodos_widget_main);
 
         AppCompatActivityUtils.setNightMode(this, NightMode.getAppNightMode().getName(), true);
 
-        AppCompatActivityUtils.setToolbar(this, com.termux.shared.R.id.toolbar);
-        AppCompatActivityUtils.setToolbarTitle(this, com.termux.shared.R.id.toolbar, TermuxConstants.TERMUX_WIDGET_APP_NAME, 0);
+        AppCompatActivityUtils.setToolbar(this, com.xodos.shared.R.id.toolbar);
+        AppCompatActivityUtils.setToolbarTitle(this, com.xodos.shared.R.id.toolbar, xodosConstants.xodos_WIDGET_APP_NAME, 0);
 
         TextView pluginInfo = findViewById(R.id.textview_plugin_info);
-        pluginInfo.setText(getString(R.string.plugin_info, TermuxConstants.TERMUX_GITHUB_REPO_URL,
-                TermuxConstants.TERMUX_WIDGET_GITHUB_REPO_URL));
+        pluginInfo.setText(getString(R.string.plugin_info, xodosConstants.xodos_GITHUB_REPO_URL,
+                xodosConstants.xodos_WIDGET_GITHUB_REPO_URL));
 
         setDynamicShortcutsViews();
         setRefreshAllWidgetsViews();
@@ -73,7 +73,7 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
         super.onResume();
 
         // Set log level for the app
-        TermuxWidgetApplication.setLogConfig(this, false);
+        xodosWidgetApplication.setLogConfig(this, false);
 
         Logger.logVerbose(LOG_TAG, "onResume");
 
@@ -96,8 +96,8 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
     }
 
     private void setChangeLauncherActivityStateViews() {
-        String packageName = TermuxConstants.TERMUX_WIDGET_PACKAGE_NAME;
-        String className = TermuxConstants.TERMUX_WIDGET.TERMUX_WIDGET_LAUNCHER_ACTIVITY_NAME;
+        String packageName = xodosConstants.xodos_WIDGET_PACKAGE_NAME;
+        String className = xodosConstants.xodos_WIDGET.xodos_WIDGET_LAUNCHER_ACTIVITY_NAME;
 
         TextView changeLauncherActivityStateTextView = findViewById(R.id.textview_change_launcher_activity_state_details);
         changeLauncherActivityStateTextView.setText(MarkdownUtils.getSpannedMarkdownText(this,
@@ -113,7 +113,7 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
             Logger.logError(LOG_TAG, "Failed to check if \"" + packageName + "/" + className + "\" launcher activity is disabled");
             changeLauncherActivityStateButton.setEnabled(false);
             changeLauncherActivityStateButton.setAlpha(.5f);
-            changeLauncherActivityStateButton.setText(com.termux.shared.R.string.action_disable_launcher_icon);
+            changeLauncherActivityStateButton.setText(com.xodos.shared.R.string.action_disable_launcher_icon);
             changeLauncherActivityStateButton.setOnClickListener(null);
             return;
         }
@@ -121,12 +121,12 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
         changeLauncherActivityStateButton.setEnabled(true);
         changeLauncherActivityStateButton.setAlpha(1f);
         if (currentlyDisabled) {
-            changeLauncherActivityStateButton.setText(com.termux.shared.R.string.action_enable_launcher_icon);
-            stateChangeMessage = getString(com.termux.shared.R.string.msg_enabling_launcher_icon, TermuxConstants.TERMUX_WIDGET_APP_NAME);
+            changeLauncherActivityStateButton.setText(com.xodos.shared.R.string.action_enable_launcher_icon);
+            stateChangeMessage = getString(com.xodos.shared.R.string.msg_enabling_launcher_icon, xodosConstants.xodos_WIDGET_APP_NAME);
             newState = true;
         } else {
-            changeLauncherActivityStateButton.setText(com.termux.shared.R.string.action_disable_launcher_icon);
-            stateChangeMessage = getString(com.termux.shared.R.string.msg_disabling_launcher_icon, TermuxConstants.TERMUX_WIDGET_APP_NAME);
+            changeLauncherActivityStateButton.setText(com.xodos.shared.R.string.action_disable_launcher_icon);
+            stateChangeMessage = getString(com.xodos.shared.R.string.msg_disabling_launcher_icon, xodosConstants.xodos_WIDGET_APP_NAME);
             newState = false;
         }
 
@@ -150,7 +150,7 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
             TextView dynamicShortcutsInfoTextView = findViewById(R.id.textview_dynamic_shortcuts_info);
             dynamicShortcutsInfoTextView.setText(MarkdownUtils.getSpannedMarkdownText(this,
                     getString(R.string.msg_dynamic_shortcuts_info,
-                    TermuxFileUtils.getUnExpandedTermuxPath(TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH))));
+                    xodosFileUtils.getUnExpandedxodosPath(xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH))));
 
             Button createDynamicShortcutsButton = findViewById(R.id.button_create_dynamic_shortcuts);
             createDynamicShortcutsButton.setOnClickListener(v -> createDynamicShortcuts(this));
@@ -169,7 +169,7 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
     }
 
     public void sendIntentToRefreshAllWidgets() {
-        TermuxWidgetProvider.sendIntentToRefreshAllWidgets(this, LOG_TAG);
+        xodosWidgetProvider.sendIntentToRefreshAllWidgets(this, LOG_TAG);
     }
 
     @RequiresApi(Build.VERSION_CODES.N_MR1)
@@ -178,18 +178,18 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
         if (shortcutManager == null) return;
 
         // Create directory if necessary so user more easily finds where to put shortcuts
-        Error error = FileUtils.createDirectoryFile(TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH);
+        Error error = FileUtils.createDirectoryFile(xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH);
         if (error != null) {
             Logger.logError(LOG_TAG, error.toString());
             Logger.showToast(this, error.getMinimalErrorLogString(), true);
         }
 
         List<ShortcutFile> shortcutFiles = new ArrayList<>();
-        ShortcutUtils.enumerateShortcutFiles(shortcutFiles, new File(TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH), false);
+        ShortcutUtils.enumerateShortcutFiles(shortcutFiles, new File(xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH), false);
 
         if (shortcutFiles.size() == 0) {
             Logger.showToast(context, getString(R.string.msg_no_shortcut_files_found_in_directory,
-                    TermuxFileUtils.getUnExpandedTermuxPath(TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH)), true);
+                    xodosFileUtils.getUnExpandedxodosPath(xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH)), true);
             return;
         }
 
@@ -206,7 +206,7 @@ public class TermuxWidgetMainActivity extends AppCompatActivity {
             while (shortcuts.size() > maxShortcuts) {
                 String message = getString(R.string.msg_skipping_shortcut,
                         shortcuts.get(shortcuts.size() - 1).getId().replaceAll(
-                                "^" + Pattern.quote(TERMUX_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH + "/"), ""));
+                                "^" + Pattern.quote(xodos_WIDGET_DYNAMIC_SHORTCUTS_DIR_PATH + "/"), ""));
                 Logger.showToast(context, message, false);
                 Logger.logDebug(LOG_TAG, message);
                 shortcuts.remove(shortcuts.size() - 1);

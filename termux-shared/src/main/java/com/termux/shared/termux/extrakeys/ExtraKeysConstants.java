@@ -1,4 +1,4 @@
-package com.termux.shared.termux.extrakeys;
+package com.xodos.shared.xodos.extrakeys;
 
 import android.view.KeyEvent;
 
@@ -203,7 +203,7 @@ public class ExtraKeysConstants {
         put("DELETE", "DEL");
         put("BACKSPACE", "BKSP");
 
-        // easier for writing in termux.properties
+        // easier for writing in xodos.properties
         put("BACKSLASH", "\\");
         put("QUOTE", "\"");
         put("APOSTROPHE", "'");

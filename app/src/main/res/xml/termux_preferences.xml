@@ -1,18 +1,18 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-        app:title="@string/termux_debugging_preferences_title"
-        app:summary="@string/termux_debugging_preferences_summary"
-        app:fragment="com.termux.app.fragments.settings.termux.DebuggingPreferencesFragment"/>
+        app:title="@string/xodos_debugging_preferences_title"
+        app:summary="@string/xodos_debugging_preferences_summary"
+        app:fragment="com.xodos.app.fragments.settings.xodos.DebuggingPreferencesFragment"/>
 
     <Preference
-        app:title="@string/termux_terminal_io_preferences_title"
-        app:summary="@string/termux_terminal_io_preferences_summary"
-        app:fragment="com.termux.app.fragments.settings.termux.TerminalIOPreferencesFragment"/>
+        app:title="@string/xodos_terminal_io_preferences_title"
+        app:summary="@string/xodos_terminal_io_preferences_summary"
+        app:fragment="com.xodos.app.fragments.settings.xodos.TerminalIOPreferencesFragment"/>
 
     <Preference
-        app:title="@string/termux_terminal_view_preferences_title"
-        app:summary="@string/termux_terminal_view_preferences_summary"
-        app:fragment="com.termux.app.fragments.settings.termux.TerminalViewPreferencesFragment"/>
+        app:title="@string/xodos_terminal_view_preferences_title"
+        app:summary="@string/xodos_terminal_view_preferences_summary"
+        app:fragment="com.xodos.app.fragments.settings.xodos.TerminalViewPreferencesFragment"/>
 
 </PreferenceScreen>

@@ -1,4 +1,4 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,32 +13,32 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.termux.R;
-import com.termux.app.TermuxActivity;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.interact.MessageDialogUtils;
-import com.termux.shared.interact.ShareUtils;
-import com.termux.shared.shell.ShellUtils;
-import com.termux.shared.termux.TermuxBootstrap;
-import com.termux.shared.termux.terminal.TermuxTerminalViewClientBase;
-import com.termux.shared.termux.extrakeys.SpecialButton;
-import com.termux.shared.android.AndroidUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.activities.ReportActivity;
-import com.termux.shared.models.ReportInfo;
-import com.termux.app.models.UserAction;
-import com.termux.app.terminal.io.KeyboardShortcut;
-import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.markdown.MarkdownUtils;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.data.TermuxUrlUtils;
-import com.termux.shared.view.KeyboardUtils;
-import com.termux.shared.view.ViewUtils;
-import com.termux.terminal.KeyHandler;
-import com.termux.terminal.TerminalEmulator;
-import com.termux.terminal.TerminalSession;
+import com.xodos.R;
+import com.xodos.app.xodosActivity;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.interact.MessageDialogUtils;
+import com.xodos.shared.interact.ShareUtils;
+import com.xodos.shared.shell.ShellUtils;
+import com.xodos.shared.xodos.xodosBootstrap;
+import com.xodos.shared.xodos.terminal.xodosTerminalViewClientBase;
+import com.xodos.shared.xodos.extrakeys.SpecialButton;
+import com.xodos.shared.android.AndroidUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.activities.ReportActivity;
+import com.xodos.shared.models.ReportInfo;
+import com.xodos.app.models.UserAction;
+import com.xodos.app.terminal.io.KeyboardShortcut;
+import com.xodos.shared.xodos.settings.properties.xodosPropertyConstants;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.markdown.MarkdownUtils;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.data.xodosUrlUtils;
+import com.xodos.shared.view.KeyboardUtils;
+import com.xodos.shared.view.ViewUtils;
+import com.xodos.terminal.KeyHandler;
+import com.xodos.terminal.TerminalEmulator;
+import com.xodos.terminal.TerminalSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +49,11 @@ import java.util.Map;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
+public class xodosTerminalViewClient extends xodosTerminalViewClientBase {
 
-    final TermuxActivity mActivity;
+    final xodosActivity mActivity;
 
-    final TermuxTerminalSessionActivityClient mTermuxTerminalSessionActivityClient;
+    final xodosTerminalSessionActivityClient mxodosTerminalSessionActivityClient;
 
     /** Keeping track of the special keys acting as Ctrl and Fn for the soft keyboard and other hardware keys. */
     boolean mVirtualControlKeyDown, mVirtualFnKeyDown;
@@ -67,14 +67,14 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
 
     private List<KeyboardShortcut> mSessionShortcuts;
 
-    private static final String LOG_TAG = "TermuxTerminalViewClient";
+    private static final String LOG_TAG = "xodosTerminalViewClient";
 
-    public TermuxTerminalViewClient(TermuxActivity activity, TermuxTerminalSessionActivityClient termuxTerminalSessionActivityClient) {
+    public xodosTerminalViewClient(xodosActivity activity, xodosTerminalSessionActivityClient xodosTerminalSessionActivityClient) {
         this.mActivity = activity;
-        this.mTermuxTerminalSessionActivityClient = termuxTerminalSessionActivityClient;
+        this.mxodosTerminalSessionActivityClient = xodosTerminalSessionActivityClient;
     }
 
-    public TermuxActivity getActivity() {
+    public xodosActivity getActivity() {
         return mActivity;
     }
 
@@ -93,12 +93,12 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
      */
     public void onStart() {
         // Set {@link TerminalView#TERMINAL_VIEW_KEY_LOGGING_ENABLED} value
-        // Also required if user changed the preference from {@link TermuxSettings} activity and returns
+        // Also required if user changed the preference from {@link xodosSettings} activity and returns
         boolean isTerminalViewKeyLoggingEnabled = mActivity.getPreferences().isTerminalViewKeyLoggingEnabled();
         mActivity.getTerminalView().setIsTerminalViewKeyLoggingEnabled(isTerminalViewKeyLoggingEnabled);
 
         // Piggyback on the terminal view key logging toggle for now, should add a separate toggle in future
-        mActivity.getTermuxActivityRootView().setIsRootViewLoggingEnabled(isTerminalViewKeyLoggingEnabled);
+        mActivity.getxodosActivityRootView().setIsRootViewLoggingEnabled(isTerminalViewKeyLoggingEnabled);
         ViewUtils.setIsViewUtilsLoggingEnabled(isTerminalViewKeyLoggingEnabled);
     }
 
@@ -115,7 +115,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             // Start terminal cursor blinking if enabled
             // If emulator is already set, then start blinker now, otherwise wait for onEmulatorSet()
             // event to start it. This is needed since onEmulatorSet() may not be called after
-            // TermuxActivity is started after device display timeout with double tap and not power button.
+            // xodosActivity is started after device display timeout with double tap and not power button.
             setTerminalCursorBlinkerState(true);
             mTerminalCursorBlinkerStateAlreadySet = true;
         }
@@ -148,16 +148,16 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
     }
 
     /**
-     * Should be called when {@link com.termux.view.TerminalView#mEmulator} is set
+     * Should be called when {@link com.xodos.view.TerminalView#mEmulator} is set
      */
     @Override
     public void onEmulatorSet() {
         if (!mTerminalCursorBlinkerStateAlreadySet) {
             // Start terminal cursor blinking if enabled
             // We need to wait for the first session to be attached that's set in
-            // TermuxActivity.onServiceConnected() and then the multiple calls to TerminalView.updateSize()
+            // xodosActivity.onServiceConnected() and then the multiple calls to TerminalView.updateSize()
             // where the final one eventually sets the mEmulator when width/height is not 0. Otherwise
-            // blinker will not start again if TermuxActivity is started again after exiting it with
+            // blinker will not start again if xodosActivity is started again after exiting it with
             // double back press. Check TerminalView.setTerminalCursorBlinkerState().
             setTerminalCursorBlinkerState(true);
             mTerminalCursorBlinkerStateAlreadySet = true;
@@ -185,7 +185,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         if (mActivity.getProperties().shouldOpenTerminalTranscriptURLOnClick()) {
             int[] columnAndRow = mActivity.getTerminalView().getColumnAndRow(e, true);
             String wordAtTap = term.getScreen().getWordAtLocation(columnAndRow[0], columnAndRow[1]);
-            LinkedHashSet<CharSequence> urlSet = TermuxUrlUtils.extractUrls(wordAtTap);
+            LinkedHashSet<CharSequence> urlSet = xodosUrlUtils.extractUrls(wordAtTap);
 
             if (!urlSet.isEmpty()) {
                 String url = (String) urlSet.iterator().next();
@@ -238,7 +238,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         if (handleVirtualKeys(keyCode, e, true)) return true;
 
         if (keyCode == KeyEvent.KEYCODE_ENTER && !currentSession.isRunning()) {
-            mTermuxTerminalSessionActivityClient.removeFinishedSession(currentSession);
+            mxodosTerminalSessionActivityClient.removeFinishedSession(currentSession);
             return true;
         } else if (!mActivity.getProperties().areHardwareKeyboardShortcutsDisabled() &&
             e.isCtrlPressed() && e.isAltPressed()) {
@@ -246,9 +246,9 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             int unicodeChar = e.getUnicodeChar(0);
 
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN || unicodeChar == 'n'/* next */) {
-                mTermuxTerminalSessionActivityClient.switchToSession(true);
+                mxodosTerminalSessionActivityClient.switchToSession(true);
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP || unicodeChar == 'p' /* previous */) {
-                mTermuxTerminalSessionActivityClient.switchToSession(false);
+                mxodosTerminalSessionActivityClient.switchToSession(false);
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
                 mActivity.getDrawer().openDrawer(Gravity.LEFT);
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
@@ -258,22 +258,22 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             } else if (unicodeChar == 'm'/* menu */) {
                 mActivity.getTerminalView().showContextMenu();
             } else if (unicodeChar == 'r'/* rename */) {
-                mTermuxTerminalSessionActivityClient.renameSession(currentSession);
+                mxodosTerminalSessionActivityClient.renameSession(currentSession);
             } else if (unicodeChar == 'c'/* create */) {
-                mTermuxTerminalSessionActivityClient.addNewSession(false, null);
+                mxodosTerminalSessionActivityClient.addNewSession(false, null);
             } else if (unicodeChar == 'u' /* urls */) {
                 showUrlSelection();
             } else if (unicodeChar == 'v') {
                 doPaste();
             } else if (unicodeChar == '+' || e.getUnicodeChar(KeyEvent.META_SHIFT_ON) == '+') {
                 // We also check for the shifted char here since shift may be required to produce '+',
-                // see https://github.com/termux/termux-api/issues/2
+                // see https://github.com/xodos/xodos-api/issues/2
                 changeFontSize(true);
             } else if (unicodeChar == '-') {
                 changeFontSize(false);
             } else if (unicodeChar >= '1' && unicodeChar <= '9') {
                 int index = unicodeChar - '1';
-                mTermuxTerminalSessionActivityClient.switchToSession(index);
+                mxodosTerminalSessionActivityClient.switchToSession(index);
             }
             return true;
         }
@@ -444,7 +444,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
                 case 'q':
                 case 'k':
                     mActivity.toggleTerminalToolbar();
-                    mVirtualFnKeyDown=false; // force disable fn key down to restore keyboard input into terminal view, fixes termux/termux-app#1420
+                    mVirtualFnKeyDown=false; // force disable fn key down to restore keyboard input into terminal view, fixes xodos/xodos-app#1420
                     break;
             }
 
@@ -457,7 +457,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             return true;
         } else if (ctrlDown) {
             if (codePoint == 106 /* Ctrl+j or \n */ && !session.isRunning()) {
-                mTermuxTerminalSessionActivityClient.removeFinishedSession(session);
+                mxodosTerminalSessionActivityClient.removeFinishedSession(session);
                 return true;
             }
 
@@ -468,17 +468,17 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
                     KeyboardShortcut shortcut = shortcuts.get(i);
                     if (codePointLowerCase == shortcut.codePoint) {
                         switch (shortcut.shortcutAction) {
-                            case TermuxPropertyConstants.ACTION_SHORTCUT_CREATE_SESSION:
-                                mTermuxTerminalSessionActivityClient.addNewSession(false, null);
+                            case xodosPropertyConstants.ACTION_SHORTCUT_CREATE_SESSION:
+                                mxodosTerminalSessionActivityClient.addNewSession(false, null);
                                 return true;
-                            case TermuxPropertyConstants.ACTION_SHORTCUT_NEXT_SESSION:
-                                mTermuxTerminalSessionActivityClient.switchToSession(true);
+                            case xodosPropertyConstants.ACTION_SHORTCUT_NEXT_SESSION:
+                                mxodosTerminalSessionActivityClient.switchToSession(true);
                                 return true;
-                            case TermuxPropertyConstants.ACTION_SHORTCUT_PREVIOUS_SESSION:
-                                mTermuxTerminalSessionActivityClient.switchToSession(false);
+                            case xodosPropertyConstants.ACTION_SHORTCUT_PREVIOUS_SESSION:
+                                mxodosTerminalSessionActivityClient.switchToSession(false);
                                 return true;
-                            case TermuxPropertyConstants.ACTION_SHORTCUT_RENAME_SESSION:
-                                mTermuxTerminalSessionActivityClient.renameSession(mActivity.getCurrentSession());
+                            case xodosPropertyConstants.ACTION_SHORTCUT_RENAME_SESSION:
+                                mxodosTerminalSessionActivityClient.renameSession(mActivity.getCurrentSession());
                                 return true;
                         }
                     }
@@ -495,8 +495,8 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
     private void setSessionShortcuts() {
         mSessionShortcuts = new ArrayList<>();
 
-        // The {@link TermuxPropertyConstants#MAP_SESSION_SHORTCUTS} stores the session shortcut key and action pair
-        for (Map.Entry<String, Integer> entry : TermuxPropertyConstants.MAP_SESSION_SHORTCUTS.entrySet()) {
+        // The {@link xodosPropertyConstants#MAP_SESSION_SHORTCUTS} stores the session shortcut key and action pair
+        for (Map.Entry<String, Integer> entry : xodosPropertyConstants.MAP_SESSION_SHORTCUTS.entrySet()) {
             // The mMap stores the code points for the session shortcuts while loading properties
             Integer codePoint = (Integer) mActivity.getProperties().getInternalPropertyValue(entry.getKey(), true);
             // If codePoint is null, then session shortcut did not exist in properties or was invalid
@@ -549,7 +549,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         }
         // If soft keyboard toggle behaviour is show/hide
         else {
-            // If soft keyboard is disabled by user for Termux
+            // If soft keyboard is disabled by user for xodos
             if (!mActivity.getPreferences().isSoftKeyboardEnabled()) {
                 Logger.logVerbose(LOG_TAG, "Maintaining disabled soft keyboard on toggle");
                 KeyboardUtils.disableSoftKeyboard(mActivity, mActivity.getTerminalView());
@@ -561,7 +561,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         }
     }
 
-    public void setSoftKeyboardState(boolean isStartup, boolean isReloadTermuxProperties) {
+    public void setSoftKeyboardState(boolean isStartup, boolean isReloadxodosProperties) {
         boolean noShowKeyboard = false;
 
         // Requesting terminal view focus is necessary regardless of if soft keyboard is to be
@@ -571,7 +571,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         // theme. For android 8.+, the "defaultFocusHighlightEnabled" attribute is also set to false
         // in TerminalView layout to fix the issue.
 
-        // If soft keyboard is disabled by user for Termux (check function docs for Termux behaviour info)
+        // If soft keyboard is disabled by user for xodos (check function docs for xodos behaviour info)
         if (KeyboardUtils.shouldSoftKeyboardBeDisabled(mActivity,
             mActivity.getPreferences().isSoftKeyboardEnabled(),
             mActivity.getPreferences().isSoftKeyboardEnabledOnlyIfNoHardware())) {
@@ -579,8 +579,8 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             KeyboardUtils.disableSoftKeyboard(mActivity, mActivity.getTerminalView());
             mActivity.getTerminalView().requestFocus();
             noShowKeyboard = true;
-            // Delay is only required if onCreate() is called like when Termux app is exited with
-            // double back press, not when Termux app is switched back from another app and keyboard
+            // Delay is only required if onCreate() is called like when xodos app is exited with
+            // double back press, not when xodos app is switched back from another app and keyboard
             // toggle is pressed to enable keyboard
             if (isStartup && mActivity.isOnResumeAfterOnCreate())
                 mShowSoftKeyboardWithDelayOnce = true;
@@ -594,7 +594,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             // If soft keyboard is to be hidden on startup
             if (isStartup && mActivity.getProperties().shouldSoftKeyboardBeHiddenOnStartup()) {
                 Logger.logVerbose(LOG_TAG, "Hiding soft keyboard on startup");
-                // Required to keep keyboard hidden when Termux app is switched back from another app
+                // Required to keep keyboard hidden when xodos app is switched back from another app
                 KeyboardUtils.setSoftKeyboardAlwaysHiddenFlags(mActivity);
 
                 KeyboardUtils.hideSoftKeyboard(mActivity, mActivity.getTerminalView());
@@ -627,13 +627,13 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             }
         });
 
-        // Do not force show soft keyboard if termux-reload-settings command was run with hardware keyboard
+        // Do not force show soft keyboard if xodos-reload-settings command was run with hardware keyboard
         // or soft keyboard is to be hidden or is disabled
-        if (!isReloadTermuxProperties && !noShowKeyboard) {
+        if (!isReloadxodosProperties && !noShowKeyboard) {
             // Request focus for TerminalView
             // Also show the keyboard, since onFocusChange will not be called if TerminalView already
             // had focus on startup to show the keyboard, like when opening url with context menu
-            // "Select URL" long press and returning to Termux app with back button. This
+            // "Select URL" long press and returning to xodos app with back button. This
             // will also show keyboard even if it was closed before opening url. #2111
             Logger.logVerbose(LOG_TAG, "Requesting TerminalView focus and showing soft keyboard");
             mActivity.getTerminalView().requestFocus();
@@ -674,7 +674,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         String transcriptText = ShellUtils.getTerminalSessionTranscriptText(session, false, true);
         if (transcriptText == null) return;
 
-        // See https://github.com/termux/termux-app/issues/1166.
+        // See https://github.com/xodos/xodos-app/issues/1166.
         transcriptText = DataUtils.getTruncatedCommandOutput(transcriptText, DataUtils.TRANSACTION_SIZE_LIMIT_IN_BYTES, false, true, false).trim();
         ShareUtils.shareText(mActivity, mActivity.getString(R.string.title_share_transcript),
             transcriptText, mActivity.getString(R.string.title_share_transcript_with));
@@ -693,7 +693,7 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
 
         String text = ShellUtils.getTerminalSessionTranscriptText(session, true, true);
 
-        LinkedHashSet<CharSequence> urlSet = TermuxUrlUtils.extractUrls(text);
+        LinkedHashSet<CharSequence> urlSet = xodosUrlUtils.extractUrls(text);
         if (urlSet.isEmpty()) {
             new AlertDialog.Builder(mActivity).setMessage(R.string.title_select_url_none_found).show();
             return;
@@ -729,14 +729,14 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         final String transcriptText = ShellUtils.getTerminalSessionTranscriptText(session, false, true);
         if (transcriptText == null) return;
 
-        MessageDialogUtils.showMessage(mActivity, TermuxConstants.TERMUX_APP_NAME + " Report Issue",
-            mActivity.getString(R.string.msg_add_termux_debug_info),
-            mActivity.getString(com.termux.shared.R.string.action_yes), (dialog, which) -> reportIssueFromTranscript(transcriptText, true),
-            mActivity.getString(com.termux.shared.R.string.action_no), (dialog, which) -> reportIssueFromTranscript(transcriptText, false),
+        MessageDialogUtils.showMessage(mActivity, xodosConstants.xodos_APP_NAME + " Report Issue",
+            mActivity.getString(R.string.msg_add_xodos_debug_info),
+            mActivity.getString(com.xodos.shared.R.string.action_yes), (dialog, which) -> reportIssueFromTranscript(transcriptText, true),
+            mActivity.getString(com.xodos.shared.R.string.action_no), (dialog, which) -> reportIssueFromTranscript(transcriptText, false),
             null);
     }
 
-    private void reportIssueFromTranscript(String transcriptText, boolean addTermuxDebugInfo) {
+    private void reportIssueFromTranscript(String transcriptText, boolean addxodosDebugInfo) {
         Logger.showToast(mActivity, mActivity.getString(R.string.msg_generating_report), true);
 
         new Thread() {
@@ -744,41 +744,41 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             public void run() {
                 StringBuilder reportString = new StringBuilder();
 
-                String title = TermuxConstants.TERMUX_APP_NAME + " Report Issue";
+                String title = xodosConstants.xodos_APP_NAME + " Report Issue";
 
                 reportString.append("## Transcript\n");
                 reportString.append("\n").append(MarkdownUtils.getMarkdownCodeForString(transcriptText, true));
                 reportString.append("\n##\n");
 
-                if (addTermuxDebugInfo) {
-                    reportString.append("\n\n").append(TermuxUtils.getAppInfoMarkdownString(mActivity, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES));
+                if (addxodosDebugInfo) {
+                    reportString.append("\n\n").append(xodosUtils.getAppInfoMarkdownString(mActivity, xodosUtils.AppInfoMode.xodos_AND_PLUGIN_PACKAGES));
                 } else {
-                    reportString.append("\n\n").append(TermuxUtils.getAppInfoMarkdownString(mActivity, TermuxUtils.AppInfoMode.TERMUX_PACKAGE));
+                    reportString.append("\n\n").append(xodosUtils.getAppInfoMarkdownString(mActivity, xodosUtils.AppInfoMode.xodos_PACKAGE));
                 }
 
                 reportString.append("\n\n").append(AndroidUtils.getDeviceInfoMarkdownString(mActivity, true));
 
-                if (TermuxBootstrap.isAppPackageManagerAPT()) {
-                    String termuxAptInfo = TermuxUtils.geAPTInfoMarkdownString(mActivity);
-                    if (termuxAptInfo != null)
-                        reportString.append("\n\n").append(termuxAptInfo);
+                if (xodosBootstrap.isAppPackageManagerAPT()) {
+                    String xodosAptInfo = xodosUtils.geAPTInfoMarkdownString(mActivity);
+                    if (xodosAptInfo != null)
+                        reportString.append("\n\n").append(xodosAptInfo);
                 }
 
-                if (addTermuxDebugInfo) {
-                    String termuxDebugInfo = TermuxUtils.getTermuxDebugMarkdownString(mActivity);
-                    if (termuxDebugInfo != null)
-                        reportString.append("\n\n").append(termuxDebugInfo);
+                if (addxodosDebugInfo) {
+                    String xodosDebugInfo = xodosUtils.getxodosDebugMarkdownString(mActivity);
+                    if (xodosDebugInfo != null)
+                        reportString.append("\n\n").append(xodosDebugInfo);
                 }
 
                 String userActionName = UserAction.REPORT_ISSUE_FROM_TRANSCRIPT.getName();
 
                 ReportInfo reportInfo = new ReportInfo(userActionName,
-                    TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY_NAME, title);
+                    xodosConstants.xodos_APP.xodos_ACTIVITY_NAME, title);
                 reportInfo.setReportString(reportString.toString());
-                reportInfo.setReportStringSuffix("\n\n" + TermuxUtils.getReportIssueMarkdownString(mActivity));
+                reportInfo.setReportStringSuffix("\n\n" + xodosUtils.getReportIssueMarkdownString(mActivity));
                 reportInfo.setReportSaveFileLabelAndPath(userActionName,
                     Environment.getExternalStorageDirectory() + "/" +
-                        FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+                        FileUtils.sanitizeFileName(xodosConstants.xodos_APP_NAME + "-" + userActionName + ".log", true, true));
 
                 ReportActivity.startReportActivity(mActivity, reportInfo);
             }

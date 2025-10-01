@@ -1,6 +1,6 @@
 #!/bin/bash
-# Termux Prefix Switcher
-# This Program will switch Termux Environment from 64-bit to 32-bit
+# xodos Prefix Switcher
+# This Program will switch xodos Environment from 64-bit to 32-bit
 sleep 1
 
 	echo "making New container or switching old wait until automatically closed"
@@ -23,7 +23,7 @@ echo "restart"
 	rm secondstage-setup.sh
 	echo "[✓] Done, Please wait until restarting the app"
 	sleep 3
-killall -9 com.termux
+killall -9 com.xodos
 	EOM
 chmod 755 $PREFIX/../secondstage-setup.sh
 	cd $PREFIX/..
@@ -45,7 +45,7 @@ sleep 2
 	rm secondstage-setup.sh
 	echo "[✓] Done, Please wait until restarting the app"
 	sleep 3
-killall -9 com.termux
+killall -9 com.xodos
 	EOM
 	chmod 755 $PREFIX/../secondstage-setup.sh
 	cd $PREFIX/..

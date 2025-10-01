@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE resources [<!ENTITY TERMUX_PACKAGE_NAME "com.termux"><!ENTITY TERMUX_APP_NAME "XoDos"><!ENTITY TERMUX_API_APP_NAME "Termux:API"><!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot"><!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float"><!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling"><!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker"><!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">]>
+<!DOCTYPE resources [<!ENTITY xodos_PACKAGE_NAME "com.xodos"><!ENTITY xodos_APP_NAME "XoDos"><!ENTITY xodos_API_APP_NAME "xodos:API"><!ENTITY xodos_BOOT_APP_NAME "xodos:Boot"><!ENTITY xodos_FLOAT_APP_NAME "xodos:Float"><!ENTITY xodos_STYLING_APP_NAME "xodos:Styling"><!ENTITY xodos_TASKER_APP_NAME "xodos:Tasker"><!ENTITY xodos_WIDGET_APP_NAME "xodos:Widget">]>
 <resources>
     <string name="application_name">XoDos</string>
     <string name="shared_user_label">user</string>
-    <!-- Разрешение Termux RUN_COMMAND -->
-    <string name="permission_run_command_label">Выполнение команд в среде &TERMUX_APP_NAME;</string>
-    <string name="permission_run_command_description">&TERMUX_APP_NAME; выполняет произвольные команды в среде и имеет доступ к файлам</string>
+    <!-- Разрешение xodos RUN_COMMAND -->
+    <string name="permission_run_command_label">Выполнение команд в среде &xodos_APP_NAME;</string>
+    <string name="permission_run_command_description">&xodos_APP_NAME; выполняет произвольные команды в среде и имеет доступ к файлам</string>
 
 
-    <!-- Установка пакетов Termux Bootstrap -->
+    <!-- Установка пакетов xodos Bootstrap -->
     <string name="bootstrap_installer_body">Установка пакетов bootstrap…</string>
     <string name="bootstrap_error_title">Невозможно установить bootstrap</string>
-    <string name="bootstrap_error_body">&TERMUX_APP_NAME; не смог установить пакеты bootstrap.</string>
+    <string name="bootstrap_error_body">&xodos_APP_NAME; не смог установить пакеты bootstrap.</string>
     <string name="bootstrap_error_abort">Прервать</string>
     <string name="bootstrap_error_try_again">Попробовать снова</string>
-    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" может быть запущен только как основной пользователь. Бинарные файлы bootstrap скомпилированы для жестко заданного пути $PREFIX и не могут быть установлены по любому другому пути, кроме:%1$s."</string>
-    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME;&TERMUX_APP_NAME;" не может быть установлен на портативную/внешнюю/съемную SD-карту на вашем устройстве. Бинарные файлы bootstrap скомпилированы для жестко заданного пути $PREFIX и не могут быть установлены по любому другому пути, кроме:%1$s."</string>
+    <string name="bootstrap_error_not_primary_user_message">&xodos_APP_NAME;&xodos_APP_NAME;" может быть запущен только как основной пользователь. Бинарные файлы bootstrap скомпилированы для жестко заданного пути $PREFIX и не могут быть установлены по любому другому пути, кроме:%1$s."</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&xodos_APP_NAME;&xodos_APP_NAME;" не может быть установлен на портативную/внешнюю/съемную SD-карту на вашем устройстве. Бинарные файлы bootstrap скомпилированы для жестко заданного пути $PREFIX и не могут быть установлены по любому другому пути, кроме:%1$s."</string>
 
 
     <!-- Боковая панель терминала и ярлыки -->
@@ -68,134 +68,134 @@
 
     <string name="action_report_issue">Сообщить о проблеме</string>
     <string name="msg_generating_report">Генерация отчета</string>
-    <string name="msg_add_termux_debug_info">Добавить отладочную информацию Termux в отчет?</string>
+    <string name="msg_add_xodos_debug_info">Добавить отладочную информацию xodos в отчет?</string>
 
-    <string name="error_styling_not_installed">Приложение &TERMUX_STYLING_APP_NAME; не установлено.</string>
+    <string name="error_styling_not_installed">Приложение &xodos_STYLING_APP_NAME; не установлено.</string>
     <string name="action_styling_install">Установить</string>
 
 
-    <!-- Уведомления Termux -->
+    <!-- Уведомления xodos -->
     <string name="notification_action_exit">Выход</string>
     <string name="notification_action_wake_lock">Заблокировать экран</string>
     <string name="notification_action_wake_unlock">Разблокировать экран</string>
 
 
-    <!-- TermuxService -->
-    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME;
+    <!-- xodosService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&xodos_APP_NAME;
         требует
         разрешения \"Отображение поверх других приложений\" для запуска сессий терминала из фона на Android >= 10.
-        Предоставьте его в Настройки -> Приложения -> &TERMUX_APP_NAME; -> Дополнительно</string>
-    <string name="error_termux_service_invalid_execution_command_runner">Недопустимый исполнитель команды для TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_runner">Неподдерживаемый исполнитель команды для TermuxService: `%1$s`</string>
-    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">Неподдерживаемый режим создания оболочки для TermuxService: `%1$s`</string>
-    <string name="error_termux_service_execution_command_shell_name_unset">Имя оболочки не установлено, но передан режим создания оболочки `%1$s`</string>
+        Предоставьте его в Настройки -> Приложения -> &xodos_APP_NAME; -> Дополнительно</string>
+    <string name="error_xodos_service_invalid_execution_command_runner">Недопустимый исполнитель команды для xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_runner">Неподдерживаемый исполнитель команды для xodosService: `%1$s`</string>
+    <string name="error_xodos_service_unsupported_execution_command_shell_create_mode">Неподдерживаемый режим создания оболочки для xodosService: `%1$s`</string>
+    <string name="error_xodos_service_execution_command_shell_name_unset">Имя оболочки не установлено, но передан режим создания оболочки `%1$s`</string>
 
 
-    <!-- Termux RunCommandService -->
+    <!-- xodos RunCommandService -->
     <string name="error_run_command_service_invalid_intent_action">Недопустимое действие Intent для RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_invalid_execution_command_runner">Недопустимый исполнитель команды для RunCommandService: `%1$s`</string>
     <string name="error_run_command_service_mandatory_extra_missing">Обязательный параметр отсутствует для RunCommandService: \"%1$s\"</string>
     <string name="error_run_command_service_api_help">Посетите %1$s для получения дополнительной информации об использовании Intent RUN_COMMAND.</string>
 
 
-    <!-- Получатель файлов Termux -->
+    <!-- Получатель файлов xodos -->
     <string name="title_file_received">Сохранить файл в ~/downloads/</string>
     <string name="action_file_received_edit">Редактировать</string>
     <string name="action_file_received_open_directory">Открыть директорию</string>
 
 
     <!-- Разное -->
-    <string name="error_termux_service_start_failed_general">Не удалось запустить TermuxService. Проверьте logcat для получения сообщения об ошибке.</string>
-    <string name="error_termux_service_start_failed_bg">Не удалось запустить TermuxService, пока приложение находится в фоне, из-за ограничений Android.</string>
+    <string name="error_xodos_service_start_failed_general">Не удалось запустить xodosService. Проверьте logcat для получения сообщения об ошибке.</string>
+    <string name="error_xodos_service_start_failed_bg">Не удалось запустить xodosService, пока приложение находится в фоне, из-за ограничений Android.</string>
 
 
-    <!-- Настройки Termux -->
-    <string name="title_activity_termux_settings">Настройки &TERMUX_APP_NAME;</string>
+    <!-- Настройки xodos -->
+    <string name="title_activity_xodos_settings">Настройки &xodos_APP_NAME;</string>
 
-    <!-- Настройки приложения Termux -->
-    <string name="termux_preferences_title">Настройки &TERMUX_APP_NAME;</string>
-    <string name="termux_preferences_summary">Настройки для приложения &TERMUX_APP_NAME;</string>
+    <!-- Настройки приложения xodos -->
+    <string name="xodos_preferences_title">Настройки &xodos_APP_NAME;</string>
+    <string name="xodos_preferences_summary">Настройки для приложения &xodos_APP_NAME;</string>
 
     <!-- Настройки отладки -->
-    <string name="termux_debugging_preferences_title">Отладка</string>
-    <string name="termux_debugging_preferences_summary">Настройки для отладки</string>
+    <string name="xodos_debugging_preferences_title">Отладка</string>
+    <string name="xodos_debugging_preferences_summary">Настройки для отладки</string>
 
     <!-- Категория логирования -->
-    <string name="termux_logging_header">Логирование</string>
+    <string name="xodos_logging_header">Логирование</string>
 
     <!-- Уровень логирования -->
-    <string name="termux_log_level_title">Уровень логирования</string>
+    <string name="xodos_log_level_title">Уровень логирования</string>
 
     <!-- Логирование клавиш Terminal View -->
-    <string name="termux_terminal_view_key_logging_enabled_title">Логирование клавиш Terminal View</string>
-    <string name="termux_terminal_view_key_logging_enabled_off">Логи не будут содержать записи о клавишах Terminal View. (По умолчанию)</string>
-    <string name="termux_terminal_view_key_logging_enabled_on">Логи logcat будут содержать записи о клавишах Terminal View.
+    <string name="xodos_terminal_view_key_logging_enabled_title">Логирование клавиш Terminal View</string>
+    <string name="xodos_terminal_view_key_logging_enabled_off">Логи не будут содержать записи о клавишах Terminal View. (По умолчанию)</string>
+    <string name="xodos_terminal_view_key_logging_enabled_on">Логи logcat будут содержать записи о клавишах Terminal View.
                     Это очень подробно и должно быть отключено в обычных обстоятельствах, иначе это может вызвать проблемы с производительностью.</string>
 
     <!-- Уведомления об ошибках плагинов -->
-    <string name="termux_plugin_error_notifications_enabled_title">Уведомления об ошибках плагинов</string>
-    <string name="termux_plugin_error_notifications_enabled_off">Отключить всплывающие сообщения и уведомления об ошибках плагинов.</string>
-    <string name="termux_plugin_error_notifications_enabled_on">Показывать всплывающие сообщения и уведомления об ошибках плагинов. (По умолчанию)</string>
+    <string name="xodos_plugin_error_notifications_enabled_title">Уведомления об ошибках плагинов</string>
+    <string name="xodos_plugin_error_notifications_enabled_off">Отключить всплывающие сообщения и уведомления об ошибках плагинов.</string>
+    <string name="xodos_plugin_error_notifications_enabled_on">Показывать всплывающие сообщения и уведомления об ошибках плагинов. (По умолчанию)</string>
 
     <!-- Уведомления о сбоях -->
-    <string name="termux_crash_report_notifications_enabled_title">Уведомления о сбоях</string>
-    <string name="termux_crash_report_notifications_enabled_off">Отключить уведомления о сбоях.</string>
-    <string name="termux_crash_report_notifications_enabled_on">Показывать уведомления о сбоях. (По умолчанию)</string>
+    <string name="xodos_crash_report_notifications_enabled_title">Уведомления о сбоях</string>
+    <string name="xodos_crash_report_notifications_enabled_off">Отключить уведомления о сбоях.</string>
+    <string name="xodos_crash_report_notifications_enabled_on">Показывать уведомления о сбоях. (По умолчанию)</string>
 
 
     <!-- Настройки ввода-вывода терминала -->
-    <string name="termux_terminal_io_preferences_title">Ввод-вывод терминала</string>
-    <string name="termux_terminal_io_preferences_summary">Настройки для ввода-вывода терминала</string>
+    <string name="xodos_terminal_io_preferences_title">Ввод-вывод терминала</string>
+    <string name="xodos_terminal_io_preferences_summary">Настройки для ввода-вывода терминала</string>
 
     <!-- Категория клавиатуры -->
-    <string name="termux_keyboard_header">Клавиатура</string>
+    <string name="xodos_keyboard_header">Клавиатура</string>
 
     <!-- Программная клавиатура -->
-    <string name="termux_soft_keyboard_enabled_title">Программная клавиатура включена</string>
-    <string name="termux_soft_keyboard_enabled_off">Программная клавиатура будет отключена.</string>
-    <string name="termux_soft_keyboard_enabled_on">Программная клавиатура будет включена. (По умолчанию)</string>
+    <string name="xodos_soft_keyboard_enabled_title">Программная клавиатура включена</string>
+    <string name="xodos_soft_keyboard_enabled_off">Программная клавиатура будет отключена.</string>
+    <string name="xodos_soft_keyboard_enabled_on">Программная клавиатура будет включена. (По умолчанию)</string>
 
     <!-- Программная клавиатура только при отсутствии аппаратной -->
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Программная клавиатура только при отсутствии аппаратной</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">Программная клавиатура будет включена, даже если
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_title">Программная клавиатура только при отсутствии аппаратной</string>
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_off">Программная клавиатура будет включена, даже если
                     подключена аппаратная клавиатура. (По умолчанию)</string>
-    <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">Программная клавиатура будет включена только при
+    <string name="xodos_soft_keyboard_enabled_only_if_no_hardware_on">Программная клавиатура будет включена только при
                     отсутствии подключенной аппаратной клавиатуры.</string>
 
 
     <!-- Настройки Terminal View -->
-    <string name="termux_terminal_view_preferences_title">Terminal View</string>
-    <string name="termux_terminal_view_preferences_summary">Настройки для Terminal View</string>
+    <string name="xodos_terminal_view_preferences_title">Terminal View</string>
+    <string name="xodos_terminal_view_preferences_summary">Настройки для Terminal View</string>
 
     <!-- Категория View -->
-    <string name="termux_terminal_view_view_header">Вид</string>
+    <string name="xodos_terminal_view_view_header">Вид</string>
 
     <!-- Настройка отступов Terminal View -->
-    <string name="termux_terminal_view_terminal_margin_adjustment_title">Настройка отступов Terminal View</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_off">Настройка отступов Terminal View будет отключена.</string>
-    <string name="termux_terminal_view_terminal_margin_adjustment_on">Настройка отступов Terminal View будет включена.
+    <string name="xodos_terminal_view_terminal_margin_adjustment_title">Настройка отступов Terminal View</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_off">Настройка отступов Terminal View будет отключена.</string>
+    <string name="xodos_terminal_view_terminal_margin_adjustment_on">Настройка отступов Terminal View будет включена.
                     Она должна быть включена, чтобы попытаться исправить проблему, когда программная клавиатура перекрывает часть дополнительных клавиш/терминала.
                     Если это вызывает мерцание экрана на вашем устройстве, отключите ее. (По умолчанию)</string>
 
 
-    <!-- Настройки приложения Termux:API -->
-    <string name="termux_api_preferences_title">Настройки &TERMUX_API_APP_NAME;</string>
-    <string name="termux_api_preferences_summary">Настройки для приложения &TERMUX_API_APP_NAME;</string>
+    <!-- Настройки приложения xodos:API -->
+    <string name="xodos_api_preferences_title">Настройки &xodos_API_APP_NAME;</string>
+    <string name="xodos_api_preferences_summary">Настройки для приложения &xodos_API_APP_NAME;</string>
 
 
-    <!-- Настройки приложения Termux:Float -->
-    <string name="termux_float_preferences_title">Настройки &TERMUX_FLOAT_APP_NAME;</string>
-    <string name="termux_float_preferences_summary">Настройки для приложения &TERMUX_FLOAT_APP_NAME;</string>
+    <!-- Настройки приложения xodos:Float -->
+    <string name="xodos_float_preferences_title">Настройки &xodos_FLOAT_APP_NAME;</string>
+    <string name="xodos_float_preferences_summary">Настройки для приложения &xodos_FLOAT_APP_NAME;</string>
 
 
-    <!-- Настройки приложения Termux:Tasker -->
-    <string name="termux_tasker_preferences_title">Настройки &TERMUX_TASKER_APP_NAME;</string>
-    <string name="termux_tasker_preferences_summary">Настройки для приложения &TERMUX_TASKER_APP_NAME;</string>
+    <!-- Настройки приложения xodos:Tasker -->
+    <string name="xodos_tasker_preferences_title">Настройки &xodos_TASKER_APP_NAME;</string>
+    <string name="xodos_tasker_preferences_summary">Настройки для приложения &xodos_TASKER_APP_NAME;</string>
 
 
-    <!-- Настройки приложения Termux:Widget -->
-    <string name="termux_widget_preferences_title">Настройки &TERMUX_WIDGET_APP_NAME;</string>
-    <string name="termux_widget_preferences_summary">Настройки для приложения &TERMUX_WIDGET_APP_NAME;</string>
+    <!-- Настройки приложения xodos:Widget -->
+    <string name="xodos_widget_preferences_title">Настройки &xodos_WIDGET_APP_NAME;</string>
+    <string name="xodos_widget_preferences_summary">Настройки для приложения &xodos_WIDGET_APP_NAME;</string>
 
 
     <!-- О программе -->
@@ -216,7 +216,7 @@
     <string name="open_terminal">открыть терминал</string>
     <string name="terminate_current_process">убить текущий запущенный процесс</string>
     <string name="unlock_layout">разблокировать слайдер экрана</string>
-    <string name="raise_termux_app">поднять приложение Termux</string>
+    <string name="raise_xodos_app">поднять приложение xodos</string>
     <string name="add_menu_item">добавить элемент в меню плавающего шара</string>
     <string name="hide_terminal">скрыть терминал</string>
     <string name="set_dinput">dinput</string>
@@ -259,7 +259,7 @@
     <item>Wine🍷Bionic: Эмуляция Windows с обёрткой драйвера (если не Snapdragon — используйте wrapper)</item>
     <item>Wine🍷: Здесь вы можете запускать EXE-файлы из любой папки</item>
     <item>Xbox🎮Эмулятор: Играйте в оригинальные игры Xbox с помощью Xemu</item>
-            <item>Termux:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
+            <item>xodos:widgets: make shortcuts directly to android launcher to make running scripts easier</item>
     <item>Настройки⚙️: Настройка версий Wine/DXVK/Box и системных драйверов</item>
     <item>AI🤖Чат: Локальный приватный ИИ с поддержкой DeepSeek, Llama и 100+ моделей</item>
     <item>Восстановить♻️: Установите обновления XoDos и другие системы, такие как Kali/Proot</item>
@@ -317,7 +317,7 @@
   <string name="install_complete">✅ Установка завершена!</string>
   <string name="install_error">Ошибка установки</string>
   <string name="install_failed">Ошибка установки XoDos: %s</string>
-  <string name="launch_xodos_command">/data/data/com.termux/files/usr/bin/xodos\n</string>
+  <string name="launch_xodos_command">/data/data/com.xodos/files/usr/bin/xodos\n</string>
   <string name="cleanup_error">Ошибка: %s</string>
   <string name="install_copying">Копирование файлов…</string>
   <string name="install_extracting">Обновление системы…</string>

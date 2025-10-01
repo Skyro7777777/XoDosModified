@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.termux.x11'
+    namespace 'com.xodos.x11'
     compileSdk 34
 
     defaultConfig {

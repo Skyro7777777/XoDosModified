@@ -1,4 +1,4 @@
-package com.termux.app.fragments.settings;
+package com.xodos.app.fragments.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.termux.R;
-import com.termux.shared.termux.settings.preferences.TermuxFloatAppSharedPreferences;
+import com.xodos.R;
+import com.xodos.shared.xodos.settings.preferences.xodosFloatAppSharedPreferences;
 
 @Keep
-public class TermuxFloatPreferencesFragment extends PreferenceFragmentCompat {
+public class xodosFloatPreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -20,28 +20,28 @@ public class TermuxFloatPreferencesFragment extends PreferenceFragmentCompat {
         if (context == null) return;
 
         PreferenceManager preferenceManager = getPreferenceManager();
-        preferenceManager.setPreferenceDataStore(TermuxFloatPreferencesDataStore.getInstance(context));
+        preferenceManager.setPreferenceDataStore(xodosFloatPreferencesDataStore.getInstance(context));
 
-        setPreferencesFromResource(R.xml.termux_float_preferences, rootKey);
+        setPreferencesFromResource(R.xml.xodos_float_preferences, rootKey);
     }
 
 }
 
-class TermuxFloatPreferencesDataStore extends PreferenceDataStore {
+class xodosFloatPreferencesDataStore extends PreferenceDataStore {
 
     private final Context mContext;
-    private final TermuxFloatAppSharedPreferences mPreferences;
+    private final xodosFloatAppSharedPreferences mPreferences;
 
-    private static TermuxFloatPreferencesDataStore mInstance;
+    private static xodosFloatPreferencesDataStore mInstance;
 
-    private TermuxFloatPreferencesDataStore(Context context) {
+    private xodosFloatPreferencesDataStore(Context context) {
         mContext = context;
-        mPreferences = TermuxFloatAppSharedPreferences.build(context, true);
+        mPreferences = xodosFloatAppSharedPreferences.build(context, true);
     }
 
-    public static synchronized TermuxFloatPreferencesDataStore getInstance(Context context) {
+    public static synchronized xodosFloatPreferencesDataStore getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new TermuxFloatPreferencesDataStore(context);
+            mInstance = new xodosFloatPreferencesDataStore(context);
         }
         return mInstance;
     }

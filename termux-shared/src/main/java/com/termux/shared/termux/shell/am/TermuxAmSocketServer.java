@@ -1,4 +1,4 @@
-package com.termux.shared.termux.shell.am;
+package com.xodos.shared.xodos.shell.am;
 
 import android.content.Context;
 
@@ -6,68 +6,68 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.errors.Error;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.net.socket.local.LocalClientSocket;
-import com.termux.shared.net.socket.local.LocalServerSocket;
-import com.termux.shared.net.socket.local.LocalSocketManager;
-import com.termux.shared.net.socket.local.LocalSocketManagerClientBase;
-import com.termux.shared.net.socket.local.LocalSocketRunConfig;
-import com.termux.shared.shell.am.AmSocketServerRunConfig;
-import com.termux.shared.shell.am.AmSocketServer;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.crash.TermuxCrashUtils;
-import com.termux.shared.termux.plugins.TermuxPluginUtils;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
-import com.termux.shared.termux.shell.command.environment.TermuxAppShellEnvironment;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.net.socket.local.LocalClientSocket;
+import com.xodos.shared.net.socket.local.LocalServerSocket;
+import com.xodos.shared.net.socket.local.LocalSocketManager;
+import com.xodos.shared.net.socket.local.LocalSocketManagerClientBase;
+import com.xodos.shared.net.socket.local.LocalSocketRunConfig;
+import com.xodos.shared.shell.am.AmSocketServerRunConfig;
+import com.xodos.shared.shell.am.AmSocketServer;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.crash.xodosCrashUtils;
+import com.xodos.shared.xodos.plugins.xodosPluginUtils;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
+import com.xodos.shared.xodos.settings.properties.xodosPropertyConstants;
+import com.xodos.shared.xodos.shell.command.environment.xodosAppShellEnvironment;
 
 /**
- * A wrapper for {@link AmSocketServer} for termux-app usage.
+ * A wrapper for {@link AmSocketServer} for xodos-app usage.
  *
- * The static {@link #termuxAmSocketServer} variable stores the {@link LocalSocketManager} for the
+ * The static {@link #xodosAmSocketServer} variable stores the {@link LocalSocketManager} for the
  * {@link AmSocketServer}.
  *
- * The {@link TermuxAmSocketServerClient} extends the {@link AmSocketServer.AmSocketServerClient}
+ * The {@link xodosAmSocketServerClient} extends the {@link AmSocketServer.AmSocketServerClient}
  * class to also show plugin error notifications for errors and disallowed client connections in
  * addition to logging the messages to logcat, which are only logged by {@link LocalSocketManagerClientBase}
  * if log level is debug or higher for privacy issues.
  *
  * It uses a filesystem socket server with the socket file at
- * {@link TermuxConstants.TERMUX_APP#TERMUX_AM_SOCKET_FILE_PATH}. It would normally only allow
- * processes belonging to the termux user and root user to connect to it. If commands are sent by the
- * root user, then the am commands executed will be run as the termux user and its permissions,
+ * {@link xodosConstants.xodos_APP#xodos_AM_SOCKET_FILE_PATH}. It would normally only allow
+ * processes belonging to the xodos user and root user to connect to it. If commands are sent by the
+ * root user, then the am commands executed will be run as the xodos user and its permissions,
  * capabilities and selinux context instead of root.
  *
- * The `$PREFIX/bin/termux-am` client connects to the server via `$PREFIX/bin/termux-am-socket` to
+ * The `$PREFIX/bin/xodos-am` client connects to the server via `$PREFIX/bin/xodos-am-socket` to
  * run the am commands. It provides similar functionality to "$PREFIX/bin/am"
  * (and "/system/bin/am"), but should be faster since it does not require starting a dalvik vm for
- * every command as done by "am" via termux/TermuxAm.
+ * every command as done by "am" via xodos/xodosAm.
  *
- * The server is started by termux-app Application class but is not started if
- * {@link TermuxPropertyConstants#KEY_RUN_TERMUX_AM_SOCKET_SERVER} is `false` which can be done by
- * adding the prop with value "false" to the "~/.termux/termux.properties" file. Changes
- * require termux-app to be force stopped and restarted.
+ * The server is started by xodos-app Application class but is not started if
+ * {@link xodosPropertyConstants#KEY_RUN_xodos_AM_SOCKET_SERVER} is `false` which can be done by
+ * adding the prop with value "false" to the "~/.xodos/xodos.properties" file. Changes
+ * require xodos-app to be force stopped and restarted.
  *
  * The current state of the server can be checked with the
- * {@link TermuxAppShellEnvironment#ENV_TERMUX_APP__AM_SOCKET_SERVER_ENABLED} env variable, which is exported
+ * {@link xodosAppShellEnvironment#ENV_xodos_APP__AM_SOCKET_SERVER_ENABLED} env variable, which is exported
  * for all shell sessions and tasks.
  *
- * https://github.com/termux/termux-am-socket
- * https://github.com/termux/TermuxAm
+ * https://github.com/xodos/xodos-am-socket
+ * https://github.com/xodos/XodosAm
  */
-public class TermuxAmSocketServer {
+public class xodosAmSocketServer {
 
-    public static final String LOG_TAG = "TermuxAmSocketServer";
+    public static final String LOG_TAG = "xodosAmSocketServer";
 
-    public static final String TITLE = "TermuxAm";
+    public static final String TITLE = "xodosAm";
 
-    /** The static instance for the {@link TermuxAmSocketServer} {@link LocalSocketManager}. */
-    private static LocalSocketManager termuxAmSocketServer;
+    /** The static instance for the {@link xodosAmSocketServer} {@link LocalSocketManager}. */
+    private static LocalSocketManager xodosAmSocketServer;
 
-    /** Whether {@link TermuxAmSocketServer} is enabled and running or not. */
+    /** Whether {@link xodosAmSocketServer} is enabled and running or not. */
     @Keep
-    protected static Boolean TERMUX_APP_AM_SOCKET_SERVER_ENABLED;
+    protected static Boolean xodos_APP_AM_SOCKET_SERVER_ENABLED;
 
     /**
      * Setup the {@link AmSocketServer} {@link LocalServerSocket} and start listening for
@@ -75,13 +75,13 @@ public class TermuxAmSocketServer {
      *
      * @param context The {@link Context} for {@link LocalSocketManager}.
      */
-    public static void setupTermuxAmSocketServer(@NonNull Context context) {
-        // Start termux-am-socket server if enabled by user
+    public static void setupxodosAmSocketServer(@NonNull Context context) {
+        // Start xodos-am-socket server if enabled by user
         boolean enabled = false;
-        if (TermuxAppSharedProperties.getProperties().shouldRunTermuxAmSocketServer()) {
+        if (xodosAppSharedProperties.getProperties().shouldRunxodosAmSocketServer()) {
             Logger.logDebug(LOG_TAG, "Starting " + TITLE + " socket server since its enabled");
             start(context);
-            if (termuxAmSocketServer != null && termuxAmSocketServer.isRunning()) {
+            if (xodosAmSocketServer != null && xodosAmSocketServer.isRunning()) {
                 enabled = true;
                 Logger.logDebug(LOG_TAG, TITLE + " socket server successfully started");
             }
@@ -89,11 +89,11 @@ public class TermuxAmSocketServer {
             Logger.logDebug(LOG_TAG, "Not starting " + TITLE + " socket server since its not enabled");
         }
 
-        // Once termux-app has started, the server state must not be changed since the variable is
+        // Once xodos-app has started, the server state must not be changed since the variable is
         // exported in shell sessions and tasks and if state is changed, then env of older shells will
         // retain invalid value. User should force stop the app to update state after changing prop.
-        TERMUX_APP_AM_SOCKET_SERVER_ENABLED = enabled;
-        TermuxAppShellEnvironment.updateTermuxAppAMSocketServerEnabled(context);
+        xodos_APP_AM_SOCKET_SERVER_ENABLED = enabled;
+        xodosAppShellEnvironment.updatexodosAppAMSocketServerEnabled(context);
     }
 
     /**
@@ -103,37 +103,37 @@ public class TermuxAmSocketServer {
         stop();
 
         AmSocketServerRunConfig amSocketServerRunConfig = new AmSocketServerRunConfig(TITLE,
-            TermuxConstants.TERMUX_APP.TERMUX_AM_SOCKET_FILE_PATH, new TermuxAmSocketServerClient());
+            xodosConstants.xodos_APP.xodos_AM_SOCKET_FILE_PATH, new xodosAmSocketServerClient());
 
-        termuxAmSocketServer = AmSocketServer.start(context, amSocketServerRunConfig);
+        xodosAmSocketServer = AmSocketServer.start(context, amSocketServerRunConfig);
     }
 
     /**
      * Stop the {@link AmSocketServer} {@link LocalServerSocket} and stop listening for new {@link LocalClientSocket}.
      */
     public static synchronized void stop() {
-        if (termuxAmSocketServer != null) {
-            Error error = termuxAmSocketServer.stop();
+        if (xodosAmSocketServer != null) {
+            Error error = xodosAmSocketServer.stop();
             if (error != null) {
-                termuxAmSocketServer.onError(error);
+                xodosAmSocketServer.onError(error);
             }
-            termuxAmSocketServer = null;
+            xodosAmSocketServer = null;
         }
     }
     
     /**
      * Update the state of the {@link AmSocketServer} {@link LocalServerSocket} depending on current
-     * value of {@link TermuxPropertyConstants#KEY_RUN_TERMUX_AM_SOCKET_SERVER}.
+     * value of {@link xodosPropertyConstants#KEY_RUN_xodos_AM_SOCKET_SERVER}.
      */
     public static synchronized void updateState(@NonNull Context context) {
-        TermuxAppSharedProperties properties = TermuxAppSharedProperties.getProperties();
-        if (properties.shouldRunTermuxAmSocketServer()) {
-            if (termuxAmSocketServer == null) {
+        xodosAppSharedProperties properties = xodosAppSharedProperties.getProperties();
+        if (properties.shouldRunxodosAmSocketServer()) {
+            if (xodosAmSocketServer == null) {
                 Logger.logDebug(LOG_TAG, "updateState: Starting " + TITLE + " socket server");
                 start(context);
             }
         } else {
-            if (termuxAmSocketServer != null) {
+            if (xodosAmSocketServer != null) {
                 Logger.logDebug(LOG_TAG, "updateState: Disabling " + TITLE + " socket server");
                 stop();
             }
@@ -141,16 +141,16 @@ public class TermuxAmSocketServer {
     }
     
     /**
-     * Get {@link #termuxAmSocketServer}.
+     * Get {@link #xodosAmSocketServer}.
      */
-    public static synchronized LocalSocketManager getTermuxAmSocketServer() {
-        return termuxAmSocketServer;
+    public static synchronized LocalSocketManager getxodosAmSocketServer() {
+        return xodosAmSocketServer;
     }
 
     /**
-     * Show an error notification on the {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
-     * {@link TermuxConstants#TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME} with a call
-     * to {@link TermuxPluginUtils#sendPluginCommandErrorNotification(Context, String, CharSequence, String, String)}.
+     * Show an error notification on the {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_ID}
+     * {@link xodosConstants#xodos_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME} with a call
+     * to {@link xodosPluginUtils#sendPluginCommandErrorNotification(Context, String, CharSequence, String, String)}.
      *
      * @param context The {@link Context} to send the notification with.
      * @param error The {@link Error} generated.
@@ -160,20 +160,20 @@ public class TermuxAmSocketServer {
     public static synchronized void showErrorNotification(@NonNull Context context, @NonNull Error error,
                                                           @NonNull LocalSocketRunConfig localSocketRunConfig,
                                                           @Nullable LocalClientSocket clientSocket) {
-        TermuxPluginUtils.sendPluginCommandErrorNotification(context, LOG_TAG,
+        xodosPluginUtils.sendPluginCommandErrorNotification(context, LOG_TAG,
             localSocketRunConfig.getTitle() + " Socket Server Error", error.getMinimalErrorString(),
             LocalSocketManager.getErrorMarkdownString(error, localSocketRunConfig, clientSocket));
     }
 
 
 
-    public static Boolean getTermuxAppAMSocketServerEnabled(@NonNull Context currentPackageContext) {
-        boolean isTermuxApp = TermuxConstants.TERMUX_PACKAGE_NAME.equals(currentPackageContext.getPackageName());
-        if (isTermuxApp) {
-            return TERMUX_APP_AM_SOCKET_SERVER_ENABLED;
+    public static Boolean getxodosAppAMSocketServerEnabled(@NonNull Context currentPackageContext) {
+        boolean isxodosApp = xodosConstants.xodos_PACKAGE_NAME.equals(currentPackageContext.getPackageName());
+        if (isxodosApp) {
+            return xodos_APP_AM_SOCKET_SERVER_ENABLED;
         } else {
-            // Currently, unsupported since plugin app processes don't know that value is set in termux
-            // app process TermuxAmSocketServer class. A binder API or a way to check if server is actually
+            // Currently, unsupported since plugin app processes don't know that value is set in xodos
+            // app process xodosAmSocketServer class. A binder API or a way to check if server is actually
             // running needs to be used. Long checks would also not be possible on main application thread
             return null;
         }
@@ -184,17 +184,17 @@ public class TermuxAmSocketServer {
 
 
 
-    /** Enhanced implementation for {@link AmSocketServer.AmSocketServerClient} for {@link TermuxAmSocketServer}. */
-    public static class TermuxAmSocketServerClient extends AmSocketServer.AmSocketServerClient {
+    /** Enhanced implementation for {@link AmSocketServer.AmSocketServerClient} for {@link xodosAmSocketServer}. */
+    public static class xodosAmSocketServerClient extends AmSocketServer.AmSocketServerClient {
 
-        public static final String LOG_TAG = "TermuxAmSocketServerClient";
+        public static final String LOG_TAG = "xodosAmSocketServerClient";
 
         @Nullable
         @Override
         public Thread.UncaughtExceptionHandler getLocalSocketManagerClientThreadUEH(
             @NonNull LocalSocketManager localSocketManager) {
-            // Use termux crash handler for socket listener thread just like used for main app process thread.
-            return TermuxCrashUtils.getCrashHandler(localSocketManager.getContext());
+            // Use xodos crash handler for socket listener thread just like used for main app process thread.
+            return xodosCrashUtils.getCrashHandler(localSocketManager.getContext());
         }
 
         @Override
@@ -203,7 +203,7 @@ public class TermuxAmSocketServer {
             // Don't show notification if server is not running since errors may be triggered
             // when server is stopped and server and client sockets are closed.
             if (localSocketManager.isRunning()) {
-                TermuxAmSocketServer.showErrorNotification(localSocketManager.getContext(), error,
+                xodosAmSocketServer.showErrorNotification(localSocketManager.getContext(), error,
                     localSocketManager.getLocalSocketRunConfig(), clientSocket);
             }
 
@@ -215,7 +215,7 @@ public class TermuxAmSocketServer {
         public void onDisallowedClientConnected(@NonNull LocalSocketManager localSocketManager,
                                                 @NonNull LocalClientSocket clientSocket, @NonNull Error error) {
             // Always show notification and log error regardless of if server is running or not
-            TermuxAmSocketServer.showErrorNotification(localSocketManager.getContext(), error,
+            xodosAmSocketServer.showErrorNotification(localSocketManager.getContext(), error,
                 localSocketManager.getLocalSocketRunConfig(), clientSocket);
             super.onDisallowedClientConnected(localSocketManager, clientSocket, error);
         }

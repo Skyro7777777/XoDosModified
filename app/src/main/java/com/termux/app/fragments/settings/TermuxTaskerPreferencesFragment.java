@@ -1,4 +1,4 @@
-package com.termux.app.fragments.settings;
+package com.xodos.app.fragments.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.termux.R;
-import com.termux.shared.termux.settings.preferences.TermuxTaskerAppSharedPreferences;
+import com.xodos.R;
+import com.xodos.shared.xodos.settings.preferences.xodosTaskerAppSharedPreferences;
 
 @Keep
-public class TermuxTaskerPreferencesFragment extends PreferenceFragmentCompat {
+public class xodosTaskerPreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -20,28 +20,28 @@ public class TermuxTaskerPreferencesFragment extends PreferenceFragmentCompat {
         if (context == null) return;
 
         PreferenceManager preferenceManager = getPreferenceManager();
-        preferenceManager.setPreferenceDataStore(TermuxTaskerPreferencesDataStore.getInstance(context));
+        preferenceManager.setPreferenceDataStore(xodosTaskerPreferencesDataStore.getInstance(context));
 
-        setPreferencesFromResource(R.xml.termux_tasker_preferences, rootKey);
+        setPreferencesFromResource(R.xml.xodos_tasker_preferences, rootKey);
     }
 
 }
 
-class TermuxTaskerPreferencesDataStore extends PreferenceDataStore {
+class xodosTaskerPreferencesDataStore extends PreferenceDataStore {
 
     private final Context mContext;
-    private final TermuxTaskerAppSharedPreferences mPreferences;
+    private final xodosTaskerAppSharedPreferences mPreferences;
 
-    private static TermuxTaskerPreferencesDataStore mInstance;
+    private static xodosTaskerPreferencesDataStore mInstance;
 
-    private TermuxTaskerPreferencesDataStore(Context context) {
+    private xodosTaskerPreferencesDataStore(Context context) {
         mContext = context;
-        mPreferences = TermuxTaskerAppSharedPreferences.build(context, true);
+        mPreferences = xodosTaskerAppSharedPreferences.build(context, true);
     }
 
-    public static synchronized TermuxTaskerPreferencesDataStore getInstance(Context context) {
+    public static synchronized xodosTaskerPreferencesDataStore getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new TermuxTaskerPreferencesDataStore(context);
+            mInstance = new xodosTaskerPreferencesDataStore(context);
         }
         return mInstance;
     }

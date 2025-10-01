@@ -1,7 +1,7 @@
-package com.termux.x11.utils;
+package com.xodos.x11.utils;
 
-import static com.termux.x11.extrakeys.TermuxX11ExtraKeysConstants.PRIMARY_KEY_CODES_FOR_STRINGS;
-import static com.termux.x11.MainActivity.toggleKeyboardVisibility;
+import static com.xodos.x11.extrakeys.xodosX11ExtraKeysConstants.PRIMARY_KEY_CODES_FOR_STRINGS;
+import static com.xodos.x11.MainActivity.toggleKeyboardVisibility;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import android.annotation.SuppressLint;
@@ -22,23 +22,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
-import com.termux.x11.extrakeys.TermuxX11ExtraKeysConstants;
-import com.termux.x11.extrakeys.TermuxX11ExtraKeysInfo;
-import com.termux.x11.extrakeys.*;
-import com.termux.x11.LoriePreferences;
-import com.termux.x11.MainActivity;
-import com.termux.x11.R;
+import com.xodos.x11.extrakeys.xodosX11ExtraKeysConstants;
+import com.xodos.x11.extrakeys.xodosX11ExtraKeysInfo;
+import com.xodos.x11.extrakeys.*;
+import com.xodos.x11.LoriePreferences;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.R;
 
 import org.json.JSONException;
 
-public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
+public class xodosX11ExtraKeys implements xodosExtraKeysView.IExtraKeysView {
     @SuppressWarnings("FieldCanBeLocal")
-    private static final String LOG_TAG = "TermuxX11ExtraKeys";
+    private static final String LOG_TAG = "xodosX11ExtraKeys";
     private final View.OnKeyListener mEventListener;
     private final MainActivity mActivity;
-    private final TermuxExtraKeysView mExtraKeysView;
+    private final xodosExtraKeysView mExtraKeysView;
     private final ClipboardManager mClipboardManager;
-    static private TermuxX11ExtraKeysInfo mExtraKeysInfo;
+    static private xodosX11ExtraKeysInfo mExtraKeysInfo;
 
     private boolean ctrlDown;
     private boolean altDown;
@@ -48,7 +48,7 @@ public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
     /** Defines the key for extra keys */
     public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[['ESC','/',{key: '-', popup: '|'},'HOME','UP','END','PGUP','PREFERENCES'], ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','KEYBOARD']]"; // Double row
 
-    public TermuxX11ExtraKeys(@NonNull View.OnKeyListener eventlistener, MainActivity activity, TermuxExtraKeysView extrakeysview) {
+    public xodosX11ExtraKeys(@NonNull View.OnKeyListener eventlistener, MainActivity activity, xodosExtraKeysView extrakeysview) {
         mEventListener = eventlistener;
         mActivity = activity;
         mExtraKeysView = extrakeysview;
@@ -56,32 +56,32 @@ public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
     }
 
     private final KeyCharacterMap mVirtualKeyboardKeyCharacterMap = KeyCharacterMap.load(KeyCharacterMap.VIRTUAL_KEYBOARD);
-    static final String ACTION_START_PREFERENCES_ACTIVITY = "com.termux.x11.start_preferences_activity";
+    static final String ACTION_START_PREFERENCES_ACTIVITY = "com.xodos.x11.start_preferences_activity";
 
     @Override
-    public void onExtraKeyButtonClick(View view, TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public void onExtraKeyButtonClick(View view, xodosX11ExtraKeyButton buttonInfo, Button button) {
         if (buttonInfo.macro) {
             String[] keys = buttonInfo.key.split(" ");
             boolean ctrlDown = false, altDown = false, shiftDown = false, metaDown = false, fnDown = false;
             for (String key : keys) {
-                if (TermuxX11SpecialButton.CTRL.getKey().equals(key))
+                if (xodosX11SpecialButton.CTRL.getKey().equals(key))
                     ctrlDown = true;
-                else if (TermuxX11SpecialButton.ALT.getKey().equals(key))
+                else if (xodosX11SpecialButton.ALT.getKey().equals(key))
                     altDown = true;
-                else if (TermuxX11SpecialButton.SHIFT.getKey().equals(key))
+                else if (xodosX11SpecialButton.SHIFT.getKey().equals(key))
                     shiftDown = true;
-                else if (TermuxX11SpecialButton.META.getKey().equals(key))
+                else if (xodosX11SpecialButton.META.getKey().equals(key))
                     metaDown = true;
-                else if (TermuxX11SpecialButton.FN.getKey().equals(key))
+                else if (xodosX11SpecialButton.FN.getKey().equals(key))
                     fnDown = true;
             }
 
             for (String key : keys) {
-                if (!TermuxX11SpecialButton.CTRL.getKey().equals(key)
-                    && !TermuxX11SpecialButton.ALT.getKey().equals(key)
-                    && !TermuxX11SpecialButton.SHIFT.getKey().equals(key)
-                    && !TermuxX11SpecialButton.META.getKey().equals(key)
-                    && !TermuxX11SpecialButton.FN.getKey().equals(key))
+                if (!xodosX11SpecialButton.CTRL.getKey().equals(key)
+                    && !xodosX11SpecialButton.ALT.getKey().equals(key)
+                    && !xodosX11SpecialButton.SHIFT.getKey().equals(key)
+                    && !xodosX11SpecialButton.META.getKey().equals(key)
+                    && !xodosX11SpecialButton.FN.getKey().equals(key))
                     onLorieExtraKeyButtonClick(view, key, ctrlDown, altDown, shiftDown, metaDown, fnDown);
             }
 
@@ -131,35 +131,35 @@ public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
         if (mExtraKeysView == null)
             return;
 
-        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.CTRL, true)))
+        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.CTRL, true)))
             mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_CTRL_LEFT, false);
-        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.ALT, true)))
+        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.ALT, true)))
             mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_ALT_LEFT, false);
-        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.SHIFT, true)))
+        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.SHIFT, true)))
             mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_SHIFT_LEFT, false);
-        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.META, true)))
+        if (Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.META, true)))
             mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_META_LEFT, false);
     }
 
     @Override
-    public boolean performExtraKeyButtonHapticFeedback(View view, TermuxX11ExtraKeyButton buttonInfo, Button button) {
+    public boolean performExtraKeyButtonHapticFeedback(View view, xodosX11ExtraKeyButton buttonInfo, Button button) {
         MainActivity.handler.postDelayed(() -> {
             boolean pressed;
             switch (buttonInfo.key) {
                 case "CTRL":
-                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.CTRL, false));
+                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.CTRL, false));
                     mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_CTRL_LEFT, pressed);
                     break;
                 case "ALT":
-                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.ALT, false));
+                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.ALT, false));
                     mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_ALT_LEFT, pressed);
                     break;
                 case "SHIFT":
-                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.SHIFT, false));
+                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.SHIFT, false));
                     mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_SHIFT_LEFT, pressed);
                     break;
                 case "META":
-                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(TermuxX11SpecialButton.META, false));
+                    pressed = Boolean.TRUE.equals(mExtraKeysView.readSpecialButton(xodosX11SpecialButton.META, false));
                     mActivity.getLorieView().sendKeyEvent(0, KeyEvent.KEYCODE_META_LEFT, pressed);
                     break;
             }
@@ -206,13 +206,13 @@ public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
             // Check {@link #getExtraKeysInternalPropertyValueFromValue(String)} and
             // {@link #getExtraKeysStyleInternalPropertyValueFromValue(String)}
             String extrakeys = MainActivity.getPrefs().extra_keys_config.get();
-            mExtraKeysInfo = new TermuxX11ExtraKeysInfo(extrakeys, "extra-keys-style", TermuxX11ExtraKeysConstants.CONTROL_CHARS_ALIASES);
+            mExtraKeysInfo = new xodosX11ExtraKeysInfo(extrakeys, "extra-keys-style", xodosX11ExtraKeysConstants.CONTROL_CHARS_ALIASES);
         } catch (JSONException e) {
             Toast.makeText(MainActivity.getInstance(), "Could not load and set the \"extra-keys\" property from the properties file: " + e, Toast.LENGTH_LONG).show();
             Log.e(LOG_TAG, "Could not load and set the \"extra-keys\" property from the properties file: ", e);
 
             try {
-                mExtraKeysInfo = new TermuxX11ExtraKeysInfo(TermuxX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS, "default", TermuxX11ExtraKeysConstants.CONTROL_CHARS_ALIASES);
+                mExtraKeysInfo = new xodosX11ExtraKeysInfo(xodosX11ExtraKeys.DEFAULT_IVALUE_EXTRA_KEYS, "default", xodosX11ExtraKeysConstants.CONTROL_CHARS_ALIASES);
             } catch (JSONException e2) {
                 Toast.makeText(MainActivity.getInstance(), "Can't create default extra keys", Toast.LENGTH_LONG).show();
                 Log.e(LOG_TAG, "Could create default extra keys: ", e);
@@ -221,7 +221,7 @@ public class TermuxX11ExtraKeys implements TermuxExtraKeysView.IExtraKeysView {
         }
     }
 
-    public static TermuxX11ExtraKeysInfo getExtraKeysInfo() {
+    public static xodosX11ExtraKeysInfo getExtraKeysInfo() {
         if (mExtraKeysInfo == null)
             setExtraKeys();
         return mExtraKeysInfo;

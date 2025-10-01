@@ -1,15 +1,15 @@
-package com.termux.shared.termux.terminal;
+package com.xodos.shared.xodos.terminal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.logger.Logger;
-import com.termux.terminal.TerminalSession;
-import com.termux.terminal.TerminalSessionClient;
+import com.xodos.shared.logger.Logger;
+import com.xodos.terminal.TerminalSession;
+import com.xodos.terminal.TerminalSessionClient;
 
-public class TermuxTerminalSessionClientBase implements TerminalSessionClient {
+public class xodosTerminalSessionClientBase implements TerminalSessionClient {
 
-    public TermuxTerminalSessionClientBase() {
+    public xodosTerminalSessionClientBase() {
     }
 
     @Override

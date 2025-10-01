@@ -1,4 +1,4 @@
-package com.termux.x11.utils;
+package com.xodos.x11.utils;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -17,9 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.termux.x11.extrakeys.TermuxExtraKeysView;
-import com.termux.x11.MainActivity;
-import com.termux.x11.R;
+import com.xodos.x11.extrakeys.xodosExtraKeysView;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.R;
 
 public class X11ToolbarViewPager {
     public static class PageAdapter extends PagerAdapter {
@@ -50,15 +50,15 @@ public class X11ToolbarViewPager {
             View layout;
             if (position == 0) {
                 layout = inflater.inflate(R.layout.display_view_terminal_toolbar_extra_keys, collection, false);
-                TermuxExtraKeysView termuxExtraKeysView = (TermuxExtraKeysView) layout;
-                mActivity.mExtraKeys = new TermuxX11ExtraKeys(mEventListener, mActivity, termuxExtraKeysView);
+                xodosExtraKeysView xodosExtraKeysView = (xodosExtraKeysView) layout;
+                mActivity.mExtraKeys = new xodosX11ExtraKeys(mEventListener, mActivity, xodosExtraKeysView);
                 int mTerminalToolbarDefaultHeight = mActivity.getDisplayTerminalToolbarViewPager().getLayoutParams().height;
                 int height = mTerminalToolbarDefaultHeight *
                         ((mActivity.mExtraKeys.getExtraKeysInfo() == null) ? 0 : mActivity.mExtraKeys.getExtraKeysInfo().getMatrix().length);
-                termuxExtraKeysView.reload(mActivity.mExtraKeys.getExtraKeysInfo(), height);
-                termuxExtraKeysView.setExtraKeysViewClient(mActivity.mExtraKeys);
-                termuxExtraKeysView.setOnHoverListener((v, e) -> true);
-                termuxExtraKeysView.setOnGenericMotionListener((v, e) -> true);
+                xodosExtraKeysView.reload(mActivity.mExtraKeys.getExtraKeysInfo(), height);
+                xodosExtraKeysView.setExtraKeysViewClient(mActivity.mExtraKeys);
+                xodosExtraKeysView.setOnHoverListener((v, e) -> true);
+                xodosExtraKeysView.setOnGenericMotionListener((v, e) -> true);
             } else {
                 layout = inflater.inflate(R.layout.display_view_terminal_toolbar_text_input, collection, false);
                 final EditText editText = layout.findViewById(R.id.display_terminal_toolbar_text_input);

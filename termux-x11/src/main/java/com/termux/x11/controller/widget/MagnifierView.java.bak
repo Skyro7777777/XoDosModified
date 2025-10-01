@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,10 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.core.Callback;
-import com.termux.x11.controller.core.UnitUtils;
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.core.Callback;
+import com.xodos.x11.controller.core.UnitUtils;
+import com.xodos.x11.controller.math.Mathf;
 
 public class MagnifierView extends FrameLayout {
     private final SharedPreferences preferences;

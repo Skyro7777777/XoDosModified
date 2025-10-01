@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.math.Mathf;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.math.Mathf;
 
 public class NumberPicker extends FrameLayout implements View.OnTouchListener {
     private int value = 0;

@@ -1,4 +1,4 @@
-package com.termux.app;
+package com.xodos.app;
 import java.io.IOException;
  import android.app.ProgressDialog;
 import android.os.Handler;     
@@ -24,18 +24,18 @@ import android.system.Os;
 import android.util.Pair;
 import android.view.WindowManager;
 
-import com.termux.R;
-import com.termux.shared.file.FileUtils;
-import com.termux.shared.termux.crash.TermuxCrashUtils;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.interact.MessageDialogUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.markdown.MarkdownUtils;
-import com.termux.shared.errors.Error;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.shell.command.environment.TermuxShellEnvironment;
+import com.xodos.R;
+import com.xodos.shared.file.FileUtils;
+import com.xodos.shared.xodos.crash.xodosCrashUtils;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.interact.MessageDialogUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.markdown.MarkdownUtils;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.shell.command.environment.xodosShellEnvironment;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -47,13 +47,13 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static com.termux.shared.termux.TermuxConstants.TERMUX_PREFIX_DIR;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_PREFIX_DIR_PATH;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR;
-import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_PREFIX_DIR;
+import static com.xodos.shared.xodos.xodosConstants.xodos_PREFIX_DIR_PATH;
+import static com.xodos.shared.xodos.xodosConstants.xodos_STAGING_PREFIX_DIR;
+import static com.xodos.shared.xodos.xodosConstants.xodos_STAGING_PREFIX_DIR_PATH;
 
 /**
- * Install the Termux bootstrap packages if necessary by following the below steps:
+ * Install the xodos bootstrap packages if necessary by following the below steps:
  * <p/>
  * (1) If $PREFIX already exist, assume that it is correct and be done. Note that this relies on that we do not create a
  * broken $PREFIX directory below.
@@ -71,25 +71,25 @@ import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR
  * <p/>
  * (5.2) For every other zip entry, extract it into $STAGING_PREFIX and set execute permissions if necessary.
  */
-final class TermuxInstaller {
+final class xodosInstaller {
 
-    private static final String LOG_TAG = "TermuxInstaller";
+    private static final String LOG_TAG = "xodosInstaller";
 
     /** Performs bootstrap setup if necessary. */
     static void setupBootstrapIfNeeded(final Activity activity, final Runnable whenDone) {
         String bootstrapErrorMessage;
         Error filesDirectoryAccessibleError;
 
-        // This will also call Context.getFilesDir(), which should ensure that termux files directory
+        // This will also call Context.getFilesDir(), which should ensure that xodos files directory
         // is created if it does not already exist
-        filesDirectoryAccessibleError = TermuxFileUtils.isTermuxFilesDirectoryAccessible(activity, true, true);
+        filesDirectoryAccessibleError = xodosFileUtils.isxodosFilesDirectoryAccessible(activity, true, true);
         boolean isFilesDirectoryAccessible = filesDirectoryAccessibleError == null;
 
-        // Termux can only be run as the primary user (device owner) since only that
+        // xodos can only be run as the primary user (device owner) since only that
         // account has the expected file system paths. Verify that:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PackageUtils.isCurrentUserThePrimaryUser(activity)) {
             bootstrapErrorMessage = activity.getString(R.string.bootstrap_error_not_primary_user_message,
-                MarkdownUtils.getMarkdownCodeForString(TERMUX_PREFIX_DIR_PATH, false));
+                MarkdownUtils.getMarkdownCodeForString(xodos_PREFIX_DIR_PATH, false));
             Logger.logError(LOG_TAG, "isFilesDirectoryAccessible: " + isFilesDirectoryAccessible);
             Logger.logError(LOG_TAG, bootstrapErrorMessage);
             sendBootstrapCrashReportNotification(activity, bootstrapErrorMessage);
@@ -103,9 +103,9 @@ final class TermuxInstaller {
             bootstrapErrorMessage = Error.getMinimalErrorString(filesDirectoryAccessibleError);
             //noinspection SdCardPath
             if (PackageUtils.isAppInstalledOnExternalStorage(activity) &&
-                !TermuxConstants.TERMUX_FILES_DIR_PATH.equals(activity.getFilesDir().getAbsolutePath().replaceAll("^/data/user/0/", "/data/data/"))) {
+                !xodosConstants.xodos_FILES_DIR_PATH.equals(activity.getFilesDir().getAbsolutePath().replaceAll("^/data/user/0/", "/data/data/"))) {
                 bootstrapErrorMessage += "\n\n" + activity.getString(R.string.bootstrap_error_installed_on_portable_sd,
-                    MarkdownUtils.getMarkdownCodeForString(TERMUX_PREFIX_DIR_PATH, false));
+                    MarkdownUtils.getMarkdownCodeForString(xodos_PREFIX_DIR_PATH, false));
             }
 
             Logger.logError(LOG_TAG, bootstrapErrorMessage);
@@ -117,15 +117,15 @@ final class TermuxInstaller {
         }
 
         // If prefix directory exists, even if its a symlink to a valid directory and symlink is not broken/dangling
-        if (FileUtils.directoryFileExists(TERMUX_PREFIX_DIR_PATH, true)) {
-            if (TermuxFileUtils.isTermuxPrefixDirectoryEmpty()) {
-                Logger.logInfo(LOG_TAG, "The termux prefix directory \"" + TERMUX_PREFIX_DIR_PATH + "\" exists but is empty or only contains specific unimportant files.");
+        if (FileUtils.directoryFileExists(xodos_PREFIX_DIR_PATH, true)) {
+            if (xodosFileUtils.isxodosPrefixDirectoryEmpty()) {
+                Logger.logInfo(LOG_TAG, "The xodos prefix directory \"" + xodos_PREFIX_DIR_PATH + "\" exists but is empty or only contains specific unimportant files.");
             } else {
                 whenDone.run();
                 return;
             }
-        } else if (FileUtils.fileExists(TERMUX_PREFIX_DIR_PATH, false)) {
-            Logger.logInfo(LOG_TAG, "The termux prefix directory \"" + TERMUX_PREFIX_DIR_PATH + "\" does not exist but another file exists at its destination.");
+        } else if (FileUtils.fileExists(xodos_PREFIX_DIR_PATH, false)) {
+            Logger.logInfo(LOG_TAG, "The xodos prefix directory \"" + xodos_PREFIX_DIR_PATH + "\" does not exist but another file exists at its destination.");
         }
 
         final ProgressDialog progress = ProgressDialog.show(activity, null, activity.getString(R.string.bootstrap_installer_body), true, false);
@@ -145,39 +145,39 @@ extractionProgressDialog.show();
             @Override
             public void run() {
                 try {
-                    Logger.logInfo(LOG_TAG, "Installing " + TermuxConstants.TERMUX_APP_NAME + " bootstrap packages.");
+                    Logger.logInfo(LOG_TAG, "Installing " + xodosConstants.xodos_APP_NAME + " bootstrap packages.");
 
                     Error error;
 
                     // Delete prefix staging directory or any file at its destination
-                    error = FileUtils.deleteFile("termux prefix staging directory", TERMUX_STAGING_PREFIX_DIR_PATH, true);
+                    error = FileUtils.deleteFile("xodos prefix staging directory", xodos_STAGING_PREFIX_DIR_PATH, true);
                     if (error != null) {
                         showBootstrapErrorDialog(activity, whenDone, Error.getErrorMarkdownString(error));
                         return;
                     }
 
                     // Delete prefix directory or any file at its destination
-                    error = FileUtils.deleteFile("termux prefix directory", TERMUX_PREFIX_DIR_PATH, true);
+                    error = FileUtils.deleteFile("xodos prefix directory", xodos_PREFIX_DIR_PATH, true);
                     if (error != null) {
                         showBootstrapErrorDialog(activity, whenDone, Error.getErrorMarkdownString(error));
                         return;
                     }
 
                     // Create prefix staging directory if it does not already exist and set required permissions
-                    error = TermuxFileUtils.isTermuxPrefixStagingDirectoryAccessible(true, true);
+                    error = xodosFileUtils.isxodosPrefixStagingDirectoryAccessible(true, true);
                     if (error != null) {
                         showBootstrapErrorDialog(activity, whenDone, Error.getErrorMarkdownString(error));
                         return;
                     }
 
                     // Create prefix directory if it does not already exist and set required permissions
-                    error = TermuxFileUtils.isTermuxPrefixDirectoryAccessible(true, true);
+                    error = xodosFileUtils.isxodosPrefixDirectoryAccessible(true, true);
                     if (error != null) {
                         showBootstrapErrorDialog(activity, whenDone, Error.getErrorMarkdownString(error));
                         return;
                     }
 
-                    Logger.logInfo(LOG_TAG, "Extracting bootstrap zip to prefix staging directory \"" + TERMUX_STAGING_PREFIX_DIR_PATH + "\".");
+                    Logger.logInfo(LOG_TAG, "Extracting bootstrap zip to prefix staging directory \"" + xodos_STAGING_PREFIX_DIR_PATH + "\".");
 
                     final byte[] buffer = new byte[8096];
                     final List<Pair<String, String>> symlinks = new ArrayList<>(50);
@@ -194,7 +194,7 @@ extractionProgressDialog.show();
                                     if (parts.length != 2)
                                         throw new RuntimeException("Malformed symlink line: " + line);
                                     String oldPath = parts[0];
-                                    String newPath = TERMUX_STAGING_PREFIX_DIR_PATH + "/" + parts[1];
+                                    String newPath = xodos_STAGING_PREFIX_DIR_PATH + "/" + parts[1];
                                     symlinks.add(Pair.create(oldPath, newPath));
 
                                     error = ensureDirectoryExists(new File(newPath).getParentFile());
@@ -205,7 +205,7 @@ extractionProgressDialog.show();
                                 }
                             } else {
                                 String zipEntryName = zipEntry.getName();
-                                File targetFile = new File(TERMUX_STAGING_PREFIX_DIR_PATH, zipEntryName);
+                                File targetFile = new File(xodos_STAGING_PREFIX_DIR_PATH, zipEntryName);
                                 boolean isDirectory = zipEntry.isDirectory();
 
                                 error = ensureDirectoryExists(isDirectory ? targetFile : targetFile.getParentFile());
@@ -236,10 +236,10 @@ extractionProgressDialog.show();
                         Os.symlink(symlink.first, symlink.second);
                     }
 
-                    Logger.logInfo(LOG_TAG, "Moving termux prefix staging to prefix directory.");
+                    Logger.logInfo(LOG_TAG, "Moving xodos prefix staging to prefix directory.");
 
-                    if (!TERMUX_STAGING_PREFIX_DIR.renameTo(TERMUX_PREFIX_DIR)) {
-                        throw new RuntimeException("Moving termux prefix staging to prefix directory failed");
+                    if (!xodos_STAGING_PREFIX_DIR.renameTo(xodos_PREFIX_DIR)) {
+                        throw new RuntimeException("Moving xodos prefix staging to prefix directory failed");
                     }
 
                     Logger.logInfo(LOG_TAG, "Bootstrap packages installed successfully.");
@@ -260,7 +260,7 @@ new Thread(() -> {
 
     try {
         // Add folder size check here
-        File wallpaperFolder = new File("/data/data/com.termux/files/home/WALLPAPERS");
+        File wallpaperFolder = new File("/data/data/com.xodos/files/home/WALLPAPERS");
         long folderSize = 0;
         long sizeLimit = 5 * 1024 * 1024; // 5 MB
         boolean folderExists = wallpaperFolder.exists() && wallpaperFolder.isDirectory();
@@ -371,7 +371,7 @@ int recordsPerCheckpoint = Math.max(1, (int) (totalRecords / targetCheckpoints))
 ProcessBuilder processBuilder = new ProcessBuilder(
     "sh", "-c",
     "tar -xf " + outFile.getAbsolutePath() +
-    " -C /data/data/com.termux/files --preserve-permissions " +
+    " -C /data/data/com.xodos/files --preserve-permissions " +
     "--warning=no-file-ignored " +  
     "--checkpoint=" + recordsPerCheckpoint + " --checkpoint-action=echo=CHECKPOINT " + // Dynamic checkpoint
     "--totals 2>&1"
@@ -379,8 +379,8 @@ ProcessBuilder processBuilder = new ProcessBuilder(
 
         // Set environment
         Map<String, String> env = processBuilder.environment();
-        env.put("PATH", "/data/data/com.termux/files/usr/bin:" + System.getenv("PATH"));
-        env.put("LD_LIBRARY_PATH", "/data/data/com.termux/files/usr/lib");
+        env.put("PATH", "/data/data/com.xodos/files/usr/bin:" + System.getenv("PATH"));
+        env.put("LD_LIBRARY_PATH", "/data/data/com.xodos/files/usr/lib");
 
         // Start process
         process = processBuilder.start();
@@ -458,8 +458,8 @@ extractionProgressDialog.setProgress(100));
 }).start();
 // Wait for completion
 
-                                                                                     // Recreate env file since termux prefix was wiped earlier
-                    TermuxShellEnvironment.writeEnvironmentToFile(activity);
+                                                                                     // Recreate env file since xodos prefix was wiped earlier
+                    xodosShellEnvironment.writeEnvironmentToFile(activity);
 
                     activity.runOnUiThread(whenDone);
 
@@ -494,8 +494,8 @@ extractionProgressDialog.setProgress(100));
                     })
                     .setPositiveButton(R.string.bootstrap_error_try_again, (dialog, which) -> {
                         dialog.dismiss();
-                        FileUtils.deleteFile("termux prefix directory", TERMUX_PREFIX_DIR_PATH, true);
-                        TermuxInstaller.setupBootstrapIfNeeded(activity, whenDone);
+                        FileUtils.deleteFile("xodos prefix directory", xodos_PREFIX_DIR_PATH, true);
+                        xodosInstaller.setupBootstrapIfNeeded(activity, whenDone);
                     }).show();
             } catch (WindowManager.BadTokenException e1) {
                 // Activity already dismissed - ignore.
@@ -504,19 +504,19 @@ extractionProgressDialog.setProgress(100));
     }
 
     private static void sendBootstrapCrashReportNotification(Activity activity, String message) {
-        final String title = TermuxConstants.TERMUX_APP_NAME + " Bootstrap Error";
+        final String title = xodosConstants.xodos_APP_NAME + " Bootstrap Error";
 
-        // Add info of all install Termux plugin apps as well since their target sdk or installation
-        // on external/portable sd card can affect Termux app files directory access or exec.
-        TermuxCrashUtils.sendCrashReportNotification(activity, LOG_TAG,
+        // Add info of all install xodos plugin apps as well since their target sdk or installation
+        // on external/portable sd card can affect xodos app files directory access or exec.
+        xodosCrashUtils.sendCrashReportNotification(activity, LOG_TAG,
             title, null, "## " + title + "\n\n" + message + "\n\n" +
-                TermuxUtils.getTermuxDebugMarkdownString(activity),
-            true, false, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES, true);
+                xodosUtils.getxodosDebugMarkdownString(activity),
+            true, false, xodosUtils.AppInfoMode.xodos_AND_PLUGIN_PACKAGES, true);
     }
 
     static void setupStorageSymlinks(final Context context) {
-        final String LOG_TAG = "termux-storage";
-        final String title = TermuxConstants.TERMUX_APP_NAME + " Setup Storage Error";
+        final String LOG_TAG = "xodos-storage";
+        final String title = xodosConstants.xodos_APP_NAME + " Setup Storage Error";
 
         Logger.logInfo(LOG_TAG, "Setting up storage symlinks.");
 
@@ -524,15 +524,15 @@ extractionProgressDialog.setProgress(100));
             public void run() {
                 try {
                     Error error;
-                    File storageDir = TermuxConstants.TERMUX_STORAGE_HOME_DIR;
+                    File storageDir = xodosConstants.xodos_STORAGE_HOME_DIR;
 
                     error = FileUtils.clearDirectory("~/storage", storageDir.getAbsolutePath());
                     if (error != null) {
                         Logger.logErrorAndShowToast(context, LOG_TAG, error.getMessage());
                         Logger.logErrorExtended(LOG_TAG, "Setup Storage Error\n" + error.toString());
-                        TermuxCrashUtils.sendCrashReportNotification(context, LOG_TAG, title, null,
+                        xodosCrashUtils.sendCrashReportNotification(context, LOG_TAG, title, null,
                             "## " + title + "\n\n" + Error.getErrorMarkdownString(error),
-                            true, false, TermuxUtils.AppInfoMode.TERMUX_PACKAGE, true);
+                            true, false, xodosUtils.AppInfoMode.xodos_PACKAGE, true);
                         return;
                     }
 
@@ -575,7 +575,7 @@ extractionProgressDialog.setProgress(100));
                     // https://cs.android.com/android/platform/superproject/+/android-12.0.0_r32:frameworks/base/services/core/java/com/android/server/StorageManagerService.java;l=3796
                     // https://cs.android.com/android/platform/superproject/+/android-7.0.0_r36:frameworks/base/services/core/java/com/android/server/MountService.java;l=3053
 
-                    // Create "Android/data/com.termux" symlinks
+                    // Create "Android/data/com.xodos" symlinks
                     File[] dirs = context.getExternalFilesDirs(null);
                     if (dirs != null && dirs.length > 0) {
                         for (int i = 0; i < dirs.length; i++) {
@@ -587,7 +587,7 @@ extractionProgressDialog.setProgress(100));
                         }
                     }
 
-                    // Create "Android/media/com.termux" symlinks
+                    // Create "Android/media/com.xodos" symlinks
                     dirs = context.getExternalMediaDirs();
                     if (dirs != null && dirs.length > 0) {
                         for (int i = 0; i < dirs.length; i++) {
@@ -603,9 +603,9 @@ extractionProgressDialog.setProgress(100));
                 } catch (Exception e) {
                     Logger.logErrorAndShowToast(context, LOG_TAG, e.getMessage());
                     Logger.logStackTraceWithMessage(LOG_TAG, "Setup Storage Error: Error setting up link", e);
-                    TermuxCrashUtils.sendCrashReportNotification(context, LOG_TAG, title, null,
+                    xodosCrashUtils.sendCrashReportNotification(context, LOG_TAG, title, null,
                         "## " + title + "\n\n" + Logger.getStackTracesMarkdownString(null, Logger.getStackTracesStringArray(e)),
-                        true, false, TermuxUtils.AppInfoMode.TERMUX_PACKAGE, true);
+                        true, false, xodosUtils.AppInfoMode.xodos_PACKAGE, true);
                 }
             }
         }.start();
@@ -617,7 +617,7 @@ extractionProgressDialog.setProgress(100));
 
     public static byte[] loadZipBytes() {
         // Only load the shared library when necessary to save memory usage.
-        System.loadLibrary("termux-bootstrap");
+        System.loadLibrary("xodos-bootstrap");
         return getZip();
     }
 

@@ -1,4 +1,4 @@
-termux-setup-storage
+xodos-setup-storage
 sleep 3
 clear
 echo "make sure The XoDos-debian.tar.xz is in download folder"
@@ -29,17 +29,17 @@ echo "make sure The XoDos-debian.tar.xz is in download folder"
 
 
 proot(){
-echo "Installing Required Aackages And Updating, Upgrading Termux Packages . . ."
+echo "Installing Required Aackages And Updating, Upgrading xodos Packages . . ."
 echo -e "\n"
-termux-setup-storage
+xodos-setup-storage
 sleep 1
-pkg remove termux-display-nightly -y
-pkg remove termux-x11-nightly -y
-dpkg -i /data/data/com.termux/files/home/termux-x11-nightly-1.03.01-0-all.deb
+pkg remove xodos-display-nightly -y
+pkg remove xodos-x11-nightly -y
+dpkg -i /data/data/com.xodos/files/home/xodos-x11-nightly-1.03.01-0-all.deb
 sleep 1
 apt --fix-broken install -y
 pkg update -y
-#termux-change-repo
+#xodos-change-repo
 pkg upgrade -y
 pkg install wget -y
 pkg install git -y
@@ -52,7 +52,7 @@ clear
 
 # Setting Up The Storage
 echo -e "\e[33m[i] Setting up storage permissions..\e[0m"
-yes | termux-setup-storage &>/dev/null
+yes | xodos-setup-storage &>/dev/null
 sleep 2
 clear
 while true; do
@@ -63,12 +63,12 @@ while true; do
     fi
 done
 
-# Installing Termux-Am
+# Installing xodos-Am
 clear
 sleep 2
-echo -e "\e[36m[+] Installing Termux-am\e[0m"
-pkg install termux-am -y &>/dev/null
-echo -e "\e[32m[✓] Termux-am Installed Successfully\e[0m"
+echo -e "\e[36m[+] Installing xodos-am\e[0m"
+pkg install xodos-am -y &>/dev/null
+echo -e "\e[32m[✓] xodos-am Installed Successfully\e[0m"
 echo -e "\n"
 clear
 
@@ -81,46 +81,46 @@ clear
     sleep 2
     
     echo -e "\e[33m[i] Extracting patch for proot (important) . . .\e[0m"
-    mv -f ~/patch.tar.xz /data/data/com.termux/files/xod 
+    mv -f ~/patch.tar.xz /data/data/com.xodos/files/xod 
 sleep 1
-tar  -xvf /data/data/com.termux/files/xod/patch.tar.xz -C /data/data/com.termux/files  --preserve-permissions
+tar  -xvf /data/data/com.xodos/files/xod/patch.tar.xz -C /data/data/com.xodos/files  --preserve-permissions
     sleep 2
     echo -e "\e[32m[✓] Installed Successfully.\e[0m"
     sleep 1
-    cp /data/data/com.termux/files/usr/bin/xodos /data/data/com.termux/files/xodos-normal
-cp /data/data/com.termux/files/usr/bin/xodxx /data/data/com.termux/files/xodxx-gamemode
-cp /data/data/com.termux/files/usr/bin/xodosset /data/data/com.termux/files/xodosset-settings
-cp  /data/data/com.termux/files/usr/bin/xodx /data/data/com.termux/files/xodx-bettergpu
-cp /data/data/com.termux/files/usr/bin/xodxd /data/data/com.termux/files/xodxd-proot
-cp /data/data/com.termux/files/usr/bin/xodset /data/data/com.termux/files/xodset-settings
-cp /data/data/com.termux/files/usr/bin/xodos-mali /data/data/com.termux/files/xodos-maligpu
-cp  /data/data/com.termux/files/usr/bin/kali /data/data/com.termux/files/kali-kaliroot
-cp  /data/data/com.termux/files/usr/bin/kaliu /data/data/com.termux/files/kaliu-kaliuser
-cp  /data/data/com.termux/files/home/switch /data/data/com.termux/files/switch-container
-cp  /data/data/com.termux/files/home/switch /data/data/com.termux/files/usr/bin/switch
+    cp /data/data/com.xodos/files/usr/bin/xodos /data/data/com.xodos/files/xodos-normal
+cp /data/data/com.xodos/files/usr/bin/xodxx /data/data/com.xodos/files/xodxx-gamemode
+cp /data/data/com.xodos/files/usr/bin/xodosset /data/data/com.xodos/files/xodosset-settings
+cp  /data/data/com.xodos/files/usr/bin/xodx /data/data/com.xodos/files/xodx-bettergpu
+cp /data/data/com.xodos/files/usr/bin/xodxd /data/data/com.xodos/files/xodxd-proot
+cp /data/data/com.xodos/files/usr/bin/xodset /data/data/com.xodos/files/xodset-settings
+cp /data/data/com.xodos/files/usr/bin/xodos-mali /data/data/com.xodos/files/xodos-maligpu
+cp  /data/data/com.xodos/files/usr/bin/kali /data/data/com.xodos/files/kali-kaliroot
+cp  /data/data/com.xodos/files/usr/bin/kaliu /data/data/com.xodos/files/kaliu-kaliuser
+cp  /data/data/com.xodos/files/home/switch /data/data/com.xodos/files/switch-container
+cp  /data/data/com.xodos/files/home/switch /data/data/com.xodos/files/usr/bin/switch
 sleep 1
-chmod +x /data/data/com.termux/files/usr/bin/xodos
-chmod +x /data/data/com.termux/files/usr/bin/xodos-mali
-chmod +x /data/data/com.termux/files/usr/bin/xodxx
-chmod +x /data/data/com.termux/files/usr/bin/xodosset
-chmod +x /data/data/com.termux/files/usr/bin/xodx
-chmod +x /data/data/com.termux/files/usr/bin/xod
-chmod +x  /data/data/com.termux/files/usr/bin/xodset
-chmod +x /data/data/com.termux/files/usr/bin/xodxd
-chmod +x  /data/data/com.termux/files/usr/etc/bash.bashrc
-chmod +x  /data/data/com.termux/files/home/x11
-chmod +x /data/data/com.termux/files/xodos-normal
-chmod +x /data/data/com.termux/files/xodxx-gamemode
-chmod +x /data/data/com.termux/files/xodosset-settings
-chmod +x /data/data/com.termux/files/xodx-bettergpu
-chmod +x /data/data/com.termux/files/xodxd-proot
-chmod +x  /data/data/com.termux/files/bash.bashrc
-chmod +x /data/data/com.termux/files/xodset-settings
-chmod +x /data/data/com.termux/files/xodos-maligpu
-chmod +x /data/data/com.termux/files/usr/bin/kali
-chmod +x /data/data/com.termux/files/usr/bin/kaliu
-chmod +x /data/data/com.termux/files/usr/bin/switch
-chmod +x /data/data/com.termux/files/switch
+chmod +x /data/data/com.xodos/files/usr/bin/xodos
+chmod +x /data/data/com.xodos/files/usr/bin/xodos-mali
+chmod +x /data/data/com.xodos/files/usr/bin/xodxx
+chmod +x /data/data/com.xodos/files/usr/bin/xodosset
+chmod +x /data/data/com.xodos/files/usr/bin/xodx
+chmod +x /data/data/com.xodos/files/usr/bin/xod
+chmod +x  /data/data/com.xodos/files/usr/bin/xodset
+chmod +x /data/data/com.xodos/files/usr/bin/xodxd
+chmod +x  /data/data/com.xodos/files/usr/etc/bash.bashrc
+chmod +x  /data/data/com.xodos/files/home/x11
+chmod +x /data/data/com.xodos/files/xodos-normal
+chmod +x /data/data/com.xodos/files/xodxx-gamemode
+chmod +x /data/data/com.xodos/files/xodosset-settings
+chmod +x /data/data/com.xodos/files/xodx-bettergpu
+chmod +x /data/data/com.xodos/files/xodxd-proot
+chmod +x  /data/data/com.xodos/files/bash.bashrc
+chmod +x /data/data/com.xodos/files/xodset-settings
+chmod +x /data/data/com.xodos/files/xodos-maligpu
+chmod +x /data/data/com.xodos/files/usr/bin/kali
+chmod +x /data/data/com.xodos/files/usr/bin/kaliu
+chmod +x /data/data/com.xodos/files/usr/bin/switch
+chmod +x /data/data/com.xodos/files/switch
     
     sleep 2
 
@@ -129,21 +129,21 @@ chmod +x /data/data/com.termux/files/switch
    
 # Continue
 sleep 1
-echo -e "\e[32m[+] Installing Termux Packages...\e[0m"
+echo -e "\e[32m[+] Installing xodos Packages...\e[0m"
 apt-get clean -y
 apt-get update -y
 apt-get upgrade -y
 pkg install wget -y
 pkg install root-repo -y
 apt-get -y --with-new-pkgs -o Dpkg::Options::="--force-confdef" upgrade
-echo -e "\e[32m[✓] Termux packages Installed Successfully.\e[0m"
+echo -e "\e[32m[✓] xodos packages Installed Successfully.\e[0m"
 echo -e "\n"
 clear
 
-echo -e "\e[36m[+] Installing Termux X11 packages...\e[0m"
+echo -e "\e[36m[+] Installing xodos X11 packages...\e[0m"
 pkg install x11-repo -y &>/dev/null
-pkg install termux-x11-nightly -y &>/dev/null
-echo -e "\e[32m[✓] Termux X11 Packages Installed Successfully.\e[0m"
+pkg install xodos-x11-nightly -y &>/dev/null
+echo -e "\e[32m[✓] xodos X11 Packages Installed Successfully.\e[0m"
 echo -e "\n"
 
 echo -e "\e[36m[+] Installing applications Packages...\e[0m"

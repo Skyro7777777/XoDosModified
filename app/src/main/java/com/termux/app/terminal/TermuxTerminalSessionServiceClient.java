@@ -1,31 +1,31 @@
-package com.termux.app.terminal;
+package com.xodos.app.terminal;
 
 import android.app.Service;
 
 import androidx.annotation.NonNull;
 
-import com.termux.app.TermuxService;
-import com.termux.shared.termux.shell.command.runner.terminal.TermuxSession;
-import com.termux.shared.termux.terminal.TermuxTerminalSessionClientBase;
-import com.termux.terminal.TerminalSession;
-import com.termux.terminal.TerminalSessionClient;
+import com.xodos.app.xodosService;
+import com.xodos.shared.xodos.shell.command.runner.terminal.xodosSession;
+import com.xodos.shared.xodos.terminal.xodosTerminalSessionClientBase;
+import com.xodos.terminal.TerminalSession;
+import com.xodos.terminal.TerminalSessionClient;
 
 /** The {@link TerminalSessionClient} implementation that may require a {@link Service} for its interface methods. */
-public class TermuxTerminalSessionServiceClient extends TermuxTerminalSessionClientBase {
+public class xodosTerminalSessionServiceClient extends xodosTerminalSessionClientBase {
 
-    private static final String LOG_TAG = "TermuxTerminalSessionServiceClient";
+    private static final String LOG_TAG = "xodosTerminalSessionServiceClient";
 
-    private final TermuxService mService;
+    private final xodosService mService;
 
-    public TermuxTerminalSessionServiceClient(TermuxService service) {
+    public xodosTerminalSessionServiceClient(xodosService service) {
         this.mService = service;
     }
 
     @Override
     public void setTerminalShellPid(@NonNull TerminalSession terminalSession, int pid) {
-        TermuxSession termuxSession = mService.getTermuxSessionForTerminalSession(terminalSession);
-        if (termuxSession != null)
-            termuxSession.getExecutionCommand().mPid = pid;
+        xodosSession xodosSession = mService.getxodosSessionForTerminalSession(terminalSession);
+        if (xodosSession != null)
+            xodosSession.getExecutionCommand().mPid = pid;
     }
 
 }

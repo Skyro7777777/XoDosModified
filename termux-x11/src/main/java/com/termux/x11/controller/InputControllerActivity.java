@@ -1,4 +1,4 @@
-package com.termux.x11.controller;
+package com.xodos.x11.controller;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.termux.x11.R;
-import com.termux.x11.controller.core.Callback;
-import com.termux.x11.controller.core.PreloaderDialog;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.core.Callback;
+import com.xodos.x11.controller.core.PreloaderDialog;
 
 public class InputControllerActivity extends AppCompatActivity {
 

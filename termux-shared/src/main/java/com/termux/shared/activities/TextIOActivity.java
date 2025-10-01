@@ -1,4 +1,4 @@
-package com.termux.shared.activities;
+package com.xodos.shared.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,11 +24,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.termux.shared.interact.ShareUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.R;
-import com.termux.shared.models.TextIOInfo;
-import com.termux.shared.view.KeyboardUtils;
+import com.xodos.shared.interact.ShareUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.R;
+import com.xodos.shared.models.TextIOInfo;
+import com.xodos.shared.view.KeyboardUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ import java.util.Locale;
  *
  * Add Following to `AndroidManifest.xml` to use in an app:
  *
- * {@code ` <activity android:name="com.termux.shared.activities.TextIOActivity" android:theme="@style/Theme.AppCompat.TermuxTextIOActivity" />` }
+ * {@code ` <activity android:name="com.xodos.shared.activities.TextIOActivity" android:theme="@style/Theme.AppCompat.xodosTextIOActivity" />` }
  */
 public class TextIOActivity extends AppCompatActivity {
 

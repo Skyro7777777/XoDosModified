@@ -33,7 +33,7 @@
 #include <unistd.h>
 
 
-/*Paramètres du syscall - Attention spécifique hardware */
+/*Paramï¿½tres du syscall - Attention spï¿½cifique hardware */
 #define __NR_epoll_create 254
 #define __NR_epoll_ctl	255
 #define __NR_epoll_wait	256

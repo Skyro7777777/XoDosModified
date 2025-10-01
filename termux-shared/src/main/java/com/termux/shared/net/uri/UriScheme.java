@@ -1,4 +1,4 @@
-package com.termux.shared.net.uri;
+package com.xodos.shared.net.uri;
 
 import android.net.Uri;
 

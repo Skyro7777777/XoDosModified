@@ -1,31 +1,31 @@
-package com.termux.shared.termux.settings.properties;
+package com.xodos.shared.xodos.settings.properties;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.xodos.xodosConstants;
 
-public class TermuxAppSharedProperties extends TermuxSharedProperties {
+public class xodosAppSharedProperties extends xodosSharedProperties {
 
-    private static TermuxAppSharedProperties properties;
+    private static xodosAppSharedProperties properties;
 
 
-    private TermuxAppSharedProperties(@NonNull Context context) {
-        super(context, TermuxConstants.TERMUX_APP_NAME,
-            TermuxConstants.TERMUX_PROPERTIES_FILE_PATHS_LIST, TermuxPropertyConstants.TERMUX_APP_PROPERTIES_LIST,
-            new TermuxSharedProperties.SharedPropertiesParserClient());
+    private xodosAppSharedProperties(@NonNull Context context) {
+        super(context, xodosConstants.xodos_APP_NAME,
+            xodosConstants.xodos_PROPERTIES_FILE_PATHS_LIST, xodosPropertyConstants.xodos_APP_PROPERTIES_LIST,
+            new xodosSharedProperties.SharedPropertiesParserClient());
     }
 
     /**
      * Initialize the {@link #properties} and load properties from disk.
      *
      * @param context The {@link Context} for operations.
-     * @return Returns the {@link TermuxAppSharedProperties}.
+     * @return Returns the {@link xodosAppSharedProperties}.
      */
-    public static TermuxAppSharedProperties init(@NonNull Context context) {
+    public static xodosAppSharedProperties init(@NonNull Context context) {
         if (properties == null)
-            properties = new TermuxAppSharedProperties(context);
+            properties = new xodosAppSharedProperties(context);
 
         return properties;
     }
@@ -33,9 +33,9 @@ public class TermuxAppSharedProperties extends TermuxSharedProperties {
     /**
      * Get the {@link #properties}.
      *
-     * @return Returns the {@link TermuxAppSharedProperties}.
+     * @return Returns the {@link xodosAppSharedProperties}.
      */
-    public static TermuxAppSharedProperties getProperties() {
+    public static xodosAppSharedProperties getProperties() {
         return properties;
     }
 

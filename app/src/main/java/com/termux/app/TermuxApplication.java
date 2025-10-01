@@ -3,23 +3,23 @@ package com.xodos.app;
 import android.app.Application;
 import android.content.Context;
 
-import com.termux.BuildConfig;
-import com.termux.shared.errors.Error;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxBootstrap;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.crash.TermuxCrashUtils;
-import com.termux.shared.termux.file.TermuxFileUtils;
-import com.termux.shared.termux.settings.preferences.TermuxAppSharedPreferences;
-import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.termux.shell.command.environment.TermuxShellEnvironment;
-import com.termux.shared.termux.shell.am.TermuxAmSocketServer;
-import com.termux.shared.termux.shell.TermuxShellManager;
-import com.termux.shared.termux.theme.TermuxThemeUtils;
+import com.xodos.BuildConfig;
+import com.xodos.shared.errors.Error;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.xodos.xodosBootstrap;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.crash.xodosCrashUtils;
+import com.xodos.shared.xodos.file.xodosFileUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosAppSharedPreferences;
+import com.xodos.shared.xodos.settings.properties.xodosAppSharedProperties;
+import com.xodos.shared.xodos.shell.command.environment.xodosShellEnvironment;
+import com.xodos.shared.xodos.shell.am.xodosAmSocketServer;
+import com.xodos.shared.xodos.shell.xodosShellManager;
+import com.xodos.shared.xodos.theme.xodosThemeUtils;
 
-public class TermuxApplication extends Application {
+public class xodosApplication extends Application {
 
-    private static final String LOG_TAG = "TermuxApplication";
+    private static final String LOG_TAG = "xodosApplication";
 
     public void onCreate() {
         super.onCreate();
@@ -27,57 +27,57 @@ public class TermuxApplication extends Application {
         Context context = getApplicationContext();
 
         // Set crash handler for the app
-        TermuxCrashUtils.setDefaultCrashHandler(this);
+        xodosCrashUtils.setDefaultCrashHandler(this);
 
         // Set log config for the app
         setLogConfig(context);
 
         Logger.logDebug("Starting Application");
 
-        // Set TermuxBootstrap.TERMUX_APP_PACKAGE_MANAGER and TermuxBootstrap.TERMUX_APP_PACKAGE_VARIANT
-        TermuxBootstrap.setTermuxPackageManagerAndVariant(BuildConfig.TERMUX_PACKAGE_VARIANT);
+        // Set xodosBootstrap.xodos_APP_PACKAGE_MANAGER and xodosBootstrap.xodos_APP_PACKAGE_VARIANT
+        xodosBootstrap.setxodosPackageManagerAndVariant(BuildConfig.xodos_PACKAGE_VARIANT);
 
-        // Init app wide SharedProperties loaded from termux.properties
-        TermuxAppSharedProperties properties = TermuxAppSharedProperties.init(context);
+        // Init app wide SharedProperties loaded from xodos.properties
+        xodosAppSharedProperties properties = xodosAppSharedProperties.init(context);
 
         // Init app wide shell manager
-        TermuxShellManager shellManager = TermuxShellManager.init(context);
+        xodosShellManager shellManager = xodosShellManager.init(context);
 
         // Set NightMode.APP_NIGHT_MODE
-        TermuxThemeUtils.setAppNightMode(properties.getNightMode());
+        xodosThemeUtils.setAppNightMode(properties.getNightMode());
 
-        // Check and create termux files directory. If failed to access it like in case of secondary
+        // Check and create xodos files directory. If failed to access it like in case of secondary
         // user or external sd card installation, then don't run files directory related code
-        Error error = TermuxFileUtils.isTermuxFilesDirectoryAccessible(this, true, true);
-        boolean isTermuxFilesDirectoryAccessible = error == null;
-        if (isTermuxFilesDirectoryAccessible) {
-            Logger.logInfo(LOG_TAG, "Termux files directory is accessible");
+        Error error = xodosFileUtils.isxodosFilesDirectoryAccessible(this, true, true);
+        boolean isxodosFilesDirectoryAccessible = error == null;
+        if (isxodosFilesDirectoryAccessible) {
+            Logger.logInfo(LOG_TAG, "xodos files directory is accessible");
 
-            error = TermuxFileUtils.isAppsTermuxAppDirectoryAccessible(true, true);
+            error = xodosFileUtils.isAppsxodosAppDirectoryAccessible(true, true);
             if (error != null) {
-                Logger.logErrorExtended(LOG_TAG, "Create apps/termux-app directory failed\n" + error);
+                Logger.logErrorExtended(LOG_TAG, "Create apps/xodos-app directory failed\n" + error);
                 return;
             }
 
-            // Setup termux-am-socket server
-            TermuxAmSocketServer.setupTermuxAmSocketServer(context);
+            // Setup xodos-am-socket server
+            xodosAmSocketServer.setupxodosAmSocketServer(context);
         } else {
-            Logger.logErrorExtended(LOG_TAG, "Termux files directory is not accessible\n" + error);
+            Logger.logErrorExtended(LOG_TAG, "xodos files directory is not accessible\n" + error);
         }
 
-        // Init TermuxShellEnvironment constants and caches after everything has been setup including termux-am-socket server
-        TermuxShellEnvironment.init(this);
+        // Init xodosShellEnvironment constants and caches after everything has been setup including xodos-am-socket server
+        xodosShellEnvironment.init(this);
 
-        if (isTermuxFilesDirectoryAccessible) {
-            TermuxShellEnvironment.writeEnvironmentToFile(this);
+        if (isxodosFilesDirectoryAccessible) {
+            xodosShellEnvironment.writeEnvironmentToFile(this);
         }
     }
 
     public static void setLogConfig(Context context) {
-        Logger.setDefaultLogTag(TermuxConstants.TERMUX_APP_NAME);
+        Logger.setDefaultLogTag(xodosConstants.xodos_APP_NAME);
 
         // Load the log level from shared preferences and set it to the {@link Logger.CURRENT_LOG_LEVEL}
-        TermuxAppSharedPreferences preferences = TermuxAppSharedPreferences.build(context);
+        xodosAppSharedPreferences preferences = xodosAppSharedPreferences.build(context);
         if (preferences == null) return;
         preferences.setLogLevel(null, preferences.getLogLevel());
     }

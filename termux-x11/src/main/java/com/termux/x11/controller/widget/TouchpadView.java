@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 
 import android.content.Context;
@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.termux.x11.LorieView;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.math.Mathf;
-import com.termux.x11.controller.math.XForm;
-import com.termux.x11.controller.xserver.Pointer;
-import com.termux.x11.controller.xserver.Viewport;
+import com.xodos.x11.LorieView;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.math.Mathf;
+import com.xodos.x11.controller.math.XForm;
+import com.xodos.x11.controller.xserver.Pointer;
+import com.xodos.x11.controller.xserver.Viewport;
 
 public class TouchpadView extends View {
     public enum TouchMode {

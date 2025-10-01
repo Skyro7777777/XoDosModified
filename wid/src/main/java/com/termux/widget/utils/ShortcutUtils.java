@@ -9,8 +9,8 @@ import androidx.annotation.RequiresApi;
 
 import com.xodos.shared.file.FileUtils;
 import com.xodos.shared.logger.Logger;
-import com.xodos.shared.termux.TermuxConstants;
-import com.xodos.shared.termux.TermuxUtils;
+import com.xodos.shared.xodos.xodosConstants;
+import com.xodos.shared.xodos.xodosUtils;
 import com.xodos.widget.NaturalOrderComparator;
 import com.xodos.widget.R;
 import com.xodos.widget.ShortcutFile;
@@ -22,17 +22,17 @@ import java.util.List;
 
 public class ShortcutUtils {
 
-    public static final int TERMUX_SHORTCUTS_SCRIPTS_DIR_MAX_SEARCH_DEPTH = 5;
+    public static final int xodos_SHORTCUTS_SCRIPTS_DIR_MAX_SEARCH_DEPTH = 5;
 
     /* Allowed paths under which shortcut files can exist. */
     public static final List<String> SHORTCUT_FILES_ALLOWED_PATHS_LIST = Arrays.asList(
-            TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR_PATH,
-            TermuxConstants.TERMUX_DATA_HOME_DIR_PATH);
+            xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR_PATH,
+            xodosConstants.xodos_DATA_HOME_DIR_PATH);
 
     /* Allowed paths under which shortcut icons files can exist. */
     public static final List<String> SHORTCUT_ICONS_FILES_ALLOWED_PATHS_LIST = Arrays.asList(
-            TermuxConstants.TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH,
-            TermuxConstants.TERMUX_DATA_HOME_DIR_PATH);
+            xodosConstants.xodos_SHORTCUT_SCRIPT_ICONS_DIR_PATH,
+            xodosConstants.xodos_DATA_HOME_DIR_PATH);
 
     public static final FileFilter SHORTCUT_FILES_FILTER = new FileFilter() {
         public boolean accept(File file) {
@@ -45,9 +45,9 @@ public class ShortcutUtils {
             } else if (!FileUtils.isPathInDirPaths(file.getAbsolutePath(), SHORTCUT_FILES_ALLOWED_PATHS_LIST, true)) {
                 // Do not show files that are not under SHORTCUT_FILES_ALLOWED_PATHS_LIST
                 return false;
-            } else if (TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR.equals(file.getParentFile()) &&
-                    file.getName().equals(TermuxConstants.TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_BASENAME)) {
-                // Do not show files under TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH
+            } else if (xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR.equals(file.getParentFile()) &&
+                    file.getName().equals(xodosConstants.xodos_SHORTCUT_SCRIPT_ICONS_DIR_BASENAME)) {
+                // Do not show files under xodos_SHORTCUT_SCRIPT_ICONS_DIR_PATH
                 return false;
             }
             return true;
@@ -55,7 +55,7 @@ public class ShortcutUtils {
     };
 
     public static void enumerateShortcutFiles(List<ShortcutFile> files, boolean sorted) {
-        enumerateShortcutFiles(files, TermuxConstants.TERMUX_SHORTCUT_SCRIPTS_DIR, sorted, 0);
+        enumerateShortcutFiles(files, xodosConstants.xodos_SHORTCUT_SCRIPTS_DIR, sorted, 0);
     }
 
     public static void enumerateShortcutFiles(List<ShortcutFile> files, File dir, boolean sorted) {
@@ -63,7 +63,7 @@ public class ShortcutUtils {
     }
 
     public static void enumerateShortcutFiles(List<ShortcutFile> files, File dir, boolean sorted, int depth) {
-        if (depth > TERMUX_SHORTCUTS_SCRIPTS_DIR_MAX_SEARCH_DEPTH) return;
+        if (depth > xodos_SHORTCUTS_SCRIPTS_DIR_MAX_SEARCH_DEPTH) return;
 
         File[] current_files = dir.listFiles(SHORTCUT_FILES_FILTER);
 
@@ -97,8 +97,8 @@ public class ShortcutUtils {
         return shortcutManager;
     }
 
-    public static boolean isTermuxAppAccessible(@NonNull Context context, @NonNull String logTag, boolean showErrorToast) {
-        String errmsg = TermuxUtils.isTermuxAppAccessible(context);
+    public static boolean isxodosAppAccessible(@NonNull Context context, @NonNull String logTag, boolean showErrorToast) {
+        String errmsg = xodosUtils.isxodosAppAccessible(context);
         if (errmsg != null) {
             Logger.logErrorAndShowToast(showErrorToast ? context : null, logTag, errmsg);
             return false;

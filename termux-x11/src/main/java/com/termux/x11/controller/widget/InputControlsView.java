@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,17 +22,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.termux.x11.controller.inputcontrols.Binding;
-import com.termux.x11.controller.inputcontrols.ControlElement;
-import com.termux.x11.controller.inputcontrols.ControlsProfile;
-import com.termux.x11.controller.inputcontrols.ExternalController;
-import com.termux.x11.controller.inputcontrols.ExternalControllerBinding;
-import com.termux.x11.controller.inputcontrols.GamepadState;
-import com.termux.x11.controller.math.Mathf;
-import com.termux.x11.controller.winhandler.WinHandler;
-import com.termux.x11.controller.xserver.Pointer;
-import com.termux.x11.LorieView;
-import com.termux.x11.controller.xserver.XKeycode;
+import com.xodos.x11.controller.inputcontrols.Binding;
+import com.xodos.x11.controller.inputcontrols.ControlElement;
+import com.xodos.x11.controller.inputcontrols.ControlsProfile;
+import com.xodos.x11.controller.inputcontrols.ExternalController;
+import com.xodos.x11.controller.inputcontrols.ExternalControllerBinding;
+import com.xodos.x11.controller.inputcontrols.GamepadState;
+import com.xodos.x11.controller.math.Mathf;
+import com.xodos.x11.controller.winhandler.WinHandler;
+import com.xodos.x11.controller.xserver.Pointer;
+import com.xodos.x11.LorieView;
+import com.xodos.x11.controller.xserver.XKeycode;
 
 import java.io.File;
 import java.io.IOException;

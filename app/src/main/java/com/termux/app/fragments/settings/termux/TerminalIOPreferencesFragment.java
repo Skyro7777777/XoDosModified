@@ -1,4 +1,4 @@
-package com.termux.app.fragments.settings.termux;
+package com.xodos.app.fragments.settings.xodos;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.termux.R;
-import com.termux.shared.termux.settings.preferences.TermuxAppSharedPreferences;
+import com.xodos.R;
+import com.xodos.shared.xodos.settings.preferences.xodosAppSharedPreferences;
 
 @Keep
 public class TerminalIOPreferencesFragment extends PreferenceFragmentCompat {
@@ -22,7 +22,7 @@ public class TerminalIOPreferencesFragment extends PreferenceFragmentCompat {
         PreferenceManager preferenceManager = getPreferenceManager();
         preferenceManager.setPreferenceDataStore(TerminalIOPreferencesDataStore.getInstance(context));
 
-        setPreferencesFromResource(R.xml.termux_terminal_io_preferences, rootKey);
+        setPreferencesFromResource(R.xml.xodos_terminal_io_preferences, rootKey);
     }
 
 }
@@ -30,13 +30,13 @@ public class TerminalIOPreferencesFragment extends PreferenceFragmentCompat {
 class TerminalIOPreferencesDataStore extends PreferenceDataStore {
 
     private final Context mContext;
-    private final TermuxAppSharedPreferences mPreferences;
+    private final xodosAppSharedPreferences mPreferences;
 
     private static TerminalIOPreferencesDataStore mInstance;
 
     private TerminalIOPreferencesDataStore(Context context) {
         mContext = context;
-        mPreferences = TermuxAppSharedPreferences.build(context, true);
+        mPreferences = xodosAppSharedPreferences.build(context, true);
     }
 
     public static synchronized TerminalIOPreferencesDataStore getInstance(Context context) {

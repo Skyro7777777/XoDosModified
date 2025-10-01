@@ -1,4 +1,4 @@
-package com.termux.x11.controller.widget;
+package com.xodos.x11.controller.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,11 +19,11 @@ import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 
-import com.termux.x11.MainActivity;
-import com.termux.x11.R;
-import com.termux.x11.controller.ControlsEditorActivity;
-import com.termux.x11.controller.core.AppUtils;
-import com.termux.x11.controller.core.UnitUtils;
+import com.xodos.x11.MainActivity;
+import com.xodos.x11.R;
+import com.xodos.x11.controller.ControlsEditorActivity;
+import com.xodos.x11.controller.core.AppUtils;
+import com.xodos.x11.controller.core.UnitUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

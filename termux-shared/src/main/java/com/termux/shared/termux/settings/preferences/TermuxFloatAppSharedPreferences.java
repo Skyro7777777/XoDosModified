@@ -1,114 +1,114 @@
-package com.termux.shared.termux.settings.preferences;
+package com.xodos.shared.xodos.settings.preferences;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.android.PackageUtils;
-import com.termux.shared.settings.preferences.AppSharedPreferences;
-import com.termux.shared.settings.preferences.SharedPreferenceUtils;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.termux.settings.preferences.TermuxPreferenceConstants.TERMUX_FLOAT_APP;
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.data.DataUtils;
+import com.xodos.shared.logger.Logger;
+import com.xodos.shared.android.PackageUtils;
+import com.xodos.shared.settings.preferences.AppSharedPreferences;
+import com.xodos.shared.settings.preferences.SharedPreferenceUtils;
+import com.xodos.shared.xodos.xodosUtils;
+import com.xodos.shared.xodos.settings.preferences.xodosPreferenceConstants.xodos_FLOAT_APP;
+import com.xodos.shared.xodos.xodosConstants;
 
-public class TermuxFloatAppSharedPreferences extends AppSharedPreferences {
+public class xodosFloatAppSharedPreferences extends AppSharedPreferences {
 
     private int MIN_FONTSIZE;
     private int MAX_FONTSIZE;
     private int DEFAULT_FONTSIZE;
 
-    private static final String LOG_TAG = "TermuxFloatAppSharedPreferences";
+    private static final String LOG_TAG = "xodosFloatAppSharedPreferences";
 
-    private TermuxFloatAppSharedPreferences(@NonNull Context context) {
+    private xodosFloatAppSharedPreferences(@NonNull Context context) {
         super(context,
             SharedPreferenceUtils.getPrivateSharedPreferences(context,
-                TermuxConstants.TERMUX_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION),
+                xodosConstants.xodos_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION),
             SharedPreferenceUtils.getPrivateAndMultiProcessSharedPreferences(context,
-                TermuxConstants.TERMUX_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION));
+                xodosConstants.xodos_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION));
 
         setFontVariables(context);
     }
 
     /**
-     * Get {@link TermuxFloatAppSharedPreferences}.
+     * Get {@link xodosFloatAppSharedPreferences}.
      *
      * @param context The {@link Context} to use to get the {@link Context} of the
-     *                {@link TermuxConstants#TERMUX_FLOAT_PACKAGE_NAME}.
-     * @return Returns the {@link TermuxFloatAppSharedPreferences}. This will {@code null} if an exception is raised.
+     *                {@link xodosConstants#xodos_FLOAT_PACKAGE_NAME}.
+     * @return Returns the {@link xodosFloatAppSharedPreferences}. This will {@code null} if an exception is raised.
      */
     @Nullable
-    public static TermuxFloatAppSharedPreferences build(@NonNull final Context context) {
-        Context termuxFloatPackageContext = PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_FLOAT_PACKAGE_NAME);
-        if (termuxFloatPackageContext == null)
+    public static xodosFloatAppSharedPreferences build(@NonNull final Context context) {
+        Context xodosFloatPackageContext = PackageUtils.getContextForPackage(context, xodosConstants.xodos_FLOAT_PACKAGE_NAME);
+        if (xodosFloatPackageContext == null)
             return null;
         else
-            return new TermuxFloatAppSharedPreferences(termuxFloatPackageContext);
+            return new xodosFloatAppSharedPreferences(xodosFloatPackageContext);
     }
 
     /**
-     * Get {@link TermuxFloatAppSharedPreferences}.
+     * Get {@link xodosFloatAppSharedPreferences}.
      *
      * @param context The {@link Context} to use to get the {@link Context} of the
-     *                {@link TermuxConstants#TERMUX_FLOAT_PACKAGE_NAME}.
+     *                {@link xodosConstants#xodos_FLOAT_PACKAGE_NAME}.
      * @param exitAppOnError If {@code true} and failed to get package context, then a dialog will
      *                       be shown which when dismissed will exit the app.
-     * @return Returns the {@link TermuxFloatAppSharedPreferences}. This will {@code null} if an exception is raised.
+     * @return Returns the {@link xodosFloatAppSharedPreferences}. This will {@code null} if an exception is raised.
      */
-    public static TermuxFloatAppSharedPreferences build(@NonNull final Context context, final boolean exitAppOnError) {
-        Context termuxFloatPackageContext = TermuxUtils.getContextForPackageOrExitApp(context, TermuxConstants.TERMUX_FLOAT_PACKAGE_NAME, exitAppOnError);
-        if (termuxFloatPackageContext == null)
+    public static xodosFloatAppSharedPreferences build(@NonNull final Context context, final boolean exitAppOnError) {
+        Context xodosFloatPackageContext = xodosUtils.getContextForPackageOrExitApp(context, xodosConstants.xodos_FLOAT_PACKAGE_NAME, exitAppOnError);
+        if (xodosFloatPackageContext == null)
             return null;
         else
-            return new TermuxFloatAppSharedPreferences(termuxFloatPackageContext);
+            return new xodosFloatAppSharedPreferences(xodosFloatPackageContext);
     }
 
 
 
     public int getWindowX() {
-        return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_X, 200);
+        return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_X, 200);
 
     }
 
     public void setWindowX(int value) {
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_X, value, false);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_X, value, false);
     }
 
     public int getWindowY() {
-        return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_Y, 200);
+        return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_Y, 200);
 
     }
 
     public void setWindowY(int value) {
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_Y, value, false);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_Y, value, false);
     }
 
 
 
     public int getWindowWidth() {
-        return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_WIDTH, 500);
+        return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_WIDTH, 500);
 
     }
 
     public void setWindowWidth(int value) {
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_WIDTH, value, false);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_WIDTH, value, false);
     }
 
     public int getWindowHeight() {
-        return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_HEIGHT, 500);
+        return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_HEIGHT, 500);
 
     }
 
     public void setWindowHeight(int value) {
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_WINDOW_HEIGHT, value, false);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_FLOAT_APP.KEY_WINDOW_HEIGHT, value, false);
     }
 
 
 
     public void setFontVariables(Context context) {
-        int[] sizes = TermuxAppSharedPreferences.getDefaultFontSizes(context);
+        int[] sizes = xodosAppSharedPreferences.getDefaultFontSizes(context);
 
         DEFAULT_FONTSIZE = sizes[0];
         MIN_FONTSIZE = sizes[1];
@@ -116,12 +116,12 @@ public class TermuxFloatAppSharedPreferences extends AppSharedPreferences {
     }
 
     public int getFontSize() {
-        int fontSize = SharedPreferenceUtils.getIntStoredAsString(mSharedPreferences, TERMUX_FLOAT_APP.KEY_FONTSIZE, DEFAULT_FONTSIZE);
+        int fontSize = SharedPreferenceUtils.getIntStoredAsString(mSharedPreferences, xodos_FLOAT_APP.KEY_FONTSIZE, DEFAULT_FONTSIZE);
         return DataUtils.clamp(fontSize, MIN_FONTSIZE, MAX_FONTSIZE);
     }
 
     public void setFontSize(int value) {
-        SharedPreferenceUtils.setIntStoredAsString(mSharedPreferences, TERMUX_FLOAT_APP.KEY_FONTSIZE, value, false);
+        SharedPreferenceUtils.setIntStoredAsString(mSharedPreferences, xodos_FLOAT_APP.KEY_FONTSIZE, value, false);
     }
 
     public void changeFontSize(boolean increase) {
@@ -136,26 +136,26 @@ public class TermuxFloatAppSharedPreferences extends AppSharedPreferences {
 
     public int getLogLevel(boolean readFromFile) {
         if (readFromFile)
-            return SharedPreferenceUtils.getInt(mMultiProcessSharedPreferences, TERMUX_FLOAT_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
+            return SharedPreferenceUtils.getInt(mMultiProcessSharedPreferences, xodos_FLOAT_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
         else
-            return SharedPreferenceUtils.getInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
+            return SharedPreferenceUtils.getInt(mSharedPreferences, xodos_FLOAT_APP.KEY_LOG_LEVEL, Logger.DEFAULT_LOG_LEVEL);
     }
 
     public void setLogLevel(Context context, int logLevel, boolean commitToFile) {
         logLevel = Logger.setLogLevel(context, logLevel);
-        SharedPreferenceUtils.setInt(mSharedPreferences, TERMUX_FLOAT_APP.KEY_LOG_LEVEL, logLevel, commitToFile);
+        SharedPreferenceUtils.setInt(mSharedPreferences, xodos_FLOAT_APP.KEY_LOG_LEVEL, logLevel, commitToFile);
     }
 
 
     public boolean isTerminalViewKeyLoggingEnabled(boolean readFromFile) {
         if (readFromFile)
-            return SharedPreferenceUtils.getBoolean(mMultiProcessSharedPreferences, TERMUX_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, TERMUX_FLOAT_APP.DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED);
+            return SharedPreferenceUtils.getBoolean(mMultiProcessSharedPreferences, xodos_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, xodos_FLOAT_APP.DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED);
         else
-            return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, TERMUX_FLOAT_APP.DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED);
+            return SharedPreferenceUtils.getBoolean(mSharedPreferences, xodos_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, xodos_FLOAT_APP.DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED);
     }
 
     public void setTerminalViewKeyLoggingEnabled(boolean value, boolean commitToFile) {
-        SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, value, commitToFile);
+        SharedPreferenceUtils.setBoolean(mSharedPreferences, xodos_FLOAT_APP.KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED, value, commitToFile);
     }
 
 }

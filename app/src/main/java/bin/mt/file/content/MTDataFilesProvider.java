@@ -23,7 +23,7 @@ import android.system.Os;
 import android.system.StructStat;
 import android.webkit.MimeTypeMap;
 
-import com.termux.shared.termux.TermuxConstants;
+import com.xodos.shared.xodos.xodosConstants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,7 +58,7 @@ public class MTDataFilesProvider extends DocumentsProvider {
         "mt_extras"
     };
     private String pkgName;
-    private static final File BASE_DIR = TermuxConstants.TERMUX_FILES_DIR;
+    private static final File BASE_DIR = xodosConstants.xodos_FILES_DIR;
     /**
      * /data/data/package/name
      */

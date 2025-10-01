@@ -1,10 +1,10 @@
-package com.termux.x11.controller.container;
+package com.xodos.x11.controller.container;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.termux.x11.controller.core.FileUtils;
-import com.termux.x11.controller.core.StringUtils;
+import com.xodos.x11.controller.core.FileUtils;
+import com.xodos.x11.controller.core.StringUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
